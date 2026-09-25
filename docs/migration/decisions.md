@@ -795,7 +795,8 @@ talks to the service over the same IPC. A Rust CLI can therefore meet a
 TypeScript service on the same `RAFT_HOME`, and the reverse. The only guard is
 the version-string comparison `SERVICE_VERSION_SKEW`.
 
-**Decision.** Keep full wire and disk interop with upstream 1.0.28.
+**Decision.** Co-existence with Raft Desktop's TypeScript service is required
+(D21). Keep full wire and disk interop with upstream 1.0.28.
 - IPC is byte-compatible: a u32 big-endian length, UTF-8 JSON, a 1 MiB cap, the
   same hello/request/response/event/cancel frames and error codes, the same
   socket path and modes (`run/service.sock`, dir 0700, socket 0600), the stale
