@@ -31,12 +31,12 @@ macOS, Linux, and Windows:
 
 **In scope**
 
-- `raft` CLI: every command registered in `packages/cli/src/main.ts`, except
-  `raft migrate`, which is blocked on O1.
+- `raft` CLI: every command registered in `packages/cli/src/main.ts`, including
+  `raft migrate` (`decisions.md` D16).
 - DaemonCore (`packages/daemon/src/core.ts` and its transitive closure),
   embedded as a library. Runtimes: claude, codex, gemini, grok, cursor,
   copilot, opencode, kimi (CLI). Runtime account usage via oar (claude, codex,
-  kimi, grok).
+  kimi, grok). Trace bundle upload stays (`decisions.md` D18).
 - `raft-computer`: login, logout, attach, setup, start, stop, restart,
   status, doctor, logs, runners, and the hidden `__service`, `__run`, `__cli`,
   `__print-env`, and `__build-versions`.
@@ -54,13 +54,17 @@ macOS, Linux, and Windows:
   legacy supervisor and migration guard, legacy-path quarantines. The refusal of
   retired OS-supervisor entries stays (`decisions.md` D11).
 - The `slock` CLI alias and the standalone `raft-daemon` binary.
-- The `builtin` (pi) and `kimi-sdk` runtimes. The SEA host's `runtime-pkg` file
+- The `builtin` (pi), `kimi-sdk`, and deprecated `antigravity` runtimes
+  (`decisions.md` D17). The SEA host's `runtime-pkg` file
   and `PI_PACKAGE_DIR` stay, because every agent sees them (`decisions.md` D8).
+- Computer legacy read fallbacks: `attachment.json` dual-read, `server-runner.*`
+  pid/log fallbacks, and the `api.slock.ai` / staging-Fly URL rewrites
+  (`decisions.md` D19). The markerless Desktop guard stays (`decisions.md` D20).
 - The `lib/` package export surface that only the Electron `raft-computer-app`
   consumes. `lib/` modules that the CLI or the service use (`lib/api.ts`,
   `lib/ipc-client.ts`, and the rest of their closure) are ported.
 
-**Open decisions** are tracked in `decisions.md` §Open.
+Scope choices that were open are now D16–D21 in `decisions.md`.
 
 ## Gates
 
@@ -70,10 +74,10 @@ Pass them in order. Passing one proves nothing about the next.
 2. **Link**: `cargo build --release` produces `raft` and `raft-computer`.
 3. **Start**: `raft --help`, `raft-computer --help`, and `raft-computer status`
    run and match the oracle's output, except that `raft-computer --help` lacks
-   exactly the `channel`, `operation`, and `upgrade` lines (`decisions.md` D13)
-   and `raft --help` waits on O1 for its `migrate` line. The expected goldens
-   and their diffs against the oracle goldens are reviewed once and stored in
-   `tests/golden/`.
+   exactly the `channel`, `operation`, and `upgrade` lines (`decisions.md` D13).
+   `raft --help` matches the oracle, including `migrate` (D16). The expected
+   goldens and their diffs against the oracle goldens are reviewed once and
+   stored in `tests/golden/`.
 4. **One test**: one translated test per crate runs and passes.
 5. **Suite**: `cargo test --workspace` passes, and `tools/test-parity` shows
    every upstream test in scope as ported or waived with a reason.

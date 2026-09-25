@@ -834,8 +834,9 @@ the version-string comparison `SERVICE_VERSION_SKEW`.
   is translated exactly and golden-tested the same way.
 - Every state file keeps its exact serializer: pretty or compact, trailing
   newline or not, key order (struct field order), and modes. That includes the
-  `attach` write without `schemaVersion`. How `attach` writes its file is open
-  (O7).
+  `attach` write without `schemaVersion`. The attach file is written in place
+  (`write` then `chmod 0600`), as `services/attach.ts` does. A temp file plus
+  rename is not used (D21).
 - `RAFT_COMPUTER_PARENT_MUTATION_LOCK_HELD` and `…_SOURCE_SERVICE_PID`
   propagation, and their removal in `runnerChildEnv`, are translated exactly.
 
@@ -986,31 +987,68 @@ format, meta-schema validation with its compile-error message, the
 
 ---
 
-## Open
+## D16. Agent migration is in scope
 
-- **O1. Agent migration** (`agentMigration*.ts`, 7 modules, 3,647 lines;
-  `raft migrate *`; `machine:migration_transport:lease`). It is a live server
-  feature, not legacy. It needs the user's decision. Until then `raft migrate`
-  and its help golden are blocked.
-- **O2. Deprecated antigravity driver** (208 lines). It is still registered in
-  `drivers/index.ts` but was not in the user's runtime list.
-- **O3. Trace bundle upload** (`traceBundleUpload.ts`, 267 lines). It is
-  fail-open and uploads local traces to `slock-trace-upload.botiverse.dev`.
-  The drop-in rule says keep it.
-- **O4. Legacy read fallbacks in the computer** (about 60 lines): reading
-  `servers/<id>/attachment.json` and `server-runner.pid`/`.log`, and the server
-  URL rewrites (staging fly → aws, `api.slock.ai` → `api.raft.build`). Dropping
-  them breaks homes created by older versions; keeping them contradicts the
-  literal "drop legacy" scope.
-- **O5. Markerless legacy Desktop guard** (`assertNoMarkerlessLegacyDesktop`):
-  it refuses to converge the login carrier while `/Applications/Raft
-  Computer.app` exists without a marker, which prevents a double start.
-- **O6. Raft Desktop co-existence.** D12 assumes the Rust CLI must interoperate
-  with a TypeScript service run by Raft Desktop on the same home. If Desktop is
-  not used on the same machine, D12 can be relaxed.
-- **O7. The `attach` state write.** Upstream writes the attach state file in
-  place. Writing a temp file and renaming it closes a race with the startup
-  quarantine, but it changes on-disk behavior (a new inode and mode on every
-  write) that a TypeScript co-tenant may observe, which the drop-in contract
-  forbids without sign-off. Until decided, the translation writes in place as
-  upstream does.
+**Governs:** `raft migrate` (`export`, `import`, `status`, `ready`, `arrived`)
+and `packages/daemon/src/agentMigration*.ts`.
+
+`raft migrate` is a live server feature. Translate the command and the seven
+daemon modules, including `machine:migration_transport:lease`. Help text matches
+the oracle, including the `migrate` line on `raft --help`.
+
+## D17. Antigravity driver is not registered
+
+**Governs:** `drivers/index.ts`.
+
+Do not port `drivers/antigravity.deprecated.ts`. The factory map omits
+`antigravity` along with the already-dropped `builtin`, `kimi-sdk`, and `pi`.
+`getDriver("antigravity")` throws
+`Unknown runtime: antigravity. Available: claude, codex, grok, copilot, cursor, gemini, kimi, opencode`
+(insertion order of the remaining factories). Existing antigravity agents cannot
+be resumed.
+
+## D18. Trace bundle upload is in scope
+
+**Governs:** `packages/daemon/src/traceBundleUpload.ts`.
+
+Translate it as upstream: fail-open, same destination, same env disable, same
+`machines/<lockId>/trace-uploads/<file>.uploaded.json` records.
+
+## D19. Computer legacy read fallbacks are not ported
+
+**Governs:** `serverState.ts`, `paths.ts`, `serverUrl.ts`, and every caller of
+the fallback readers.
+
+Three behaviors are deleted. Everything else in those files stays.
+
+- `readServerAttachment` reads only `runner.state.json`. It does not read
+  `attachment.json`, does not precedence-merge, and does not migrate-on-read.
+  A home whose only credential is `attachment.json` reads as absent.
+- Readers use `runner.pid` and `runner.log` only. `serverRunnerPidReadFallback`
+  and `serverRunnerLogReadFallback` are not ported, so a live `server-runner.pid`
+  or `server-runner.log` is invisible to status, doctor, and reconcile.
+- `canonicalizeServerUrl` does not rewrite `https://api.slock.ai` to
+  `https://api.raft.build`, and the staging rewrite does not map
+  `https://slock-server-staging.fly.dev` to the AWS staging URL. Stored and
+  configured URLs are used as trimmed, with only the trailing-slash strip.
+  `SLOCK_SERVER_URL` / `RAFT_SERVER_URL` resolution stays. Hostname
+  classification in the daemon (`api.slock.ai` as its own target class) stays;
+  this decision is about computer URL rewriting only.
+
+## D20. Markerless Desktop guard stays
+
+**Governs:** `assertNoMarkerlessLegacyDesktop`.
+
+This is the exception to the dropped-legacy scope. While
+`/Applications/Raft Computer.app` exists without a marker, login-carrier
+convergence refuses, with upstream's message. The guard is what stops a second
+service next to the old Desktop app.
+
+## D21. Co-existence and the attach write
+
+Raft Desktop's TypeScript service and this Rust port share one home. D12
+stands: IPC, `proper-lockfile`, the daemon machine lock, and state files match
+what that service reads and writes.
+
+The attach state file is written in place, then `chmod 0600`, matching
+`services/attach.ts`. Do not write a temp file and rename it.
