@@ -1,0 +1,13 @@
+[package]
+name = "raft-cli"
+version = "0.0.24"
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+license-file.workspace = true
+
+[[bin]]
+name = "raft"
+path = "src/main.rs"
+
+[dependencies]

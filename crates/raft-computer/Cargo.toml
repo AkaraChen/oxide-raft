@@ -1,0 +1,13 @@
+[package]
+name = "raft-computer"
+version = "1.0.28"
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+license-file.workspace = true
+
+[[bin]]
+name = "raft-computer"
+path = "src/main.rs"
+
+[dependencies]

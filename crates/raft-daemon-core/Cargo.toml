@@ -1,0 +1,9 @@
+[package]
+name = "raft-daemon-core"
+version = "1.0.25"
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+license-file.workspace = true
+
+[dependencies]

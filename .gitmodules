@@ -1,0 +1,6 @@
+[submodule "upstream/raft-source"]
+	path = upstream/raft-source
+	url = https://github.com/botiverse/raft-source.git
+[submodule "upstream/oar"]
+	path = upstream/oar
+	url = https://github.com/botiverse/oar.git

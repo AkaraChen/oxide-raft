@@ -1,0 +1,16 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/raft-shared",
+    "crates/raft-trace-client",
+    "crates/oar",
+    "crates/raft-cli",
+    "crates/raft-daemon-core",
+    "crates/raft-computer",
+]
+
+[workspace.package]
+edition = "2024"
+rust-version = "1.89"
+license-file = "LICENSE"
+repository = "https://github.com/AkaraChen/oxide-raft"
