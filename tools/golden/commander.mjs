@@ -30,6 +30,12 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+// Collation depends on the locale (LC_ALL, then LC_MESSAGES, then LANG);
+// goldens are captured with all three unset, which Node resolves to en-US (D24).
+if (new Intl.Collator().resolvedOptions().locale !== "en-US" || process.env.LANG !== undefined || process.env.LC_ALL !== undefined || process.env.LC_MESSAGES !== undefined) {
+  throw new Error("run with LANG, LC_ALL and LC_MESSAGES unset (decisions.md D24)");
+}
+
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const require = createRequire(resolve(root, "upstream/raft-source/packages/cli/package.json"));
 const { Command, Option, InvalidArgumentError, CommanderError } = require("commander");

@@ -23,6 +23,12 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
+// Collation depends on the locale (LC_ALL, then LC_MESSAGES, then LANG);
+// goldens are captured with all three unset, which Node resolves to en-US (D24).
+if (new Intl.Collator().resolvedOptions().locale !== "en-US" || process.env.LANG !== undefined || process.env.LC_ALL !== undefined || process.env.LC_MESSAGES !== undefined) {
+  throw new Error("run with LANG, LC_ALL and LC_MESSAGES unset (decisions.md D24)");
+}
+
 const ZONES = ["Asia/Shanghai", "UTC", "America/New_York", "Europe/London", "Australia/Lord_Howe", "Asia/Kolkata", "America/Sao_Paulo", "Etc/GMT+5", "asia/shanghai", "Invalid/Zone", "EST5EDT", ":Asia/Tokyo"];
 
 const PARSE_INPUTS = [
