@@ -114,6 +114,22 @@ const groups = [
   ["empty", {}, [1, "x", null, {}]],
   ["true.schema.items", { type: "array", items: true }, [[1, "x"]]],
   ["false.schema.prop", obj({ a: false }), [{}, { a: 1 }]],
+  // Edge cases from the json_schema implementer's differential runs.
+  ["propertyNames.emptyKey", { type: "object", propertyNames: { minLength: 1 } }, [{ "": 1 }, { a: 1 }]],
+  ["dynamicRef.const", { properties: { a: { $dynamicRef: "#x", const: 5 } } }, [{ a: 5 }, { a: 6 }]],
+  ["prototype.names", { type: "object", required: ["valueOf", "toString"], properties: { toString: { type: "string" }, constructor: { type: "number" } } }, [{}, { toString: "x" }, { constructor: 1 }]],
+  ["type.duplicate", { type: ["string", "string"] }, ["x"]],
+  ["oneOf.threePass", { oneOf: [{}, { type: "number" }, { minimum: 0 }] }, [1, "x"]],
+  [
+    "additional.false.nineProps",
+    obj(Object.fromEntries("abcdefghi".split("").map((k) => [k, { type: "number" }])), { additionalProperties: false }),
+    [{ a: 1, z: 2 }, { a: 1 }, { valueOf: 1 }],
+  ],
+  ["enum.objects.valueOf", { enum: [{ a: 1 }, [1]] }, [{ valueOf: 1 }, { toString: 1 }, { a: 1 }, [1]]],
+  ["const.object.valueOf", { const: { a: 1 } }, [{ valueOf: 1 }, { a: 1 }]],
+  ["multipleOf.tenth", { type: "number", multipleOf: 0.1 }, [0.3, 0.35, 1]],
+  ["pattern.octalClass", { type: "string", pattern: "[\\01]" }, ["\u0001", "0"]],
+  ["pattern.loneSurrogate", { type: "string", pattern: "\ud83d" }, ["a\ud83d", "😀"]],
 ];
 
 // Schemas that should fail meta-schema validation or compilation.
@@ -134,6 +150,18 @@ const invalidSchemas = [
   ["bad.maximum.string", { maximum: "5" }],
   ["bad.nested", { type: "object", properties: { a: { type: "object", properties: { b: { minItems: "x" } } } } }],
   ["format.unknown", { type: "string", format: "email" }],
+  ["bad.enum.valueOf", { enum: [{ valueOf: 1 }] }],
+  ["bad.defs.cycle", { $defs: { a: { $ref: "#/$defs/a" } }, $ref: "#/$defs/a" }],
+  ["schema.meta.core", { $schema: "https://json-schema.org/draft/2020-12/meta/core", type: "string" }],
+  ["schema.meta.applicator", { $schema: "https://json-schema.org/draft/2020-12/meta/applicator", type: 5 }],
+  ["schema.number", { $schema: 5 }],
+  ["schema.null", null],
+  ["schema.array", [1]],
+  ["schema.string", "x"],
+  ["id.keyword", { id: "x", type: "string" }],
+  ["nullable.keyword", { nullable: true, type: "string" }],
+  ["pattern.octalClass.u", { pattern: "[\\01" }],
+  ["property.loneSurrogate", { properties: { "\ud800": { type: "string" } }, required: ["\ud800"] }],
 ];
 
 const safeRegexPatterns = [
@@ -154,13 +182,20 @@ for (const [name, schema, payloads] of groups) {
   let fn;
   try {
     fn = newAjv().compile(schema);
+  } catch (error) {
+    compile.push({ name, schema, ok: false, error: `${error.constructor.name}: ${error.message}`, warnings: [...warnings] });
+    continue;
   } finally {
     console.warn = origWarn;
   }
   compile.push({ name, schema, ok: true, warnings: [...warnings] });
   for (const payload of payloads) {
-    const valid = fn(payload);
-    validate.push({ name, payload, valid, errors: fn.errors ?? null });
+    try {
+      const valid = fn(payload);
+      validate.push({ name, payload, valid, errors: fn.errors ?? null });
+    } catch (error) {
+      validate.push({ name, payload, thrown: `${error.constructor.name}: ${error.message}` });
+    }
   }
 }
 for (const [name, schema] of invalidSchemas) {

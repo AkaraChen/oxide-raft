@@ -441,6 +441,169 @@
    "warnings": []
   },
   {
+   "name": "propertyNames.emptyKey",
+   "schema": {
+    "type": "object",
+    "propertyNames": {
+     "minLength": 1
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "dynamicRef.const",
+   "schema": {
+    "properties": {
+     "a": {
+      "$dynamicRef": "#x",
+      "const": 5
+     }
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "prototype.names",
+   "schema": {
+    "type": "object",
+    "required": [
+     "valueOf",
+     "toString"
+    ],
+    "properties": {
+     "toString": {
+      "type": "string"
+     },
+     "constructor": {
+      "type": "number"
+     }
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "type.duplicate",
+   "schema": {
+    "type": [
+     "string",
+     "string"
+    ]
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/type must be equal to one of the allowed values, data/type must NOT have duplicate items (items ## 0 and 1 are identical), data/type must match a schema in anyOf",
+   "warnings": []
+  },
+  {
+   "name": "oneOf.threePass",
+   "schema": {
+    "oneOf": [
+     {},
+     {
+      "type": "number"
+     },
+     {
+      "minimum": 0
+     }
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "additional.false.nineProps",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "a": {
+      "type": "number"
+     },
+     "b": {
+      "type": "number"
+     },
+     "c": {
+      "type": "number"
+     },
+     "d": {
+      "type": "number"
+     },
+     "e": {
+      "type": "number"
+     },
+     "f": {
+      "type": "number"
+     },
+     "g": {
+      "type": "number"
+     },
+     "h": {
+      "type": "number"
+     },
+     "i": {
+      "type": "number"
+     }
+    },
+    "additionalProperties": false
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "enum.objects.valueOf",
+   "schema": {
+    "enum": [
+     {
+      "a": 1
+     },
+     [
+      1
+     ]
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "const.object.valueOf",
+   "schema": {
+    "const": {
+     "a": 1
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "multipleOf.tenth",
+   "schema": {
+    "type": "number",
+    "multipleOf": 0.1
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "pattern.octalClass",
+   "schema": {
+    "type": "string",
+    "pattern": "[\\01]"
+   },
+   "ok": false,
+   "error": "SyntaxError: Invalid regular expression: /[\\01]/u: Invalid decimal escape",
+   "warnings": []
+  },
+  {
+   "name": "pattern.loneSurrogate",
+   "schema": {
+    "type": "string",
+    "pattern": "\ud83d"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
    "name": "bad.type",
    "schema": {
     "type": "strin"
@@ -611,6 +774,127 @@
     "unknown format \"email\" ignored in schema at path \"#\"",
     "unknown format \"email\" ignored in schema at path \"#\""
    ]
+  },
+  {
+   "name": "bad.enum.valueOf",
+   "schema": {
+    "enum": [
+     {
+      "valueOf": 1
+     }
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "bad.defs.cycle",
+   "schema": {
+    "$defs": {
+     "a": {
+      "$ref": "#/$defs/a"
+     }
+    },
+    "$ref": "#/$defs/a"
+   },
+   "ok": false,
+   "error": "RangeError: Maximum call stack size exceeded",
+   "warnings": []
+  },
+  {
+   "name": "schema.meta.core",
+   "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/meta/core",
+    "type": "string"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "schema.meta.applicator",
+   "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/meta/applicator",
+    "type": 5
+   },
+   "ok": false,
+   "error": "Error: type must be JSONType or JSONType[]: 5",
+   "warnings": []
+  },
+  {
+   "name": "schema.number",
+   "schema": {
+    "$schema": 5
+   },
+   "ok": false,
+   "error": "Error: $schema must be a string",
+   "warnings": []
+  },
+  {
+   "name": "schema.null",
+   "schema": null,
+   "ok": false,
+   "error": "TypeError: Cannot read properties of null (reading '$id')",
+   "warnings": []
+  },
+  {
+   "name": "schema.array",
+   "schema": [
+    1
+   ],
+   "ok": false,
+   "error": "Error: schema is invalid: data must be object,boolean",
+   "warnings": []
+  },
+  {
+   "name": "schema.string",
+   "schema": "x",
+   "ok": false,
+   "error": "Error: schema must be object or boolean",
+   "warnings": []
+  },
+  {
+   "name": "id.keyword",
+   "schema": {
+    "id": "x",
+    "type": "string"
+   },
+   "ok": false,
+   "error": "Error: NOT SUPPORTED: keyword \"id\", use \"$id\" for schema ID",
+   "warnings": []
+  },
+  {
+   "name": "nullable.keyword",
+   "schema": {
+    "nullable": true,
+    "type": "string"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "pattern.octalClass.u",
+   "schema": {
+    "pattern": "[\\01"
+   },
+   "ok": false,
+   "error": "SyntaxError: Invalid regular expression: /[\\01/u: Invalid decimal escape",
+   "warnings": []
+  },
+  {
+   "name": "property.loneSurrogate",
+   "schema": {
+    "properties": {
+     "\ud800": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "\ud800"
+    ]
+   },
+   "ok": false,
+   "error": "URIError: URI malformed",
+   "warnings": []
   }
  ],
  "validate": [
@@ -2332,6 +2616,307 @@
      "keyword": "false schema",
      "params": {},
      "message": "boolean schema is false"
+    }
+   ]
+  },
+  {
+   "name": "propertyNames.emptyKey",
+   "payload": {
+    "": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/propertyNames/minLength",
+     "keyword": "minLength",
+     "params": {
+      "limit": 1
+     },
+     "message": "must NOT have fewer than 1 characters",
+     "propertyName": ""
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/propertyNames",
+     "keyword": "propertyNames",
+     "params": {
+      "propertyName": ""
+     },
+     "message": "property name must be valid"
+    }
+   ]
+  },
+  {
+   "name": "propertyNames.emptyKey",
+   "payload": {
+    "a": 1
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "dynamicRef.const",
+   "payload": {
+    "a": 5
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "dynamicRef.const",
+   "payload": {
+    "a": 6
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "prototype.names",
+   "payload": {},
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/toString",
+     "schemaPath": "#/properties/toString/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "prototype.names",
+   "payload": {
+    "toString": "x"
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/constructor",
+     "schemaPath": "#/properties/constructor/type",
+     "keyword": "type",
+     "params": {
+      "type": "number"
+     },
+     "message": "must be number"
+    }
+   ]
+  },
+  {
+   "name": "prototype.names",
+   "payload": {
+    "constructor": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/toString",
+     "schemaPath": "#/properties/toString/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "oneOf.threePass",
+   "payload": 1,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf",
+     "keyword": "oneOf",
+     "params": {
+      "passingSchemas": [
+       0,
+       1
+      ]
+     },
+     "message": "must match exactly one schema in oneOf"
+    }
+   ]
+  },
+  {
+   "name": "oneOf.threePass",
+   "payload": "x",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf/1/type",
+     "keyword": "type",
+     "params": {
+      "type": "number"
+     },
+     "message": "must be number"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf",
+     "keyword": "oneOf",
+     "params": {
+      "passingSchemas": [
+       0,
+       2
+      ]
+     },
+     "message": "must match exactly one schema in oneOf"
+    }
+   ]
+  },
+  {
+   "name": "additional.false.nineProps",
+   "payload": {
+    "a": 1,
+    "z": 2
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/additionalProperties",
+     "keyword": "additionalProperties",
+     "params": {
+      "additionalProperty": "z"
+     },
+     "message": "must NOT have additional properties"
+    }
+   ]
+  },
+  {
+   "name": "additional.false.nineProps",
+   "payload": {
+    "a": 1
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "additional.false.nineProps",
+   "payload": {
+    "valueOf": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/additionalProperties",
+     "keyword": "additionalProperties",
+     "params": {
+      "additionalProperty": "valueOf"
+     },
+     "message": "must NOT have additional properties"
+    }
+   ]
+  },
+  {
+   "name": "enum.objects.valueOf",
+   "payload": {
+    "valueOf": 1
+   },
+   "thrown": "TypeError: a.valueOf is not a function"
+  },
+  {
+   "name": "enum.objects.valueOf",
+   "payload": {
+    "toString": 1
+   },
+   "thrown": "TypeError: a.toString is not a function"
+  },
+  {
+   "name": "enum.objects.valueOf",
+   "payload": {
+    "a": 1
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "enum.objects.valueOf",
+   "payload": [
+    1
+   ],
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "const.object.valueOf",
+   "payload": {
+    "valueOf": 1
+   },
+   "thrown": "TypeError: a.valueOf is not a function"
+  },
+  {
+   "name": "const.object.valueOf",
+   "payload": {
+    "a": 1
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "multipleOf.tenth",
+   "payload": 0.3,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/multipleOf",
+     "keyword": "multipleOf",
+     "params": {
+      "multipleOf": 0.1
+     },
+     "message": "must be multiple of 0.1"
+    }
+   ]
+  },
+  {
+   "name": "multipleOf.tenth",
+   "payload": 0.35,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/multipleOf",
+     "keyword": "multipleOf",
+     "params": {
+      "multipleOf": 0.1
+     },
+     "message": "must be multiple of 0.1"
+    }
+   ]
+  },
+  {
+   "name": "multipleOf.tenth",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "pattern.loneSurrogate",
+   "payload": "a\ud83d",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "pattern.loneSurrogate",
+   "payload": "😀",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/pattern",
+     "keyword": "pattern",
+     "params": {
+      "pattern": "\ud83d"
+     },
+     "message": "must match pattern \"\ud83d\""
     }
    ]
   }
