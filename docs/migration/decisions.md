@@ -1254,3 +1254,48 @@ mapping-guide §13: `libc =0.2.189` (unix targets), `windows-sys =0.61.2` with
 features `Win32_Foundation` and `Win32_System_Console` (windows targets).
 Proof: pty tests at 120 and 60 columns with expected text captured from Node
 24.15.0 under a pty of the same size.
+
+## D27. JsRegex: V8 parser front end, case folding, and lastIndex sharing
+
+**Governs:** `raft_shared::js::JsRegex` (`js/regex*.rs`), every translated regex.
+
+**Facts** (regex-reviewer-a/b round 1, Node 24.15.0).
+- regress parses a superset/subset of V8's syntax differently (Annex B
+  `\u{N}` without `u`, quantified assertions, astral group names, nesting depth)
+  and has its own error texts.
+- Without `u`/`v`, V8's `i` uses Canonicalize (single-code-unit
+  `toUpperCase`, never mapping a unit ≥ 128 to one < 128); regress uses Unicode
+  simple case folding, so `/s/i` matched `ſ` and `/[a-z]/i` matched K (U+212A).
+- A `g`/`y` regex's `lastIndex` is mutable state; JS never shares it between
+  threads, Rust statics can.
+
+**Decision.**
+- `JsRegex::new` parses the pattern with a V8-mirroring parser that produces
+  V8's exact SyntaxError texts, then re-emits it for regress in unambiguous
+  syntax. regress's own error text is never shown; a pattern V8 accepts but
+  regress rejects reports "Regular expression too large".
+- Non-`u`/`v` `i` is not handed to regress: literals, classes and class
+  escapes are expanded to V8's Canonicalize equivalence sets; backreferences
+  compare over a Canonicalize-mapped copy of the input.
+- Sticky matching is one anchored attempt; match results do not copy the
+  input.
+- Methods that JS resets or keeps per call (`replace*`, `match_all`,
+  `match_global`, `search`, `split`, non-`g`/`y` `exec`/`test`) are safe on a
+  shared regex. Loops over `g`/`y` regexes held in statics use `exec_at` /
+  `test_at` with a caller-owned lastIndex (translate `re.lastIndex = 0;
+  re.test(s)` as `re.test_at(&s, &mut 0)`). Shared-lastIndex `exec`/`test` on a
+  `g`/`y` regex detect a concurrent change and panic: that is a translation
+  bug, not an input condition.
+
+**Known residuals** (none reachable from an in-scope pattern today):
+1. Non-`u` `i` patterns with backreferences canonicalize the whole input per
+   call, so an exec loop over them is quadratic.
+2. A backreference inside `(?i:…)` in a pattern without the `i` flag, or in a
+   pattern containing `(?-i:)`, uses regress's fold; differs only for ſ/ı/K.
+3. Under `u`/`v` only `\B` is emulated at mid-surrogate-pair positions; V8 can
+   also match other zero-width assertions there.
+4. regress rejects `\ud83d\u{41}*` under `iv` (V8 accepts).
+5. More than 255 levels of distinct (non-collapsible) nesting exceed regress's
+   limit.
+6. "Negated character class may contain strings" is detected for `\q{}` only,
+   not for string properties in a negated `v` class.
