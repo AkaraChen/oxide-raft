@@ -1,13 +1,31 @@
-# crates/commander — 对抗评审 A（第二轮复查）
+# crates/commander — 对抗评审 A（第三轮复查）
 
-结论：**通过，无阻塞项。** 第一轮的 5 项发现全部修复，并已用原来的探针逐项复现验证。
+**第三轮结论：通过。** 仍未关闭的问题都不阻塞：
+- 第二轮的应修项 1（Windows 帮助宽度）已修复。
+- 可选项 3 被推迟。我审查了推迟理由，认为成立，所以接受推迟。
+- 可选项 2 的根因在 `raft_shared::js::default_locale`，不在本 crate，建议转给 D24 的负责人。
 
-复查中新发现 1 个应修项和 2 个可选项：
-- 应修：Windows 的终端宽度取值与 libuv 不一致。本机无法在 Windows 上运行，这一项是按源码比对确认的，下文注明了证据。
-- 可选：畸形 locale 环境变量下的排序差异。这个问题属于 `raft_shared::js::default_locale`，commander 只是受它影响。
-- 可选：累积型解析器被重复调用上万次时，常数因子较大。
+当前计数：阻塞 0，应修 0，可选 1（第二轮的可选 2）。
 
-Oracle 为 Node 24.15.0（`process.versions.uv` = 1.51.0）加上 upstream 锁定的 commander 12.1.0。探针位于 `scratchpad/cmdReviewA/`，构建时使用了 `crates/commander` 和 `crates/raft-shared` 的快照（`snap2/`，与仓库当前文件逐字节相同）。在快照上运行 `cargo test -p commander`，10 个测试全部通过，其中 golden 测试断言了全部 141 个用例。
+## 第三轮复查
+
+| 第二轮发现 | 状态 | 证据 |
+|---|---|---|
+| 1. [应修] Windows 取窗口宽度，而 libuv 取缓冲区宽度 | **已修复** | 这一轮修复只改了 `terminal.rs` 的 `console_columns`：仍先调用 `GetConsoleMode`（不是控制台就返回 `None`），再调用 `GetConsoleScreenBufferInfo`，现在返回 `usize::try_from(info.dwSize.X).ok()`。libuv v1.51.0 的 `uv_tty_get_winsize` 在调用 `uv__tty_update_virtual_window` 之后返回 `uv_tty_virtual_width = info->dwSize.X`，两者取的是同一个字段。<br>边界值也一致。`dwSize.X` 是 `SHORT` 类型：值为 0 时，Rust 返回 `Some(0)`，被 `help_width.filter(≠0)` 过滤后按 80；JS 的 `0 \|\| 80` 同样得 80。负值时 `try_from` 失败，按 80 处理。<br>isTTY 的判定与 libuv 的 `uv_guess_handle`（`FILE_TYPE_CHAR` 加 `GetConsoleMode`）结果相同。D26 已改为写明 `dwSize.X`。 |
+| 2. [可选] 畸形的 locale 值 | 未修（不属于本单元） | 本轮没有改动，仍然只影响畸形的 `LANG`/`LC_*` 值，归属 raft-shared 和 D24。 |
+| 3. [可选] 累积解析器每次克隆 `previous` | **推迟，理由成立** | fixer 给出两条理由。<br>"解析器失败后 `opts()` 会被改变"：这一条单独看不成立。我原来的建议里已经写了失败时把旧值放回，可以避免这个问题。<br>"重入"：这一条成立。`ParseArgFn` 是 `Fn` 闭包，可以捕获一个 `Command` 句柄（`Rc`），并在解析过程中调用 `opts()` 或 `get_option_value()`。JS 中解析器调用期间，`program.opts()` 能读到旧值；如果把旧值 take 出去，这时就读不到了，行为会偏离源码。<br>要在不改变可观察行为的前提下省掉这次复制，需要让 `Value::Array` 支持共享（`Rc`），这超出本单元的范围。这个性能问题只在同一选项重复上万次时才明显（20000 次时 Rust 10.3 s，Node 1.78 s），可以接受推迟。 |
+
+本轮验证：
+- 从仓库重新复制 `crates/commander` 和 `crates/raft-shared`，得到快照 `snap2/`，其中 commander 与仓库逐字节相同（`diff -r`）。golden 文件也取自仓库。
+- `cargo test -p commander` 通过 10 个测试，其中 golden 测试断言了全部 141 个用例。
+- `cargo clippy -p commander --all-targets --target x86_64-pc-windows-gnu` 和 Linux 目标下的同一命令都能编译通过，commander 自身没有警告。输出中的 13 个警告全部来自 raft-shared 的 `schema/idna_tables.rs`（`upper_case_acronyms`），属于另一个单元。
+- 这一轮只改动了 Windows 专用代码，第二轮在 unix 上做的差分结果（pty 宽度、fuzz、golden）仍然有效。
+
+---
+
+以下是第二轮报告原文，保留备查。
+
+# 第二轮
 
 ## 复查：第一轮发现的处理情况
 

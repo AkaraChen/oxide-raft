@@ -103,3 +103,33 @@
 - 什么时候会出现差异：D14 第 4 步在 `__service`（launchd-user/systemd-user）采集登录 shell 环境后调用 `std::env::set_var`/`remove_var`。之后 Rust 按登录 shell 的 `LANG` 排序，Node 仍然用服务启动时继承的 locale。
 - 对 commander 目前观察不到：`__service` 的候选只有 `slock-home`、`raft-home`、`os-supervised`、`help`、`version`，这些小写 ASCII 名字在已知的各种裁剪规则下次序都相同。但 daemon 里其他翻译过来的 `localeCompare` 排序（D3 列出的 `agentProcessManager.ts:8108` 等）同样走 `SystemEnv`，会受影响。
 - 修复建议：在 `main` 执行 D14 第 4 步之前，把 locale 相关的三个变量取一份快照放进 Env（比如在进程启动时构造一个只含 `LC_ALL`/`LC_MESSAGES`/`LANG` 的 `BTreeMap`，传给 `program.set_env`，也用于其他 `locale_compare` 调用点）。同时在 D24 里写明"取进程启动时的值"。
+
+---
+
+## 第三轮复查
+
+**结论：通过。commander 已没有未关闭的阻塞项或应修项。**
+
+第二轮的 S2（Windows 默认 locale）和 O1（启动时对 locale 做快照）已经交给 raft-shared 的日期/时区单元处理，不计入 commander 的结论。
+
+| 项 | 状态 | 证据 |
+|---|---|---|
+| 第二轮 S1：Windows 列宽取了窗口宽度 | **已修复** | 见下方说明 |
+| 第二轮 S2：Windows 默认 locale | 移出 commander 结论（交给 raft-shared） | commander 这边只是调用 `locale_compare_js`，无需改动 |
+| 第二轮 O1：locale 实时读取 | 移出 commander 结论（交给 raft-shared） | 同上 |
+
+S1 的修复：
+- `terminal.rs` 的 `console_columns` 现在返回 `usize::try_from(info.dwSize.X).ok()`。
+- 与 libuv 1.51.0 `src/win/tty.c` 逐项对照：
+  - `uv_tty_get_winsize` 在 `GetConsoleScreenBufferInfo` 失败时返回错误，Node 因而不设置 `columns`；Rust 对应返回 `None`。
+  - 成功时经 `uv__tty_update_virtual_window` 得到 `*width = uv_tty_virtual_width = info->dwSize.X`；Rust 取的是同一个值。
+  - 前置的 `GetConsoleMode` 检查对应 `uv_guess_handle` 对 `FILE_TYPE_CHAR` 句柄的 TTY 判定：非 console 句柄没有 `columns`。
+  - `dwSize.X` 的类型是 `i16`，用 `try_from` 转换，没有 `as`；值为 0 时由 `helpWidth || 80` 退回 80。
+- D26 已同步更正。
+
+本轮核验（重新做了一份快照）：
+- `cargo test -p commander`：10 个测试全部通过，包括 141 条 golden 和 unix pty 测试。
+- `cargo check -p commander --target x86_64-pc-windows-gnu` 通过，Windows 分支可以编译。
+- clippy 在 commander 上无警告；仅有的警告都在 raft-shared 的 `schema/idna*.rs` 中，不属于本单元。
+- `cargo fmt --check` 无 diff。
+- 本机没有 Windows 运行环境，Windows 分支的行为靠源码对照确认，没有实际运行过。
