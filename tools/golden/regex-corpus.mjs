@@ -24,6 +24,9 @@ const inputs = [
   "user@example.com", "https://raft.build/x?y=1#z", "#engineering:aaaa1111", "@Cody hi", "2026-09-07T12:00:00.000Z",
   "--number 87", "C:\\Users\\x\\file.txt", "/tmp/a/b.json", "0x1F", "task-123_abc", "`code` **bold** [l](u)",
   "ERR_TLS_CERT_ALTNAME_INVALID fetch failed", "getaddrinfo ENOTFOUND api.raft.build",
+  // Case-folding-sensitive inputs (regex-reviewer-a/b): V8's non-u Canonicalize
+  // keeps these apart from ASCII; Unicode simple folding does not.
+  "\u017fession \u017fecret \u017fk-live", "\u212aelvin \u0131d \u0130D stra\u00dfe", "\u03a3\u0391\u03a3 \u03c3\u03b1\u03c2 \u01c5 \u1e9e", "x-\u212a:\u017f_1",
 ];
 
 const seen = new Map();
