@@ -111,6 +111,9 @@ export function rustTestFileFor(pkg, upstreamFile) {
 
 const EXTRA_TEST_LOCATIONS = [
   { prefix: "crates/raft-shared/src/js/", reason: "decisions.md D3: golden and unit tests of the JS semantics helpers" },
+  { prefix: "crates/raft-shared/src/schema/", reason: "decisions.md D2: zod combinator goldens (tools/zod-golden/combinators.mjs)" },
+  { prefix: "crates/raft-shared/src/json_schema/", reason: "decisions.md D15: Ajv and safe-regex2 goldens (tools/golden/json-schema.mjs)" },
+  { prefix: "crates/commander/", reason: "decisions.md D1: commander 12.1.0 behaviour goldens (tools/golden/commander.mjs)" },
 ];
 const isExtraLocation = (file) => EXTRA_TEST_LOCATIONS.some((l) => file.startsWith(l.prefix));
 
