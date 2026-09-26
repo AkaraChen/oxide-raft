@@ -25,7 +25,9 @@ import { fileURLToPath } from "node:url";
 
 // Collation depends on the locale (LC_ALL, then LC_MESSAGES, then LANG);
 // goldens are captured with all three unset, which Node resolves to en-US (D24).
-if (new Intl.Collator().resolvedOptions().locale !== "en-US" || process.env.LANG !== undefined || process.env.LC_ALL !== undefined || process.env.LC_MESSAGES !== undefined) {
+const isChild = process.argv[2]?.startsWith("--") ?? false;
+const localeUnset = process.env.LANG === undefined && process.env.LC_ALL === undefined && process.env.LC_MESSAGES === undefined;
+if (!isChild && (!localeUnset || new Intl.Collator().resolvedOptions().locale !== "en-US")) {
   throw new Error("run with LANG, LC_ALL and LC_MESSAGES unset (decisions.md D24)");
 }
 
@@ -55,6 +57,32 @@ const VALID_ZONES = ["Asia/Shanghai", "asia/shanghai", "ASIA/SHANGHAI", "UTC", "
 const LOCALE_DATE_MS = [0, 1776754800000, 1772953200000, -62198755200000, 1767225599999];
 
 const COLLATE_INPUTS = ["a", "A", "b", "B", "ä", "a1", "a10", "a2", "_x", "-x", "x-", "x_", "Zeta", "zeta", "éclair", "eclair", "中文", "日本", "😀", "", " ", "a b", "ab", "a.b", "a/b", "a\\b", "file.md", "File.md", "readme", "README", "résumé", "resume"];
+
+// Locale matrix (D24): per locale environment, Node's default collator locale
+// and the sorted order of LOCALE_SORT_INPUTS (a sample of CJK ideographs, kana,
+// Hangul and the Latin collation inputs), which fixes every pairwise order.
+const LOCALE_ENVS = [
+  {}, { LANG: "" }, { LANG: "C" }, { LANG: "en_US.UTF-8" }, { LANG: "da_DK.UTF-8" }, { LANG: "da__DK" }, { LANG: "sv_SE.UTF-8" },
+  { LANG: "sv_SE.UTF-8@collation=phonebook" }, { LANG: "ja_JP.UTF-8" }, { LANG: "ja_JP@calendar=japanese" }, { LANG: "zh_CN.UTF-8" },
+  { LANG: "zh_TW.UTF-8" }, { LANG: "zh_Hant_TW.UTF-8" }, { LANG: "ko_KR.UTF-8" }, { LANG: "ko_KR@collation=search" }, { LANG: "tl_PH.UTF-8" },
+  { LANG: "es_ES@traditional" }, { LANG: "de_DE@euro" }, { LANG: "se_NO.UTF-8" }, { LANG: "haw_US.UTF-8" }, { LANG: "tr_TR.UTF-8" },
+  { LC_ALL: "de_DE.UTF-8", LANG: "da_DK.UTF-8" }, { LC_MESSAGES: "sv_SE.UTF-8", LANG: "en_US.UTF-8" }, { LC_ALL: "", LANG: "da_DK.UTF-8" },
+  { LC_COLLATE: "da_DK.UTF-8" }, { LANGUAGE: "da" },
+];
+const cjk = [];
+for (let cp = 0x4e00; cp <= 0x9fff; cp += 11) cjk.push(String.fromCodePoint(cp));
+for (let cp = 0x3041; cp <= 0x3096; cp += 3) cjk.push(String.fromCodePoint(cp));
+for (let cp = 0x30a1; cp <= 0x30fa; cp += 3) cjk.push(String.fromCodePoint(cp));
+for (let cp = 0xac00; cp <= 0xd7a3; cp += 97) cjk.push(String.fromCodePoint(cp));
+const LOCALE_SORT_INPUTS = [...cjk, "缵", "纓", "中文", "日本", "東京", "北京", "aa", "å", "z", "ä", "ö", "ø", "æ", "ü", "ı", "i", "I", "İ", "ch", "c", "d", "ll", "l", "m", "ñ", "n", "ß", "ss", "v", "w", "Å", "Ä", "Ö"];
+
+if (process.argv[2] === "--locale-child") {
+  process.stdout.write(JSON.stringify({
+    locale: new Intl.Collator().resolvedOptions().locale,
+    sorted: [...LOCALE_SORT_INPUTS].sort((a, b) => a.localeCompare(b)),
+  }));
+  process.exit(0);
+}
 
 if (process.argv[2] === "--child") {
   const zone = {};
@@ -100,6 +128,11 @@ const validZones = VALID_ZONES.map((timeZone) => {
   }
 });
 const localeDate = LOCALE_DATE_MS.map((ms) => ({ ms, text: new Date(ms).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" }) }));
+const localeMatrix = LOCALE_ENVS.map((vars) => {
+  const r = spawnSync(process.execPath, [fileURLToPath(import.meta.url), "--locale-child"], { env: { PATH: process.env.PATH, ...vars }, encoding: "utf8" });
+  if (r.status !== 0) throw new Error(`locale child for ${JSON.stringify(vars)} failed: ${r.stderr}`);
+  return { env: vars, ...JSON.parse(r.stdout) };
+});
 const localeCompare = [];
 for (const a of COLLATE_INPUTS) for (const b of COLLATE_INPUTS) localeCompare.push(Math.sign(a.localeCompare(b)));
 const sorted = [...COLLATE_INPUTS].sort((a, b) => a.localeCompare(b));
@@ -117,5 +150,7 @@ writeFileSync(out, `${JSON.stringify({
   localeDate,
   localeCompare,
   sorted,
+  LOCALE_SORT_INPUTS,
+  localeMatrix,
 }, null, 1)}\n`);
 console.log(`dates: ${ZONES.length} zones, ${PARSE_INPUTS.length} parse inputs, ${COLLATE_INPUTS.length ** 2} collation pairs`);
