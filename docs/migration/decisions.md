@@ -1247,8 +1247,9 @@ configures a width, so the default is observable in every interactive
 
 **Decision.** commander reads the width itself on every help render, as Node
 refreshes `columns`: unix `isatty` + `ioctl(TIOCGWINSZ)` (`ws_col`); Windows
-`GetConsoleMode` (libuv's TTY test) + `GetConsoleScreenBufferInfo` (window
-width `srWindow.Right - srWindow.Left + 1`). Not a terminal, a failed query, or
+`GetConsoleMode` (libuv's TTY test) + `GetConsoleScreenBufferInfo`, taking the
+screen buffer width `dwSize.X` as libuv 1.51.0 `uv_tty_get_winsize` does
+(`uv_tty_virtual_width`), not the window width. Not a terminal, a failed query, or
 0 columns → 80. `configure_output` still overrides it. Pinned per
 mapping-guide §13: `libc =0.2.189` (unix targets), `windows-sys =0.61.2` with
 features `Win32_Foundation` and `Win32_System_Console` (windows targets).
