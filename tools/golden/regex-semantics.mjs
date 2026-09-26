@@ -105,6 +105,11 @@ globalThis.RegExp = NativeRegExp;
 const escapeRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 for (const term of ["deploy", "a.b", "C++", "(x)", "ſ", "straße"]) constructed.push({ source: escapeRegExp(term), flags: "i" });
 for (const tag of ["string", "key", "integer"]) constructed.push({ source: `<${tag}>([^<]*)</${tag}>`, flags: "gi" });
+// computer/src/output.ts inferNextCommands: one backtick-fence regex per width.
+for (const width of [1, 2, 3]) {
+  const fence = "`".repeat(width);
+  constructed.push({ source: new RegExp("(?<!`)" + fence + "(?!`)([\\s\\S]*?)(?<!`)" + fence + "(?!`)", "g").source, flags: "g" });
+}
 
 const DYNAMIC_INPUTS = [
   "hi @alice and @Bob.Smith, see #engineering:abc123 and #general",
@@ -115,6 +120,8 @@ const DYNAMIC_INPUTS = [
   "<string>v1</string><STRING>v2</String><key>k</key>",
   "Deploy the fix; DEPLOY again; ſtraße STRASSE a.b C++ (x)",
   "`@alice` ```#general``` @alice",
+  "Run `raft-computer start` or ``raft-computer setup `x` now`` then ```raft-computer\nstop```.",
+  "````a```b```` `` ` `unterminated",
 ];
 const seen = new Set();
 const dynamic = [];

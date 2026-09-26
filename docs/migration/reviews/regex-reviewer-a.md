@@ -1,180 +1,140 @@
-# raft_shared::js::JsRegex — 对抗评审 A
+# raft_shared::js::JsRegex — 对抗评审 A（第二轮）
 
-结论：**不通过**。有 2 个阻塞项：一是每个匹配都整份复制输入，全局 replace/matchAll 的内存和时间随输入呈平方增长，80K 码元的字符串就要 6.4 GB；二是非 `u` 模式下 `i` 的大小写折叠与 V8 不一致，upstream 有 236 个此类正则依赖它，而 golden 测不到。另有 4 个应修项和 4 个可选项。
+结论：**不通过**。有 1 个阻塞项：为模拟 V8 的 `\B` 而新增的"对内起点"路径让 regress 在 release 构建下**段错误**（在 debug 构建下 panic），也就是说安全 API 会触发未定义行为。另有 1 个应修项和 2 个可选项。第一轮的 10 项里，8 项已修复，第 5 项部分修复，第 8 项修复时引入了新的阻塞问题。
 
-Oracle：
-- 主要使用 Node 24.15.0（linux-x64），即 scratchpad 里已有的 `node-v24.15.0-linux-x64`，与 golden 捕获时的版本一致。
-- /opt/node22（v22）只作对照。v22 会拒绝重复命名组 `(?<a>x)|(?<a>y)` 和模式修饰符 `(?i:a)`，v24 接受，regress 也接受。因此这两项以 v24 为准，结论是**一致**。
-- 探针位于 scratchpad/reviewA/probe：一个 scratch crate，通过路径依赖引用 raft-shared，有独立的 CARGO_TARGET_DIR；另有 `node.mjs`/`cmp.mjs` 做逐条对比。
-- 仓库自带的 17 个 regex 测试全部通过。
+Oracle 和环境：
+- Node 24.15.0（linux-x64），与 golden 捕获版本相同。
+- 被测代码是 raft-shared 的**快照**，复制于本轮开始时，放在 scratchpad/reviewA/snap。
+- 探针沿用第一轮 scratchpad/reviewA/probe 下的 `cmp.mjs`、`fold.mjs`、`scandiff.mjs`、`bench`，另新增 `perf2`、`race2`、`crash.mjs`、`f1.mjs`、`f2.mjs`、`c11`–`c14`。
+- 快照上的 28 个 regex 测试（corpus、semantics 以及手写测试）全部通过。
 
-## 已验证无差异的范围（不在 golden 集中）
-- **Unicode 属性**：`\p{L} N Cc Cf Lu Ll Lt Lm Lo Nd P S Z Cn}`、`Emoji`、`Extended_Pictographic`、`Emoji_Presentation`、`Alphabetic`、`White_Space`、`Script=Han`、`Script_Extensions=Han`、`sc=Latin`、`ID_Start`、`ID_Continue`、`Any`、`Assigned`、`Lowercase`、`Uppercase`，以及 `\s`、`\w`、`[\p{L}\p{N}_-]`，在 `gu` 下对全部 1,112,064 个码点逐一比对，差异为 0。`giu` 下的 `\p{Lu}`、`\p{Ll}`、`\w`、`\W`、`[^\p{Ll}]`、`\P{Ll}` 同样为 0 差异。可见 regress 的 Unicode 版本与 Node 24 的 ICU 一致。
-- **`iu` 大小写折叠**：取 4632 个有大小写的码点（到 U+1FFFF），分别以字面量 `X` 和字符类 `[X]` 形式，对全部有大小写字符做扫描，`iu` 下 0 差异。差异全部出现在非 `u` 的 `i` 下，见发现 2。
-- **GetSubstitution**：3000 个随机替换模板，由 `$ & \` ' 0 1 2 9 < > a n x` 组合而成，覆盖 0、1、2、11 个捕获组、命名组、重复命名组、`g` 与非 `g`，差异为 0。
-- **split**：21 个模式 × 9 个输入 × 4 组 flags（`""`/`u`/`g`/`y`）× 8 个 limit（undefined、0、1、2、3、-1、2^32+1、1.5），共 9048 例，差异为 0。覆盖空匹配、代理对、孤立代理项、捕获组为 undefined 的情形。
-- **lastIndex/g/y**：flags 取 `g y gy gu yu gyu`，模式包括 `a`、空、`a|`、`^a`、`\b`、`$`、`(?<=a)b`、`.`、`\udc00`、`\ude00`、`(?:)`；lastIndex 取 0/1/2/3/10；每组连续 exec 4 次，另测 replace、matchAll、split、replaceAll 从 lastIndex=1 开始的情形，共 676 例，只有 2 例不一致，均属发现 2。确认一致的行为：
-  - `u` 下 lastIndex 落在代理对中间时回退到对首；
-  - 粘连匹配失败后归零；
-  - 全局 replace 先置 0、结束后仍为 0；
-  - matchAll 不修改原正则；
-  - split 忽略 lastIndex。
-- **其他语义**：
-  - `m`/`s` 与 `\r`、` `、` `、`\r\n`、`\u0085` 的组合；
-  - 非 `u`/`iu` 下的反向引用；
-  - lookbehind 中捕获与反向引用的顺序；
-  - `d` 标志的 indices：含代理对、未参与的组、重复命名组，以及 groups 的声明顺序；
-  - 粘连 exec 与 lookbehind、`\b`、`^` 同时出现，且 lastIndex>0 的情形；
-  - 空匹配出现在末尾时的 `` $` ``、`$'`。
-- **报错文本（非 v 模式）**：6000 个随机模式，由 57 种 token 拼接，覆盖 8 种 flags 组合，每个模式配 9 个输入，共 60000 例。非 `v` 的构造差异只有发现 6、7 列出的几类。
-- **flags 报错**：`gg`、`x`、`uv`、`G`、`l` 的报错与 `flags()` 的规范顺序均一致。
+## 已验证无差异的范围
+- **大规模随机测试**：`f1.mjs` 用 3 个种子，每个种子 8000 个随机模式，共 144000 例。
+  - token 共 110 种，包括 ſ K ı İ ß ẞ σ ς、代理对与孤立代理项、各类断言与环视、命名组与重复命名组、`\k`、`\1`–`\10`、Annex B 写法（`\c1`、`[\c_]`、`\8`、`\00`、`x{,3}`、`{2,1}`、`]`、`{`）、模式修饰符（`(?i:`、`(?-i:`、`(?s-i:`），以及 v 模式的 `&&`、`--`、嵌套类和 `\q{}`。
+  - flags 取 `"" u i iu v iv m s im is` 共 10 种。
+  - 每个模式都跑 new、`g` 下连续 exec（lastIndex 取 0–2）、`y` exec、`d` exec、4 种 replace 模板、带 limit 的 split。
+  - 用 debug 版 probe 跑，这样 regress 的 debug_assert 会以 panic 的形式暴露出来。
+  - 结果：**非 v 模式 0 差异**。全部差异都是 `[^\q{…}]`，见发现 4。
+- **大小写折叠**：4632 个有大小写的码点，分别以 `X`、`[X]`、`(X)\1`、`[X-X]` 四种形式，在 `i` 和 `iu` 下测试，0 差异。第一轮的 138 处差异已清零。
+- **反向引用和类的折叠**：取 60 个易出错字符，两两组合共 3600 对，测 `^(.)\1$`、`^(?<x>.)\k<x>$`、`^[^a]$`、`(?<=a)x`、`^(?:a)+$`、`^[\wa]$`，均在 `i` 下，共 17496 例，0 差异。
+- **Unicode 属性**：沿用第一轮在全码点上的扫描方法，本轮未发现回归。第一轮的 c1–c10 全部重跑（c1、c2、c3、c4、c6、c7、c8、c9、c10），只剩 c1、c6 各有一类 v 模式差异，归入发现 4。
+- **性能**：输入均为 100 万码元的 `"a ".repeat(500000)`，正则 `/\s/g`，release 构建。
+
+  | 操作 | 耗时 | 峰值内存 |
+  |---|---|---|
+  | replace | 40 ms | 6.7 MB |
+  | replace_with | 66 ms | — |
+  | match_all | 104 ms | 87 MB |
+  | `while test` | 39 ms | — |
+  | split | 68 ms | — |
+  | 逐位置粘连 `/\d/y` | 123 ms | — |
+  | `yu` 在 emoji 串上逐位置 `test_at` | 98 ms | — |
+  | 构造 1 万次 MIME 正则 | 482 ms | — |
+
+  30 万次匹配的非 u `i` 反向引用 replace 用了 50 ms。
+- **嵌套深度**：
+  - `(?:` 和 `(` 嵌套到 100 万层都不崩溃，也不会栈溢出。
+  - 捕获组超过 10 万时报 `Too many captures`，与 V8 一致。
+  - 在 D27 残留 5 的范围内：255 层以内的非可折叠嵌套都能构造成功，256 层起报 `Regular expression too large`。
+
+## 复查：第一轮发现逐项结论
+
+| # | 原严重度 | 状态 | 证据 |
+|---|---|---|---|
+| 1 每个匹配都复制输入，平方复杂度 | 阻塞 | **已修复** | 见上面的性能表：100 万码元下 replace 为 40 ms / 6.7 MB（原先 8 万码元要 11.7 s / 6.4 GB），match_all 为 104 ms。剩余两条平方路径：一是 D27 残留 1（非 u `i` 带反向引用时的 test 循环，4 万次匹配耗时 2.7 s，V8 为 2 ms）；二是新发现 3 中 `\B`+u 的路径。 |
+| 2 非 u `i` 的折叠 | 阻塞 | **已修复** | 扫描 4632 个码点，在 X、[X]、(X)\1、[X-X] 四种形式下 0 差异；c9 中的 3 个 in-scope 调用点（invoke.ts:176、upload.ts:47、agentProcessManager.ts:254）0 差异；corpus 的输入里已加入 `ſession ſecret`、`Kelvin ıd İD straße` 等。只剩 D27 残留 2：`(?i:(s)\1)` 等 3 例在 `sſ` 上仍与 V8 不同，upstream 没有修饰符和反向引用，因此触及不到。 |
+| 3 非 u 下的 `\u{…}` | 应修 | **已修复** | c7 共 34 例，0 差异（`/\u{2}/` 匹配 `"uu"`，`/\u{41}/` 不匹配 `"A"`）。 |
+| 4 粘连匹配扫描整个剩余输入 | 应修 | **已修复** | 100 万码元下耗时 123 ms（原先 20 万码元要 93 s）；`yu` 为 98 ms。 |
+| 5 static 中 lastIndex 被跨线程干扰 | 应修 | **部分修复** | 现在会 panic，但仍有静默的错误结果，见发现 2。 |
+| 6 语法接受与拒绝不一致 | 应修 | **已修复** | c2 共 305 例、c6 共 6 万例在非 v 模式下 0 差异：`\b+`、`\B*` 被拒绝，`(?<𝒜>x)` 被接受，嵌套 1000 层可以构造。 |
+| 7 报错文本 | 可选 | **已修复** | c2 与 f1 中报错文本 0 差异，包括 v 模式。**更正第一轮**：当时说 `[\1]/u` 在 V8 中报 "Invalid class escape"，那是 Node 22 的文本；Node 24.15.0 报的是 "Invalid decimal escape"，Rust 与它一致。 |
+| 8 `\B` 在代理对中间匹配 | 可选 | **改法引入阻塞问题** | 简单情形已对齐（`/\B/u.exec("a😀")` 得 2）。但新路径会让 regress 段错误（发现 1），同时还有未对齐的情形和平方复杂度（发现 3）。 |
+| 9 `iu` 下类中的 `\W` / `iv` 下的 `\P{}` | 可选 | **iu 已修复，iv 部分未修复** | c10 在 `iu` 下 0 差异，`\P{Lu}/iv` 已对齐；`[^\W]/iv`、`[\W]/iv` 遇到 ſ 或 K 时仍不同，见发现 4。 |
+| 10 `source()` 反斜杠后的行终止符 | 可选 | **已修复** | c2 中 `\`+LF 与 `\`+U+2028 均为 0 差异。 |
 
 ## 发现
 
-### 1. [阻塞] 每个 `JsMatch` 都整份复制输入；全局 replace/matchAll 的内存和时间都是平方级
-- 位置：regex.rs:636 `build` 中的 `input: input.clone()`。`JsString` 是自有的 `Vec<u16>`，每个匹配都会复制一遍完整输入。`replace_matches`（regex.rs:684）和 `match_all`（regex.rs:666）会先把所有 `JsMatch` 收集起来再使用。
-- 输入：`s = "a ".repeat(n)`，正则 `/\s/g`（release 构建，内存为 VmHWM 峰值）。
+### 1. [阻塞] 模拟 `\B` 的"对内起点"让 regress 发生越界：release 段错误，debug panic
+- 位置：regex.rs 的 `Program::find`。当 `mid_pair_starts` 为真，即 `u`/`v` 模式且模式里含 `\B` 时，它会在每个代理对中间的位置 q 调用 `match_at`，进而调用 `find_from_utf16(hay, q)`，从低代理项开始匹配。regress 的 UTF-16 游标不支持从代理对中间起步，回溯时会越界：classicalbacktrack.rs:567 的 `debug_assert!(max >= min)` 就是在拦这种情况，而 release 构建里没有这条断言，于是直接越界访问。
+- 复现（addendum 第 2 项已确认，且范围更广）：
 
-  | 操作 | n=20000（40K 码元） | n=40000（80K 码元） |
-  |---|---|---|
-  | `replace(s, "_")` | 0.79 s / 1.57 GB | **11.7 s / 6.4 GB** |
-  | `match_all` | 0.78 s / 1.57 GB | 4.9 s / 6.4 GB |
-  | `replace_with` | —（n=30000：1.7 s / 3.5 GB） | — |
+  | 输入 | V8 | debug 构建 | release 构建 |
+  |---|---|---|---|
+  | `JsRegex::new("\\P{Lu}*\\cA\\B\\p{L}", "u").test("😀")` | false | regress 的 debug_assert panic：`max should be >= min` | **SIGSEGV**，进程崩溃，无法捕获 |
+  | `/.*\B./u` 在 `"x😀"` 或 `"a😀b"` 上 | 正常返回 | panic | **SIGSEGV** |
 
-  - `while re.test(&s)`：内存正常，但时间也是平方级，n=200000（400K 码元）耗时 4.46 s。
-  - Node 24 对 400K 码元同时执行 test 循环、replace 和 matchAll，合计只需 81 ms / 116 MB。
-- 影响：日志、消息体、文件内容只要几百 KB，做一次全局 replace 或 matchAll 就会让进程 OOM 或卡住数十秒。upstream 有大量这类用法，例如 raftRefs.ts 的 `matchAll`、`mergeOverlappingSpans`、`producerFactLineage`，以及 101 个 `g` 正则。
+  另外 `/[^a]*\B./u`、`/\W*\B./u`、`/\P{Lu}*\B./u` 在 flags 为 `u`、`v`、`gu`、`iu` 时都会段错误（见 `crash.mjs`）。在 `f2.mjs` 的 12000 个含 `\B` 的随机 u/v 用例中，debug 构建 panic 了 21 次。
+- 影响：
+  - 这是安全 Rust API 上的内存不安全（UB）。
+  - D15 让 Ajv 用 `u` 编译 manifest schema 的 `pattern`；只要某个 schema 里出现 `.*\B.` 这类写法，一段含 emoji 的输入就能让 daemon 或 server 崩溃。
+  - 它也违反了 mapping-guide §4.6"debug 与 release 行为一致"的要求：debug 下 panic，release 下 SIGSEGV。
+  - 第一轮第 8 项原本只是[可选]，现在的修法把它变成了阻塞。
 - 建议：
-  - `JsMatch` 不要持有输入的副本。可以改为共享引用（`Arc<[u16]>`，或者借用 `&'a JsString`），捕获组存为区间，按需切片。
-  - `replace_impl` 边匹配边写出，不要先收集。
-  - 补一个大输入的性能回归测试，例如 1 MB 输入、50 万个匹配。
+  - 首选：**删除对内起点的模拟**，把 `/\B/u.exec("a😀")` 与 V8 的差异写进 D27 的残留清单。upstream 的 u/v 模式里没有 `\B`，corpus 里一个都没有。
+  - 如果一定要保留模拟，就必须保证 regress 永远不会从代理对中间起步，例如为这些位置单独匹配一个剥离了 `\B` 之外成分的程序。同时要在 release 构建下对上面的复现加回归测试。
+  - 另外建议 vendor 的 regress 打开 `overflow-checks`，或者把这条 debug_assert 改成 `assert!`，这样同类问题至少会 panic，而不是越界。
 
-### 2. [阻塞] 非 `u` 模式下 `i` 的大小写折叠与 V8 不同，D3 未记录，golden 也测不到
-- 位置：regex.rs:86 `engine_flags`。它把 `icase` 直接交给 regress。regress 在非 `unicode` 模式下仍然使用 Unicode 简单大小写折叠，而 V8 用的是规范中的 Canonicalize：取 `toUpperCase`，结果不是单个码元时保留原字符，非 ASCII 字符不会映射到 ASCII。
-- 规模：4632 个有大小写的码点 × 两种形式（`X`、`[X]`），在 `i` 模式下有 **138 处不一致**，在 `iu` 模式下为 0。部分例子：
-
-  | 输入 | V8 | Rust |
-  |---|---|---|
-  | `/s/i.exec("ſ")` | null | 匹配 |
-  | `/I/i.exec("ı")`（土耳其语无点 i） | null | 匹配 |
-  | `/[a-z]/i.exec("K")`（开尔文符号） | null | 匹配 |
-  | `/\w/i.exec("ſ")` | null | 匹配 |
-  | `/\W/i.exec("ſ")` | 匹配 | null |
-  | `/[^k]/i.exec("K")` | 匹配 | null |
-  | `/[ß]/i.exec("ẞ")` | null | 匹配 |
-  | `/[Ω]/i.exec("Ω")` | null | 匹配 |
-  | `/(s)\1/i.exec("sſ")` | null | 匹配 |
-
-  另外还有 `ᾀ`–`ᾯ`、`ᾳ`/`ᾼ`、`ῃ`/`ῌ`、`ῳ`/`ῼ` 这些希腊语 prosgegrammeni 对，以及 U+212B、U+03F4、U+FB05/FB06、U+0390/U+1FD3、U+03B0/U+1FE3。
-- 对 in-scope 调用点的实际影响（均已复现）：
-  - `cli/src/commands/integration/invoke.ts:176` 的 `isCredentialField`：`"Key-ſ".replace(/[^a-z0-9]/gi, "_")`，V8 得 `"_ey__"`，Rust 得 `"Key_ſ"`。凭据字段识别结果不同。
-  - `cli/src/commands/attachment/upload.ts:47` 的 `MIME_TYPE_RE`：`"text/ſvg"` 在 V8 中被拒，在 Rust 中被接受。
-  - `daemon/src/agentProcessManager.ts:254`：`/(?:^|[._-])token(?:s)?(?:[._-]|$)/i` 匹配 `"git_tokenſ"`，V8 得 null，Rust 在 index 3 处匹配。
-- 为什么 golden 发现不了：
-  - corpus 中有 236 个带 `i` 但不带 `u` 的正则，但 20 个固定输入里没有 ſ、K、ı 或任何希腊字符。
-  - 手写测试只断言了 `/K/i` 不匹配 `k`。这一条恰好是 regress 字面量路径上仍然正确的少数情形。
-  - D3 规定"任何差异在被翻译模式依赖前列入本记录"，但本差异没有列入。
+### 2. [应修] 用 panic 检测跨线程竞争只能覆盖单次调用，循环中途被插入时仍会静默出错
+- 位置：regex.rs 的 `exec_shared`。它只对单次 exec 的"读取 lastIndex → 写回"做 CAS。
+- 输入：`static RE = /a/g`，4 个线程各跑 20 万轮 `while RE.test(&s)`（s 为 `"a"×10` 或 `"ba"`），每轮用 catch_unwind 包住。
+  - 结果：4 个线程分别有 11810、791、8675、4858 轮 panic，同时仍有 **4478、270、3532、3033 轮既没有 panic、又得到错误的计数**。原因是 CAS 只保护单次 exec，一个 `while test` 循环在两次 exec 之间被别的线程改了 lastIndex，就检测不到。
+- 对设计的判断：
+  - D27 的规则本身可以接受：带 `g`/`y` 的正则放进 static 时，改用 `exec_at`/`test_at`。
+  - 但文档说"detect a concurrent change and panic"，容易让人以为能兜底，实际上兜不住。
+  - 在 mapping-guide 看来，这类 panic 不属于 §4.5"源码会让进程崩溃的断言"，而是对翻译错误的检测。只能当作尽力而为的手段，不能依赖。
 - 建议：
-  - 首选：修正 regress 非 unicode 模式的 canonicalize（vendor 或提交 patch），改用 V8 的 `toUpperCase` 规则。
-  - 如果短期修不了，就在 D3 中登记这一差异，并列出受影响的调用点。
-  - 无论哪种方案，都给 golden 输入加入 `ſ ı İ K Å Ω ẞ ß ς` 以及 `ᾀ ᾈ`，再补一个 `i`/`iu` 的逐码点折叠 golden（本评审的扫描方法可以直接复用）。
+  - 用类型从根本上阻止这种用法。例如 `exec`/`test` 在 `g`/`y` 时要求 `&mut self`，或者拆出一个 `!Sync` 的 `JsRegexCursor`。
+  - 或者由 static 构造函数在模式带 `g`/`y` 时直接拒绝。
+  - 至少要把 D27 和模块文档改成"尽力检测，不保证"，并在 mapping-guide §6.2 写明：模块级的 `/g` 字面量翻译成 `exec_at`，或者在使用处 clone。
 
-### 3. [应修] 非 `u` 模式下，`\u{…}` 被当成码点转义
-- 位置：regress 的解析器（经 regex.rs:452 调用）。按 Annex B，非 `u` 模式下的 `\u{41}` 是 `u` 重复 41 次，而 regress 把它当作 U+0041。
-
-  | 输入 | V8 | Rust |
-  |---|---|---|
-  | `/\u{41}/.exec("A")` | null | 匹配 |
-  | `/\u{2}/.exec("uu")` | 匹配 `"uu"` | null |
-  | `/\u{1F600}/.exec("u{1F600}")` | 匹配 | null |
-  | `/[\u{41}]/.exec("u")` | 匹配 | null |
-
-- 影响：目前的字面量 corpus 里没有这种写法。但它会悄无声息地改变模式含义，commander 的 `wrap` 等动态拼接的非 `u` 模式也可能触及。
-- 建议：在 `new_js` 中，对非 `u`/`v` 的模式预扫描 `\u{`，按 Annex B 语义改写（把 `\u` 换成 `u`），或者直接拒绝。另外补一个 golden。
-
-### 4. [应修] 粘连（`y`）exec 失败时会扫描整个剩余输入
-- 位置：regex.rs:583–585。粘连匹配是用"从 start 开始的最左搜索，再过滤 `m.start() == start`"实现的。一旦在 start 处没有匹配，regress 会一直搜到串尾。
-- 输入：`s = "a ".repeat(n)`，`y = /\d/y`，对每个位置 i 执行 `y.lastIndex = i; y.test(s)`。
-  - V8（n=100000，200K 码元）：4 ms。
-  - Rust：n=50000 时 22.5 s，n=100000 时 **93 s**。
-- 影响：D3 声明支持 `y`，而用 `y` 写的词法分析器会退化成平方复杂度。upstream 目前没有 `y` 字面量。
-- 建议：粘连模式下把 pattern 包成锚定形式（例如在前面加上只在 start 处成立的断言），或者改用 regress 的锚定匹配 API，不要做"搜索后过滤"。
-
-### 5. [应修] 模块文档推荐 `static LazyLock<JsRegex>`，但带 `g`/`y` 的正则跨线程共享时 lastIndex 会互相干扰
-- 位置：regex.rs:9–11 的文档，以及 `exec`（regex.rs:644），后者是先 load、再 exec、再 store。
-- 输入：`static RE = /a/g`，4 个线程各跑 20000 轮 `while RE.test(&s)`（s 为 `"a"×10`，或者 `"b"×36+"a"`）。每轮预期计数为 10 或 1，实际错误轮数分别为 3696、435、2097、1178。
-- 背景：V8 是单线程，同步的 `while (re.test(s))` 循环不会被打断。翻译成 Rust 后，daemon 和 server 跑在多线程运行时上，结果会错误且不确定。
-- 建议：
-  - 文档改为只允许无 `g`/`y` 的正则放进 static。
-  - 或者让有状态的正则 `!Sync`，例如把 lastIndex 放进 `Cell`，由编译器阻止跨线程共享。
-  - 或者在 guide §6.2 写明：模块级 `/g` 正则翻译为"每次调用 clone"或局部构造。
-
-### 6. [应修] 语法的接受与拒绝和 V8 不一致（动态模式、Ajv 的 `pattern` 会遇到）
-- 位置：`new_js`（regex.rs:445）直接采用 regress 的解析结果。
+### 3. [可选] `\B` 模拟仍与 V8 不一致，且有新的平方复杂度路径（D27 未记录）
+- 结果不一致（`f2.mjs`，共 8 例，均不涉及 panic）：
 
   | 输入 | V8 | Rust |
   |---|---|---|
-  | `/\b+/`、`/\B*/`、`/\b{2}/`、`/\B?$/i` 等量化断言（`u`/`v` 同样） | `SyntaxError: … Nothing to repeat` | **构造成功** |
-  | `/(?<𝒜>x)/`（非 u，星界字符作组名） | 接受 | `Invalid capture group name` |
-  | 256 层嵌套的 `(`…`)` 或 `(?:`…`)` | 可以构造（1000 层也行，捕获组 20000 层时才报 `Stack overflow`） | 从约 256 层起报 `Regular expression is too deeply nested`（200 层正常） |
+  | `/\B\W*/gu.exec("x😀😀y")` | index 2，匹配空串 | index 3，匹配 `"😀"` |
+  | `"x😀😀y".split(/\B\W*/u)` | `["x\ud83d","\ude00","y"]` | `["x😀","y"]` |
+  | `/\B/yu`，lastIndex=2，在 `"a😀b"` 上 | 在 2 处匹配 | null |
 
-- 影响：D15 规定 Ajv 用 `JsRegex` 加 `u` 编译 schema 的 `pattern`。V8 下会编译失败的 schema，在 Rust 下能通过（或者反过来），meta 验证、编译报错的路径就和 TS 不同了。
-- 建议：
-  - 在 `new_js` 中预检"量化的 `\b`/`\B`"，给出 V8 的文本。
-  - 把星界组名、嵌套深度登记为已知差异，或者修 regress。
-  - golden 中加入这些用例。
+- 平方复杂度：`find` 每次都先做一遍完整的最左搜索（找不到时会扫到串尾），再逐个检查代理对中间的位置。
+  - `"😀a".repeat(80000).split(/\B/u)`：Rust 37.9 s（2 万次重复时为 2.4 s），V8 53 ms。
+- D27 残留 3 的措辞暗示"`\B` 已经对齐"，与上面的结果不符。
+- 建议：如果按发现 1 删除了模拟，这一项也随之消失，只需登记为残留。
 
-### 7. [可选] 部分报错文本不是 V8 的原文
-以下情形 V8 与 Rust 都会拒绝，只是文本不同（Node 22 与 24 的文本相同）：
-
-| 模式 | V8 | Rust |
-|---|---|---|
-| `/\k/u` | `Invalid named reference` | `Invalid named backreference syntax`（regress 原文直接透出） |
-| `/\c/u`、`/\c1/u`、`/[\c_]/u` | `Invalid Unicode escape` | `Invalid escape` |
-| `/\01/u` | `Invalid decimal escape` | `Invalid escape` |
-| `/[\1]/u` | `Invalid class escape` | `Invalid escape` |
-| `/(?/`、`/(?:a)(?)/` | `Invalid group` | `Invalid capture group name` / `Invalid group modifier` |
-| `/(?<n>\n(?<n>/` | `Unterminated group` | `Duplicate capture group name`（报错优先级不同） |
-| `v` 模式的字符类错误，如 `/[(]/v`、`/[z-a]/v`、`/[\d-z]/v` | `Invalid character in character class`、`Range out of order in character class`、`Invalid character class` | `Invalid class set character`、`Invalid class set range` |
-
-建议：在 `v8_reason` 中补上这些映射。v 模式目前没有调用方，可以只登记。
-
-### 8. [可选] `u`/`v` 下 V8 的 `\B` 会在代理对中间匹配，Rust 不会
-- 输入：`/\B/u.exec("a😀")`。
-  - V8：index 2，位于代理对中间。`"a😀".replace(/\B/u, "|")` 得到 `a \ud83d | \ude00`。
-  - Rust：index 3，replace 得到 `a😀|`。`/\B/gu`、`/\B/vg` 同样如此。
-- 这是 V8 自己的怪癖，不符合规范的 AdvanceStringIndex，但 oracle 是 V8。
-- 建议：在 D3 中登记为已知差异。upstream 的 `u` 模式里没有 `\B`。
-
-### 9. [可选] `iu` 下字符类中的 `\W`，以及 `iv` 下的 `\P{…}`，与 V8 不同
-- `iu` 下 `\W` 放在字符类里时：
+### 4. [可选] v 模式：`[^\q{…}]` 的结果被取反，`[^*?]` 被误拒，`[\W]` 在 iv 下不同（D27 未记录）
+- 位置：new_js 对 v 模式的处理是"用 V8 语法校验通过后，把原文交给 regress"。
 
   | 输入 | V8 | Rust |
   |---|---|---|
-  | `/[\W]/iu.exec("ſ")` | null | 匹配 |
-  | `/[^\W]/iu.exec("K")` | 匹配 | null |
-  | `/[^\W\d]/iu.exec("ſ")` | 匹配 | null |
+  | `/[^\q{a}]/v.exec("ab")` | `"b"` @1 | `"a"` @0（语义反了） |
+  | `/[^\q{a\|b}]/v.exec("abc")`、`/[^[\q{a}]]/v` | 同样 | 同样取反 |
 
-  单独使用 `\W`、`\w`，或在字符类中使用 `[\w]`、`[^\w/]`，都与 V8 一致。raftRefs 的 `giu` 模式经复核不受影响。
-- `/\P{Lu}/iv.exec("A")`：V8 为 null，Rust 匹配。
-- 建议：登记为已知差异。
+  - f1 在 144000 例中的 80 处差异全部来自这一类，涉及 exec、`g`、`y`、`d`、replace、split。
+  - `/[^*?]/v`：V8 接受，Rust 报 `Regular expression too large`。这是 regress 拒绝了一个合法模式，而报出的原因不对。
+  - `/[^\W]/iv.exec("ſ")`、`"\u212A"`：V8 匹配，Rust 为 null；`/[\W]/iv.exec("ſ")`：V8 为 null，Rust 匹配。
+- 影响：upstream 没有 v 模式，所以是[可选]。但 `[^\q{a}]` 会静默给出取反的结果，必须写进 D27 的残留清单；也可以直接拒绝"v 模式下的否定类里出现 `\q`"。
 
-### 10. [可选] `source()` 没有转义反斜杠之后的行终止符
-- 位置：regex.rs:480。遇到 `\` 时，会把下一个码元原样拷贝，即使它是行终止符。
+## 关于 addendum 两项
+- **(1) `[\01`、`[\1` 在 u 下报 "Invalid decimal escape"，而 V8 报 "Invalid class escape"**：在 Node 24.15.0 上**不成立**。
+  - V8 24 对 `[\01`、`[\1`、`[\01]`、`[\1]` 在 `u` 下报的都是 `Invalid decimal escape`，Rust 与之一致（c11 共 48 例，0 差异）。
+  - 无 `u` 时，V8 与 Rust 对未闭合的 `[\01`、`[\1` 都报 `Unterminated character class`。
+  - "Invalid class escape" 是 Node 22 的文本。第一轮第 7 项里的这一条也是 Node 22 造成的误差，已在上面更正。
+  - 不计为发现。
+- **(2) regress 的 debug_assert**：已确认，而且 release 构建下是段错误，已并入发现 1，严重度为[阻塞]。
 
-  | 输入 | V8 | Rust |
-  |---|---|---|
-  | `new RegExp("\\\n").source` | `"\\n"` | `"\\" + LF` |
-  | `new RegExp("\\ ").source` | `"\\u2028"` | `"\\" + U+2028` |
+## D27 残留：是否可以接受
+依据：in-scope 的 corpus 共 2306 个模式，其中没有反向引用、没有模式修饰符、没有 `\B`、没有 v 模式（已逐一 grep 确认）。另外还要看输入是否现实。
 
-- 建议：反斜杠后面如果是行终止符，同样走 match 分支做转义。
-
-## 关于证明（golden 与测试）的问题，归入发现 2、6
-- corpus 只收录了字面量，以及参数为字符串字面量的 `new RegExp`。raftRefs.ts 中通过模板串动态构造的 12 个 `gu`/`giu`/`iu` 模式（D3 的主要使用方），以及 `autocompleteTriggers` 等，都不在 golden 中。
-- corpus 中命名组、`y`、`d` 都是 0 个。replace 只用了固定模板 `<$&|$1|$$>`；split 没有测 limit；也没有 lastIndex 序列。
-- D3 声称"golden 检查 `iu` 大小写折叠"，但 golden 的输入里没有任何对折叠敏感的字符。
+| 残留 | 判断 |
+|---|---|
+| 1 非 u `i` 带反向引用时的循环是平方复杂度 | **可以接受**：in-scope 没有反向引用。已实测：4 万次匹配的 test 循环 2.7 s，V8 2 ms。 |
+| 2 `(?i:)` / `(?-i:)` 与反向引用组合时的折叠 | **可以接受**：已复现 3 例（`(?i:(s)\1)`、`(s)(?i:\1)`、`(s)(?-i:x)\1`/i 在 `sſ` 上），in-scope 没有这种写法。 |
+| 3 u/v 下只模拟了 `\B` | **不可接受**：模拟本身就是发现 1 的来源，而且 `\B` 也没有真正对齐（发现 3）。改为"不模拟"，把这一条整体登记为残留即可接受。 |
+| 4、5 | **可以接受**：v 模式和 255 层以上的嵌套在 in-scope 中都不出现。已实测：`(?:a\|` 嵌套 255 层可以构造，256 层以上报 `Regular expression too large`。 |
+| 6 | 可以接受，但应扩展到发现 4 中的三类 v 模式差异。 |
+| panic-on-race | 规则可以接受，但"检测"兜不住（发现 2），应改用类型约束，或者把措辞改成"尽力而为"。 |
 
 ## 统计
-阻塞 2，应修 4，可选 4。
+阻塞 1，应修 1，可选 2。
 
-分布：阻塞为发现 1、2；应修为发现 3、4、5、6；可选为发现 7、8、9、10。
+分布：阻塞为发现 1（`\B` 模拟导致 regress 越界，release 下段错误）；应修为发现 2（竞争检测不完整）；可选为发现 3（`\B` 仍不对齐且有平方路径）和发现 4（v 模式的 `\q`、`[^*?]`、`[\W]`/iv）。
