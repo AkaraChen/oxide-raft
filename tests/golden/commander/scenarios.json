@@ -197,6 +197,87 @@
     }
    ]
   },
+  "extras": {
+   "name": "ex",
+   "action": true,
+   "arguments": [
+    "[word]"
+   ],
+   "options": [
+    {
+     "flags": "--color",
+     "description": "Use color."
+    },
+    {
+     "flags": "--no-color",
+     "description": "No color."
+    },
+    {
+     "flags": "--opt <v>",
+     "description": "Value option."
+    },
+    {
+     "flags": "--checked <v>",
+     "description": "Checked value.",
+     "parser": "commanderInvalid"
+    }
+   ],
+   "commands": [
+    {
+     "name": "start",
+     "description": "Start it."
+    },
+    {
+     "name": "state",
+     "description": "Show state."
+    },
+    {
+     "name": "stats",
+     "description": "Show stats."
+    },
+    {
+     "name": "Stage",
+     "description": "Mixed case."
+    },
+    {
+     "name": "st_x",
+     "description": "Underscore."
+    },
+    {
+     "name": "st-x",
+     "description": "Dash."
+    }
+   ]
+  },
+  "ties": {
+   "name": "ti",
+   "commands": [
+    {
+     "name": "start",
+     "description": "Start it."
+    },
+    {
+     "name": "state",
+     "description": "Show state."
+    },
+    {
+     "name": "stats",
+     "description": "Show stats."
+    },
+    {
+     "name": "Stage",
+     "description": "Mixed case."
+    },
+    {
+     "name": "st_x",
+     "description": "Underscore."
+    },
+    {
+     "name": "st-x",
+     "description": "Dash."
+    }
+   ]
+  },
   "rootAction": {
    "name": "ra",
    "arguments": [
@@ -2796,6 +2877,402 @@
    "outcome": {
     "kind": "exit",
     "exitCode": 0
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--help"
+   ],
+   "stdout": "Usage: ex [options] [command] [word]\n\nOptions:\n  --color        Use color.\n  --no-color     No color.\n  --opt <v>      Value option.\n  --checked <v>  Checked value.\n  -h, --help     display help for command\n\nCommands:\n  start          Start it.\n  state          Show state.\n  stats          Show stats.\n  Stage          Mixed case.\n  st_x           Underscore.\n  st-x           Dash.\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "ties",
+   "argv": [
+    "stat"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'stat'\n(Did you mean one of start, state, stats?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'stat'\n(Did you mean one of start, state, stats?)"
+   }
+  },
+  {
+   "program": "ties",
+   "argv": [
+    "sta"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'sta'\n(Did you mean one of st_x, st-x, start, state, stats?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'sta'\n(Did you mean one of st_x, st-x, start, state, stats?)"
+   }
+  },
+  {
+   "program": "ties",
+   "argv": [
+    "stage"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'stage'\n(Did you mean one of Stage, state?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'stage'\n(Did you mean one of Stage, state?)"
+   }
+  },
+  {
+   "program": "ties",
+   "argv": [
+    "st"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'st'\n(Did you mean one of st_x, st-x?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'st'\n(Did you mean one of st_x, st-x?)"
+   }
+  },
+  {
+   "program": "ties",
+   "argv": [
+    "stx"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'stx'\n(Did you mean one of st_x, st-x?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'stx'\n(Did you mean one of st_x, st-x?)"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--colr"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--colr'\n(Did you mean --color?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '--colr'\n(Did you mean --color?)"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      null
+     ],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--color"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      null
+     ],
+     "opts": {
+      "color": true
+     },
+     "optsWithGlobals": {
+      "color": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--no-color"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      null
+     ],
+     "opts": {
+      "color": false
+     },
+     "optsWithGlobals": {
+      "color": false
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--color",
+    "--no-color"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      null
+     ],
+     "opts": {
+      "color": false
+     },
+     "optsWithGlobals": {
+      "color": false
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--no-color",
+    "--color"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      null
+     ],
+     "opts": {
+      "color": true
+     },
+     "optsWithGlobals": {
+      "color": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--opt="
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      null
+     ],
+     "opts": {
+      "opt": ""
+     },
+     "optsWithGlobals": {
+      "opt": ""
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--opt=",
+    "start"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "start"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {
+      "opt": ""
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--checked",
+    "ok"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      null
+     ],
+     "opts": {
+      "checked": "ok"
+     },
+     "optsWithGlobals": {
+      "checked": "ok"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "--checked",
+    "bad"
+   ],
+   "stdout": "",
+   "stderr": "error: option '--checked <v>' argument 'bad' is invalid. Bad value.\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.invalidArgument",
+    "exitCode": 1,
+    "message": "error: option '--checked <v>' argument 'bad' is invalid. Bad value."
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "start",
+    "--no-color"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "start"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {
+      "color": false
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "start"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "start"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "extras",
+   "argv": [
+    "zzz"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      "zzz"
+     ],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
    }
   },
   {

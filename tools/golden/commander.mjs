@@ -8,11 +8,14 @@
 //              options?: [opt], arguments?: [str | [str, desc]],
 //              commands?: [cmd], helpAfter?: str, preAction?: bool }
 //   cmd:     same fields as program plus `name` (the `.command()` string),
-//            `hidden?: bool`, `action?: bool` (default true for leaf commands)
+//            `hidden?: bool`, `action?: bool` (default true for leaf commands;
+//            true also gives a command with subcommands its own action)
 //   opt:     { flags, description?, default?, parser?, hidden?, mandatory? }
 //            parser names: int (parseInt(v, 10)), collect (previous ?? [] then
 //            push), trace (`${String(previous)}|${v}`), invalid (throws
-//            InvalidArgumentError("Not a number.") unless /^\d+$/, else Number)
+//            InvalidArgumentError("Not a number.") unless /^\d+$/, else Number),
+//            commanderInvalid (throws new CommanderError(1,
+//            "commander.invalidArgument", "Bad value.") for "bad", else v)
 // Case fields:
 //   program: key into `programs`; argv: user args (node + script prepended);
 //   exitOverride?: bool (default true; false = commander's default exit path,
@@ -38,6 +41,10 @@ const parsers = {
   int: (v) => parseInt(v, 10),
   collect: (v, previous) => [...(previous ?? []), v],
   trace: (v, previous) => `${String(previous)}|${v}`,
+  commanderInvalid: (v) => {
+    if (v === "bad") throw new CommanderError(1, "commander.invalidArgument", "Bad value.");
+    return v;
+  },
   invalid: (v) => {
     if (!/^\d+$/.test(v)) throw new InvalidArgumentError("Not a number.");
     return Number(v);
@@ -126,6 +133,36 @@ const programs = {
     options: [{ flags: "--required <r>", description: "Mandatory option.", mandatory: true }],
     commands: [{ name: "run", description: "Run it." }],
   },
+  extras: {
+    name: "ex",
+    action: true,
+    arguments: ["[word]"],
+    options: [
+      { flags: "--color", description: "Use color." },
+      { flags: "--no-color", description: "No color." },
+      { flags: "--opt <v>", description: "Value option." },
+      { flags: "--checked <v>", description: "Checked value.", parser: "commanderInvalid" },
+    ],
+    commands: [
+      { name: "start", description: "Start it." },
+      { name: "state", description: "Show state." },
+      { name: "stats", description: "Show stats." },
+      { name: "Stage", description: "Mixed case." },
+      { name: "st_x", description: "Underscore." },
+      { name: "st-x", description: "Dash." },
+    ],
+  },
+  ties: {
+    name: "ti",
+    commands: [
+      { name: "start", description: "Start it." },
+      { name: "state", description: "Show state." },
+      { name: "stats", description: "Show stats." },
+      { name: "Stage", description: "Mixed case." },
+      { name: "st_x", description: "Underscore." },
+      { name: "st-x", description: "Dash." },
+    ],
+  },
   rootAction: {
     name: "ra",
     arguments: ["[file]"],
@@ -162,7 +199,7 @@ function applyCommon(cmd, spec, calls, path) {
     applyCommon(sub, child, calls, [...path, sub.name()]);
   }
   const leaf = !(spec.commands ?? []).length;
-  if (leaf && spec.action !== false) {
+  if ((leaf && spec.action !== false) || spec.action === true) {
     cmd.action((...args) => {
       const self = args[args.length - 1];
       calls.push({
@@ -372,6 +409,26 @@ const cases = [
   { program: "computer", argv: ["help", "nosuch"], exitOverride: false },
   { program: "computer", argv: ["help"], exitOverride: false, exitCode: 3 },
   { program: "computer", argv: ["--help"], exitOverride: false, exitCode: 4 },
+  // Extras: suggestion ties, dual negatable options, parent action, empty =value.
+  { program: "extras", argv: ["--help"] },
+  { program: "ties", argv: ["stat"] },
+  { program: "ties", argv: ["sta"] },
+  { program: "ties", argv: ["stage"] },
+  { program: "ties", argv: ["st"] },
+  { program: "ties", argv: ["stx"] },
+  { program: "extras", argv: ["--colr"] },
+  { program: "extras", argv: [] },
+  { program: "extras", argv: ["--color"] },
+  { program: "extras", argv: ["--no-color"] },
+  { program: "extras", argv: ["--color", "--no-color"] },
+  { program: "extras", argv: ["--no-color", "--color"] },
+  { program: "extras", argv: ["--opt="] },
+  { program: "extras", argv: ["--opt=", "start"] },
+  { program: "extras", argv: ["--checked", "ok"] },
+  { program: "extras", argv: ["--checked", "bad"] },
+  { program: "extras", argv: ["start", "--no-color"] },
+  { program: "extras", argv: ["start"], exitOverride: false },
+  { program: "extras", argv: ["zzz"], exitOverride: false },
   // Introspection.
   { program: "basic", argv: [], op: "helpInformation" },
   { program: "basic", argv: [], op: "helpInformation", path: ["send"] },
