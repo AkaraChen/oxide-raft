@@ -1295,8 +1295,15 @@ Proof: pty tests at 120 and 60 columns with expected text captured from Node
    pattern containing `(?-i:)`, uses regress's fold; differs only for ſ/ı/K.
 3. Under `u`/`v` only `\B` is emulated at mid-surrogate-pair positions; V8 can
    also match other zero-width assertions there.
-4. regress rejects `\ud83d\u{41}*` under `iv` (V8 accepts).
+4. regress rejects `\ud83d\u{41}*` under `v` with or without `i` (V8
+   accepts).
 5. More than 255 levels of distinct (non-collapsible) nesting exceed regress's
    limit.
 6. "Negated character class may contain strings" is detected for `\q{}` only,
    not for string properties in a negated `v` class.
+7. Under `v`, a class of adjacent distinct punctuation such as `[.$]` is
+   rejected (V8 accepts), and an unanchored `\p{RGI_Emoji}` matches only the
+   first code point of a multi-code-point emoji.
+
+Where a regex is created in translated code (module-level static vs.
+per-call) follows mapping-guide §6.2.

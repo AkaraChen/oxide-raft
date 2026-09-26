@@ -195,8 +195,27 @@ Use the helpers in `raft_shared::js` (D3). Do not re-implement them inline.
    `regress` ECMAScript engine running on UTF-16) with the same pattern text and
    flags. It provides `test`, `exec`, `match_all`, `replace`, `replace_all`,
    `replace_with` (callback replacers), and `split` with JS semantics
-   (`$1`/`$&` replacement syntax, `lastIndex` for `g`/`y`, UTF-16 indices). Do
-   not use the `regex` crate for translated patterns.
+   (`$1`/`$&` replacement syntax, `lastIndex` for `g`/`y`, UTF-16 indices),
+   plus `search`, `match_global` (global `s.match(re)`), and `exec_at` /
+   `test_at`, which keep `lastIndex` in a caller-owned `usize`. Do not use the
+   `regex` crate for translated patterns.
+
+   Where the regex object lives follows where JS creates it (D27):
+   - A regex literal or `new RegExp` at module level is one shared object in
+     JS: translate it as a `static LazyLock<JsRegex>`.
+   - A regex literal or `new RegExp` inside a function is a fresh object on
+     every call, with `lastIndex` 0. Without `g`/`y` it may still be hoisted to
+     a `static` (its behaviour has no state). With `g` or `y` it may be hoisted
+     only when every use goes through a method that does not read or keep
+     `lastIndex` across calls (`replace*`, `match_all`, `match_global`,
+     `search`, `split`), or through `exec_at` / `test_at` with a local `usize`
+     starting at 0. Otherwise build it in the function (`JsRegex::new`), as JS
+     does: hoisting a `g` regex used with `test`/`exec` changes results even on
+     one thread (`function f(s) { return /a/g.test(s) }` is true, true in JS;
+     a hoisted static gives true, false).
+   - JS code that assigns `re.lastIndex` and then calls `test`/`exec` on a
+     shared regex (zod's `pattern.lastIndex = 0; pattern.test(s)`) translates
+     to `re.test_at(&s, &mut 0)`.
 3. **JSON output**: `JSON.stringify(v)` → `js::json_stringify(&v)`;
    `JSON.stringify(v, null, 2)` → `js::json_stringify_pretty(&v, 2)`. They
    reproduce V8 number formatting (every number through f64: `1` not `1.0`,
