@@ -1,0 +1,358 @@
+{
+ "oracle": "computer",
+ "node": "v24.15.0",
+ "help": [
+  {
+   "argv": [
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer [options] [command]\n\nRaft Computer — connect this machine to Raft so agents can run here.\n\nOptions:\n  -V, --version                   output the version number\n  -h, --help                      display help for command\n\nCommands:\n  login [options]                 Log in to Raft on this machine.\n  logout                          Log out of Raft on this machine. Connected\n                                  servers are kept.\n  attach [options] <serverSlug>   Connect this machine to one Raft server.\n  setup [options] <serverSlug>    Set up Raft Computer for one server: log in\n                                  if needed, connect this machine, then start.\n  start [options] [serverSlug]    Start Raft Computer in the background.\n  stop                            Stop Raft Computer and any agents it is\n                                  running.\n  restart [options] [serverSlug]  Restart Raft Computer.\n  status                          Show whether Raft Computer is logged in,\n                                  running, and connected to servers.\n  doctor [options] [serverSlug]   Check Raft Computer setup and connection\n                                  health. Secrets are never printed.\n  logs [options] [serverSlug]     Show recent Raft Computer logs. Secrets are\n                                  redacted.\n  runners                         Advanced tools for agents running on this\n                                  Computer.\n  channel                         Show or set the Computer release channel.\n                                  `latest` installs production releases;\n                                  `alpha` follows staging builds;\n                                  `pinned:<semver>` stays on one version.\n  operation                       Inspect or acknowledge durable Computer\n                                  upgrade receipts.\n  upgrade [options]               Update Raft Computer to the latest version\n                                  for this machine. By default it follows the\n                                  saved release channel; pass --target-version\n                                  to install a specific version.\n  help [command]                  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "login",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer login [options]\n\nLog in to Raft on this machine.\n\nOptions:\n  --server-url <url>  Raft API base URL; defaults to\n                      SLOCK_SERVER_URL/RAFT_SERVER_URL or\n                      https://api.raft.build\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "logout",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer logout [options]\n\nLog out of Raft on this machine. Connected servers are kept.\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "attach",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer attach [options] <serverSlug>\n\nConnect this machine to one Raft server.\n\nArguments:\n  serverSlug          target Raft server slug (canonical form `/myserver`; bare\n                      `myserver` accepted)\n\nOptions:\n  --server-url <url>  Raft API base URL; defaults to the saved user session,\n                      SLOCK_SERVER_URL/RAFT_SERVER_URL or\n                      https://api.raft.build\n  --name <name>       Computer display name; defaults to a sanitized hostname\n  --no-start          connect without starting Raft Computer\n  --foreground        run the service in this terminal instead of the\n                      background\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "setup",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer setup [options] <serverSlug>\n\nSet up Raft Computer for one server: log in if needed, connect this machine,\nthen start.\n\nArguments:\n  serverSlug             target Raft server slug (canonical form `/myserver`;\n                         bare `myserver` accepted)\n\nOptions:\n  --server-url <url>     Raft API base URL; defaults to the saved user session,\n                         SLOCK_SERVER_URL/RAFT_SERVER_URL or\n                         https://api.raft.build\n  --name <name>          Computer display name for a new attachment; defaults\n                         to a sanitized hostname\n  --machine <machineId>  adopt the Computer/daemon row with this id (shown on\n                         the web Computers page) instead of matching local\n                         evidence\n  --fresh                create a new connection after unmatched local legacy\n                         evidence is printed\n  --verbose              show detailed migration evidence during setup\n  --no-start             finish setup without starting Raft Computer\n  --foreground           run the service in this terminal instead of the\n                         background\n  -y, --yes              allow non-interactive setup after confirming the\n                         planned actions\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "start",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer start [options] [serverSlug]\n\nStart Raft Computer in the background.\n\nArguments:\n  serverSlug    optional: scope to one attached server (canonical `/myserver`;\n                bare accepted; default: all attached)\n\nOptions:\n  --foreground  run the service in this terminal instead of the background\n  -h, --help    display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "stop",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer stop [options]\n\nStop Raft Computer and any agents it is running.\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "restart",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer restart [options] [serverSlug]\n\nRestart Raft Computer.\n\nArguments:\n  serverSlug    optional: scope to one attached server (canonical `/myserver`;\n                bare accepted; default: all attached)\n\nOptions:\n  --foreground  run the service in this terminal instead of the background\n  -h, --help    display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "status",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer status [options]\n\nShow whether Raft Computer is logged in, running, and connected to servers.\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "doctor",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer doctor [options] [serverSlug]\n\nCheck Raft Computer setup and connection health. Secrets are never printed.\n\nArguments:\n  serverSlug           optional: scope to one attached server (canonical\n                       `/myserver`; bare accepted; default: all attached)\n                       (scopes recent-crash detail to that server)\n\nOptions:\n  --fix                after diagnosis, clean up stale local state when it is\n                       safe\n  --migration-details  show local legacy migration evidence and server-relative\n                       exclusion reasons\n  -h, --help           display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "logs",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer logs [options] [serverSlug]\n\nShow recent Raft Computer logs. Secrets are redacted.\n\nArguments:\n  serverSlug   optional: scope to one attached server (canonical `/myserver`;\n               bare accepted; default: all attached) (required when ≥2\n               attached; ignored with --service)\n\nOptions:\n  --lines <n>  trailing lines to show (default 200)\n  --service    show machine-level logs instead of server-specific logs\n  -h, --help   display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "runners",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer runners [options] [command]\n\nAdvanced tools for agents running on this Computer.\n\nOptions:\n  -h, --help                   display help for command\n\nCommands:\n  list [options] [serverSlug]  List agents running on this Computer.\n  stop <agentId> [serverSlug]  Stop an agent running on this Computer.\n  help [command]               display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer channel [options] [command]\n\nShow or set the Computer release channel. `latest` installs production\nreleases; `alpha` follows staging builds; `pinned:<semver>` stays on one\nversion.\n\nOptions:\n  -h, --help                    display help for command\n\nCommands:\n  show                          Show the saved Computer release channel. If\n                                none is set, this prints `latest`.\n  set <channel>                 Set which release channel future `raft-computer\n                                upgrade` commands should use.\n  versions [options] [channel]  List installable Computer versions published on\n                                a release channel.\n  help [command]                display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "operation",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer operation [options] [command]\n\nInspect or acknowledge durable Computer upgrade receipts.\n\nOptions:\n  -h, --help                 display help for command\n\nCommands:\n  acknowledge <operationId>  Acknowledge one exact terminal K receipt without\n                             deleting its audit record.\n  help [command]             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "upgrade",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer upgrade [options]\n\nUpdate Raft Computer to the latest version for this machine. By default it\nfollows the saved release channel; pass --target-version to install a specific\nversion.\n\nOptions:\n  --dry-run                  resolve the update package only; server\n                             authorization is not checked and no changes are\n                             made\n  --channel <name>           use a release channel for this invocation only.\n                             `latest` installs production releases; `alpha`\n                             follows staging builds; `pinned:<semver>` stays on\n                             one version.\n  --target-version <semver>  install a specific version\n  --rollback                 restore the previous version from the last\n                             successful upgrade; mutually exclusive with\n                             --target-version/--channel/--dry-run\n  -h, --help                 display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "runners",
+    "list",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer runners list [options] [serverSlug]\n\nList agents running on this Computer.\n\nArguments:\n  serverSlug  optional: scope to one attached server (canonical `/myserver`;\n              bare accepted; default: all attached) (optional; default lists\n              this Computer's runners across attached servers)\n\nOptions:\n  --all       list all runners on the selected server (legacy server-wide view;\n              serverSlug required when ≥2 attached)\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "runners",
+    "stop",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer runners stop [options] <agentId> [serverSlug]\n\nStop an agent running on this Computer.\n\nArguments:\n  agentId     id of the agent to stop\n  serverSlug  optional: scope to one attached server (canonical `/myserver`;\n              bare accepted; default: all attached) (required when ≥2 attached)\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "show",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer channel show [options]\n\nShow the saved Computer release channel. If none is set, this prints `latest`.\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "set",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer channel set [options] <channel>\n\nSet which release channel future `raft-computer upgrade` commands should use.\n\nArguments:\n  channel     `latest` installs production releases; `alpha` follows staging\n              builds; `pinned:<semver>` stays on one version\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "versions",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer channel versions [options] [channel]\n\nList installable Computer versions published on a release channel.\n\nArguments:\n  channel          release channel to list; defaults to the saved channel\n\nOptions:\n  --json           print the stable machine-readable response\n  --limit <count>  maximum versions to return (1-100)\n  -h, --help       display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "operation",
+    "acknowledge",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer operation acknowledge [options] <operationId>\n\nAcknowledge one exact terminal K receipt without deleting its audit record.\n\nArguments:\n  operationId  exact K operation id shown by `raft-computer status`\n\nOptions:\n  -h, --help   display help for command\n",
+   "stderr": "",
+   "exit": 0
+  }
+ ],
+ "parse": [
+  {
+   "argv": [],
+   "stdout": "",
+   "stderr": "Usage: raft-computer [options] [command]\n\nRaft Computer — connect this machine to Raft so agents can run here.\n\nOptions:\n  -V, --version                   output the version number\n  -h, --help                      display help for command\n\nCommands:\n  login [options]                 Log in to Raft on this machine.\n  logout                          Log out of Raft on this machine. Connected\n                                  servers are kept.\n  attach [options] <serverSlug>   Connect this machine to one Raft server.\n  setup [options] <serverSlug>    Set up Raft Computer for one server: log in\n                                  if needed, connect this machine, then start.\n  start [options] [serverSlug]    Start Raft Computer in the background.\n  stop                            Stop Raft Computer and any agents it is\n                                  running.\n  restart [options] [serverSlug]  Restart Raft Computer.\n  status                          Show whether Raft Computer is logged in,\n                                  running, and connected to servers.\n  doctor [options] [serverSlug]   Check Raft Computer setup and connection\n                                  health. Secrets are never printed.\n  logs [options] [serverSlug]     Show recent Raft Computer logs. Secrets are\n                                  redacted.\n  runners                         Advanced tools for agents running on this\n                                  Computer.\n  channel                         Show or set the Computer release channel.\n                                  `latest` installs production releases;\n                                  `alpha` follows staging builds;\n                                  `pinned:<semver>` stays on one version.\n  operation                       Inspect or acknowledge durable Computer\n                                  upgrade receipts.\n  upgrade [options]               Update Raft Computer to the latest version\n                                  for this machine. By default it follows the\n                                  saved release channel; pass --target-version\n                                  to install a specific version.\n  help [command]                  display help for command\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "--version"
+   ],
+   "stdout": "1.0.28\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "nosuchcmd"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'nosuchcmd'\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "upgrade"
+   ],
+   "stdout": "",
+   "stderr": "What happened (UPGRADE_SEA_ONLY): Computer self-upgrade requires the installed single-executable binary.\nNext: raft-computer upgrade\nState: No completed upgrade was confirmed by this command.\nHelp: https://app.raft.build/s/community/\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "channel"
+   ],
+   "stdout": "",
+   "stderr": "Usage: raft-computer channel [options] [command]\n\nShow or set the Computer release channel. `latest` installs production\nreleases; `alpha` follows staging builds; `pinned:<semver>` stays on one\nversion.\n\nOptions:\n  -h, --help                    display help for command\n\nCommands:\n  show                          Show the saved Computer release channel. If\n                                none is set, this prints `latest`.\n  set <channel>                 Set which release channel future `raft-computer\n                                upgrade` commands should use.\n  versions [options] [channel]  List installable Computer versions published on\n                                a release channel.\n  help [command]                display help for command\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "operation"
+   ],
+   "stdout": "",
+   "stderr": "Usage: raft-computer operation [options] [command]\n\nInspect or acknowledge durable Computer upgrade receipts.\n\nOptions:\n  -h, --help                 display help for command\n\nCommands:\n  acknowledge <operationId>  Acknowledge one exact terminal K receipt without\n                             deleting its audit record.\n  help [command]             display help for command\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "logs",
+    "--lines"
+   ],
+   "stdout": "",
+   "stderr": "error: option '--lines <n>' argument missing\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "logs",
+    "--lines",
+    "x"
+   ],
+   "stdout": "",
+   "stderr": "What happened (NO_ATTACHMENT): No server attachments yet. Run `raft-computer attach /<serverSlug>` (e.g. `/myserver`) first.\nNext: raft-computer attach /<serverSlug>\nState: No local Computer state was changed.\nHelp: https://app.raft.build/s/community/\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "logs",
+    "--lines",
+    "5.9"
+   ],
+   "stdout": "",
+   "stderr": "What happened (NO_ATTACHMENT): No server attachments yet. Run `raft-computer attach /<serverSlug>` (e.g. `/myserver`) first.\nNext: raft-computer attach /<serverSlug>\nState: No local Computer state was changed.\nHelp: https://app.raft.build/s/community/\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "logs",
+    "--lines",
+    "1e25"
+   ],
+   "stdout": "",
+   "stderr": "What happened (NO_ATTACHMENT): No server attachments yet. Run `raft-computer attach /<serverSlug>` (e.g. `/myserver`) first.\nNext: raft-computer attach /<serverSlug>\nState: No local Computer state was changed.\nHelp: https://app.raft.build/s/community/\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "setup",
+    "--no-start",
+    "--help"
+   ],
+   "stdout": "Usage: raft-computer setup [options] <serverSlug>\n\nSet up Raft Computer for one server: log in if needed, connect this machine,\nthen start.\n\nArguments:\n  serverSlug             target Raft server slug (canonical form `/myserver`;\n                         bare `myserver` accepted)\n\nOptions:\n  --server-url <url>     Raft API base URL; defaults to the saved user session,\n                         SLOCK_SERVER_URL/RAFT_SERVER_URL or\n                         https://api.raft.build\n  --name <name>          Computer display name for a new attachment; defaults\n                         to a sanitized hostname\n  --machine <machineId>  adopt the Computer/daemon row with this id (shown on\n                         the web Computers page) instead of matching local\n                         evidence\n  --fresh                create a new connection after unmatched local legacy\n                         evidence is printed\n  --verbose              show detailed migration evidence during setup\n  --no-start             finish setup without starting Raft Computer\n  --foreground           run the service in this terminal instead of the\n                         background\n  -y, --yes              allow non-interactive setup after confirming the\n                         planned actions\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "start",
+    "--bogus"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--bogus'\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "help"
+   ],
+   "stdout": "Usage: raft-computer [options] [command]\n\nRaft Computer — connect this machine to Raft so agents can run here.\n\nOptions:\n  -V, --version                   output the version number\n  -h, --help                      display help for command\n\nCommands:\n  login [options]                 Log in to Raft on this machine.\n  logout                          Log out of Raft on this machine. Connected\n                                  servers are kept.\n  attach [options] <serverSlug>   Connect this machine to one Raft server.\n  setup [options] <serverSlug>    Set up Raft Computer for one server: log in\n                                  if needed, connect this machine, then start.\n  start [options] [serverSlug]    Start Raft Computer in the background.\n  stop                            Stop Raft Computer and any agents it is\n                                  running.\n  restart [options] [serverSlug]  Restart Raft Computer.\n  status                          Show whether Raft Computer is logged in,\n                                  running, and connected to servers.\n  doctor [options] [serverSlug]   Check Raft Computer setup and connection\n                                  health. Secrets are never printed.\n  logs [options] [serverSlug]     Show recent Raft Computer logs. Secrets are\n                                  redacted.\n  runners                         Advanced tools for agents running on this\n                                  Computer.\n  channel                         Show or set the Computer release channel.\n                                  `latest` installs production releases;\n                                  `alpha` follows staging builds;\n                                  `pinned:<semver>` stays on one version.\n  operation                       Inspect or acknowledge durable Computer\n                                  upgrade receipts.\n  upgrade [options]               Update Raft Computer to the latest version\n                                  for this machine. By default it follows the\n                                  saved release channel; pass --target-version\n                                  to install a specific version.\n  help [command]                  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "help",
+    "logs"
+   ],
+   "stdout": "Usage: raft-computer logs [options] [serverSlug]\n\nShow recent Raft Computer logs. Secrets are redacted.\n\nArguments:\n  serverSlug   optional: scope to one attached server (canonical `/myserver`;\n               bare accepted; default: all attached) (required when ≥2\n               attached; ignored with --service)\n\nOptions:\n  --lines <n>  trailing lines to show (default 200)\n  --service    show machine-level logs instead of server-specific logs\n  -h, --help   display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "help",
+    "nosuch"
+   ],
+   "stdout": "",
+   "stderr": "Usage: raft-computer [options] [command]\n\nRaft Computer — connect this machine to Raft so agents can run here.\n\nOptions:\n  -V, --version                   output the version number\n  -h, --help                      display help for command\n\nCommands:\n  login [options]                 Log in to Raft on this machine.\n  logout                          Log out of Raft on this machine. Connected\n                                  servers are kept.\n  attach [options] <serverSlug>   Connect this machine to one Raft server.\n  setup [options] <serverSlug>    Set up Raft Computer for one server: log in\n                                  if needed, connect this machine, then start.\n  start [options] [serverSlug]    Start Raft Computer in the background.\n  stop                            Stop Raft Computer and any agents it is\n                                  running.\n  restart [options] [serverSlug]  Restart Raft Computer.\n  status                          Show whether Raft Computer is logged in,\n                                  running, and connected to servers.\n  doctor [options] [serverSlug]   Check Raft Computer setup and connection\n                                  health. Secrets are never printed.\n  logs [options] [serverSlug]     Show recent Raft Computer logs. Secrets are\n                                  redacted.\n  runners                         Advanced tools for agents running on this\n                                  Computer.\n  channel                         Show or set the Computer release channel.\n                                  `latest` installs production releases;\n                                  `alpha` follows staging builds;\n                                  `pinned:<semver>` stays on one version.\n  operation                       Inspect or acknowledge durable Computer\n                                  upgrade receipts.\n  upgrade [options]               Update Raft Computer to the latest version\n                                  for this machine. By default it follows the\n                                  saved release channel; pass --target-version\n                                  to install a specific version.\n  help [command]                  display help for command\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "status",
+    "extra"
+   ],
+   "stdout": "\nSLOCK_HOME:   <HOME>/.raft\nLogged in:    no — run `raft-computer login`\nCLI version:  1.0.28\nService:   stopped — run `raft-computer start`\nService version: unknown (no live version evidence)\nService log: <HOME>/.raft/computer/run/service.log\nUpgrade: none in flight\nHost lifecycle: healthy\n\nAttachments:  none — run `raft-computer attach /<serverSlug>` (e.g. `/myserver`).\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "__print-env",
+    "--help"
+   ],
+   "stdout": "",
+   "stderr": "node:net:1389\n    validatePort(port);\n    ^\n\nRangeError [ERR_SOCKET_BAD_PORT]: Port should be >= 0 and < 65536. Received type string ('').\n    at lookupAndConnect (node:net:1389:5)\n    at Socket.connect (node:net:1344:5)\n    at Object.connect (node:net:249:17)\n    at printEnvMode (/Users/akrc/Developer/oxide-raft/upstream/raft-source/packages/computer/src/index.ts:299:22)\n    at <anonymous> (/Users/akrc/Developer/oxide-raft/upstream/raft-source/packages/computer/src/index.ts:405:3)\n    at ModuleJob.run (node:internal/modules/esm/module_job:437:25)\n    at async node:internal/modules/esm/loader:639:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  code: 'ERR_SOCKET_BAD_PORT'\n}\n\nNode.js v24.15.0\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "__build-versions"
+   ],
+   "stdout": "{\"computerVersion\":\"1.0.28\",\"daemonVersion\":null,\"cliVersion\":null}\n",
+   "stderr": "",
+   "exit": 0
+  }
+ ]
+}

@@ -71,7 +71,15 @@ Features neither CLI uses (`choices`, `env`, `conflicts`, `implies`,
 `.usage()`, the `.alias(name)` setter, `on("option:…")` events, whose one use
 D10 removes) are not ported. Before translation, this list is checked against a
 grep of every commander API used in `cli/src` and `computer/src`, including
-tests to be ported; a missing API is added here. Action handlers are async
+tests to be ported; a missing API is added here. The grep (run when phase 1
+started) added: read access to `command.options` with each `Option`'s `long`
+and `flags` (`agent/login.test.ts:212-263`, `agent/bridge.test.ts:56-60`,
+`integration/app.test.ts:318`); the registered arguments with `name()`
+(`computer/src/cliServerArgContract.test.ts:50` reads `_args`); `new Option(…)`
+with `hideHelp()` and `addOption` (`cli/src/core/command.ts:42-51`);
+`outputHelp()` (`knowledge/get.test.ts:69`, `knowledge/search.test.ts:64`,
+`integration/invoke.test.ts:1075`); and `helpInformation()`
+(`computer/src/cliHelpCopy.test.ts`, `cliServerArgContract.test.ts:92`). Action handlers are async
 closures returning `Result`. Proof: the 116 help goldens plus the parse-error
 matrix from the oracle for both CLIs, including `raft-computer logs --lines`
 with no value and with `x`, `5.9`, and `1e25`, `--no-start`, unknown commands,
@@ -254,7 +262,7 @@ Helpers:
   BOM stripped, the `content-type` charset ignored; `res.json()` is
   `json_parse(response_text(bytes))`;
 - numbers: `number_to_string`, `to_fixed`, `to_number`,
-  `parse_int(s, radix: Option<u32>) -> f64` (JS radix inference),
+  `parse_int(s: &JsString, radix: Option<f64>) -> f64` (JS radix inference; the radix is the JS argument, converted with ToInt32),
   `to_integer_or_infinity`, `is_integer`, `is_safe_integer`, `math_round`,
   `math_floor_div`;
 - dates and zones: `to_iso_string`, `date_parse` (V8 legacy parser subset),
@@ -270,6 +278,37 @@ Helpers:
 
 Golden inputs include astral characters, lone surrogates, array-index keys,
 `undefined` members, and edge numbers.
+
+Settled while implementing the core helpers (phase 1):
+- Errors implement `js::JsErrorName` (`js_name()`; the message is `Display`);
+  `error_to_string(&err)` renders `"<name>: <message>"`, `error_to_string_parts`
+  is the raw form. A `JsError` message is a Rust `String`, so a lone surrogate
+  quoted in a `JSON.parse` error shows as U+FFFD (Node prints it the same way to
+  a stream).
+- Nesting: `json_parse` has no depth limit; drop, clone, equality,
+  `to_display_string`, and `json_stringify` are iterative, so they succeed where
+  V8 throws `RangeError` (beyond about 6,161 levels for stringify, about 2,816 for
+  `String()`). The serde bridge stops at 128 levels with `RangeError: Maximum
+  call stack size exceeded`.
+- `pad_start`/`pad_end` return `Result` and throw `RangeError: Invalid string
+  length` above V8's 2^29−24 code units. U+0085 is not JS whitespace: `trim`,
+  `Number()`, `parseInt`, and `\s` all leave it (verified on Node 24.15.0).
+- `parseInt` with a radix other than 10 or a power of two accumulates with a
+  fused multiply-add: V8 contracts `result * multiplier + part` on arm64, the
+  oracle machine. An x64 Node may differ in the last bit.
+- A `JsString` given to a non-`js` serializer is written as UTF-8 with U+FFFD
+  for lone surrogates; `from_value` into `String` is lossy the same way.
+- Deferred to their own phase-1 units: `JsRegex`, locale collation and
+  normalization, dates and time zones, `Utf8StreamDecoder`/`ReadlineSplitter`,
+  and `split`/`to_locale_*` helpers not yet listed in `js`. Public names added
+  beyond the list above: `JsErrorName`, `error_to_string_parts`,
+  `json_parse_js`, `MAX_STRING_LENGTH`, `collapse_js_whitespace`, `less_than`,
+  `is_finite`, `to_number_value`, `trim_start`, `trim_end`, and `js::convert`.
+- `Value` implements `Drop` (iterative), so contents are moved out with
+  `into_*` accessors or `std::mem::take`, not by destructuring.
+- Float/integer conversions for translated code (guide §4.6) are the checked
+  helpers in `js::convert` (`f64_to_i64_exact`, `to_int32`, `to_uint32`,
+  `usize_to_f64`, …); they are the only place such casts live.
 
 ---
 
@@ -691,6 +730,20 @@ ported with the same condition as
 with that feature's name. A test that checks TS source text or packaging is
 waived as `source-scan` or `packaging`. Every other test is ported.
 
+**Skip kinds (clarification).** vitest's JSON output carries no skip reason, so
+each upstream skip in scope gets a kind in `docs/migration/scope/rules.json`
+`upstreamSkips`, read from the upstream `skip`/`skipIf` expression:
+- `platform` (a `process.platform`/OS condition): ported with
+  `#[cfg_attr(<cfg>, ignore = "upstream skip: <reason>")]` as above.
+- `opt-in` (an env var such as `RUN_CLAUDE_INTEGRATION_TESTS`,
+  `RUN_CODEX_INTEGRATION_TESTS`, `RUN_GROK_INTEGRATION_TESTS`,
+  `TASK695_FAILURE_PROBE`): no ignore attribute. The Rust test reads the same
+  variable at runtime with the same test (`=== "1"` stays `== "1"`) and returns
+  early when it does not hold, so setting the variable runs it on every OS.
+  It is counted as ported, not as upstream-skipped.
+- `always` (an unconditional `test.skip`): `#[ignore = "upstream skip: <reason>"]`.
+`tools/test-parity` enforces the attribute or the runtime check per kind.
+
 Golden capture scripts live in `tools/golden/` and are rerunnable against the
 oracle. The orchestrator runs them (README "Work units and roles").
 
@@ -1053,3 +1106,55 @@ what that service reads and writes.
 
 The attach state file is written in place, then `chmod 0600`, matching
 `services/attach.ts`. Do not write a temp file and rename it.
+
+## D22. Setup and doctor without legacy migration
+
+**Governs:** `setup.rs`, `doctor.rs`, `doctor_cli.rs`, `cli.rs` (the `setup`
+and `doctor` commands).
+
+**Facts.** This records the observable effect of README "Dropped: Legacy
+migration and adoption" on two kept commands. It adds no new drop.
+
+- `setupCore` injects legacy detection, the legacy-machines roster, three
+  pickers, adopt-by-fingerprint, adopt-by-daemon-id, and forced migration
+  diagnostics (`computer/src/setup.ts:1238-1254`). `--machine <id>` adopts a
+  server row by id (`setup.ts:1360-1390`, `SETUP_MACHINE_INVALID`) and is
+  refused next to an existing attachment (`setup.ts:1337-1342`,
+  `SETUP_MACHINE_ALREADY_ATTACHED`). Without `--machine`, setup runs discovery
+  and the pickers (`setup.ts:1392-1656`), which print `Migration:` lines and
+  honour `--fresh` and `--verbose`. When nothing is adopted, setup attaches
+  fresh (`setup.ts:1659-1662`); this is the whole path when detection reports
+  `no_local_evidence`. Forced scrubbed diagnostics run after an adoption
+  (`setup.ts:1668-1720`). The unlinked-runner recovery archives state and
+  loops back to the attachment decision (`setup.ts:1686-1694`).
+- `doctor` adds an `identity <server>` check from legacy detection: the
+  zero-match setup blocker and the regret switch
+  (`computer/src/doctor.ts:246-263`, `setupBlockingIdentityDetail`,
+  `regretSwitchDetail`). `doctor --migration-details` prints local legacy
+  evidence instead of the report (`computer/src/cli.ts:466-475`,
+  `doctorCli.ts:179-290`).
+
+**Effect in the port.**
+- Setup never runs legacy detection, fetches the legacy roster, prompts a
+  picker, adopts, or forces migration diagnostics. With no attachment it goes
+  straight to the fresh attach of `setup.ts:1659-1662`, then start, printing no
+  `Migration:` line. `SETUP_MACHINE_INVALID` and
+  `SETUP_MACHINE_ALREADY_ATTACHED` are never produced. The unlinked-runner
+  recovery still archives the stale state and loops back, which now leads to a
+  fresh attach.
+- Doctor never adds an `identity <server>` check; the list of doctor checks
+  shrinks accordingly (as for the K receipt check in D13).
+- `services/diagnosticsPush.ts` stays: `lib/api.ts` exposes it (README keeps
+  `lib/api.ts` and its closure). Only setup's migration callers go.
+- `setup --machine <machineId>`, `setup --fresh`, `setup --verbose` and
+  `doctor --migration-details` are not registered (user decision). They are
+  not stubbed. `raft-computer setup --help` and `raft-computer doctor --help`
+  therefore lack those option lines, the same way D13 removes the `channel`,
+  `operation` and `upgrade` lines from `raft-computer --help`; golden help
+  comparisons use the oracle output with exactly those lines removed. Passing
+  one of them gives commander's `error: unknown option '--machine'` (with the
+  option as typed) and exit code 1.
+- Tests: the cases of `setup.test.ts` and `doctor.test.ts` that exercise the
+  paths or options above are waived per case in `tests-waived.md` as
+  `dropped`. Ported cases that injected the detection seam keep their other
+  assertions; each left-out assertion has its own `:: assert` row there.

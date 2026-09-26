@@ -1,0 +1,5399 @@
+{
+ "sources": {
+  "upstream/oar/packages/cli/src/index.ts": {
+   "package": "oar",
+   "lines": 154,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/cli/src/progress.ts": {
+   "package": "oar",
+   "lines": 66,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/contracts/account-usage.ts": {
+   "package": "oar",
+   "lines": 41,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/contracts/installation.ts": {
+   "package": "oar",
+   "lines": 34,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/contracts/model-catalog.ts": {
+   "package": "oar",
+   "lines": 56,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/contracts/provider-auth.ts": {
+   "package": "oar",
+   "lines": 81,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/contracts/runtime.ts": {
+   "package": "oar",
+   "lines": 16,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/contracts/session.ts": {
+   "package": "oar",
+   "lines": 191,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/index.ts": {
+   "package": "oar",
+   "lines": 108,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/observe/agent-status.ts": {
+   "package": "oar",
+   "lines": 73,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/observe/aggregate-events.ts": {
+   "package": "oar",
+   "lines": 80,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/observe/index.ts": {
+   "package": "oar",
+   "lines": 17,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/observe/observe-agent.ts": {
+   "package": "oar",
+   "lines": 94,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/observe/stall-observer.ts": {
+   "package": "oar",
+   "lines": 57,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/observe/tool-activity.ts": {
+   "package": "oar",
+   "lines": 120,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/registry.ts": {
+   "package": "oar",
+   "lines": 37,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/claude/account-usage.ts": {
+   "package": "oar",
+   "lines": 236,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/claude/context-usage.ts": {
+   "package": "oar",
+   "lines": 25,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/claude/index.ts": {
+   "package": "oar",
+   "lines": 15,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/claude/installation.ts": {
+   "package": "oar",
+   "lines": 4,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/claude/projection.ts": {
+   "package": "oar",
+   "lines": 154,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/claude/session.ts": {
+   "package": "oar",
+   "lines": 192,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/account-usage.ts": {
+   "package": "oar",
+   "lines": 262,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/app-server-client.ts": {
+   "package": "oar",
+   "lines": 97,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/context-usage.ts": {
+   "package": "oar",
+   "lines": 18,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/index.ts": {
+   "package": "oar",
+   "lines": 15,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/installation.ts": {
+   "package": "oar",
+   "lines": 24,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/item-detail.ts": {
+   "package": "oar",
+   "lines": 49,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/projection.ts": {
+   "package": "oar",
+   "lines": 126,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/reasoning.ts": {
+   "package": "oar",
+   "lines": 26,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/codex/session.ts": {
+   "package": "oar",
+   "lines": 225,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/grok/account-usage.ts": {
+   "package": "oar",
+   "lines": 198,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/grok/index.ts": {
+   "package": "oar",
+   "lines": 15,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/grok/installation.ts": {
+   "package": "oar",
+   "lines": 30,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/grok/session.ts": {
+   "package": "oar",
+   "lines": 74,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/kimi/account-usage.ts": {
+   "package": "oar",
+   "lines": 299,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/kimi/auth-config.ts": {
+   "package": "oar",
+   "lines": 111,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/kimi/index.ts": {
+   "package": "oar",
+   "lines": 15,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/kimi/installation.ts": {
+   "package": "oar",
+   "lines": 30,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/kimi/oauth-token.ts": {
+   "package": "oar",
+   "lines": 42,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/kimi/session.ts": {
+   "package": "oar",
+   "lines": 49,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/runtimes/pi/auth.ts": {
+   "package": "oar",
+   "lines": 166,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/oar/packages/oar/src/runtimes/pi/catalog.ts": {
+   "package": "oar",
+   "lines": 90,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/oar/packages/oar/src/runtimes/pi/index.ts": {
+   "package": "oar",
+   "lines": 17,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/oar/packages/oar/src/runtimes/pi/installation.ts": {
+   "package": "oar",
+   "lines": 35,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/oar/packages/oar/src/runtimes/pi/projection.ts": {
+   "package": "oar",
+   "lines": 153,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/oar/packages/oar/src/runtimes/pi/session.ts": {
+   "package": "oar",
+   "lines": 218,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/oar/packages/oar/src/shared/acp/errors.ts": {
+   "package": "oar",
+   "lines": 42,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/acp/process.ts": {
+   "package": "oar",
+   "lines": 127,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/acp/profile.ts": {
+   "package": "oar",
+   "lines": 224,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/acp/projection.ts": {
+   "package": "oar",
+   "lines": 194,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/acp/session.ts": {
+   "package": "oar",
+   "lines": 301,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/acp/terminal.ts": {
+   "package": "oar",
+   "lines": 272,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/executable/index.ts": {
+   "package": "oar",
+   "lines": 7,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/executable/process.ts": {
+   "package": "oar",
+   "lines": 119,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/executable/resolve.ts": {
+   "package": "oar",
+   "lines": 7,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/executable/run.ts": {
+   "package": "oar",
+   "lines": 50,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/executable/version.ts": {
+   "package": "oar",
+   "lines": 25,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/failure-class.ts": {
+   "package": "oar",
+   "lines": 26,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/installation.ts": {
+   "package": "oar",
+   "lines": 84,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/instant.ts": {
+   "package": "oar",
+   "lines": 8,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/json.ts": {
+   "package": "oar",
+   "lines": 36,
+   "status": "in-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/seal-session.ts": {
+   "package": "oar",
+   "lines": 31,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/shared/session-kernel.ts": {
+   "package": "oar",
+   "lines": 97,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/packages/oar/src/voyage.ts": {
+   "package": "oar",
+   "lines": 76,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/sea-trial/vendor/support/asserts.ts": {
+   "package": "oar",
+   "lines": 43,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/sea-trial/vendor/support/system-prompt.ts": {
+   "package": "oar",
+   "lines": 87,
+   "status": "out-of-scope"
+  },
+  "upstream/oar/sea-trial/vendor/support/tool-round.ts": {
+   "package": "oar",
+   "lines": 83,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/cli/src/agentApiPath.ts": {
+   "package": "cli",
+   "lines": 573,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/agentCommsCore/bridge.ts": {
+   "package": "cli",
+   "lines": 1125,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/agentLogin/deviceAuthClient.ts": {
+   "package": "cli",
+   "lines": 303,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/apps/reminder/ack.ts": {
+   "package": "cli",
+   "lines": 172,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/apps/reminder/log.ts": {
+   "package": "cli",
+   "lines": 43,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/auth/env.ts": {
+   "package": "cli",
+   "lines": 321,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/auth/managedTransport.ts": {
+   "package": "cli",
+   "lines": 119,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/client.ts": {
+   "package": "cli",
+   "lines": 554,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/_apiFailure.ts": {
+   "package": "cli",
+   "lines": 2,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/_axExampleFixtures.ts": {
+   "package": "cli",
+   "lines": 97,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/_target.ts": {
+   "package": "cli",
+   "lines": 30,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/action/prepare.ts": {
+   "package": "cli",
+   "lines": 164,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/agent/_format.ts": {
+   "package": "cli",
+   "lines": 246,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/agent/bridge.ts": {
+   "package": "cli",
+   "lines": 662,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/agent/list.ts": {
+   "package": "cli",
+   "lines": 163,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/agent/login.ts": {
+   "package": "cli",
+   "lines": 599,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/app/_format.ts": {
+   "package": "cli",
+   "lines": 26,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/app/config.ts": {
+   "package": "cli",
+   "lines": 118,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/attachment/_format.ts": {
+   "package": "cli",
+   "lines": 95,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/attachment/comments.ts": {
+   "package": "cli",
+   "lines": 54,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/attachment/upload.ts": {
+   "package": "cli",
+   "lines": 366,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/attachment/view.ts": {
+   "package": "cli",
+   "lines": 98,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/auth/whoami.ts": {
+   "package": "cli",
+   "lines": 38,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/add-member.ts": {
+   "package": "cli",
+   "lines": 117,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/create.ts": {
+   "package": "cli",
+   "lines": 86,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/info.ts": {
+   "package": "cli",
+   "lines": 70,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/join.ts": {
+   "package": "cli",
+   "lines": 74,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/leave.ts": {
+   "package": "cli",
+   "lines": 106,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/lifecycle.ts": {
+   "package": "cli",
+   "lines": 95,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/members.ts": {
+   "package": "cli",
+   "lines": 46,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/mute.ts": {
+   "package": "cli",
+   "lines": 125,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/remove-member.ts": {
+   "package": "cli",
+   "lines": 131,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/update.ts": {
+   "package": "cli",
+   "lines": 128,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/freshness/_format.ts": {
+   "package": "cli",
+   "lines": 200,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/inbox/_format.ts": {
+   "package": "cli",
+   "lines": 37,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/inbox/check.ts": {
+   "package": "cli",
+   "lines": 55,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/_format.ts": {
+   "package": "cli",
+   "lines": 341,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/_session.ts": {
+   "package": "cli",
+   "lines": 427,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/actionV1.ts": {
+   "package": "cli",
+   "lines": 348,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/app.ts": {
+   "package": "cli",
+   "lines": 763,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/appReceipts.ts": {
+   "package": "cli",
+   "lines": 182,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/env.ts": {
+   "package": "cli",
+   "lines": 281,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/invocationStoreV1.ts": {
+   "package": "cli",
+   "lines": 416,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/invoke.ts": {
+   "package": "cli",
+   "lines": 2195,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/invokeV1.ts": {
+   "package": "cli",
+   "lines": 1093,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/list.ts": {
+   "package": "cli",
+   "lines": 59,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/login.ts": {
+   "package": "cli",
+   "lines": 109,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/manifest.ts": {
+   "package": "cli",
+   "lines": 569,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/manifestV1.ts": {
+   "package": "cli",
+   "lines": 908,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/marketplace.ts": {
+   "package": "cli",
+   "lines": 99,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/privateSecretSink.ts": {
+   "package": "cli",
+   "lines": 116,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/readiness.ts": {
+   "package": "cli",
+   "lines": 370,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/readinessV1.ts": {
+   "package": "cli",
+   "lines": 241,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/knowledge/context.ts": {
+   "package": "cli",
+   "lines": 60,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/knowledge/get.ts": {
+   "package": "cli",
+   "lines": 128,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/knowledge/search.ts": {
+   "package": "cli",
+   "lines": 154,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/mention/_format.ts": {
+   "package": "cli",
+   "lines": 305,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/mention/execute.ts": {
+   "package": "cli",
+   "lines": 90,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/mention/index.ts": {
+   "package": "cli",
+   "lines": 11,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/mention/pending.ts": {
+   "package": "cli",
+   "lines": 44,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_consumedSeqState.ts": {
+   "package": "cli",
+   "lines": 188,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_continueDraftState.ts": {
+   "package": "cli",
+   "lines": 95,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_format.ts": {
+   "package": "cli",
+   "lines": 610,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_inbox.ts": {
+   "package": "cli",
+   "lines": 91,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_privateStateFile.ts": {
+   "package": "cli",
+   "lines": 109,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/check.ts": {
+   "package": "cli",
+   "lines": 44,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/react.ts": {
+   "package": "cli",
+   "lines": 76,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/read.ts": {
+   "package": "cli",
+   "lines": 162,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/resolve.ts": {
+   "package": "cli",
+   "lines": 105,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/search.ts": {
+   "package": "cli",
+   "lines": 248,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/send.ts": {
+   "package": "cli",
+   "lines": 816,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/migrate/index.ts": {
+   "package": "cli",
+   "lines": 209,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/profile/_format.ts": {
+   "package": "cli",
+   "lines": 96,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/profile/show.ts": {
+   "package": "cli",
+   "lines": 65,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/profile/update.ts": {
+   "package": "cli",
+   "lines": 207,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/_duration.ts": {
+   "package": "cli",
+   "lines": 12,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/_format.ts": {
+   "package": "cli",
+   "lines": 137,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/_resolve.ts": {
+   "package": "cli",
+   "lines": 41,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/cancel.ts": {
+   "package": "cli",
+   "lines": 52,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/list.ts": {
+   "package": "cli",
+   "lines": 60,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/log.ts": {
+   "package": "cli",
+   "lines": 5,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/schedule.ts": {
+   "package": "cli",
+   "lines": 164,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/snooze.ts": {
+   "package": "cli",
+   "lines": 60,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/update.ts": {
+   "package": "cli",
+   "lines": 79,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reviewerIsolation.ts": {
+   "package": "cli",
+   "lines": 30,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/server/_format.ts": {
+   "package": "cli",
+   "lines": 489,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/server/info.ts": {
+   "package": "cli",
+   "lines": 195,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/server/update.ts": {
+   "package": "cli",
+   "lines": 126,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/_format.ts": {
+   "package": "cli",
+   "lines": 447,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/amend.ts": {
+   "package": "cli",
+   "lines": 119,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/assign.ts": {
+   "package": "cli",
+   "lines": 118,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/claim.ts": {
+   "package": "cli",
+   "lines": 188,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/convert.ts": {
+   "package": "cli",
+   "lines": 70,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/create.ts": {
+   "package": "cli",
+   "lines": 88,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/delete.ts": {
+   "package": "cli",
+   "lines": 76,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/history.ts": {
+   "package": "cli",
+   "lines": 59,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/list.ts": {
+   "package": "cli",
+   "lines": 99,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/receipt.ts": {
+   "package": "cli",
+   "lines": 107,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/unassign.ts": {
+   "package": "cli",
+   "lines": 109,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/unclaim.ts": {
+   "package": "cli",
+   "lines": 71,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/update.ts": {
+   "package": "cli",
+   "lines": 140,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/thread/unfollow.ts": {
+   "package": "cli",
+   "lines": 94,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/user/info.ts": {
+   "package": "cli",
+   "lines": 133,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/version.ts": {
+   "package": "cli",
+   "lines": 95,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/commands/wiki/index.ts": {
+   "package": "cli",
+   "lines": 128,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/core/apiFailure.ts": {
+   "package": "cli",
+   "lines": 58,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/core/browserHandoff.ts": {
+   "package": "cli",
+   "lines": 70,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/core/command.ts": {
+   "package": "cli",
+   "lines": 75,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/core/context.ts": {
+   "package": "cli",
+   "lines": 72,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/core/errors.ts": {
+   "package": "cli",
+   "lines": 282,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/core/io.ts": {
+   "package": "cli",
+   "lines": 14,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/core/renderer.ts": {
+   "package": "cli",
+   "lines": 264,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/daemonApiPath.ts": {
+   "package": "cli",
+   "lines": 170,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/external/raftChannelWakeAdapter.ts": {
+   "package": "cli",
+   "lines": 187,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/index.ts": {
+   "package": "cli",
+   "lines": 9,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/main.ts": {
+   "package": "cli",
+   "lines": 426,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/proxy.ts": {
+   "package": "cli",
+   "lines": 222,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/runtimePreflight.ts": {
+   "package": "cli",
+   "lines": 40,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/transportTrace.ts": {
+   "package": "cli",
+   "lines": 244,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/src/version.ts": {
+   "package": "cli",
+   "lines": 48,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/cli/tsup.config.ts": {
+   "package": "cli",
+   "lines": 25,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/computer/src/accountUnavailable.ts": {
+   "package": "computer",
+   "lines": 172,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/apiClient.ts": {
+   "package": "computer",
+   "lines": 797,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/attach.ts": {
+   "package": "computer",
+   "lines": 51,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/browserHandoff.ts": {
+   "package": "computer",
+   "lines": 70,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/channel.ts": {
+   "package": "computer",
+   "lines": 293,
+   "status": "dropped",
+   "reason": "release channel (README Dropped `channel`; D13: computer/channel is not read or written)"
+  },
+  "upstream/raft-source/packages/computer/src/cleanup.ts": {
+   "package": "computer",
+   "lines": 427,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/cli.ts": {
+   "package": "computer",
+   "lines": 931,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/computerRelease.ts": {
+   "package": "computer",
+   "lines": 54,
+   "status": "dropped",
+   "reason": "update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/concurrency.ts": {
+   "package": "computer",
+   "lines": 171,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/doctor.ts": {
+   "package": "computer",
+   "lines": 361,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/doctorCli.ts": {
+   "package": "computer",
+   "lines": 310,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/durableFile.ts": {
+   "package": "computer",
+   "lines": 45,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/fixtures/shell-env/envProbePost.ts": {
+   "package": "computer",
+   "lines": 4,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/computer/src/fixtures/shell-env/envProbePre.ts": {
+   "package": "computer",
+   "lines": 3,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/computer/src/health.ts": {
+   "package": "computer",
+   "lines": 410,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/index.ts": {
+   "package": "computer",
+   "lines": 419,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/internal/h-family-chaos.ts": {
+   "package": "computer",
+   "lines": 575,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/computer/src/internal/ipc-codec.ts": {
+   "package": "computer",
+   "lines": 78,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/internal/ipc-server.ts": {
+   "package": "computer",
+   "lines": 497,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/internal/process-primitives.ts": {
+   "package": "computer",
+   "lines": 52,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/internal/runner-log-diagnostics.ts": {
+   "package": "computer",
+   "lines": 55,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/internal/service-pid-fallback.ts": {
+   "package": "computer",
+   "lines": 116,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/kAcceptanceApp.ts": {
+   "package": "computer",
+   "lines": 137,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kConsent.ts": {
+   "package": "computer",
+   "lines": 37,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kHostAdapter.ts": {
+   "package": "computer",
+   "lines": 397,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kHostAdapterHarnessFixture.ts": {
+   "package": "computer",
+   "lines": 116,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kHostLifecycleRefresh.ts": {
+   "package": "computer",
+   "lines": 64,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kInstallerConvergence.ts": {
+   "package": "computer",
+   "lines": 593,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kLifecycleSurface.ts": {
+   "package": "computer",
+   "lines": 46,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kOperationAcknowledgement.ts": {
+   "package": "computer",
+   "lines": 401,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kPaths.ts": {
+   "package": "computer",
+   "lines": 28,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kReleaseSource.ts": {
+   "package": "computer",
+   "lines": 477,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kResidentBinary.ts": {
+   "package": "computer",
+   "lines": 79,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kRunnerHold.ts": {
+   "package": "computer",
+   "lines": 21,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kUpgradeCoordinator.ts": {
+   "package": "computer",
+   "lines": 139,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kUpgradeProcess.ts": {
+   "package": "computer",
+   "lines": 266,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kUpgradeReconcile.ts": {
+   "package": "computer",
+   "lines": 48,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kUpgrader.ts": {
+   "package": "computer",
+   "lines": 51,
+   "status": "dropped",
+   "reason": "k-carrier/update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/legacyKOriginAdoption.ts": {
+   "package": "computer",
+   "lines": 145,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/legacyOsSupervisorMigration.ts": {
+   "package": "computer",
+   "lines": 55,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/legacySupervisorTakeover.ts": {
+   "package": "computer",
+   "lines": 470,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/lib/actions.ts": {
+   "package": "computer",
+   "lines": 266,
+   "status": "dropped",
+   "reason": "Electron-only lib export surface (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/lib/adoptLegacyResponse.ts": {
+   "package": "computer",
+   "lines": 33,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/lib/affordances.ts": {
+   "package": "computer",
+   "lines": 409,
+   "status": "dropped",
+   "reason": "Electron-only lib export surface (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/lib/api.ts": {
+   "package": "computer",
+   "lines": 675,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/channelState.ts": {
+   "package": "computer",
+   "lines": 72,
+   "status": "dropped",
+   "reason": "release channel (README Dropped `channel`; D13: computer/channel is not read or written)"
+  },
+  "upstream/raft-source/packages/computer/src/lib/computerTracer.ts": {
+   "package": "computer",
+   "lines": 25,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/errors.ts": {
+   "package": "computer",
+   "lines": 33,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/events.ts": {
+   "package": "computer",
+   "lines": 85,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/index.ts": {
+   "package": "computer",
+   "lines": 287,
+   "status": "dropped",
+   "reason": "Electron-only lib export surface (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/lib/ipc-client.ts": {
+   "package": "computer",
+   "lines": 394,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/migration.ts": {
+   "package": "computer",
+   "lines": 356,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/lib/migrationDismissals.ts": {
+   "package": "computer",
+   "lines": 193,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/lib/readers.ts": {
+   "package": "computer",
+   "lines": 117,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/replacementHandoff.ts": {
+   "package": "computer",
+   "lines": 26,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/runnerStateMachine.ts": {
+   "package": "computer",
+   "lines": 229,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/serviceIdentity.ts": {
+   "package": "computer",
+   "lines": 25,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/serviceShutdown.ts": {
+   "package": "computer",
+   "lines": 84,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/state.ts": {
+   "package": "computer",
+   "lines": 72,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/traceTypes.ts": {
+   "package": "computer",
+   "lines": 35,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/types.ts": {
+   "package": "computer",
+   "lines": 510,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lib/userSession.ts": {
+   "package": "computer",
+   "lines": 226,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/lifecycleOperations.ts": {
+   "package": "computer",
+   "lines": 292,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/localLifecycleIntents.ts": {
+   "package": "computer",
+   "lines": 368,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/logRotation.ts": {
+   "package": "computer",
+   "lines": 121,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/login.ts": {
+   "package": "computer",
+   "lines": 96,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/logs.ts": {
+   "package": "computer",
+   "lines": 33,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/machineConvergenceReducer.ts": {
+   "package": "computer",
+   "lines": 346,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/machineFacts.ts": {
+   "package": "computer",
+   "lines": 89,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/machineOperationRuntime.ts": {
+   "package": "computer",
+   "lines": 73,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/machineOperationStore.ts": {
+   "package": "computer",
+   "lines": 223,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/machineReadiness.ts": {
+   "package": "computer",
+   "lines": 99,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/machineServiceAttestation.ts": {
+   "package": "computer",
+   "lines": 193,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/macosLoginCarrier.ts": {
+   "package": "computer",
+   "lines": 1062,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/osSupervisor.ts": {
+   "package": "computer",
+   "lines": 563,
+   "status": "dropped",
+   "reason": "legacy OS supervisor retirement (README Dropped); osSupervisorLifecycle.ts stays for the refusal of retired entries (D11)"
+  },
+  "upstream/raft-source/packages/computer/src/osSupervisorLifecycle.ts": {
+   "package": "computer",
+   "lines": 51,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/osSupervisorRuntime.ts": {
+   "package": "computer",
+   "lines": 663,
+   "status": "dropped",
+   "reason": "legacy OS supervisor retirement (README Dropped); osSupervisorLifecycle.ts stays for the refusal of retired entries (D11)"
+  },
+  "upstream/raft-source/packages/computer/src/output.ts": {
+   "package": "computer",
+   "lines": 152,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/paths.ts": {
+   "package": "computer",
+   "lines": 398,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/proxy.ts": {
+   "package": "computer",
+   "lines": 85,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/realFileIdentity.ts": {
+   "package": "computer",
+   "lines": 28,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/releaseAuthority.ts": {
+   "package": "computer",
+   "lines": 6,
+   "status": "dropped",
+   "reason": "update (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/reset.ts": {
+   "package": "computer",
+   "lines": 127,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/residentConnectionMarker.ts": {
+   "package": "computer",
+   "lines": 41,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/residentCoreIdentity.ts": {
+   "package": "computer",
+   "lines": 29,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/residentLifecycleBridge.ts": {
+   "package": "computer",
+   "lines": 165,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/restartMarker.ts": {
+   "package": "computer",
+   "lines": 66,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/runnerChildEnv.ts": {
+   "package": "computer",
+   "lines": 18,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/runnerLockConflict.ts": {
+   "package": "computer",
+   "lines": 74,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/runners.ts": {
+   "package": "computer",
+   "lines": 85,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/runningVersionEvidence.ts": {
+   "package": "computer",
+   "lines": 71,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/serverState.ts": {
+   "package": "computer",
+   "lines": 347,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/serverUrl.ts": {
+   "package": "computer",
+   "lines": 24,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/service.ts": {
+   "package": "computer",
+   "lines": 1214,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/serviceControl.ts": {
+   "package": "computer",
+   "lines": 304,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/serviceIpcSeam.ts": {
+   "package": "computer",
+   "lines": 104,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/serviceReconcileLoop.ts": {
+   "package": "computer",
+   "lines": 10,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/serviceState.ts": {
+   "package": "computer",
+   "lines": 164,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/serviceUpgradeStart.ts": {
+   "package": "computer",
+   "lines": 267,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/services/adoptLegacy.ts": {
+   "package": "computer",
+   "lines": 805,
+   "status": "dropped",
+   "reason": "legacy migration (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/services/attach.ts": {
+   "package": "computer",
+   "lines": 324,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/services/diagnosticsPush.ts": {
+   "package": "computer",
+   "lines": 781,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/services/errors.ts": {
+   "package": "computer",
+   "lines": 16,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/services/login.ts": {
+   "package": "computer",
+   "lines": 185,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/services/start.ts": {
+   "package": "computer",
+   "lines": 559,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/services/stop.ts": {
+   "package": "computer",
+   "lines": 232,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/setup.ts": {
+   "package": "computer",
+   "lines": 1736,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/shellEnvCapture.ts": {
+   "package": "computer",
+   "lines": 407,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/startStop.ts": {
+   "package": "computer",
+   "lines": 228,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/status.ts": {
+   "package": "computer",
+   "lines": 447,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/systemdDiscoveryPath.ts": {
+   "package": "computer",
+   "lines": 79,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/computer/src/targetServer.ts": {
+   "package": "computer",
+   "lines": 94,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/test-fixtures/mutationLockCompromiseChild.ts": {
+   "package": "computer",
+   "lines": 36,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/computer/src/test/runNamedCase.ts": {
+   "package": "computer",
+   "lines": 11,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/computer/src/version.ts": {
+   "package": "computer",
+   "lines": 63,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/versionEvidence.ts": {
+   "package": "computer",
+   "lines": 64,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/computer/src/windowsPowerShellEnv.ts": {
+   "package": "computer",
+   "lines": 12,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/computer/tsup.config.ts": {
+   "package": "computer",
+   "lines": 75,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/computer/vitest.config.ts": {
+   "package": "computer",
+   "lines": 14,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/scripts/generate-pi-builtin-models.ts": {
+   "package": "daemon",
+   "lines": 332,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/scripts/generate-raft-cli-guide.ts": {
+   "package": "daemon",
+   "lines": 37,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentActivityProducer.ts": {
+   "package": "daemon",
+   "lines": 136,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentAppInbox.ts": {
+   "package": "daemon",
+   "lines": 829,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentCredentialProxy.ts": {
+   "package": "daemon",
+   "lines": 1728,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentInboxDeliveryDebt.ts": {
+   "package": "daemon",
+   "lines": 351,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentInboxProjection.ts": {
+   "package": "daemon",
+   "lines": 181,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentInboxStateMachine.ts": {
+   "package": "daemon",
+   "lines": 612,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentLifecycleRecord.ts": {
+   "package": "daemon",
+   "lines": 438,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationExport.ts": {
+   "package": "daemon",
+   "lines": 686,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationHttpTransport.ts": {
+   "package": "daemon",
+   "lines": 702,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationImport.ts": {
+   "package": "daemon",
+   "lines": 396,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationObjectStoreBundle.ts": {
+   "package": "daemon",
+   "lines": 690,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationResumableBundle.ts": {
+   "package": "daemon",
+   "lines": 1002,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationWorkspaceArchive.ts": {
+   "package": "daemon",
+   "lines": 141,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationWorkspacePath.ts": {
+   "package": "daemon",
+   "lines": 37,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentNoProcessResidency.ts": {
+   "package": "daemon",
+   "lines": 297,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentO11yClient.ts": {
+   "package": "daemon",
+   "lines": 292,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.stateTypes.typeproof.ts": {
+   "package": "daemon",
+   "lines": 58,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.timerStateTypes.typeproof.ts": {
+   "package": "daemon",
+   "lines": 59,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.ts": {
+   "package": "daemon",
+   "lines": 8129,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProxyInboxCoordinator.ts": {
+   "package": "daemon",
+   "lines": 84,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentRuntimeInput.ts": {
+   "package": "daemon",
+   "lines": 475,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentStartCoordinator.ts": {
+   "package": "daemon",
+   "lines": 258,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentStartDispatchProjection.ts": {
+   "package": "daemon",
+   "lines": 70,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentStartPendingDeliveryBuffer.ts": {
+   "package": "daemon",
+   "lines": 150,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentStatusTransitionTrace.ts": {
+   "package": "daemon",
+   "lines": 56,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/agentVisibleDeliveryLedger.ts": {
+   "package": "daemon",
+   "lines": 287,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/apmStateMachine.ts": {
+   "package": "daemon",
+   "lines": 973,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/apmStateMachineContract.ts": {
+   "package": "daemon",
+   "lines": 237,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/daemon/src/apmStateMachineTrace.ts": {
+   "package": "daemon",
+   "lines": 407,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/cleaner/configReceiver.ts": {
+   "package": "daemon",
+   "lines": 222,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/cleaner/definition.ts": {
+   "package": "daemon",
+   "lines": 161,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/cleaner/runtime.ts": {
+   "package": "daemon",
+   "lines": 585,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/reminder/inboxDefinition.ts": {
+   "package": "daemon",
+   "lines": 77,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/reminder/reminderCache.ts": {
+   "package": "daemon",
+   "lines": 1284,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/reminder/runtime.ts": {
+   "package": "daemon",
+   "lines": 736,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/attachmentFormatting.ts": {
+   "package": "daemon",
+   "lines": 27,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/axExampleFixtures.ts": {
+   "package": "daemon",
+   "lines": 60,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/chatBridgeRequest.ts": {
+   "package": "daemon",
+   "lines": 128,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/cindy.ts": {
+   "package": "daemon",
+   "lines": 544,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/claudeStartupCrashDiagnostic.ts": {
+   "package": "daemon",
+   "lines": 67,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/computerMigrationGuard.ts": {
+   "package": "daemon",
+   "lines": 141,
+   "status": "dropped",
+   "reason": "legacy daemon migration guard (README Dropped)"
+  },
+  "upstream/raft-source/packages/daemon/src/connection.ts": {
+   "package": "daemon",
+   "lines": 607,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/core.ts": {
+   "package": "daemon",
+   "lines": 4480,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/daemonFetch.ts": {
+   "package": "daemon",
+   "lines": 219,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/daemonOrphanReaper.ts": {
+   "package": "daemon",
+   "lines": 90,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/directUploadCapability.ts": {
+   "package": "daemon",
+   "lines": 192,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/antigravity.deprecated.ts": {
+   "package": "daemon",
+   "lines": 209,
+   "status": "dropped",
+   "reason": "antigravity runtime (D17)"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claude.ts": {
+   "package": "daemon",
+   "lines": 190,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claudeEventNormalizer.ts": {
+   "package": "daemon",
+   "lines": 396,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claudeInputBudget.ts": {
+   "package": "daemon",
+   "lines": 60,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claudeLaunch.ts": {
+   "package": "daemon",
+   "lines": 136,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claudeProviderIsolation.ts": {
+   "package": "daemon",
+   "lines": 106,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/cliTransport.ts": {
+   "package": "daemon",
+   "lines": 866,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codex.ts": {
+   "package": "daemon",
+   "lines": 1656,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codexEventNormalizer.ts": {
+   "package": "daemon",
+   "lines": 796,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codexHome.ts": {
+   "package": "daemon",
+   "lines": 57,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codexInstructionShape.ts": {
+   "package": "daemon",
+   "lines": 144,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codexTelemetrySidecar.ts": {
+   "package": "daemon",
+   "lines": 84,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/copilot.ts": {
+   "package": "daemon",
+   "lines": 228,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/cursor.ts": {
+   "package": "daemon",
+   "lines": 266,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/gemini.ts": {
+   "package": "daemon",
+   "lines": 293,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/geminiEventNormalizer.ts": {
+   "package": "daemon",
+   "lines": 65,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/grok.ts": {
+   "package": "daemon",
+   "lines": 809,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/grokEventNormalizer.ts": {
+   "package": "daemon",
+   "lines": 401,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/grokHome.ts": {
+   "package": "daemon",
+   "lines": 18,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/index.ts": {
+   "package": "daemon",
+   "lines": 74,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/kimi-sdk.ts": {
+   "package": "daemon",
+   "lines": 1121,
+   "status": "dropped",
+   "reason": "kimi-sdk runtime (D17)"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/kimi.ts": {
+   "package": "daemon",
+   "lines": 368,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/managedMcpTools.ts": {
+   "package": "daemon",
+   "lines": 131,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/nodeHostLaunch.ts": {
+   "package": "daemon",
+   "lines": 175,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/opencode.ts": {
+   "package": "daemon",
+   "lines": 623,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/pi.ts": {
+   "package": "daemon",
+   "lines": 1982,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/piCommandTool.ts": {
+   "package": "daemon",
+   "lines": 381,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/piEventNormalizer.ts": {
+   "package": "daemon",
+   "lines": 92,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/piToolExecutionObservability.ts": {
+   "package": "daemon",
+   "lines": 511,
+   "status": "dropped",
+   "reason": "builtin/pi runtime (D17)"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/probe.ts": {
+   "package": "daemon",
+   "lines": 316,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/raftCliGuide.ts": {
+   "package": "daemon",
+   "lines": 596,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/runtimeArtifacts.ts": {
+   "package": "daemon",
+   "lines": 409,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/runtimeSession.ts": {
+   "package": "daemon",
+   "lines": 217,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/systemPrompt.ts": {
+   "package": "daemon",
+   "lines": 231,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/types.ts": {
+   "package": "daemon",
+   "lines": 568,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/windowsPowerShellEnv.ts": {
+   "package": "daemon",
+   "lines": 14,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/feedbackTranscriptCollector.ts": {
+   "package": "daemon",
+   "lines": 144,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/feedbackTranscriptWindow.ts": {
+   "package": "daemon",
+   "lines": 125,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/historyFormatting.ts": {
+   "package": "daemon",
+   "lines": 54,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/index.ts": {
+   "package": "daemon",
+   "lines": 30,
+   "status": "dropped",
+   "reason": "standalone raft-daemon binary (README Dropped)"
+  },
+  "upstream/raft-source/packages/daemon/src/launchPhaseTransition.ts": {
+   "package": "daemon",
+   "lines": 274,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/launchProxyCleanup.ts": {
+   "package": "daemon",
+   "lines": 8,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/legacySupervisor.ts": {
+   "package": "daemon",
+   "lines": 226,
+   "status": "dropped",
+   "reason": "legacy supervisor (README Dropped)"
+  },
+  "upstream/raft-source/packages/daemon/src/logger.ts": {
+   "package": "daemon",
+   "lines": 57,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/loopbackNoProxy.ts": {
+   "package": "daemon",
+   "lines": 24,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/machineLock.ts": {
+   "package": "daemon",
+   "lines": 187,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/managedMcpRuntimeProxy.ts": {
+   "package": "daemon",
+   "lines": 588,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/onboardingSeedContent.ts": {
+   "package": "daemon",
+   "lines": 29,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/providerConnectionLaunch.ts": {
+   "package": "daemon",
+   "lines": 112,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/proxy.ts": {
+   "package": "daemon",
+   "lines": 321,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/proxyFailureTrace.ts": {
+   "package": "daemon",
+   "lines": 89,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/raftHome.ts": {
+   "package": "daemon",
+   "lines": 64,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/registry.manifest.ts": {
+   "package": "daemon",
+   "lines": 131,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeAccountUsage/collector.ts": {
+   "package": "daemon",
+   "lines": 107,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeAccountUsage/oarAdapter.ts": {
+   "package": "daemon",
+   "lines": 150,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeBusyDeliveryCoordinator.ts": {
+   "package": "daemon",
+   "lines": 241,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeCommunicationTrace.ts": {
+   "package": "daemon",
+   "lines": 107,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeCompactionProjection.ts": {
+   "package": "daemon",
+   "lines": 62,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeErrorDeliveryPolicy.ts": {
+   "package": "daemon",
+   "lines": 85,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeErrorDiagnostics.ts": {
+   "package": "daemon",
+   "lines": 404,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeEventTrace.ts": {
+   "package": "daemon",
+   "lines": 70,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeInputByteMetrics.ts": {
+   "package": "daemon",
+   "lines": 94,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeLaunchVersion.ts": {
+   "package": "daemon",
+   "lines": 136,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeModelSourceProjection.ts": {
+   "package": "daemon",
+   "lines": 55,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeNotificationState.ts": {
+   "package": "daemon",
+   "lines": 238,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeOutputWindow.ts": {
+   "package": "daemon",
+   "lines": 69,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeProcessBindingFence.ts": {
+   "package": "daemon",
+   "lines": 371,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeProgressState.ts": {
+   "package": "daemon",
+   "lines": 55,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeTelemetrySanitization.ts": {
+   "package": "daemon",
+   "lines": 31,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeTurnState.ts": {
+   "package": "daemon",
+   "lines": 108,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/scopedAppStorage.ts": {
+   "package": "daemon",
+   "lines": 288,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/scopedAppStorageObservability.ts": {
+   "package": "daemon",
+   "lines": 235,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/secretFile.ts": {
+   "package": "daemon",
+   "lines": 27,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/sessionTranscriptReader.ts": {
+   "package": "daemon",
+   "lines": 215,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/spawnFailureClassification.ts": {
+   "package": "daemon",
+   "lines": 74,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/testing/drydock.ts": {
+   "package": "daemon",
+   "lines": 212,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/daemon/src/testing/fakeClock.ts": {
+   "package": "daemon",
+   "lines": 66,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/daemon/src/testing/promptFixture.ts": {
+   "package": "daemon",
+   "lines": 19,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/daemon/src/testing/seaHostHarness.ts": {
+   "package": "daemon",
+   "lines": 117,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/traceBundleUpload.ts": {
+   "package": "daemon",
+   "lines": 268,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/wikiAgentWorkspace.ts": {
+   "package": "daemon",
+   "lines": 372,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/src/workspaces.ts": {
+   "package": "daemon",
+   "lines": 169,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/daemon/tsup.config.ts": {
+   "package": "daemon",
+   "lines": 11,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/vitest.config.ts": {
+   "package": "daemon",
+   "lines": 14,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/daemon/vitest.sea-host.config.ts": {
+   "package": "daemon",
+   "lines": 12,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/scripts/check-openapi-determinism.ts": {
+   "package": "shared",
+   "lines": 13,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/scripts/generate-agent-api-routes.ts": {
+   "package": "shared",
+   "lines": 18,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/scripts/generate-openapi.ts": {
+   "package": "shared",
+   "lines": 15,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/scripts/generate-runtime-provider-display-names.ts": {
+   "package": "shared",
+   "lines": 77,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/scripts/openapi-artifacts.ts": {
+   "package": "shared",
+   "lines": 25,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/__wrong-patch__/criteria.ts": {
+   "package": "shared",
+   "lines": 45,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/shared/src/__wrong-patch__/mergeOverlappingSpans.ts": {
+   "package": "shared",
+   "lines": 77,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/shared/src/actionCards.ts": {
+   "package": "shared",
+   "lines": 522,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/activityMute.ts": {
+   "package": "shared",
+   "lines": 40,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentActivityKinds.typeproof.ts": {
+   "package": "shared",
+   "lines": 20,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiChannelJoin.ts": {
+   "package": "shared",
+   "lines": 170,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiClient.ts": {
+   "package": "shared",
+   "lines": 299,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiContract.ts": {
+   "package": "shared",
+   "lines": 3195,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiMessageClient.ts": {
+   "package": "shared",
+   "lines": 289,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiMessageContract.ts": {
+   "package": "shared",
+   "lines": 339,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiMessages.ts": {
+   "package": "shared",
+   "lines": 4,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiPaths.ts": {
+   "package": "shared",
+   "lines": 4,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiRawClient.ts": {
+   "package": "shared",
+   "lines": 368,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentInbox.ts": {
+   "package": "shared",
+   "lines": 174,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentInboxApp.ts": {
+   "package": "shared",
+   "lines": 156,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentMigration.ts": {
+   "package": "shared",
+   "lines": 75,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentMigrationErrors.ts": {
+   "package": "shared",
+   "lines": 54,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentMigrationResumable.ts": {
+   "package": "shared",
+   "lines": 93,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentScopes.ts": {
+   "package": "shared",
+   "lines": 438,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/apmHeldFreshness.ts": {
+   "package": "shared",
+   "lines": 353,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/appConfigTransport.ts": {
+   "package": "shared",
+   "lines": 107,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/appNotifications.ts": {
+   "package": "shared",
+   "lines": 34,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/appRuntimeTrace.ts": {
+   "package": "shared",
+   "lines": 138,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/apps/cleaner/configProtocol.ts": {
+   "package": "shared",
+   "lines": 86,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/apps/reminder/protocol.ts": {
+   "package": "shared",
+   "lines": 93,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/attachmentPreview.ts": {
+   "package": "shared",
+   "lines": 100,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/attachmentUploadApi.consumer.ts": {
+   "package": "shared",
+   "lines": 40,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/attachmentUploadContract.ts": {
+   "package": "shared",
+   "lines": 252,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/attentionDependencyOracle.ts": {
+   "package": "shared",
+   "lines": 102,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/authRefreshTiming.ts": {
+   "package": "shared",
+   "lines": 18,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/brandedIds.ts": {
+   "package": "shared",
+   "lines": 85,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/canonicalMessageManifest.ts": {
+   "package": "shared",
+   "lines": 280,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/canonicalMessageV2.ts": {
+   "package": "shared",
+   "lines": 344,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/capabilityInventories.ts": {
+   "package": "shared",
+   "lines": 106,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/channelPermissions.ts": {
+   "package": "shared",
+   "lines": 183,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/clock.ts": {
+   "package": "shared",
+   "lines": 28,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/daemonApiClient.ts": {
+   "package": "shared",
+   "lines": 289,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/daemonApiContract.ts": {
+   "package": "shared",
+   "lines": 301,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/daemonApiRawClient.ts": {
+   "package": "shared",
+   "lines": 549,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/discussionGraph.ts": {
+   "package": "shared",
+   "lines": 211,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/displayLocales.ts": {
+   "package": "shared",
+   "lines": 42,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/emailValidation.ts": {
+   "package": "shared",
+   "lines": 23,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/externalAgentIntegration.ts": {
+   "package": "shared",
+   "lines": 229,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/externalProjection.ts": {
+   "package": "shared",
+   "lines": 303,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/featureFlagAdminPrivileges.ts": {
+   "package": "shared",
+   "lines": 270,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/featureFlagRolloutGuardrail.ts": {
+   "package": "shared",
+   "lines": 442,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/featureFlags.ts": {
+   "package": "shared",
+   "lines": 48,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/generated/agentApiRoutes.ts": {
+   "package": "shared",
+   "lines": 1622,
+   "status": "test-support"
+  },
+  "upstream/raft-source/packages/shared/src/generated/openapi.ts": {
+   "package": "shared",
+   "lines": 482,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/generated/runtimeProviderDisplayNames.ts": {
+   "package": "shared",
+   "lines": 28,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/inboxScopeReadFrontier.ts": {
+   "package": "shared",
+   "lines": 155,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/index.ts": {
+   "package": "shared",
+   "lines": 3807,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/knowledgeContext.ts": {
+   "package": "shared",
+   "lines": 65,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/legalAcceptance.ts": {
+   "package": "shared",
+   "lines": 19,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/managedMcp.ts": {
+   "package": "shared",
+   "lines": 140,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/oauthClientCategories.ts": {
+   "package": "shared",
+   "lines": 45,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/oauthRedirect.ts": {
+   "package": "shared",
+   "lines": 21,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/oauthScopes.ts": {
+   "package": "shared",
+   "lines": 70,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/onboardingStateMachineContract.ts": {
+   "package": "shared",
+   "lines": 213,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/openApiContract.ts": {
+   "package": "shared",
+   "lines": 195,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/piBuiltinModels.generated.ts": {
+   "package": "shared",
+   "lines": 661,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/producerFactLineage.ts": {
+   "package": "shared",
+   "lines": 93,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/providerConnections.ts": {
+   "package": "shared",
+   "lines": 57,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/raftPermalinks.ts": {
+   "package": "shared",
+   "lines": 59,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/raftRefs.ts": {
+   "package": "shared",
+   "lines": 544,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/runtimeAccountUsage.ts": {
+   "package": "shared",
+   "lines": 168,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/runtimeConfigLegacy.ts": {
+   "package": "shared",
+   "lines": 369,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/runtimeProviderDisplay.ts": {
+   "package": "shared",
+   "lines": 73,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/safeReturnPath.ts": {
+   "package": "shared",
+   "lines": 30,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/serverPermissions.ts": {
+   "package": "shared",
+   "lines": 177,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/serverSlugValidation.ts": {
+   "package": "shared",
+   "lines": 42,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/slackBridgeDelivery.ts": {
+   "package": "shared",
+   "lines": 434,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/slackBridgeProvisioning.ts": {
+   "package": "shared",
+   "lines": 271,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/taskPermissions.ts": {
+   "package": "shared",
+   "lines": 38,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/testing/failpoints.ts": {
+   "package": "shared",
+   "lines": 203,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/thirdPartyInertRenderer.ts": {
+   "package": "shared",
+   "lines": 125,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/timeFormatPreference.ts": {
+   "package": "shared",
+   "lines": 11,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/toolDisplay.ts": {
+   "package": "shared",
+   "lines": 534,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/assertions.ts": {
+   "package": "shared",
+   "lines": 39,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/eventRows.ts": {
+   "package": "shared",
+   "lines": 557,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/fields.ts": {
+   "package": "shared",
+   "lines": 167,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/index.ts": {
+   "package": "shared",
+   "lines": 626,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/memory.ts": {
+   "package": "shared",
+   "lines": 22,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/stateTransitionTrace.ts": {
+   "package": "shared",
+   "lines": 118,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/stateViolationTrace.ts": {
+   "package": "shared",
+   "lines": 138,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/traceFamilyRegistry.ts": {
+   "package": "shared",
+   "lines": 117,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/translationLanguages.ts": {
+   "package": "shared",
+   "lines": 60,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/typeGuards.ts": {
+   "package": "shared",
+   "lines": 29,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/shared/src/utcTimestamp.ts": {
+   "package": "shared",
+   "lines": 14,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/trace-client/src/index.ts": {
+   "package": "trace-client",
+   "lines": 24,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/trace-client/src/localTraceSink.ts": {
+   "package": "trace-client",
+   "lines": 228,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/trace-client/src/traceClient.ts": {
+   "package": "trace-client",
+   "lines": 203,
+   "status": "in-scope"
+  },
+  "upstream/raft-source/packages/trace-client/src/traceJitter.ts": {
+   "package": "trace-client",
+   "lines": 58,
+   "status": "in-scope"
+  }
+ },
+ "tests": {
+  "upstream/oar/apps/coxswain/test/activity-model.test.ts": {
+   "package": "oar",
+   "lines": 167,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "coxswain Electron app in the oar workspace; not part of oar's used closure (README In scope: used closure of oar)"
+  },
+  "upstream/oar/apps/coxswain/test/activity-size.test.ts": {
+   "package": "oar",
+   "lines": 49,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "coxswain Electron app in the oar workspace; not part of oar's used closure (README In scope: used closure of oar)"
+  },
+  "upstream/oar/apps/coxswain/test/agent.test.ts": {
+   "package": "oar",
+   "lines": 367,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "coxswain Electron app in the oar workspace; not part of oar's used closure (README In scope: used closure of oar)"
+  },
+  "upstream/oar/apps/coxswain/test/ipc.test.ts": {
+   "package": "oar",
+   "lines": 44,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "coxswain Electron app in the oar workspace; not part of oar's used closure (README In scope: used closure of oar)"
+  },
+  "upstream/oar/apps/coxswain/test/say-bridge.test.ts": {
+   "package": "oar",
+   "lines": 53,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "coxswain Electron app in the oar workspace; not part of oar's used closure (README In scope: used closure of oar)"
+  },
+  "upstream/oar/apps/coxswain/test/say-protocol.test.ts": {
+   "package": "oar",
+   "lines": 27,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "coxswain Electron app in the oar workspace; not part of oar's used closure (README In scope: used closure of oar)"
+  },
+  "upstream/oar/apps/coxswain/test/usage-model.test.ts": {
+   "package": "oar",
+   "lines": 26,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "coxswain Electron app in the oar workspace; not part of oar's used closure (README In scope: used closure of oar)"
+  },
+  "upstream/oar/sea-trial/vendor/claude.vendor.test.ts": {
+   "package": "oar",
+   "lines": 206,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "oar sea-trial harness vendoring runtime SDKs; not part of oar's used closure"
+  },
+  "upstream/oar/sea-trial/vendor/codex.vendor.test.ts": {
+   "package": "oar",
+   "lines": 129,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "oar sea-trial harness vendoring runtime SDKs; not part of oar's used closure"
+  },
+  "upstream/oar/sea-trial/vendor/pi.vendor.test.ts": {
+   "package": "oar",
+   "lines": 115,
+   "subject": null,
+   "status": "out-of-scope",
+   "reason": "oar sea-trial harness vendoring runtime SDKs; not part of oar's used closure"
+  },
+  "upstream/oar/tests/account-usage.test.ts": {
+   "package": "oar",
+   "lines": 299,
+   "subject": "upstream/oar/packages/oar/src/runtimes/claude/account-usage.ts",
+   "status": "port"
+  },
+  "upstream/oar/tests/acp/acp-process.test.ts": {
+   "package": "oar",
+   "lines": 121,
+   "subject": "upstream/oar/packages/oar/src/shared/acp/process.ts",
+   "status": "port"
+  },
+  "upstream/oar/tests/acp/acp-session.test.ts": {
+   "package": "oar",
+   "lines": 177,
+   "subject": "upstream/oar/packages/oar/src/shared/acp/session.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/acp/acp-terminal.test.ts": {
+   "package": "oar",
+   "lines": 72,
+   "subject": "upstream/oar/packages/oar/src/shared/acp/terminal.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/acp/acp-vendor-snapshot.test.ts": {
+   "package": "oar",
+   "lines": 127,
+   "subject": "upstream/oar/packages/oar/src/runtimes/kimi/session.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/claude-account-usage-reader.test.ts": {
+   "package": "oar",
+   "lines": 108,
+   "subject": "upstream/oar/packages/oar/src/runtimes/claude/account-usage.ts",
+   "status": "port"
+  },
+  "upstream/oar/tests/cli-progress.test.ts": {
+   "package": "oar",
+   "lines": 73,
+   "subject": "upstream/oar/packages/cli/src/index.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/cli-voyage.test.ts": {
+   "package": "oar",
+   "lines": 103,
+   "subject": "upstream/oar/packages/cli/src/index.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/codex-account-usage-reader.test.ts": {
+   "package": "oar",
+   "lines": 175,
+   "subject": "upstream/oar/packages/oar/src/runtimes/codex/account-usage.ts",
+   "status": "port"
+  },
+  "upstream/oar/tests/codex/codex-item-detail.test.ts": {
+   "package": "oar",
+   "lines": 48,
+   "subject": "upstream/oar/packages/oar/src/runtimes/codex/item-detail.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/codex/codex-reasoning.test.ts": {
+   "package": "oar",
+   "lines": 42,
+   "subject": "upstream/oar/packages/oar/src/runtimes/codex/reasoning.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/grok/grok-account-usage-reader.test.ts": {
+   "package": "oar",
+   "lines": 99,
+   "subject": "upstream/oar/packages/oar/src/runtimes/grok/account-usage.ts",
+   "status": "port"
+  },
+  "upstream/oar/tests/installation.test.ts": {
+   "package": "oar",
+   "lines": 228,
+   "subject": "upstream/oar/packages/oar/src/shared/installation.ts",
+   "status": "port-partial",
+   "reason": "pi installation (D17): per-case row",
+   "droppedImports": [
+    "upstream/oar/packages/oar/src/runtimes/pi/installation.ts"
+   ]
+  },
+  "upstream/oar/tests/kimi/kimi-account-usage-reader.test.ts": {
+   "package": "oar",
+   "lines": 183,
+   "subject": "upstream/oar/packages/oar/src/runtimes/kimi/account-usage.ts",
+   "status": "port"
+  },
+  "upstream/oar/tests/kimi/kimi-account-usage.test.ts": {
+   "package": "oar",
+   "lines": 143,
+   "subject": "upstream/oar/packages/oar/src/runtimes/kimi/account-usage.ts",
+   "status": "port"
+  },
+  "upstream/oar/tests/process.test.ts": {
+   "package": "oar",
+   "lines": 90,
+   "subject": "upstream/oar/packages/oar/src/shared/executable/process.ts",
+   "status": "port"
+  },
+  "upstream/oar/tests/providers/model-catalog.test.ts": {
+   "package": "oar",
+   "lines": 32,
+   "subject": "upstream/oar/packages/oar/src/runtimes/pi/catalog.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/oar/packages/oar/src/runtimes/pi/catalog.ts"
+   ]
+  },
+  "upstream/oar/tests/providers/pi-env.test.ts": {
+   "package": "oar",
+   "lines": 25,
+   "subject": "upstream/oar/packages/oar/src/runtimes/pi/session.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/oar/packages/oar/src/runtimes/pi/session.ts"
+   ]
+  },
+  "upstream/oar/tests/providers/provider-auth.test.ts": {
+   "package": "oar",
+   "lines": 40,
+   "subject": "upstream/oar/packages/oar/src/runtimes/pi/auth.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/oar/packages/oar/src/runtimes/pi/auth.ts"
+   ]
+  },
+  "upstream/oar/tests/registry.test.ts": {
+   "package": "oar",
+   "lines": 24,
+   "subject": "upstream/oar/packages/oar/src/registry.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/replay/claude-projection.test.ts": {
+   "package": "oar",
+   "lines": 76,
+   "subject": "upstream/oar/packages/oar/src/runtimes/claude/projection.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/replay/codex-projection.test.ts": {
+   "package": "oar",
+   "lines": 79,
+   "subject": "upstream/oar/packages/oar/src/runtimes/codex/projection.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/replay/pi-projection.test.ts": {
+   "package": "oar",
+   "lines": 81,
+   "subject": "upstream/oar/packages/oar/src/runtimes/pi/projection.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/oar/packages/oar/src/runtimes/pi/projection.ts"
+   ]
+  },
+  "upstream/oar/tests/replay/tool-activity.test.ts": {
+   "package": "oar",
+   "lines": 65,
+   "subject": "upstream/oar/packages/oar/src/observe/tool-activity.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/session.test.ts": {
+   "package": "oar",
+   "lines": 236,
+   "subject": "upstream/oar/packages/oar/src/observe/observe-agent.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/oar/tests/tool-activity.test.ts": {
+   "package": "oar",
+   "lines": 39,
+   "subject": "upstream/oar/packages/oar/src/observe/tool-activity.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/cli/src/agentApiNoBypass.test.ts": {
+   "package": "cli",
+   "lines": 198,
+   "subject": null,
+   "status": "waive",
+   "reason": "source-scan: walks src/commands and matches call sites in TS source text; the synthetic cases test that scanner"
+  },
+  "upstream/raft-source/packages/cli/src/agentApiPath.test.ts": {
+   "package": "cli",
+   "lines": 947,
+   "subject": "upstream/raft-source/packages/cli/src/agentApiPath.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/agentCommsCore/bridge.test.ts": {
+   "package": "cli",
+   "lines": 596,
+   "subject": "upstream/raft-source/packages/cli/src/agentCommsCore/bridge.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/agentLogin/deviceAuthClient.test.ts": {
+   "package": "cli",
+   "lines": 242,
+   "subject": "upstream/raft-source/packages/cli/src/agentLogin/deviceAuthClient.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/auth/env.test.ts": {
+   "package": "cli",
+   "lines": 466,
+   "subject": "upstream/raft-source/packages/cli/src/auth/env.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/auth/managedTransport.test.ts": {
+   "package": "cli",
+   "lines": 112,
+   "subject": "upstream/raft-source/packages/cli/src/auth/managedTransport.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/axManifest.test.ts": {
+   "package": "cli",
+   "lines": 35,
+   "subject": null,
+   "status": "waive",
+   "reason": "source-scan: gates the AX manifest generator that parses TS command definitions"
+  },
+  "upstream/raft-source/packages/cli/src/bundleConfig.test.ts": {
+   "package": "cli",
+   "lines": 31,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: tsup bundle configuration"
+  },
+  "upstream/raft-source/packages/cli/src/client.test.ts": {
+   "package": "cli",
+   "lines": 807,
+   "subject": "upstream/raft-source/packages/cli/src/client.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/action/prepare.test.ts": {
+   "package": "cli",
+   "lines": 270,
+   "subject": "upstream/raft-source/packages/cli/src/commands/action/prepare.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/agent/_format.test.ts": {
+   "package": "cli",
+   "lines": 78,
+   "subject": "upstream/raft-source/packages/cli/src/commands/agent/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/agent/bridge.test.ts": {
+   "package": "cli",
+   "lines": 1052,
+   "subject": "upstream/raft-source/packages/cli/src/commands/agent/bridge.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/agent/list.test.ts": {
+   "package": "cli",
+   "lines": 53,
+   "subject": "upstream/raft-source/packages/cli/src/commands/agent/list.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/agent/login.test.ts": {
+   "package": "cli",
+   "lines": 341,
+   "subject": "upstream/raft-source/packages/cli/src/commands/agent/login.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/app/_format.test.ts": {
+   "package": "cli",
+   "lines": 26,
+   "subject": "upstream/raft-source/packages/cli/src/commands/app/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/app/config.test.ts": {
+   "package": "cli",
+   "lines": 217,
+   "subject": "upstream/raft-source/packages/cli/src/commands/app/config.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/attachment/_format.test.ts": {
+   "package": "cli",
+   "lines": 57,
+   "subject": "upstream/raft-source/packages/cli/src/commands/attachment/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/attachment/upload.test.ts": {
+   "package": "cli",
+   "lines": 472,
+   "subject": "upstream/raft-source/packages/cli/src/commands/attachment/upload.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/attachment/view.test.ts": {
+   "package": "cli",
+   "lines": 346,
+   "subject": "upstream/raft-source/packages/cli/src/commands/attachment/view.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/auth/whoami.test.ts": {
+   "package": "cli",
+   "lines": 56,
+   "subject": "upstream/raft-source/packages/cli/src/commands/auth/whoami.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/add-member.test.ts": {
+   "package": "cli",
+   "lines": 167,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/add-member.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/create.test.ts": {
+   "package": "cli",
+   "lines": 169,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/create.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/info.test.ts": {
+   "package": "cli",
+   "lines": 151,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/info.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/join.test.ts": {
+   "package": "cli",
+   "lines": 210,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/join.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/leave.test.ts": {
+   "package": "cli",
+   "lines": 146,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/leave.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/lifecycle.test.ts": {
+   "package": "cli",
+   "lines": 117,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/lifecycle.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/members.test.ts": {
+   "package": "cli",
+   "lines": 113,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/members.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/mute.test.ts": {
+   "package": "cli",
+   "lines": 240,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/mute.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/remove-member.test.ts": {
+   "package": "cli",
+   "lines": 162,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/remove-member.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/channel/update.test.ts": {
+   "package": "cli",
+   "lines": 133,
+   "subject": "upstream/raft-source/packages/cli/src/commands/channel/update.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/frameworkMigration.test.ts": {
+   "package": "cli",
+   "lines": 426,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/inbox/check.test.ts": {
+   "package": "cli",
+   "lines": 225,
+   "subject": "upstream/raft-source/packages/cli/src/commands/inbox/check.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/_format.test.ts": {
+   "package": "cli",
+   "lines": 281,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/_session.test.ts": {
+   "package": "cli",
+   "lines": 41,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/_session.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/app.test.ts": {
+   "package": "cli",
+   "lines": 1057,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/app.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/appManualContract.test.ts": {
+   "package": "cli",
+   "lines": 141,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/appReceipts.test.ts": {
+   "package": "cli",
+   "lines": 179,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/appReceipts.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/env.test.ts": {
+   "package": "cli",
+   "lines": 479,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/env.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/invoke.test.ts": {
+   "package": "cli",
+   "lines": 5065,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/invoke.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/invokeV1.test.ts": {
+   "package": "cli",
+   "lines": 1053,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/invokeV1.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/list.test.ts": {
+   "package": "cli",
+   "lines": 153,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/list.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/login.test.ts": {
+   "package": "cli",
+   "lines": 643,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/login.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/manifest.test.ts": {
+   "package": "cli",
+   "lines": 499,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/manifest.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/manifestV1.test.ts": {
+   "package": "cli",
+   "lines": 341,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/manifestV1.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/marketplace.test.ts": {
+   "package": "cli",
+   "lines": 121,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/marketplace.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/readiness.test.ts": {
+   "package": "cli",
+   "lines": 157,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/readiness.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/integration/readinessV1.test.ts": {
+   "package": "cli",
+   "lines": 132,
+   "subject": "upstream/raft-source/packages/cli/src/commands/integration/readinessV1.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/knowledge/get.test.ts": {
+   "package": "cli",
+   "lines": 214,
+   "subject": "upstream/raft-source/packages/cli/src/commands/knowledge/get.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/knowledge/search.test.ts": {
+   "package": "cli",
+   "lines": 310,
+   "subject": "upstream/raft-source/packages/cli/src/commands/knowledge/search.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/mention/_format.test.ts": {
+   "package": "cli",
+   "lines": 306,
+   "subject": "upstream/raft-source/packages/cli/src/commands/mention/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/mention/execute.test.ts": {
+   "package": "cli",
+   "lines": 166,
+   "subject": "upstream/raft-source/packages/cli/src/commands/mention/execute.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/mention/pending.test.ts": {
+   "package": "cli",
+   "lines": 102,
+   "subject": "upstream/raft-source/packages/cli/src/commands/mention/pending.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_consumedSeqState.test.ts": {
+   "package": "cli",
+   "lines": 60,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/_consumedSeqState.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_format.test.ts": {
+   "package": "cli",
+   "lines": 805,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_inbox.test.ts": {
+   "package": "cli",
+   "lines": 190,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/_inbox.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/_privateStateFile.test.ts": {
+   "package": "cli",
+   "lines": 103,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/_privateStateFile.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/check.test.ts": {
+   "package": "cli",
+   "lines": 265,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/check.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/react.test.ts": {
+   "package": "cli",
+   "lines": 14,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/react.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/read.test.ts": {
+   "package": "cli",
+   "lines": 441,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/read.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/resolve.test.ts": {
+   "package": "cli",
+   "lines": 185,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/resolve.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/search.test.ts": {
+   "package": "cli",
+   "lines": 464,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/search.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/message/send.test.ts": {
+   "package": "cli",
+   "lines": 2590,
+   "subject": "upstream/raft-source/packages/cli/src/commands/message/send.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/migrate/index.test.ts": {
+   "package": "cli",
+   "lines": 245,
+   "subject": "upstream/raft-source/packages/cli/src/commands/migrate/index.ts",
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/cli/src/commands/profile/_format.test.ts": {
+   "package": "cli",
+   "lines": 66,
+   "subject": "upstream/raft-source/packages/cli/src/commands/profile/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/profile/show.test.ts": {
+   "package": "cli",
+   "lines": 144,
+   "subject": "upstream/raft-source/packages/cli/src/commands/profile/show.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/_format.test.ts": {
+   "package": "cli",
+   "lines": 183,
+   "subject": "upstream/raft-source/packages/cli/src/commands/reminder/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/ack.test.ts": {
+   "package": "cli",
+   "lines": 338,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/log.test.ts": {
+   "package": "cli",
+   "lines": 100,
+   "subject": "upstream/raft-source/packages/cli/src/commands/reminder/log.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reminder/schedule.test.ts": {
+   "package": "cli",
+   "lines": 129,
+   "subject": "upstream/raft-source/packages/cli/src/commands/reminder/schedule.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/reviewerIsolation.test.ts": {
+   "package": "cli",
+   "lines": 30,
+   "subject": "upstream/raft-source/packages/cli/src/commands/reviewerIsolation.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/server/_format.test.ts": {
+   "package": "cli",
+   "lines": 125,
+   "subject": "upstream/raft-source/packages/cli/src/commands/server/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/server/info.test.ts": {
+   "package": "cli",
+   "lines": 263,
+   "subject": "upstream/raft-source/packages/cli/src/commands/server/info.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/server/update.test.ts": {
+   "package": "cli",
+   "lines": 168,
+   "subject": "upstream/raft-source/packages/cli/src/commands/server/update.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/_format.test.ts": {
+   "package": "cli",
+   "lines": 397,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/_format.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/amend.test.ts": {
+   "package": "cli",
+   "lines": 172,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/amend.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/assign.test.ts": {
+   "package": "cli",
+   "lines": 163,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/assign.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/claim.test.ts": {
+   "package": "cli",
+   "lines": 261,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/claim.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/convert.test.ts": {
+   "package": "cli",
+   "lines": 128,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/convert.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/create.test.ts": {
+   "package": "cli",
+   "lines": 296,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/create.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/delete.test.ts": {
+   "package": "cli",
+   "lines": 117,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/delete.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/history.test.ts": {
+   "package": "cli",
+   "lines": 71,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/history.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/list.test.ts": {
+   "package": "cli",
+   "lines": 244,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/list.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/mineManualContract.test.ts": {
+   "package": "cli",
+   "lines": 76,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/receipt.test.ts": {
+   "package": "cli",
+   "lines": 127,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/receipt.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/unassign.test.ts": {
+   "package": "cli",
+   "lines": 126,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/unassign.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/unclaim.test.ts": {
+   "package": "cli",
+   "lines": 109,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/unclaim.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/task/update.test.ts": {
+   "package": "cli",
+   "lines": 331,
+   "subject": "upstream/raft-source/packages/cli/src/commands/task/update.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/thread/unfollow.test.ts": {
+   "package": "cli",
+   "lines": 115,
+   "subject": "upstream/raft-source/packages/cli/src/commands/thread/unfollow.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/user/info.test.ts": {
+   "package": "cli",
+   "lines": 190,
+   "subject": "upstream/raft-source/packages/cli/src/commands/user/info.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/version.test.ts": {
+   "package": "cli",
+   "lines": 230,
+   "subject": "upstream/raft-source/packages/cli/src/commands/version.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/commands/wiki/index.test.ts": {
+   "package": "cli",
+   "lines": 207,
+   "subject": "upstream/raft-source/packages/cli/src/commands/wiki/index.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/core/browserHandoff.test.ts": {
+   "package": "cli",
+   "lines": 32,
+   "subject": "upstream/raft-source/packages/cli/src/core/browserHandoff.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/core/command.test.ts": {
+   "package": "cli",
+   "lines": 427,
+   "subject": "upstream/raft-source/packages/cli/src/core/command.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/daemonApiPath.test.ts": {
+   "package": "cli",
+   "lines": 122,
+   "subject": "upstream/raft-source/packages/cli/src/daemonApiPath.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/external/raftChannelWakeAdapter.test.ts": {
+   "package": "cli",
+   "lines": 120,
+   "subject": "upstream/raft-source/packages/cli/src/external/raftChannelWakeAdapter.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/parserOutput.test.ts": {
+   "package": "cli",
+   "lines": 234,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/printSeam.test.ts": {
+   "package": "cli",
+   "lines": 89,
+   "subject": null,
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/cli/src/proxy.test.ts": {
+   "package": "cli",
+   "lines": 159,
+   "subject": "upstream/raft-source/packages/cli/src/proxy.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/publishPackage.test.ts": {
+   "package": "cli",
+   "lines": 41,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: npm publish layout"
+  },
+  "upstream/raft-source/packages/cli/src/runtimePreflight.test.ts": {
+   "package": "cli",
+   "lines": 101,
+   "subject": "upstream/raft-source/packages/cli/src/runtimePreflight.ts",
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/cli/src/shimPackage.test.ts": {
+   "package": "cli",
+   "lines": 59,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: npm shim package build"
+  },
+  "upstream/raft-source/packages/cli/src/transportTrace.routeFamily.test.ts": {
+   "package": "cli",
+   "lines": 42,
+   "subject": "upstream/raft-source/packages/cli/src/transportTrace.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/cli/src/version.test.ts": {
+   "package": "cli",
+   "lines": 64,
+   "subject": "upstream/raft-source/packages/cli/src/version.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/apiClient.authclient.test.ts": {
+   "package": "computer",
+   "lines": 312,
+   "subject": "upstream/raft-source/packages/computer/src/apiClient.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/attach.test.ts": {
+   "package": "computer",
+   "lines": 217,
+   "subject": "upstream/raft-source/packages/computer/src/attach.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/browserHandoff.test.ts": {
+   "package": "computer",
+   "lines": 32,
+   "subject": "upstream/raft-source/packages/computer/src/browserHandoff.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/bundleConfig.test.ts": {
+   "package": "computer",
+   "lines": 63,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: tsup bundle configuration"
+  },
+  "upstream/raft-source/packages/computer/src/channel.test.ts": {
+   "package": "computer",
+   "lines": 359,
+   "subject": "upstream/raft-source/packages/computer/src/channel.ts",
+   "status": "waive",
+   "reason": "release channel (README Dropped `channel`; D13: computer/channel is not read or written)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/channel.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/cleanup.test.ts": {
+   "package": "computer",
+   "lines": 289,
+   "subject": "upstream/raft-source/packages/computer/src/cleanup.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/cliCommandReferenceContract.test.ts": {
+   "package": "computer",
+   "lines": 106,
+   "subject": null,
+   "status": "waive",
+   "reason": "source-scan: reads every src/*.ts and cli.ts as text"
+  },
+  "upstream/raft-source/packages/computer/src/cliHelpCopy.test.ts": {
+   "package": "computer",
+   "lines": 100,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/cliLifecycleContract.test.ts": {
+   "package": "computer",
+   "lines": 194,
+   "subject": null,
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/computer/src/cliServerArgContract.test.ts": {
+   "package": "computer",
+   "lines": 94,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/cliUpgradeContract.test.ts": {
+   "package": "computer",
+   "lines": 115,
+   "subject": null,
+   "status": "waive",
+   "reason": "dropped: update: raft-computer upgrade (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/computerExistingKMacosAcceptance.contract.test.ts": {
+   "package": "computer",
+   "lines": 578,
+   "subject": null,
+   "status": "waive",
+   "reason": "dropped: k-carrier/update (README Dropped): existing-K macOS acceptance"
+  },
+  "upstream/raft-source/packages/computer/src/computerInstallerLiveCheck.contract.test.ts": {
+   "package": "computer",
+   "lines": 289,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: asserts private CI workflow contents"
+  },
+  "upstream/raft-source/packages/computer/src/computerName.test.ts": {
+   "package": "computer",
+   "lines": 24,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/concurrency.test.ts": {
+   "package": "computer",
+   "lines": 215,
+   "subject": "upstream/raft-source/packages/computer/src/concurrency.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/doctor.test.ts": {
+   "package": "computer",
+   "lines": 878,
+   "subject": "upstream/raft-source/packages/computer/src/doctor.ts",
+   "status": "port-partial",
+   "reason": "doctor --migration-details and identity checks (README Dropped legacy migration; D22), K receipt check (D13): per-case rows",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kPaths.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/durableFile.test.ts": {
+   "package": "computer",
+   "lines": 37,
+   "subject": "upstream/raft-source/packages/computer/src/durableFile.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/health.test.ts": {
+   "package": "computer",
+   "lines": 271,
+   "subject": "upstream/raft-source/packages/computer/src/health.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/importCycles.test.ts": {
+   "package": "computer",
+   "lines": 156,
+   "subject": null,
+   "status": "waive",
+   "reason": "source-scan: TS import-cycle ratchet over source files"
+  },
+  "upstream/raft-source/packages/computer/src/installScriptContract.test.ts": {
+   "package": "computer",
+   "lines": 2205,
+   "subject": null,
+   "status": "waive",
+   "reason": "dropped: installers (README Dropped): install.sh/install.ps1 and K reset",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/osSupervisor.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/internal/h-family-chaos.test.ts": {
+   "package": "computer",
+   "lines": 265,
+   "subject": "upstream/raft-source/packages/computer/src/internal/h-family-chaos.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/computer/src/internal/ipc-server.test.ts": {
+   "package": "computer",
+   "lines": 439,
+   "subject": "upstream/raft-source/packages/computer/src/internal/ipc-server.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/internal/runner-log-diagnostics.test.ts": {
+   "package": "computer",
+   "lines": 60,
+   "subject": "upstream/raft-source/packages/computer/src/internal/runner-log-diagnostics.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/kCarrierDependency.test.ts": {
+   "package": "computer",
+   "lines": 48,
+   "subject": null,
+   "status": "waive",
+   "reason": "dropped: k-carrier dependency pin (README Dropped)"
+  },
+  "upstream/raft-source/packages/computer/src/kConsent.test.ts": {
+   "package": "computer",
+   "lines": 28,
+   "subject": "upstream/raft-source/packages/computer/src/kConsent.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kConsent.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kHostAdapter.test.ts": {
+   "package": "computer",
+   "lines": 544,
+   "subject": "upstream/raft-source/packages/computer/src/kHostAdapter.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kHostAdapter.ts",
+    "upstream/raft-source/packages/computer/src/kHostLifecycleRefresh.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kInstallerConvergence.test.ts": {
+   "package": "computer",
+   "lines": 875,
+   "subject": "upstream/raft-source/packages/computer/src/kInstallerConvergence.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kInstallerConvergence.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kLifecycleSurface.test.ts": {
+   "package": "computer",
+   "lines": 47,
+   "subject": "upstream/raft-source/packages/computer/src/kLifecycleSurface.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kLifecycleSurface.ts",
+    "upstream/raft-source/packages/computer/src/kPaths.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kOperationAcknowledgement.test.ts": {
+   "package": "computer",
+   "lines": 428,
+   "subject": "upstream/raft-source/packages/computer/src/kOperationAcknowledgement.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kOperationAcknowledgement.ts",
+    "upstream/raft-source/packages/computer/src/kUpgradeProcess.ts",
+    "upstream/raft-source/packages/computer/src/kPaths.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kReleaseGzip.test.ts": {
+   "package": "computer",
+   "lines": 77,
+   "subject": null,
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kReleaseSource.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kReleaseSource.test.ts": {
+   "package": "computer",
+   "lines": 652,
+   "subject": "upstream/raft-source/packages/computer/src/kReleaseSource.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kReleaseSource.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kResidentBinary.test.ts": {
+   "package": "computer",
+   "lines": 159,
+   "subject": "upstream/raft-source/packages/computer/src/kResidentBinary.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kPaths.ts",
+    "upstream/raft-source/packages/computer/src/kResidentBinary.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kUpgradeCoordinator.test.ts": {
+   "package": "computer",
+   "lines": 256,
+   "subject": "upstream/raft-source/packages/computer/src/kUpgradeCoordinator.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kUpgradeCoordinator.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kUpgradeProcess.test.ts": {
+   "package": "computer",
+   "lines": 245,
+   "subject": "upstream/raft-source/packages/computer/src/kUpgradeProcess.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kUpgradeProcess.ts",
+    "upstream/raft-source/packages/computer/src/kUpgradeCoordinator.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/kUpgrader.test.ts": {
+   "package": "computer",
+   "lines": 53,
+   "subject": "upstream/raft-source/packages/computer/src/kUpgrader.ts",
+   "status": "waive",
+   "reason": "k-carrier/update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kUpgrader.ts",
+    "upstream/raft-source/packages/computer/src/kPaths.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/legacyKOriginAdoption.test.ts": {
+   "package": "computer",
+   "lines": 331,
+   "subject": "upstream/raft-source/packages/computer/src/legacyKOriginAdoption.ts",
+   "status": "waive",
+   "reason": "legacy migration (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kUpgradeProcess.ts",
+    "upstream/raft-source/packages/computer/src/kPaths.ts",
+    "upstream/raft-source/packages/computer/src/legacyKOriginAdoption.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/lib/actions.test.ts": {
+   "package": "computer",
+   "lines": 112,
+   "subject": "upstream/raft-source/packages/computer/src/lib/actions.ts",
+   "status": "waive",
+   "reason": "Electron-only lib export surface (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/lib/actions.ts",
+    "upstream/raft-source/packages/computer/src/lib/index.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/lib/affordances.test.ts": {
+   "package": "computer",
+   "lines": 370,
+   "subject": "upstream/raft-source/packages/computer/src/lib/affordances.ts",
+   "status": "waive",
+   "reason": "Electron-only lib export surface (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/lib/affordances.ts",
+    "upstream/raft-source/packages/computer/src/lib/actions.ts",
+    "upstream/raft-source/packages/computer/src/lib/index.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/lib/api.test.ts": {
+   "package": "computer",
+   "lines": 359,
+   "subject": "upstream/raft-source/packages/computer/src/lib/api.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/lib/api.trace.test.ts": {
+   "package": "computer",
+   "lines": 110,
+   "subject": "upstream/raft-source/packages/computer/src/lib/api.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/lib/api.upgrade.test.ts": {
+   "package": "computer",
+   "lines": 146,
+   "subject": "upstream/raft-source/packages/computer/src/lib/api.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/lib/computerTracer.test.ts": {
+   "package": "computer",
+   "lines": 11,
+   "subject": "upstream/raft-source/packages/computer/src/lib/computerTracer.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/lib/ipc-client.test.ts": {
+   "package": "computer",
+   "lines": 383,
+   "subject": "upstream/raft-source/packages/computer/src/lib/ipc-client.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/lib/migration.test.ts": {
+   "package": "computer",
+   "lines": 696,
+   "subject": "upstream/raft-source/packages/computer/src/lib/migration.ts",
+   "status": "waive",
+   "reason": "legacy migration (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/lib/migration.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/lib/runnerStateMachine.test.ts": {
+   "package": "computer",
+   "lines": 154,
+   "subject": "upstream/raft-source/packages/computer/src/lib/runnerStateMachine.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/lib/serviceIdentity.test.ts": {
+   "package": "computer",
+   "lines": 71,
+   "subject": "upstream/raft-source/packages/computer/src/lib/serviceIdentity.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/lifecycleOperations.test.ts": {
+   "package": "computer",
+   "lines": 595,
+   "subject": "upstream/raft-source/packages/computer/src/lifecycleOperations.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/logRotation.test.ts": {
+   "package": "computer",
+   "lines": 105,
+   "subject": "upstream/raft-source/packages/computer/src/logRotation.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/login.test.ts": {
+   "package": "computer",
+   "lines": 313,
+   "subject": "upstream/raft-source/packages/computer/src/login.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/logs.test.ts": {
+   "package": "computer",
+   "lines": 180,
+   "subject": "upstream/raft-source/packages/computer/src/logs.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/machineReadiness.test.ts": {
+   "package": "computer",
+   "lines": 158,
+   "subject": "upstream/raft-source/packages/computer/src/machineReadiness.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/macosLoginCarrier.test.ts": {
+   "package": "computer",
+   "lines": 841,
+   "subject": "upstream/raft-source/packages/computer/src/macosLoginCarrier.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/nativePublish.contract.test.ts": {
+   "package": "computer",
+   "lines": 228,
+   "subject": null,
+   "status": "waive",
+   "reason": "update (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/computerRelease.ts",
+    "upstream/raft-source/packages/computer/src/kReleaseSource.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/osSupervisor.test.ts": {
+   "package": "computer",
+   "lines": 799,
+   "subject": "upstream/raft-source/packages/computer/src/osSupervisor.ts",
+   "status": "waive",
+   "reason": "legacy OS supervisor retirement (README Dropped); osSupervisorLifecycle.ts stays for the refusal of retired entries (D11)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/osSupervisor.ts",
+    "upstream/raft-source/packages/computer/src/osSupervisorRuntime.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/osSupervisorWindowsAbsence.test.ts": {
+   "package": "computer",
+   "lines": 290,
+   "subject": null,
+   "status": "waive",
+   "reason": "legacy OS supervisor retirement (README Dropped); osSupervisorLifecycle.ts stays for the refusal of retired entries (D11)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/osSupervisor.ts",
+    "upstream/raft-source/packages/computer/src/osSupervisorRuntime.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/paths.test.ts": {
+   "package": "computer",
+   "lines": 26,
+   "subject": "upstream/raft-source/packages/computer/src/paths.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/reset.test.ts": {
+   "package": "computer",
+   "lines": 337,
+   "subject": "upstream/raft-source/packages/computer/src/reset.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/residentLifecycleBridge.test.ts": {
+   "package": "computer",
+   "lines": 167,
+   "subject": "upstream/raft-source/packages/computer/src/residentLifecycleBridge.ts",
+   "status": "waive",
+   "reason": "dropped: k-carrier/update (README Dropped; D13): every case binds or projects a K receipt",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kUpgradeReconcile.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/restartMarker.test.ts": {
+   "package": "computer",
+   "lines": 33,
+   "subject": "upstream/raft-source/packages/computer/src/restartMarker.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/runners.test.ts": {
+   "package": "computer",
+   "lines": 218,
+   "subject": "upstream/raft-source/packages/computer/src/runners.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/serverState.test.ts": {
+   "package": "computer",
+   "lines": 184,
+   "subject": "upstream/raft-source/packages/computer/src/serverState.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/serverUrl.test.ts": {
+   "package": "computer",
+   "lines": 49,
+   "subject": "upstream/raft-source/packages/computer/src/serverUrl.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/service.test.ts": {
+   "package": "computer",
+   "lines": 2954,
+   "subject": "upstream/raft-source/packages/computer/src/service.ts",
+   "status": "port-partial",
+   "reason": "SEA K coordinator branch of upgrade-start (D13) and installer migration (README Dropped): per-case rows",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/legacyOsSupervisorMigration.ts",
+    "upstream/raft-source/packages/computer/src/kUpgradeCoordinator.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/serviceProvenance.test.ts": {
+   "package": "computer",
+   "lines": 37,
+   "subject": null,
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/computer/src/serviceUpgradeStart.scope.test.ts": {
+   "package": "computer",
+   "lines": 101,
+   "subject": "upstream/raft-source/packages/computer/src/serviceUpgradeStart.ts",
+   "status": "waive",
+   "reason": "dropped: update (README Dropped; D13): local/remote upgrade-start convergence on the K coordinator seam",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kUpgradeCoordinator.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/services/adoptLegacy.test.ts": {
+   "package": "computer",
+   "lines": 1130,
+   "subject": "upstream/raft-source/packages/computer/src/services/adoptLegacy.ts",
+   "status": "waive",
+   "reason": "legacy migration (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/services/adoptLegacy.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/services/attach.test.ts": {
+   "package": "computer",
+   "lines": 647,
+   "subject": "upstream/raft-source/packages/computer/src/services/attach.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/services/diagnosticsPush.test.ts": {
+   "package": "computer",
+   "lines": 443,
+   "subject": "upstream/raft-source/packages/computer/src/services/diagnosticsPush.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/services/login.test.ts": {
+   "package": "computer",
+   "lines": 329,
+   "subject": "upstream/raft-source/packages/computer/src/services/login.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/services/start.test.ts": {
+   "package": "computer",
+   "lines": 937,
+   "subject": "upstream/raft-source/packages/computer/src/services/start.ts",
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/computer/src/services/stop.test.ts": {
+   "package": "computer",
+   "lines": 366,
+   "subject": "upstream/raft-source/packages/computer/src/services/stop.ts",
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/computer/src/setup.test.ts": {
+   "package": "computer",
+   "lines": 2731,
+   "subject": "upstream/raft-source/packages/computer/src/setup.ts",
+   "status": "port-partial",
+   "reason": "legacy migration and adoption (README Dropped; D22) and legacy URL rewrite (D19): per-case rows in tests-waived.md"
+  },
+  "upstream/raft-source/packages/computer/src/shellEnvCapture.test.ts": {
+   "package": "computer",
+   "lines": 1277,
+   "subject": "upstream/raft-source/packages/computer/src/shellEnvCapture.ts",
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/computer/src/status.test.ts": {
+   "package": "computer",
+   "lines": 579,
+   "subject": "upstream/raft-source/packages/computer/src/status.ts",
+   "status": "port-partial",
+   "reason": "K receipt projection (D13) and legacy URL/pid fallbacks (D19): per-case rows",
+   "droppedImports": [
+    "upstream/raft-source/packages/computer/src/kPaths.ts"
+   ]
+  },
+  "upstream/raft-source/packages/computer/src/targetServer.test.ts": {
+   "package": "computer",
+   "lines": 178,
+   "subject": "upstream/raft-source/packages/computer/src/targetServer.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/src/version.test.ts": {
+   "package": "computer",
+   "lines": 98,
+   "subject": "upstream/raft-source/packages/computer/src/version.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentActivityProducer.test.ts": {
+   "package": "daemon",
+   "lines": 64,
+   "subject": "upstream/raft-source/packages/daemon/src/agentActivityProducer.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentAppInbox.test.ts": {
+   "package": "daemon",
+   "lines": 753,
+   "subject": "upstream/raft-source/packages/daemon/src/agentAppInbox.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentCredentialProxy.routeFamily.test.ts": {
+   "package": "daemon",
+   "lines": 19,
+   "subject": "upstream/raft-source/packages/daemon/src/agentCredentialProxy.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentCredentialProxy.test.ts": {
+   "package": "daemon",
+   "lines": 4321,
+   "subject": "upstream/raft-source/packages/daemon/src/agentCredentialProxy.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentInboxProjection.test.ts": {
+   "package": "daemon",
+   "lines": 466,
+   "subject": "upstream/raft-source/packages/daemon/src/agentInboxProjection.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentInboxStateMachine.test.ts": {
+   "package": "daemon",
+   "lines": 758,
+   "subject": "upstream/raft-source/packages/daemon/src/agentInboxStateMachine.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentLifecycleRecord.test.ts": {
+   "package": "daemon",
+   "lines": 172,
+   "subject": "upstream/raft-source/packages/daemon/src/agentLifecycleRecord.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationExport.test.ts": {
+   "package": "daemon",
+   "lines": 501,
+   "subject": "upstream/raft-source/packages/daemon/src/agentMigrationExport.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationHttpTransport.test.ts": {
+   "package": "daemon",
+   "lines": 575,
+   "subject": "upstream/raft-source/packages/daemon/src/agentMigrationHttpTransport.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationImport.test.ts": {
+   "package": "daemon",
+   "lines": 384,
+   "subject": "upstream/raft-source/packages/daemon/src/agentMigrationImport.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationObjectStoreBundle.test.ts": {
+   "package": "daemon",
+   "lines": 619,
+   "subject": "upstream/raft-source/packages/daemon/src/agentMigrationObjectStoreBundle.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationResumableBundle.test.ts": {
+   "package": "daemon",
+   "lines": 598,
+   "subject": "upstream/raft-source/packages/daemon/src/agentMigrationResumableBundle.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentMigrationWorkspaceArchive.test.ts": {
+   "package": "daemon",
+   "lines": 186,
+   "subject": "upstream/raft-source/packages/daemon/src/agentMigrationWorkspaceArchive.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentNoProcessResidency.test.ts": {
+   "package": "daemon",
+   "lines": 178,
+   "subject": "upstream/raft-source/packages/daemon/src/agentNoProcessResidency.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentO11yClient.test.ts": {
+   "package": "daemon",
+   "lines": 244,
+   "subject": "upstream/raft-source/packages/daemon/src/agentO11yClient.ts",
+   "status": "out-of-scope",
+   "note": "no importer outside its own test; not reached from DaemonCore (research/daemon.md §2)"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.appInboxTrace.test.ts": {
+   "package": "daemon",
+   "lines": 50,
+   "subject": "upstream/raft-source/packages/daemon/src/agentProcessManager.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.builtin.e2e.test.ts": {
+   "package": "daemon",
+   "lines": 542,
+   "subject": "upstream/raft-source/packages/daemon/src/agentProcessManager.ts",
+   "status": "port-partial",
+   "reason": "cases that run the builtin (pi) driver (D17): per-case rows",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/pi.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.cindy.test.ts": {
+   "package": "daemon",
+   "lines": 106,
+   "subject": "upstream/raft-source/packages/daemon/src/agentProcessManager.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.claude.test.ts": {
+   "package": "daemon",
+   "lines": 4114,
+   "subject": "upstream/raft-source/packages/daemon/src/agentProcessManager.ts",
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.codex.test.ts": {
+   "package": "daemon",
+   "lines": 11235,
+   "subject": "upstream/raft-source/packages/daemon/src/agentProcessManager.ts",
+   "status": "port-partial",
+   "reason": "cases that register a pi or builtin driver id (D17): per-case rows",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/pi.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.grok.test.ts": {
+   "package": "daemon",
+   "lines": 772,
+   "subject": "upstream/raft-source/packages/daemon/src/agentProcessManager.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.sessionTranscript.test.ts": {
+   "package": "daemon",
+   "lines": 755,
+   "subject": "upstream/raft-source/packages/daemon/src/agentProcessManager.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentProcessManager.systemPrompt.test.ts": {
+   "package": "daemon",
+   "lines": 150,
+   "subject": "upstream/raft-source/packages/daemon/src/agentProcessManager.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentRuntimeInput.snapshot.test.ts": {
+   "package": "daemon",
+   "lines": 86,
+   "subject": "upstream/raft-source/packages/daemon/src/agentRuntimeInput.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentRuntimeInput.test.ts": {
+   "package": "daemon",
+   "lines": 48,
+   "subject": "upstream/raft-source/packages/daemon/src/agentRuntimeInput.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentStartCoordinator.test.ts": {
+   "package": "daemon",
+   "lines": 121,
+   "subject": "upstream/raft-source/packages/daemon/src/agentStartCoordinator.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentStartPendingDeliveryBuffer.test.ts": {
+   "package": "daemon",
+   "lines": 131,
+   "subject": "upstream/raft-source/packages/daemon/src/agentStartPendingDeliveryBuffer.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/agentVisibleDeliveryLedger.test.ts": {
+   "package": "daemon",
+   "lines": 130,
+   "subject": "upstream/raft-source/packages/daemon/src/agentVisibleDeliveryLedger.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/apmStateMachine.contract.test.ts": {
+   "package": "daemon",
+   "lines": 603,
+   "subject": "upstream/raft-source/packages/daemon/src/apmStateMachine.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/cleaner/configReceiver.test.ts": {
+   "package": "daemon",
+   "lines": 267,
+   "subject": "upstream/raft-source/packages/daemon/src/apps/cleaner/configReceiver.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/cleaner/runtime.test.ts": {
+   "package": "daemon",
+   "lines": 379,
+   "subject": "upstream/raft-source/packages/daemon/src/apps/cleaner/runtime.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/reminder/inboxDefinition.test.ts": {
+   "package": "daemon",
+   "lines": 93,
+   "subject": "upstream/raft-source/packages/daemon/src/apps/reminder/inboxDefinition.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/reminder/reminderCache.test.ts": {
+   "package": "daemon",
+   "lines": 2013,
+   "subject": "upstream/raft-source/packages/daemon/src/apps/reminder/reminderCache.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/apps/reminder/runtime.test.ts": {
+   "package": "daemon",
+   "lines": 1262,
+   "subject": "upstream/raft-source/packages/daemon/src/apps/reminder/runtime.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/chatBridgeRequest.test.ts": {
+   "package": "daemon",
+   "lines": 143,
+   "subject": "upstream/raft-source/packages/daemon/src/chatBridgeRequest.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/computerMigrationGuard.test.ts": {
+   "package": "daemon",
+   "lines": 44,
+   "subject": "upstream/raft-source/packages/daemon/src/computerMigrationGuard.ts",
+   "status": "waive",
+   "reason": "legacy daemon migration guard (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/computerMigrationGuard.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/connection.test.ts": {
+   "package": "daemon",
+   "lines": 1391,
+   "subject": "upstream/raft-source/packages/daemon/src/connection.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/core.test.ts": {
+   "package": "daemon",
+   "lines": 5585,
+   "subject": "upstream/raft-source/packages/daemon/src/core.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/daemonFetch.test.ts": {
+   "package": "daemon",
+   "lines": 243,
+   "subject": "upstream/raft-source/packages/daemon/src/daemonFetch.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/directUploadCapability.test.ts": {
+   "package": "daemon",
+   "lines": 142,
+   "subject": "upstream/raft-source/packages/daemon/src/directUploadCapability.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claude.integration.test.ts": {
+   "package": "daemon",
+   "lines": 515,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/claude.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claude.test.ts": {
+   "package": "daemon",
+   "lines": 495,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/claude.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claudeEventNormalizer.test.ts": {
+   "package": "daemon",
+   "lines": 671,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/claudeEventNormalizer.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/claudeLaunch.test.ts": {
+   "package": "daemon",
+   "lines": 306,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/claudeLaunch.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/cliTransport.test.ts": {
+   "package": "daemon",
+   "lines": 1745,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/cliTransport.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codex.integration.test.ts": {
+   "package": "daemon",
+   "lines": 460,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/codex.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codex.test.ts": {
+   "package": "daemon",
+   "lines": 3551,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/codex.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codexBlankFinalAnswer.contract.test.ts": {
+   "package": "daemon",
+   "lines": 486,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/codexInstructionShape.test.ts": {
+   "package": "daemon",
+   "lines": 260,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/codexInstructionShape.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/copilot.test.ts": {
+   "package": "daemon",
+   "lines": 338,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/copilot.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/cursor.test.ts": {
+   "package": "daemon",
+   "lines": 367,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/cursor.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/gemini.test.ts": {
+   "package": "daemon",
+   "lines": 409,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/gemini.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/geminiEventNormalizer.test.ts": {
+   "package": "daemon",
+   "lines": 70,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/geminiEventNormalizer.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/grok.integration.test.ts": {
+   "package": "daemon",
+   "lines": 182,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/grok.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/grok.test.ts": {
+   "package": "daemon",
+   "lines": 833,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/grok.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/grokEventNormalizer.test.ts": {
+   "package": "daemon",
+   "lines": 320,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/grokEventNormalizer.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/kimi-sdk.test.ts": {
+   "package": "daemon",
+   "lines": 1618,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/kimi-sdk.ts",
+   "status": "waive",
+   "reason": "kimi-sdk runtime (D17)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/kimi-sdk.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/kimi.test.ts": {
+   "package": "daemon",
+   "lines": 138,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/kimi.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/managedMcpTools.test.ts": {
+   "package": "daemon",
+   "lines": 72,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/managedMcpTools.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/managedMcpTools.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/nodeHostLaunch.test.ts": {
+   "package": "daemon",
+   "lines": 165,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/nodeHostLaunch.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/opencode.test.ts": {
+   "package": "daemon",
+   "lines": 812,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/opencode.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/pi.integration.test.ts": {
+   "package": "daemon",
+   "lines": 249,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/pi.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/pi.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/pi.test.ts": {
+   "package": "daemon",
+   "lines": 3389,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/pi.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/pi.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/piCommandTool.test.ts": {
+   "package": "daemon",
+   "lines": 458,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/piCommandTool.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/piCommandTool.ts",
+    "upstream/raft-source/packages/daemon/src/drivers/piToolExecutionObservability.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/piEventNormalizer.test.ts": {
+   "package": "daemon",
+   "lines": 116,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/piEventNormalizer.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/piEventNormalizer.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/piToolExecutionObservability.test.ts": {
+   "package": "daemon",
+   "lines": 506,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/piToolExecutionObservability.ts",
+   "status": "waive",
+   "reason": "builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/piToolExecutionObservability.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/piToolExecutionRuntimeSession.test.ts": {
+   "package": "daemon",
+   "lines": 140,
+   "subject": null,
+   "status": "waive",
+   "reason": "dropped: builtin/pi runtime (D17)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/drivers/pi.ts",
+    "upstream/raft-source/packages/daemon/src/drivers/piToolExecutionObservability.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/probe.test.ts": {
+   "package": "daemon",
+   "lines": 408,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/probe.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/raftCliGuideFreshness.test.ts": {
+   "package": "daemon",
+   "lines": 41,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/runtimeContract.test.ts": {
+   "package": "daemon",
+   "lines": 263,
+   "subject": null,
+   "status": "port-partial",
+   "reason": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/runtimeSession.test.ts": {
+   "package": "daemon",
+   "lines": 89,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/runtimeSession.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/systemPrompt.snapshot.test.ts": {
+   "package": "daemon",
+   "lines": 76,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/systemPrompt.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/systemPrompt.test.ts": {
+   "package": "daemon",
+   "lines": 68,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/systemPrompt.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/drivers/windowsPowerShellEnv.test.ts": {
+   "package": "daemon",
+   "lines": 43,
+   "subject": "upstream/raft-source/packages/daemon/src/drivers/windowsPowerShellEnv.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/feedbackTranscriptWindow.test.ts": {
+   "package": "daemon",
+   "lines": 42,
+   "subject": "upstream/raft-source/packages/daemon/src/feedbackTranscriptWindow.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/historyFormatting.test.ts": {
+   "package": "daemon",
+   "lines": 46,
+   "subject": "upstream/raft-source/packages/daemon/src/historyFormatting.ts",
+   "status": "out-of-scope",
+   "note": "no importer outside its own test; not reached from DaemonCore (research/daemon.md §2)"
+  },
+  "upstream/raft-source/packages/daemon/src/launchPhaseTransition.test.ts": {
+   "package": "daemon",
+   "lines": 245,
+   "subject": "upstream/raft-source/packages/daemon/src/launchPhaseTransition.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/legacySupervisor.test.ts": {
+   "package": "daemon",
+   "lines": 135,
+   "subject": "upstream/raft-source/packages/daemon/src/legacySupervisor.ts",
+   "status": "waive",
+   "reason": "legacy supervisor (README Dropped)",
+   "droppedImports": [
+    "upstream/raft-source/packages/daemon/src/legacySupervisor.ts"
+   ]
+  },
+  "upstream/raft-source/packages/daemon/src/logger.test.ts": {
+   "package": "daemon",
+   "lines": 21,
+   "subject": "upstream/raft-source/packages/daemon/src/logger.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/machineLock.test.ts": {
+   "package": "daemon",
+   "lines": 222,
+   "subject": "upstream/raft-source/packages/daemon/src/machineLock.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/managedMcpRuntimeProxy.test.ts": {
+   "package": "daemon",
+   "lines": 426,
+   "subject": "upstream/raft-source/packages/daemon/src/managedMcpRuntimeProxy.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/printSeam.test.ts": {
+   "package": "daemon",
+   "lines": 39,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/providerConnectionLaunch.test.ts": {
+   "package": "daemon",
+   "lines": 90,
+   "subject": "upstream/raft-source/packages/daemon/src/providerConnectionLaunch.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/proxy.test.ts": {
+   "package": "daemon",
+   "lines": 518,
+   "subject": "upstream/raft-source/packages/daemon/src/proxy.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/proxyFailureTrace.test.ts": {
+   "package": "daemon",
+   "lines": 111,
+   "subject": "upstream/raft-source/packages/daemon/src/proxyFailureTrace.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/raftHome.test.ts": {
+   "package": "daemon",
+   "lines": 68,
+   "subject": "upstream/raft-source/packages/daemon/src/raftHome.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/registry.manifest.appTrace.test.ts": {
+   "package": "daemon",
+   "lines": 114,
+   "subject": "upstream/raft-source/packages/daemon/src/registry.manifest.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/releaseRuntimeSdkPreflight.test.ts": {
+   "package": "daemon",
+   "lines": 37,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: release script and package.json scripts"
+  },
+  "upstream/raft-source/packages/daemon/src/reminderRetryRoutes.sourceContract.test.ts": {
+   "package": "daemon",
+   "lines": 407,
+   "subject": null,
+   "status": "waive",
+   "reason": "source-scan: reads TS source text"
+  },
+  "upstream/raft-source/packages/daemon/src/runnerApp.e2e.test.ts": {
+   "package": "daemon",
+   "lines": 326,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeAccountUsage/collector.test.ts": {
+   "package": "daemon",
+   "lines": 152,
+   "subject": "upstream/raft-source/packages/daemon/src/runtimeAccountUsage/collector.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeAccountUsage/oarAdapter.test.ts": {
+   "package": "daemon",
+   "lines": 185,
+   "subject": "upstream/raft-source/packages/daemon/src/runtimeAccountUsage/oarAdapter.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeAccountUsage/oarKimi.test.ts": {
+   "package": "daemon",
+   "lines": 131,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeErrorDiagnostics.test.ts": {
+   "package": "daemon",
+   "lines": 310,
+   "subject": "upstream/raft-source/packages/daemon/src/runtimeErrorDiagnostics.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeLaunchVersion.test.ts": {
+   "package": "daemon",
+   "lines": 109,
+   "subject": "upstream/raft-source/packages/daemon/src/runtimeLaunchVersion.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeModelSourceProjection.test.ts": {
+   "package": "daemon",
+   "lines": 82,
+   "subject": "upstream/raft-source/packages/daemon/src/runtimeModelSourceProjection.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeNotificationState.test.ts": {
+   "package": "daemon",
+   "lines": 188,
+   "subject": "upstream/raft-source/packages/daemon/src/runtimeNotificationState.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeProgressState.test.ts": {
+   "package": "daemon",
+   "lines": 42,
+   "subject": "upstream/raft-source/packages/daemon/src/runtimeProgressState.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/runtimeTurnState.test.ts": {
+   "package": "daemon",
+   "lines": 79,
+   "subject": "upstream/raft-source/packages/daemon/src/runtimeTurnState.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/scopedAppStorage.sourceContract.test.ts": {
+   "package": "daemon",
+   "lines": 457,
+   "subject": "upstream/raft-source/packages/daemon/src/scopedAppStorage.ts",
+   "status": "waive",
+   "reason": "source-scan: parses daemon TS sources with the TypeScript AST"
+  },
+  "upstream/raft-source/packages/daemon/src/scopedAppStorage.test.ts": {
+   "package": "daemon",
+   "lines": 348,
+   "subject": "upstream/raft-source/packages/daemon/src/scopedAppStorage.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/scopedAppStorageObservability.test.ts": {
+   "package": "daemon",
+   "lines": 427,
+   "subject": "upstream/raft-source/packages/daemon/src/scopedAppStorageObservability.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/spawnFailureClassification.test.ts": {
+   "package": "daemon",
+   "lines": 17,
+   "subject": "upstream/raft-source/packages/daemon/src/spawnFailureClassification.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/task695ContinueOnErrorProbe.test.ts": {
+   "package": "daemon",
+   "lines": 16,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/testing/drydock.test.ts": {
+   "package": "daemon",
+   "lines": 130,
+   "subject": "upstream/raft-source/packages/daemon/src/testing/drydock.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/testing/seaHostHarness.sea-suite.ts": {
+   "package": "daemon",
+   "lines": 66,
+   "subject": "upstream/raft-source/packages/daemon/src/testing/seaHostHarness.ts",
+   "status": "waive",
+   "reason": "packaging: builds a Node single-executable application (node --experimental-sea-config, postject, codesign); separate vitest.sea-host.config.ts suite"
+  },
+  "upstream/raft-source/packages/daemon/src/traceBundleUpload.test.ts": {
+   "package": "daemon",
+   "lines": 296,
+   "subject": "upstream/raft-source/packages/daemon/src/traceBundleUpload.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/wikiAgentWorkspace.test.ts": {
+   "package": "daemon",
+   "lines": 222,
+   "subject": "upstream/raft-source/packages/daemon/src/wikiAgentWorkspace.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/daemon/src/workspaces.test.ts": {
+   "package": "daemon",
+   "lines": 65,
+   "subject": "upstream/raft-source/packages/daemon/src/workspaces.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/__wrong-patch__/wrongPatch.test.ts": {
+   "package": "shared",
+   "lines": 55,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/actionCards.test.ts": {
+   "package": "shared",
+   "lines": 115,
+   "subject": "upstream/raft-source/packages/shared/src/actionCards.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiClient.test.ts": {
+   "package": "shared",
+   "lines": 1089,
+   "subject": "upstream/raft-source/packages/shared/src/agentApiClient.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiContract.test.ts": {
+   "package": "shared",
+   "lines": 1215,
+   "subject": "upstream/raft-source/packages/shared/src/agentApiContract.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/agentApiRawClient.test.ts": {
+   "package": "shared",
+   "lines": 1117,
+   "subject": "upstream/raft-source/packages/shared/src/agentApiRawClient.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/agentInbox.test.ts": {
+   "package": "shared",
+   "lines": 185,
+   "subject": "upstream/raft-source/packages/shared/src/agentInbox.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/agentMigration.test.ts": {
+   "package": "shared",
+   "lines": 65,
+   "subject": "upstream/raft-source/packages/shared/src/agentMigration.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/agentMigrationErrors.test.ts": {
+   "package": "shared",
+   "lines": 25,
+   "subject": "upstream/raft-source/packages/shared/src/agentMigrationErrors.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/agentScopes.test.ts": {
+   "package": "shared",
+   "lines": 139,
+   "subject": "upstream/raft-source/packages/shared/src/agentScopes.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/apmHeldFreshness.test.ts": {
+   "package": "shared",
+   "lines": 251,
+   "subject": "upstream/raft-source/packages/shared/src/apmHeldFreshness.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/appConfigTransport.test.ts": {
+   "package": "shared",
+   "lines": 125,
+   "subject": "upstream/raft-source/packages/shared/src/appConfigTransport.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/appRuntimeTrace.test.ts": {
+   "package": "shared",
+   "lines": 100,
+   "subject": "upstream/raft-source/packages/shared/src/appRuntimeTrace.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/apps/cleaner/configProtocol.test.ts": {
+   "package": "shared",
+   "lines": 105,
+   "subject": "upstream/raft-source/packages/shared/src/apps/cleaner/configProtocol.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/attachmentPreview.test.ts": {
+   "package": "shared",
+   "lines": 19,
+   "subject": "upstream/raft-source/packages/shared/src/attachmentPreview.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/attachmentUploadContract.test.ts": {
+   "package": "shared",
+   "lines": 193,
+   "subject": "upstream/raft-source/packages/shared/src/attachmentUploadContract.ts",
+   "status": "port",
+   "needsOutOfScope": [
+    "upstream/raft-source/packages/shared/src/openApiContract.ts"
+   ]
+  },
+  "upstream/raft-source/packages/shared/src/attentionDependencyOracle.test.ts": {
+   "package": "shared",
+   "lines": 68,
+   "subject": "upstream/raft-source/packages/shared/src/attentionDependencyOracle.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/authRefreshTiming.test.ts": {
+   "package": "shared",
+   "lines": 33,
+   "subject": "upstream/raft-source/packages/shared/src/authRefreshTiming.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/billingPlans.test.ts": {
+   "package": "shared",
+   "lines": 271,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/brandedIds.test.ts": {
+   "package": "shared",
+   "lines": 84,
+   "subject": "upstream/raft-source/packages/shared/src/brandedIds.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/canonicalMessageManifest.test.ts": {
+   "package": "shared",
+   "lines": 112,
+   "subject": "upstream/raft-source/packages/shared/src/canonicalMessageManifest.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/canonicalMessageV2.test.ts": {
+   "package": "shared",
+   "lines": 330,
+   "subject": "upstream/raft-source/packages/shared/src/canonicalMessageV2.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/capabilityInventories.test.ts": {
+   "package": "shared",
+   "lines": 47,
+   "subject": "upstream/raft-source/packages/shared/src/capabilityInventories.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/channelPermissions.test.ts": {
+   "package": "shared",
+   "lines": 231,
+   "subject": "upstream/raft-source/packages/shared/src/channelPermissions.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/daemonApiContract.test.ts": {
+   "package": "shared",
+   "lines": 57,
+   "subject": "upstream/raft-source/packages/shared/src/daemonApiContract.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/daemonApiRawClient.test.ts": {
+   "package": "shared",
+   "lines": 332,
+   "subject": "upstream/raft-source/packages/shared/src/daemonApiRawClient.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/discussionGraph.test.ts": {
+   "package": "shared",
+   "lines": 66,
+   "subject": "upstream/raft-source/packages/shared/src/discussionGraph.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/displayLocales.test.ts": {
+   "package": "shared",
+   "lines": 39,
+   "subject": "upstream/raft-source/packages/shared/src/displayLocales.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/emailValidation.test.ts": {
+   "package": "shared",
+   "lines": 26,
+   "subject": "upstream/raft-source/packages/shared/src/emailValidation.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/externalAgentIntegration.test.ts": {
+   "package": "shared",
+   "lines": 402,
+   "subject": "upstream/raft-source/packages/shared/src/externalAgentIntegration.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/externalProjection.test.ts": {
+   "package": "shared",
+   "lines": 434,
+   "subject": "upstream/raft-source/packages/shared/src/externalProjection.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/featureFlagRolloutGuardrail.test.ts": {
+   "package": "shared",
+   "lines": 583,
+   "subject": "upstream/raft-source/packages/shared/src/featureFlagRolloutGuardrail.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/identitySetup.test.ts": {
+   "package": "shared",
+   "lines": 47,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/inboxScopeReadFrontier.test.ts": {
+   "package": "shared",
+   "lines": 188,
+   "subject": "upstream/raft-source/packages/shared/src/inboxScopeReadFrontier.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/knowledgeContext.test.ts": {
+   "package": "shared",
+   "lines": 50,
+   "subject": "upstream/raft-source/packages/shared/src/knowledgeContext.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/legalAcceptance.test.ts": {
+   "package": "shared",
+   "lines": 11,
+   "subject": "upstream/raft-source/packages/shared/src/legalAcceptance.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/managedMcp.test.ts": {
+   "package": "shared",
+   "lines": 13,
+   "subject": "upstream/raft-source/packages/shared/src/managedMcp.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/nameValidation.test.ts": {
+   "package": "shared",
+   "lines": 27,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/oauthClientCategories.test.ts": {
+   "package": "shared",
+   "lines": 43,
+   "subject": "upstream/raft-source/packages/shared/src/oauthClientCategories.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/oauthRedirect.test.ts": {
+   "package": "shared",
+   "lines": 25,
+   "subject": "upstream/raft-source/packages/shared/src/oauthRedirect.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/onboardingStateMachineContract.test.ts": {
+   "package": "shared",
+   "lines": 192,
+   "subject": "upstream/raft-source/packages/shared/src/onboardingStateMachineContract.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/producerFactLineage.test.ts": {
+   "package": "shared",
+   "lines": 45,
+   "subject": "upstream/raft-source/packages/shared/src/producerFactLineage.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/raftPermalinks.test.ts": {
+   "package": "shared",
+   "lines": 101,
+   "subject": "upstream/raft-source/packages/shared/src/raftPermalinks.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/raftRefs.test.ts": {
+   "package": "shared",
+   "lines": 314,
+   "subject": "upstream/raft-source/packages/shared/src/raftRefs.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/runtimeAccountUsage.test.ts": {
+   "package": "shared",
+   "lines": 103,
+   "subject": "upstream/raft-source/packages/shared/src/runtimeAccountUsage.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/runtimeAvailability.test.ts": {
+   "package": "shared",
+   "lines": 87,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/runtimeConfig.test.ts": {
+   "package": "shared",
+   "lines": 1032,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/runtimeModels.test.ts": {
+   "package": "shared",
+   "lines": 219,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/runtimeProviderDisplay.test.ts": {
+   "package": "shared",
+   "lines": 48,
+   "subject": "upstream/raft-source/packages/shared/src/runtimeProviderDisplay.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/safeReturnPath.test.ts": {
+   "package": "shared",
+   "lines": 27,
+   "subject": "upstream/raft-source/packages/shared/src/safeReturnPath.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/serverPermissions.test.ts": {
+   "package": "shared",
+   "lines": 126,
+   "subject": "upstream/raft-source/packages/shared/src/serverPermissions.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/serverSlugValidation.test.ts": {
+   "package": "shared",
+   "lines": 28,
+   "subject": "upstream/raft-source/packages/shared/src/serverSlugValidation.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/slackBridgeDelivery.test.ts": {
+   "package": "shared",
+   "lines": 508,
+   "subject": "upstream/raft-source/packages/shared/src/slackBridgeDelivery.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/slackBridgeFeatureFlags.test.ts": {
+   "package": "shared",
+   "lines": 24,
+   "subject": null,
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/syncCoreReexport.test.ts": {
+   "package": "shared",
+   "lines": 15,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/taskPermissions.test.ts": {
+   "package": "shared",
+   "lines": 31,
+   "subject": "upstream/raft-source/packages/shared/src/taskPermissions.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/testing/failpoints.test.ts": {
+   "package": "shared",
+   "lines": 104,
+   "subject": "upstream/raft-source/packages/shared/src/testing/failpoints.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/thirdPartyInertRenderer.test.ts": {
+   "package": "shared",
+   "lines": 185,
+   "subject": "upstream/raft-source/packages/shared/src/thirdPartyInertRenderer.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/toolDisplay.test.ts": {
+   "package": "shared",
+   "lines": 203,
+   "subject": "upstream/raft-source/packages/shared/src/toolDisplay.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/traceFamilyRegistry.test.ts": {
+   "package": "shared",
+   "lines": 262,
+   "subject": "upstream/raft-source/packages/shared/src/tracing/traceFamilyRegistry.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/tracing/tracing.test.ts": {
+   "package": "shared",
+   "lines": 992,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/translationLanguages.test.ts": {
+   "package": "shared",
+   "lines": 18,
+   "subject": "upstream/raft-source/packages/shared/src/translationLanguages.ts",
+   "status": "out-of-scope"
+  },
+  "upstream/raft-source/packages/shared/src/typeGuards.test.ts": {
+   "package": "shared",
+   "lines": 39,
+   "subject": "upstream/raft-source/packages/shared/src/typeGuards.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/utcTimestamp.test.ts": {
+   "package": "shared",
+   "lines": 13,
+   "subject": "upstream/raft-source/packages/shared/src/utcTimestamp.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/versionComparison.test.ts": {
+   "package": "shared",
+   "lines": 77,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/shared/src/wikiWorkspacePack.test.ts": {
+   "package": "shared",
+   "lines": 84,
+   "subject": null,
+   "status": "port"
+  },
+  "upstream/raft-source/packages/trace-client/src/localTraceSink.test.ts": {
+   "package": "trace-client",
+   "lines": 629,
+   "subject": "upstream/raft-source/packages/trace-client/src/localTraceSink.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/trace-client/src/traceClient.test.ts": {
+   "package": "trace-client",
+   "lines": 145,
+   "subject": "upstream/raft-source/packages/trace-client/src/traceClient.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/trace-client/src/traceJitter.test.ts": {
+   "package": "trace-client",
+   "lines": 73,
+   "subject": "upstream/raft-source/packages/trace-client/src/traceJitter.ts",
+   "status": "port"
+  },
+  "upstream/raft-source/packages/computer/scripts/native/classify-object-inventory.test.mjs": {
+   "package": "computer",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: R2/S3 release object inventory (research/computer-service.md §6)"
+  },
+  "upstream/raft-source/packages/computer/scripts/native/dependency-freshness.test.mjs": {
+   "package": "computer",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: SEA build dependency freshness (research/computer-service.md §6)"
+  },
+  "upstream/raft-source/packages/computer/scripts/native/photon-wasm-contract.test.mjs": {
+   "package": "computer",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: SEA build photon wasm sidecar (research/computer-service.md §6)"
+  },
+  "upstream/raft-source/packages/computer/scripts/native/publish-hands-release.test.mjs": {
+   "package": "computer",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: Hands release publishing (research/computer-service.md §6)"
+  },
+  "upstream/raft-source/packages/computer/scripts/native/register-existing-hands-release.test.mjs": {
+   "package": "computer",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: Hands release publishing (research/computer-service.md §6)"
+  },
+  "upstream/raft-source/packages/computer/scripts/native/rehearse-object-inventory.test.mjs": {
+   "package": "computer",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: release object inventory rehearsal (research/computer-service.md §6)"
+  },
+  "upstream/raft-source/packages/computer/scripts/native/staging-version.test.mjs": {
+   "package": "computer",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: staging prerelease versioning (research/computer-service.md §6)"
+  },
+  "upstream/raft-source/packages/computer/scripts/native/verify-notarization-ticket.test.mjs": {
+   "package": "computer",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "packaging: release notarization tooling (research/computer-service.md §6)"
+  },
+  "upstream/raft-source/packages/shared/scripts/check-agent-api-message-lockstep.mjs": {
+   "package": "shared",
+   "lines": 0,
+   "subject": null,
+   "status": "waive",
+   "reason": "source-scan: test:message-lockstep mutates agentApiMessageContract.ts source text and type-checks it with tsc"
+  }
+ }
+}

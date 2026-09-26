@@ -7,6 +7,7 @@ mod error;
 mod json;
 mod number;
 mod object;
+mod regex;
 mod string;
 mod value;
 
@@ -23,6 +24,7 @@ pub use number::{
     parse_int, to_fixed, to_integer_or_infinity, to_number,
 };
 pub use object::{Object, object_assign};
+pub use regex::{JsMatch, JsMatchIndices, JsRegex};
 pub use string::{
     JsString, MAX_STRING_LENGTH, collapse_js_whitespace, encode_uri_component, pad_end, pad_start,
     sort_default, split, string_replace_all, string_replace_first, trim, trim_end, trim_start,
@@ -33,3 +35,7 @@ pub use value::{Value, is_nullish, is_truthy, less_than, to_display_string, to_n
 #[cfg(test)]
 #[path = "golden_tests.rs"]
 mod golden_tests;
+
+#[cfg(test)]
+#[path = "regex_golden_tests.rs"]
+mod regex_golden_tests;

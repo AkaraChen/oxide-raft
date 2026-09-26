@@ -8,6 +8,7 @@ license-file.workspace = true
 
 [dependencies]
 serde.workspace = true
+regress.workspace = true
 
 [dev-dependencies]
 serde_json.workspace = true

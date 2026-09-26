@@ -1,0 +1,476 @@
+{
+  "comment": "Input to tools/scope/classify.mjs. Roots are walked through graph.json import edges; a dropped file is not entered, a partial file is in scope but its edges are not followed. Every drop cites README Scope or a D-record. testWaivers force a whole test file to waive; partialTests force port-partial (per-case rows in tests-waived.md); outOfScopeTests classify test files outside the scanned packages.",
+  "roots": [
+    "upstream/raft-source/packages/cli/src/index.ts",
+    "upstream/raft-source/packages/computer/src/index.ts"
+  ],
+  "barrels": {
+    "upstream/raft-source/packages/shared/src/index.ts": "Symbol-level closure (research/shared.md §1.2): the barrel's re-exports are not followed; the listed files are in scope.",
+    "upstream/oar/packages/oar/src/index.ts": "oar barrel: only the four runtimes' installation/accountUsage are used (research/shared.md §7.2).",
+    "upstream/oar/packages/oar/src/runtimes/claude/index.ts": "runtime definition used without its session (research/shared.md §7.2)",
+    "upstream/oar/packages/oar/src/runtimes/codex/index.ts": "runtime definition used without its session (research/shared.md §7.2)",
+    "upstream/oar/packages/oar/src/runtimes/kimi/index.ts": "runtime definition used without its session (research/shared.md §7.2)",
+    "upstream/oar/packages/oar/src/runtimes/grok/index.ts": "runtime definition used without its session (research/shared.md §7.2)"
+  },
+  "drops": [
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/k[A-Z]*.ts",
+      "reason": "k-carrier/update (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/computerRelease.ts",
+      "reason": "update (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/releaseAuthority.ts",
+      "reason": "update (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/legacyKOriginAdoption.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/legacyOsSupervisorMigration.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/legacySupervisorTakeover.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/machineOperationRuntime.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/machineOperationStore.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/machineConvergenceReducer.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/services/adoptLegacy.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/lib/migration.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/lib/migrationDismissals.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/lib/adoptLegacyResponse.ts",
+      "reason": "legacy migration (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/osSupervisor.ts",
+      "reason": "legacy OS supervisor retirement (README Dropped); osSupervisorLifecycle.ts stays for the refusal of retired entries (D11)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/osSupervisorRuntime.ts",
+      "reason": "legacy OS supervisor retirement (README Dropped); osSupervisorLifecycle.ts stays for the refusal of retired entries (D11)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/channel.ts",
+      "reason": "release channel (README Dropped `channel`; D13: computer/channel is not read or written)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/lib/channelState.ts",
+      "reason": "release channel (README Dropped `channel`; D13: computer/channel is not read or written)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/lib/index.ts",
+      "reason": "Electron-only lib export surface (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/lib/actions.ts",
+      "reason": "Electron-only lib export surface (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/computer/src/lib/affordances.ts",
+      "reason": "Electron-only lib export surface (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/daemon/src/drivers/pi.ts",
+      "reason": "builtin/pi runtime (D17)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/daemon/src/drivers/pi*.ts",
+      "reason": "builtin/pi runtime (D17)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/daemon/src/drivers/managedMcpTools.ts",
+      "reason": "builtin/pi runtime (D17)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/daemon/src/drivers/kimi-sdk.ts",
+      "reason": "kimi-sdk runtime (D17)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/daemon/src/drivers/antigravity.deprecated.ts",
+      "reason": "antigravity runtime (D17)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/daemon/src/computerMigrationGuard.ts",
+      "reason": "legacy daemon migration guard (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/daemon/src/legacySupervisor.ts",
+      "reason": "legacy supervisor (README Dropped)"
+    },
+    {
+      "pattern": "upstream/raft-source/packages/daemon/src/index.ts",
+      "reason": "standalone raft-daemon binary (README Dropped)"
+    },
+    {
+      "pattern": "upstream/oar/packages/oar/src/runtimes/pi/*.ts",
+      "reason": "builtin/pi runtime (D17)"
+    }
+  ],
+  "testWaivers": [
+    {
+      "file": "upstream/raft-source/packages/cli/src/axManifest.test.ts",
+      "category": "source-scan",
+      "reason": "gates the AX manifest generator that parses TS command definitions"
+    },
+    {
+      "file": "upstream/raft-source/packages/cli/src/bundleConfig.test.ts",
+      "category": "packaging",
+      "reason": "tsup bundle configuration"
+    },
+    {
+      "file": "upstream/raft-source/packages/cli/src/publishPackage.test.ts",
+      "category": "packaging",
+      "reason": "npm publish layout"
+    },
+    {
+      "file": "upstream/raft-source/packages/cli/src/shimPackage.test.ts",
+      "category": "packaging",
+      "reason": "npm shim package build"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/bundleConfig.test.ts",
+      "category": "packaging",
+      "reason": "tsup bundle configuration"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/computerInstallerLiveCheck.contract.test.ts",
+      "category": "packaging",
+      "reason": "asserts private CI workflow contents"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/importCycles.test.ts",
+      "category": "source-scan",
+      "reason": "TS import-cycle ratchet over source files"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/cliUpgradeContract.test.ts",
+      "category": "dropped",
+      "reason": "update: raft-computer upgrade (README Dropped)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/kCarrierDependency.test.ts",
+      "category": "dropped",
+      "reason": "k-carrier dependency pin (README Dropped)"
+    },
+    {
+      "file": "upstream/raft-source/packages/daemon/src/releaseRuntimeSdkPreflight.test.ts",
+      "category": "packaging",
+      "reason": "release script and package.json scripts"
+    },
+    {
+      "file": "upstream/raft-source/packages/daemon/src/reminderRetryRoutes.sourceContract.test.ts",
+      "category": "source-scan",
+      "reason": "reads TS source text"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/scripts/native/classify-object-inventory.test.mjs",
+      "category": "packaging",
+      "reason": "R2/S3 release object inventory (research/computer-service.md §6)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/scripts/native/dependency-freshness.test.mjs",
+      "category": "packaging",
+      "reason": "SEA build dependency freshness (research/computer-service.md §6)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/scripts/native/photon-wasm-contract.test.mjs",
+      "category": "packaging",
+      "reason": "SEA build photon wasm sidecar (research/computer-service.md §6)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/scripts/native/publish-hands-release.test.mjs",
+      "category": "packaging",
+      "reason": "Hands release publishing (research/computer-service.md §6)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/scripts/native/register-existing-hands-release.test.mjs",
+      "category": "packaging",
+      "reason": "Hands release publishing (research/computer-service.md §6)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/scripts/native/rehearse-object-inventory.test.mjs",
+      "category": "packaging",
+      "reason": "release object inventory rehearsal (research/computer-service.md §6)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/scripts/native/staging-version.test.mjs",
+      "category": "packaging",
+      "reason": "staging prerelease versioning (research/computer-service.md §6)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/scripts/native/verify-notarization-ticket.test.mjs",
+      "category": "packaging",
+      "reason": "release notarization tooling (research/computer-service.md §6)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/installScriptContract.test.ts",
+      "category": "dropped",
+      "reason": "installers (README Dropped): install.sh/install.ps1 and K reset"
+    },
+    {
+      "file": "upstream/raft-source/packages/daemon/src/drivers/piToolExecutionRuntimeSession.test.ts",
+      "category": "dropped",
+      "reason": "builtin/pi runtime (D17)"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/serviceUpgradeStart.scope.test.ts",
+      "category": "dropped",
+      "reason": "update (README Dropped; D13): local/remote upgrade-start convergence on the K coordinator seam"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/residentLifecycleBridge.test.ts",
+      "category": "dropped",
+      "reason": "k-carrier/update (README Dropped; D13): every case binds or projects a K receipt"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/computerExistingKMacosAcceptance.contract.test.ts",
+      "category": "dropped",
+      "reason": "k-carrier/update (README Dropped): existing-K macOS acceptance"
+    },
+    {
+      "file": "upstream/raft-source/packages/daemon/src/testing/seaHostHarness.sea-suite.ts",
+      "category": "packaging",
+      "reason": "builds a Node single-executable application (node --experimental-sea-config, postject, codesign); separate vitest.sea-host.config.ts suite"
+    },
+    {
+      "file": "upstream/raft-source/packages/shared/scripts/check-agent-api-message-lockstep.mjs",
+      "category": "source-scan",
+      "reason": "test:message-lockstep mutates agentApiMessageContract.ts source text and type-checks it with tsc"
+    },
+    {
+      "file": "upstream/raft-source/packages/cli/src/agentApiNoBypass.test.ts",
+      "category": "source-scan",
+      "reason": "walks src/commands and matches call sites in TS source text; the synthetic cases test that scanner"
+    },
+    {
+      "file": "upstream/raft-source/packages/computer/src/cliCommandReferenceContract.test.ts",
+      "category": "source-scan",
+      "reason": "reads every src/*.ts and cli.ts as text"
+    },
+    {
+      "file": "upstream/raft-source/packages/daemon/src/scopedAppStorage.sourceContract.test.ts",
+      "category": "source-scan",
+      "reason": "parses daemon TS sources with the TypeScript AST"
+    }
+  ],
+  "outOfScopeNotes": {
+    "upstream/raft-source/packages/daemon/src/agentO11yClient.ts": "no importer outside its own test; not reached from DaemonCore (research/daemon.md §2)",
+    "upstream/raft-source/packages/daemon/src/historyFormatting.ts": "no importer outside its own test; not reached from DaemonCore (research/daemon.md §2)"
+  },
+  "testSupport": [
+    "upstream/raft-source/packages/computer/src/test-fixtures/mutationLockCompromiseChild.ts",
+    "upstream/raft-source/packages/shared/src/__wrong-patch__/criteria.ts",
+    "upstream/raft-source/packages/shared/src/__wrong-patch__/mergeOverlappingSpans.ts",
+    "upstream/raft-source/packages/shared/src/generated/agentApiRoutes.ts"
+  ],
+  "closures": {
+    "upstream/raft-source/packages/shared/src/": {
+      "source": "research/shared.md §1.2 (symbol-level closure)",
+      "files": [
+        "agentApiContract.ts",
+        "index.ts",
+        "piBuiltinModels.generated.ts",
+        "tracing/index.ts",
+        "toolDisplay.ts",
+        "raftRefs.ts",
+        "daemonApiRawClient.ts",
+        "apmHeldFreshness.ts",
+        "runtimeConfigLegacy.ts",
+        "agentApiRawClient.ts",
+        "agentApiMessageContract.ts",
+        "daemonApiContract.ts",
+        "agentApiClient.ts",
+        "daemonApiClient.ts",
+        "actionCards.ts",
+        "externalAgentIntegration.ts",
+        "agentApiChannelJoin.ts",
+        "agentInbox.ts",
+        "runtimeAccountUsage.ts",
+        "agentInboxApp.ts",
+        "appConfigTransport.ts",
+        "capabilityInventories.ts",
+        "appRuntimeTrace.ts",
+        "apps/reminder/protocol.ts",
+        "thirdPartyInertRenderer.ts",
+        "attachmentUploadContract.ts",
+        "runtimeProviderDisplay.ts",
+        "agentMigrationResumable.ts",
+        "knowledgeContext.ts",
+        "managedMcp.ts",
+        "apps/cleaner/configProtocol.ts",
+        "oauthClientCategories.ts",
+        "agentMigration.ts",
+        "brandedIds.ts",
+        "typeGuards.ts",
+        "attentionDependencyOracle.ts",
+        "generated/runtimeProviderDisplayNames.ts",
+        "providerConnections.ts",
+        "externalProjection.ts",
+        "utcTimestamp.ts",
+        "clock.ts",
+        "producerFactLineage.ts",
+        "agentApiPaths.ts"
+      ]
+    },
+    "upstream/oar/packages/oar/src/": {
+      "source": "research/shared.md §7.2 (daemon uses only installation() and accountUsage() of claude, codex, kimi, grok; sessions, projections, observe and pi are out of scope)",
+      "files": [
+        "index.ts",
+        "contracts/runtime.ts",
+        "contracts/installation.ts",
+        "contracts/account-usage.ts",
+        "runtimes/claude/index.ts",
+        "runtimes/claude/account-usage.ts",
+        "runtimes/claude/installation.ts",
+        "runtimes/codex/index.ts",
+        "runtimes/codex/account-usage.ts",
+        "runtimes/codex/installation.ts",
+        "runtimes/codex/app-server-client.ts",
+        "runtimes/kimi/index.ts",
+        "runtimes/kimi/account-usage.ts",
+        "runtimes/kimi/installation.ts",
+        "runtimes/kimi/auth-config.ts",
+        "runtimes/kimi/oauth-token.ts",
+        "runtimes/grok/index.ts",
+        "runtimes/grok/account-usage.ts",
+        "runtimes/grok/installation.ts"
+      ]
+    }
+  },
+  "partial": {
+    "upstream/oar/packages/oar/src/runtimes/grok/session.ts": "only selectGrokAuthMethod and grokInitializeMeta (lines 1-34) are used, by grok/account-usage.ts; the ACP session is out of scope (research/shared.md §7.2)",
+    "upstream/raft-source/packages/computer/src/serviceUpgradeStart.ts": "D13: upgrade-start stays registered with only the K_COORDINATOR_SEA_ONLY rejection; createServiceUpgradeStart's non-SEA branch and describeUpgradeStartRejection are kept, the K coordinator branch is deleted"
+  },
+  "subjects": {
+    "upstream/oar/tests/account-usage.test.ts": "upstream/oar/packages/oar/src/runtimes/claude/account-usage.ts",
+    "upstream/oar/tests/claude-account-usage-reader.test.ts": "upstream/oar/packages/oar/src/runtimes/claude/account-usage.ts",
+    "upstream/oar/tests/codex-account-usage-reader.test.ts": "upstream/oar/packages/oar/src/runtimes/codex/account-usage.ts",
+    "upstream/oar/tests/grok/grok-account-usage-reader.test.ts": "upstream/oar/packages/oar/src/runtimes/grok/account-usage.ts",
+    "upstream/oar/tests/kimi/kimi-account-usage-reader.test.ts": "upstream/oar/packages/oar/src/runtimes/kimi/account-usage.ts",
+    "upstream/oar/tests/kimi/kimi-account-usage.test.ts": "upstream/oar/packages/oar/src/runtimes/kimi/account-usage.ts",
+    "upstream/oar/tests/installation.test.ts": "upstream/oar/packages/oar/src/shared/installation.ts",
+    "upstream/oar/tests/process.test.ts": "upstream/oar/packages/oar/src/shared/executable/process.ts",
+    "upstream/oar/tests/acp/acp-process.test.ts": "upstream/oar/packages/oar/src/shared/acp/process.ts",
+    "upstream/oar/tests/acp/acp-session.test.ts": "upstream/oar/packages/oar/src/shared/acp/session.ts",
+    "upstream/oar/tests/acp/acp-terminal.test.ts": "upstream/oar/packages/oar/src/shared/acp/terminal.ts",
+    "upstream/oar/tests/acp/acp-vendor-snapshot.test.ts": "upstream/oar/packages/oar/src/runtimes/kimi/session.ts",
+    "upstream/oar/tests/session.test.ts": "upstream/oar/packages/oar/src/observe/observe-agent.ts",
+    "upstream/oar/tests/tool-activity.test.ts": "upstream/oar/packages/oar/src/observe/tool-activity.ts",
+    "upstream/oar/tests/registry.test.ts": "upstream/oar/packages/oar/src/registry.ts",
+    "upstream/oar/tests/codex/codex-item-detail.test.ts": "upstream/oar/packages/oar/src/runtimes/codex/item-detail.ts",
+    "upstream/oar/tests/codex/codex-reasoning.test.ts": "upstream/oar/packages/oar/src/runtimes/codex/reasoning.ts",
+    "upstream/oar/tests/replay/claude-projection.test.ts": "upstream/oar/packages/oar/src/runtimes/claude/projection.ts",
+    "upstream/oar/tests/replay/codex-projection.test.ts": "upstream/oar/packages/oar/src/runtimes/codex/projection.ts",
+    "upstream/oar/tests/replay/pi-projection.test.ts": "upstream/oar/packages/oar/src/runtimes/pi/projection.ts",
+    "upstream/oar/tests/replay/tool-activity.test.ts": "upstream/oar/packages/oar/src/observe/tool-activity.ts",
+    "upstream/oar/tests/providers/model-catalog.test.ts": "upstream/oar/packages/oar/src/runtimes/pi/catalog.ts",
+    "upstream/oar/tests/providers/pi-env.test.ts": "upstream/oar/packages/oar/src/runtimes/pi/session.ts",
+    "upstream/oar/tests/providers/provider-auth.test.ts": "upstream/oar/packages/oar/src/runtimes/pi/auth.ts",
+    "upstream/oar/tests/cli-progress.test.ts": "upstream/oar/packages/cli/src/index.ts",
+    "upstream/oar/tests/cli-voyage.test.ts": "upstream/oar/packages/cli/src/index.ts"
+  },
+  "partialTests": {
+    "upstream/raft-source/packages/computer/src/setup.test.ts": "legacy migration and adoption (README Dropped; D22) and legacy URL rewrite (D19): per-case rows in tests-waived.md",
+    "upstream/raft-source/packages/computer/src/doctor.test.ts": "doctor --migration-details and identity checks (README Dropped legacy migration; D22), K receipt check (D13): per-case rows",
+    "upstream/raft-source/packages/computer/src/status.test.ts": "K receipt projection (D13) and legacy URL/pid fallbacks (D19): per-case rows",
+    "upstream/raft-source/packages/computer/src/service.test.ts": "SEA K coordinator branch of upgrade-start (D13) and installer migration (README Dropped): per-case rows",
+    "upstream/raft-source/packages/daemon/src/agentProcessManager.builtin.e2e.test.ts": "cases that run the builtin (pi) driver (D17): per-case rows",
+    "upstream/raft-source/packages/daemon/src/agentProcessManager.codex.test.ts": "cases that register a pi or builtin driver id (D17): per-case rows",
+    "upstream/oar/tests/installation.test.ts": "pi installation (D17): per-case row",
+    "upstream/raft-source/packages/cli/src/commands/migrate/index.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/cli/src/runtimePreflight.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/cli/src/printSeam.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/computer/src/cliLifecycleContract.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/computer/src/serviceProvenance.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/computer/src/services/start.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/computer/src/services/stop.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/computer/src/shellEnvCapture.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/daemon/src/agentProcessManager.claude.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)",
+    "upstream/raft-source/packages/daemon/src/drivers/runtimeContract.test.ts": "per-case rows for cases that read TypeScript source text (source-scan)"
+  },
+  "outOfScopeTests": [
+    {
+      "pattern": "upstream/oar/apps/coxswain/test/*.test.ts",
+      "reason": "coxswain Electron app in the oar workspace; not part of oar's used closure (README In scope: used closure of oar)"
+    },
+    {
+      "pattern": "upstream/oar/sea-trial/vendor/*.test.ts",
+      "reason": "oar sea-trial harness vendoring runtime SDKs; not part of oar's used closure"
+    }
+  ],
+  "upstreamSkips": {
+    "comment": "Kind of every upstream skip in scope (decisions.md D9), read from the skip/skipIf expression, since vitest's JSON has no reason. platform: condition on process.platform → #[cfg_attr(<cfg>, ignore = \"upstream skip: …\")]. opt-in: gated on an env var → the Rust test reads the same var at runtime and returns early; no ignore. always: unconditional test.skip → #[ignore = \"upstream skip: …\"]. title \"*\" covers every case of the file.",
+    "rules": [
+      {
+        "file": "upstream/raft-source/packages/daemon/src/drivers/cliTransport.test.ts",
+        "title": "*",
+        "kind": "platform",
+        "source": "drivers/cliTransport.test.ts:48,218,257,711,816 ({ skip: process.platform … \"win32\" })"
+      },
+      {
+        "file": "upstream/raft-source/packages/daemon/src/drivers/probe.test.ts",
+        "title": "*",
+        "kind": "platform",
+        "source": "drivers/probe.test.ts:71 ({ skip: process.platform !== \"win32\" })"
+      },
+      {
+        "file": "upstream/raft-source/packages/daemon/src/drivers/claude.integration.test.ts",
+        "title": "*",
+        "kind": "opt-in",
+        "env": "RUN_CLAUDE_INTEGRATION_TESTS",
+        "source": "drivers/claude.integration.test.ts:29-37"
+      },
+      {
+        "file": "upstream/raft-source/packages/daemon/src/drivers/codex.integration.test.ts",
+        "title": "*",
+        "kind": "opt-in",
+        "env": "RUN_CODEX_INTEGRATION_TESTS",
+        "source": "drivers/codex.integration.test.ts:91-103"
+      },
+      {
+        "file": "upstream/raft-source/packages/daemon/src/drivers/grok.integration.test.ts",
+        "title": "*",
+        "kind": "opt-in",
+        "env": "RUN_GROK_INTEGRATION_TESTS",
+        "source": "drivers/grok.integration.test.ts:30-39"
+      },
+      {
+        "file": "upstream/raft-source/packages/daemon/src/task695ContinueOnErrorProbe.test.ts",
+        "title": "*",
+        "kind": "opt-in",
+        "env": "TASK695_FAILURE_PROBE",
+        "source": "task695ContinueOnErrorProbe.test.ts:11"
+      },
+      {
+        "file": "upstream/raft-source/packages/daemon/src/agentProcessManager.claude.test.ts",
+        "title": "RETIRED 2026-08-03 (task #524): Claude APM invariant: turn_end re-arms write-only pending input into a new turn",
+        "kind": "always",
+        "source": "agentProcessManager.claude.test.ts:540 (test.skip)"
+      }
+    ]
+  }
+}

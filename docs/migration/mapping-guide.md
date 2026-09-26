@@ -49,6 +49,23 @@ upstream's locked dependencies: commander 12.1.0, zod 4.3.6, ajv 8.20.0, ws
    is no describe), exactly as the oracle reports it; `tools/test-parity`
    matches on that line (see §12).
 
+   Clarification (how `tools/test-parity` reads this rule; print a name with
+   `node tools/test-parity/check.mjs --name "<title>"`). "Transliterated to
+   ASCII" means NFKD normalization with combining marks U+0300–U+036F removed
+   and nothing else: every other non-ASCII character (`§`, `→`, `—`, CJK) is one
+   of the "other characters", so `§10 x` gives `_10_x`, not `ss10_x`; leading
+   and trailing runs become `_` too. `t_` is added before truncating. The dedupe
+   scope is the Rust test file, i.e. one upstream test file: its cases are taken
+   in oracle order, ported or not, and the second case with the same base name
+   gets `_2`, the third `_3`, whatever `mod` blocks or order the Rust file uses.
+   In the key, `\n`, `\r` and tab in a title are written `\n`, `\r`, `\t`. A test
+   file named `a.b.test.ts` becomes `a_b_tests.rs` next to `a.rs`, included from
+   `a.rs` as `#[cfg(test)] #[path = "a_b_tests.rs"] mod b_tests;`; `.test.mjs`
+   is stripped like `.test.ts`. oar's `tests/<p>.test.ts` has no sibling source:
+   it becomes `crates/oar/src/tests/<p>_tests.rs`, compiled through
+   `#[cfg(test)] mod tests;` in `lib.rs` and `mod` lines in `src/tests/mod.rs`.
+   A `*_tests.rs` file that no `mod` reaches does not count as ported.
+
 ## 2. Workspace and crate boundaries
 
 | TS package | Rust crate | Notes |
@@ -401,6 +418,26 @@ Use the helpers in `raft_shared::js` (D3). Do not re-implement them inline.
   component's `Clock` trait.
 - A test that upstream skips on some OS keeps the same condition as
   `#[cfg_attr(<cfg>, ignore = "upstream skip: <reason>")]` (D9).
+- Clarification on location: a test that spawns the binary
+  (`env!("CARGO_BIN_EXE_raft")`, `CARGO_BIN_EXE_raft-computer`) must be a
+  Cargo integration test, because Cargo sets that variable only there. Such a
+  test file lives under `crates/<crate>/tests/` at its §1.6 path without the
+  leading `src/` (for example `crates/raft-cli/tests/commands/agent/login_tests.rs`,
+  included from a `tests/<top>.rs` root with `#[path] mod`), or flat as
+  `crates/<crate>/tests/<name>_tests.rs`. Everything else stays next to the
+  code. A case keyed in both places fails the gate. Opt-in upstream skips
+  (env var gates) are ported as a runtime check of the same variable, not as
+  an ignore attribute (`decisions.md` D9).
+- Clarification for Gate 5: a Rust test that ports no upstream test (for
+  example the D3 golden and unit tests under `crates/raft-shared/src/js/`) is
+  allowed only in a location listed in `EXTRA_TEST_LOCATIONS` in
+  `tools/test-parity/check.mjs`, with the record that asks for it. Such tests
+  are reported in their own `extra` column and are not part of the equality
+  "keyed Rust tests = ported = in-scope − waived", which stays strict. An
+  unkeyed test anywhere else fails the gate. When a ported test leaves out one
+  upstream assertion (or injected input) that belongs to a dropped feature,
+  the case still counts as ported and `tests-waived.md` gets a
+  `<key> :: assert <what>` row, category `dropped`.
 - Tests that inspect TypeScript source text, bundling, Node version
   preflight, npm packaging, or dropped features are not ported. Each one is
   listed with its reason in `tests-waived.md`; nothing is skipped silently.

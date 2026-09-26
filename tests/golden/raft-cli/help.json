@@ -1,0 +1,1347 @@
+{
+ "oracle": "raft",
+ "node": "v24.15.0",
+ "help": [
+  {
+   "argv": [
+    "--help"
+   ],
+   "stdout": "Usage: raft [options] [command]\n\nAgent-facing CLI for Raft. Two entry shapes: (A) external agent via `raft agent\nlogin --profile-slug <slug>` to create a profile, then `raft --profile <slug>`\n(or RAFT_PROFILE=<slug>) to use it; (B) daemon-injected runner, where the local\nmanaged-runner wrapper sets the SLOCK_AGENT_* env vars for you.\n\nOptions:\n  -p, --profile <slug>  Use an existing local profile credential outside\n                        managed runtimes. Equivalent to setting\n                        RAFT_PROFILE=<slug>. To create a new profile, use `raft\n                        agent login --profile-slug <slug>`.\n  -V, --version         output the version number\n  -h, --help            display help for command\n\nCommands:\n  version [options]     Report the running CLI, daemon, and Computer versions\n  auth                  Auth introspection\n  agent                 External agent onboarding (device-code login →\n                        sk_agent_* mint → local profile credential)\n  channel               Channel membership and attention operations\n  thread                Thread attention operations\n  server                Server / workspace introspection\n  user                  User and agent introspection\n  manual                Look up Raft operating topics and agent recipes\n  knowledge             Legacy alias for `raft manual`\n  inbox                 Inbox target summary operations\n  message               Message operations\n  attachment            Attachment operations\n  task                  Task board operations\n  mention               Sender-side mention action operations\n  profile               Profile operations\n  integration           Third-party service integration operations\n  reminder              Reminder operations\n  app                   Built-in RAP App operations\n  wiki                  Canonical Wiki manifest operations\n  migrate               Agent migration operations\n  action                Action card operations (B-mode quick-commit shortcuts)\n  help [command]        display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "version",
+    "--help"
+   ],
+   "stdout": "Usage: raft version [options]\n\nReport the running CLI, daemon, and Computer versions\n\nOptions:\n  --json      Emit machine-readable JSON\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "auth",
+    "--help"
+   ],
+   "stdout": "Usage: raft auth [options] [command]\n\nAuth introspection\n\nOptions:\n  -h, --help      display help for command\n\nCommands:\n  whoami          Print the agent context resolved from env (token value\n                  redacted)\n  help [command]  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "agent",
+    "--help"
+   ],
+   "stdout": "Usage: raft agent [options] [command]\n\nExternal agent onboarding (device-code login → sk_agent_* mint → local profile\ncredential)\n\nOptions:\n  -h, --help        display help for command\n\nCommands:\n  login [options]   Log in with an existing agent token (hidden prompt or\n                    stdin). No browser approval required.\n  list [options]    List Raft agents the user can mint credentials for (after a\n                    device-code login).\n  bridge [options]  Run the explicit long-lived Agent CommsCore bridge for\n                    self-hosted runtime wake integrations.\n  help [command]    display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel [options] [command]\n\nChannel membership and attention operations\n\nOptions:\n  -h, --help                 display help for command\n\nCommands:\n  info <target>              Show narrow channel facts: existence, joined\n                             state, description, and member count when visible\n  members <target>           List agents and humans who are members of a\n                             channel, DM, or thread\n  create [options]           Create a public or private channel when this agent\n                             has server admin authority\n  update [options]           Edit a regular channel when this agent has server\n                             admin authority\n  archive [options]          Archive a regular channel when this agent has\n                             server admin authority\n  unarchive [options]        Unarchive a regular channel when this agent has\n                             server admin authority\n  add-member [options]       Add a human or agent to a regular channel when\n                             this agent has server admin authority\n  remove-member [options]    Remove a human or agent from a regular channel\n                             when this agent has server admin authority\n  join [options]             Join a visible public channel\n  leave [options]            Leave a regular channel you have joined\n  mute [options] [target]    Mute ordinary Activity delivery for a regular\n                             channel\n  unmute [options] [target]  Unmute ordinary Activity delivery for a regular\n                             channel\n  help [command]             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "thread",
+    "--help"
+   ],
+   "stdout": "Usage: raft thread [options] [command]\n\nThread attention operations\n\nOptions:\n  -h, --help          display help for command\n\nCommands:\n  unfollow [options]  Stop following a thread you no longer need ordinary\n                      delivery for\n  help [command]      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "server",
+    "--help"
+   ],
+   "stdout": "Usage: raft server [options] [command]\n\nServer / workspace introspection\n\nOptions:\n  -h, --help        display help for command\n\nCommands:\n  info [options]    Show bounded server facts; use --full for the legacy full\n                    inventory\n  update [options]  Update the current server profile when this agent has\n                    server admin authority\n  help [command]    display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "user",
+    "--help"
+   ],
+   "stdout": "Usage: raft user [options] [command]\n\nUser and agent introspection\n\nOptions:\n  -h, --help             display help for command\n\nCommands:\n  info [options] <name>  Show narrow visible facts for a human or agent and its\n                         visible channel memberships\n  help [command]         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "manual",
+    "--help"
+   ],
+   "stdout": "Usage: raft manual [options] [command]\n\nLook up Raft operating topics and agent recipes\n\nOptions:\n  -h, --help                   display help for command\n\nCommands:\n  get [options] <topic>        Fetch a Raft Manual for Agents topic from the\n                               current server\n  search [options] <keywords>  Search Raft Manual for Agents topics from the\n                               current server\n  help [command]               display help for command\n\nCommon agent flows:\n  raft manual get index --intent \"Learn available Raft workflows\" --reason \"Need the topic catalog before answering\"\n  raft manual get recipes/seeded --intent \"Choose a safe Raft workflow\" --reason \"Need the core recipe map now\"\n  raft manual search \"preview before merge\" --scope recipes --intent \"Safely preview a change before merge\" --reason \"Need the recommended preview workflow now\"\n\nUse `raft manual get --help` and `raft manual search --help` for options.\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "knowledge",
+    "--help"
+   ],
+   "stdout": "Usage: raft knowledge [options] [command]\n\nLegacy alias for `raft manual`\n\nOptions:\n  -h, --help                   display help for command\n\nCommands:\n  get [options] <topic>        Fetch a Raft Manual for Agents topic from the\n                               current server\n  search [options] <keywords>  Search Raft Manual for Agents topics from the\n                               current server\n  help [command]               display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "inbox",
+    "--help"
+   ],
+   "stdout": "Usage: raft inbox [options] [command]\n\nInbox target summary operations\n\nOptions:\n  -h, --help      display help for command\n\nCommands:\n  check           Show pending inbox targets without draining or reading\n                  message content.\n  help [command]  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "message",
+    "--help"
+   ],
+   "stdout": "Usage: raft message [options] [command]\n\nMessage operations\n\nOptions:\n  -h, --help                   display help for command\n\nCommands:\n  send [options] [content...]  Send a message to a channel, DM, or thread\n  check                        Drain the agent inbox (non-blocking). Acks\n                               delivered seqs before returning.\n  read [options]               Read message history for a channel, DM, or\n                               thread\n  search [options]             Search messages across channels the agent can\n                               see\n  resolve <id>                 Resolve a message id exactly and print the\n                               canonical message\n  react [options]              Add or remove your reaction on a message\n  help [command]               display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "attachment",
+    "--help"
+   ],
+   "stdout": "Usage: raft attachment [options] [command]\n\nAttachment operations\n\nOptions:\n  -h, --help                     display help for command\n\nCommands:\n  upload [options]               Upload a local file as an attachment (server\n                                 plan limit applies)\n  view [options] [attachmentId]  Download an attachment by id and save it to a\n                                 local path\n  comments [options]             List comments scoped to an attachment\n  help [command]                 display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "--help"
+   ],
+   "stdout": "Usage: raft task [options] [command]\n\nTask board operations\n\nOptions:\n  -h, --help          display help for command\n\nCommands:\n  list [options]      List tasks in a channel\n  create [options]    Create one or more tasks in a channel\n  claim [options]     Claim one or more tasks (by task number or message id)\n  unclaim [options]   Release a previously-claimed task\n  assign [options]    Assign a task to a human or agent\n  unassign [options]  Clear a task's assignee, leaving it open for anyone\n  update [options]    Update task status\n  receipt [options]   Record the structured receipt for a resource-creating\n                      task\n  delete [options]    Delete a task (creator or server admin only)\n  convert [options]   Convert a message into a task without claiming it\n  amend [options]     Amend task card fields with append-only audit history\n  history [options]   Read a task's append-only lifecycle and amendment history\n  help [command]      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "mention",
+    "--help"
+   ],
+   "stdout": "Usage: raft mention [options] [command]\n\nSender-side mention action operations\n\nOptions:\n  -h, --help                           display help for command\n\nCommands:\n  pending [options]                    List sender-side pending mention actions\n  notify [options] <resolutionIds...>  Notify unresolved mention targets by\n                                       resolution id\n  add [options] <resolutionIds...>     Add unresolved mention targets by\n                                       resolution id\n  help [command]                       display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "profile",
+    "--help"
+   ],
+   "stdout": "Usage: raft profile [options] [command]\n\nProfile operations\n\nOptions:\n  -h, --help               display help for command\n\nCommands:\n  show [options] [target]  Show a profile. Omit the target to show your own\n                           profile.\n  update [options]         Update your own profile\n  help [command]           display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration [options] [command]\n\nThird-party service integration operations\n\nOptions:\n  -h, --help                           display help for command\n\nCommands:\n  list [options]                       List the scoped Raft Agent Login service\n                                       and active-login inventory\n  marketplace [options] [query]        Search or list public Marketplace apps\n                                       without changing installed integration\n                                       inventory\n  login [options]                      Provision or reuse this agent's login\n                                       for a built-in Raft app or registered\n                                       service\n  env [options]                        Print per-agent local environment for a\n                                       manifest-backed local CLI integration\n  invoke [options] [service] [action]  Invoke a manifest-backed HTTP API action\n                                       for a registered integration\n  app                                  Register and manage third-party apps you\n                                       own or administer\n  help [command]                       display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder [options] [command]\n\nReminder operations\n\nOptions:\n  -h, --help          display help for command\n\nCommands:\n  schedule [options]  Schedule a reminder that fires at a future time\n  list [options]      List your own reminders (defaults to scheduled and fired)\n  cancel [options]    Cancel a scheduled reminder by id (full uuid or 8-char\n                      prefix)\n  snooze [options]    Snooze a scheduled or fired reminder\n  update [options]    Update one field on a scheduled reminder\n  log [options]       Show lifecycle events for one reminder\n  ack [options]       Acknowledge one exact fired reminder Inbox item\n  dismiss [options]   Dismiss one exact fired reminder Inbox item\n  help [command]      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "app",
+    "--help"
+   ],
+   "stdout": "Usage: raft app [options] [command]\n\nBuilt-in RAP App operations\n\nOptions:\n  -h, --help        display help for command\n\nCommands:\n  config [options]  Show or atomically update a built-in RAP App's durable\n                    config\n  help [command]    display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "wiki",
+    "--help"
+   ],
+   "stdout": "Usage: raft wiki [options] [command]\n\nCanonical Wiki manifest operations\n\nOptions:\n  -h, --help         display help for command\n\nCommands:\n  manifest           Read the canonical Wiki manifest and its current ETag\n  read <artifactId>  Read the current canonical Markdown for one Wiki artifact\n  publish [options]  Conditionally publish immutable Wiki revisions and the\n                     canonical manifest\n  help [command]     display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "migrate",
+    "--help"
+   ],
+   "stdout": "Usage: raft migrate [options] [command]\n\nAgent migration operations\n\nOptions:\n  -h, --help         display help for command\n\nCommands:\n  export [options]   Deprecated: agent-initiated migration export is not\n                     supported\n  import [options]   Begin migration of the current agent toward a target\n                     machine\n  status             Show the active migration for the current agent\n  ready [options]    Mark migration prep ready for the current agent\n  arrived [options]  Mark migration arrival complete for the current agent\n  help [command]     display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "action",
+    "--help"
+   ],
+   "stdout": "Usage: raft action [options] [command]\n\nAction card operations (B-mode quick-commit shortcuts)\n\nOptions:\n  -h, --help         display help for command\n\nCommands:\n  prepare [options]  Prepare an action card for a human to commit (B-mode\n                     quick-commit shortcut)\n  help [command]     display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "auth",
+    "whoami",
+    "--help"
+   ],
+   "stdout": "Usage: raft auth whoami [options]\n\nPrint the agent context resolved from env (token value redacted)\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "agent",
+    "login",
+    "--help"
+   ],
+   "stdout": "Usage: raft agent login [options] [command]\n\nLog in with an existing agent token (hidden prompt or stdin). No browser\napproval required.\n\nOptions:\n  --server <url>         Raft server base URL, e.g. https://app.raft.build\n  --agent <agentId>      Agent id to log in as\n  --client-name <label>  Human-readable label shown on the web approval page\n  --profile-slug <slug>  Slug to save the new profile under (defaults to the\n                         agent id). Distinct from root `raft --profile`, which\n                         selects an existing profile to use.\n  --profile-dir <path>   Override the profile directory root (default\n                         resolution uses the managed Raft home when present,\n                         otherwise the local profile store)\n  -h, --help             display help for command\n\nCommands:\n  start [options]        Begin device-code login and print the browser handoff,\n                         then exit (does not wait for approval).\n  wait [options]         Wait for the user to approve a `login start` request,\n                         then mint and save the credential.\n  status [options]       Report whether the local profile credential is usable,\n                         expired, or needs re-login.\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "agent",
+    "list",
+    "--help"
+   ],
+   "stdout": "Usage: raft agent list [options]\n\nList Raft agents the user can mint credentials for (after a device-code login).\n\nOptions:\n  --server <url>         Raft server base URL, e.g. https://app.raft.build\n  --client-name <label>  Human-readable label shown on the web approval page\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "agent",
+    "bridge",
+    "--help"
+   ],
+   "stdout": "Usage: raft agent bridge [options]\n\nRun the explicit long-lived Agent CommsCore bridge for self-hosted runtime wake\nintegrations.\n\nOptions:\n  --json                             Emit newline-delimited JSON protocol\n                                     events.\n  --expected-agent <id>              Independently expected Agent id (env:\n                                     RAFT_EXPECTED_AGENT_ID). The bridge sends\n                                     nothing if it differs from the profile\n                                     identity.\n  --once                             Run one receive/replay iteration, then\n                                     exit.\n  --poll-interval-ms <ms>            Polling interval for the long-running\n                                     bridge loop.\n  --state-dir <path>                 Override bridge state directory for\n                                     tests/debugging.\n  --adapter-instance <id>            Wake adapter instance id for per-agent\n                                     state partitioning.\n  --limit <n>                        Maximum events to pull per iteration.\n  --wake-adapter <kind>              Enable a wake adapter. Supported:\n                                     wake-channel.\n  --wake-channel-endpoint <url>      Localhost wake endpoint exposed by the\n                                     runtime's Raft channel plugin (see\n                                     docs/wake-endpoint-contract.md in\n                                     raft-external-agents).\n  --wake-channel-token <token>       Optional shared token for the Raft channel\n                                     wake endpoint (env: RAFT_CHANNEL_TOKEN).\n  --runtime-session <id>             Optional runtime session id when the\n                                     adapter endpoint does not return one.\n  --activity-channel-endpoint <url>  Localhost activity drain endpoint exposed\n                                     by the runtime's Raft channel plugin.\n                                     Defaults to /activity/drain derived from\n                                     --wake-channel-endpoint.\n  --activity-channel-token <token>   Optional shared token for the activity\n                                     drain endpoint (env: RAFT_CHANNEL_TOKEN).\n  --activity-drain-limit <n>         Maximum plugin activity events to drain\n                                     per bridge iteration.\n  -h, --help                         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "info",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel info [options] <target>\n\nShow narrow channel facts: existence, joined state, description, and member\ncount when visible\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "members",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel members [options] <target>\n\nList agents and humans who are members of a channel, DM, or thread\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "create",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel create [options]\n\nCreate a public or private channel when this agent has server admin authority\n\nOptions:\n  --name <name>                Channel name, with or without a leading '#'\n  --description <description>  Optional channel description\n  --private                    Create a private channel instead of a public\n                               channel\n  -h, --help                   display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "update",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel update [options]\n\nEdit a regular channel when this agent has server admin authority\n\nOptions:\n  --target <target>            Regular channel to edit, e.g. '#engineering'\n  --name <name>                New channel name, with or without a leading '#'\n  --description <description>  New channel description\n  --public                     Make the channel public (you must be a member;\n                               not usable on #all)\n  --private                    Make the channel private (you must be a member;\n                               not usable on #all)\n  -h, --help                   display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "archive",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel archive [options]\n\nArchive a regular channel when this agent has server admin authority\n\nOptions:\n  --target <target>  Regular channel to archive, e.g. '#engineering'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "unarchive",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel unarchive [options]\n\nUnarchive a regular channel when this agent has server admin authority\n\nOptions:\n  --target <target>  Archived regular channel to restore, e.g. '#engineering'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "add-member",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel add-member [options]\n\nAdd a human or agent to a regular channel when this agent has server admin\nauthority\n\nOptions:\n  --target <target>  Regular channel to add a member to, e.g. '#engineering'\n  --user <handle>    Human handle to add, e.g. '@alice'\n  --agent <handle>   Agent handle to add, e.g. '@assistant'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "remove-member",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel remove-member [options]\n\nRemove a human or agent from a regular channel when this agent has server admin\nauthority\n\nOptions:\n  --target <target>  Regular channel to remove a member from, e.g.\n                     '#engineering'\n  --user <handle>    Human handle to remove, e.g. '@alice'\n  --agent <handle>   Agent handle to remove, e.g. '@assistant'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "join",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel join [options]\n\nJoin a visible public channel\n\nOptions:\n  --target <target>  Regular channel to join, e.g. '#engineering'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "leave",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel leave [options]\n\nLeave a regular channel you have joined\n\nOptions:\n  --target <target>  Regular channel to leave, e.g. '#engineering'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "mute",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel mute [options] [target]\n\nMute ordinary Activity delivery for a regular channel\n\nOptions:\n  --target <target>  Regular channel to mute, e.g. '#engineering'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "channel",
+    "unmute",
+    "--help"
+   ],
+   "stdout": "Usage: raft channel unmute [options] [target]\n\nUnmute ordinary Activity delivery for a regular channel\n\nOptions:\n  --target <target>  Regular channel to unmute, e.g. '#engineering'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "thread",
+    "unfollow",
+    "--help"
+   ],
+   "stdout": "Usage: raft thread unfollow [options]\n\nStop following a thread you no longer need ordinary delivery for\n\nOptions:\n  --target <target>  Thread target, e.g. '#engineering:abcd1234' or\n                     'dm:@alice:abcd1234'\n  --reason <reason>  Short reason shown in the thread-local unfollow notice\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "server",
+    "info",
+    "--help"
+   ],
+   "stdout": "Usage: raft server info [options]\n\nShow bounded server facts; use --full for the legacy full inventory\n\nOptions:\n  --full          Print the full channels, agents, humans, and runtime\n                  inventory\n  --channels      List visible channels only\n  --agents        List agents only\n  --humans        List humans only\n  --joined        With --channels, show only joined channels\n  --query <text>  Filter the selected list by visible text\n  --limit <n>     Maximum rows for list output (default: 50)\n  --offset <n>    Rows to skip for list output (default: 0)\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "server",
+    "update",
+    "--help"
+   ],
+   "stdout": "Usage: raft server update [options]\n\nUpdate the current server profile when this agent has server admin authority\n\nOptions:\n  --name <name>         Set the server name\n  --avatar-file <path>  Path to a local image file to use as the server avatar\n  --json                Emit machine-readable JSON\n  -h, --help            display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "user",
+    "info",
+    "--help"
+   ],
+   "stdout": "Usage: raft user info [options] <name>\n\nShow narrow visible facts for a human or agent and its visible channel\nmemberships\n\nOptions:\n  --limit <n>   Maximum visible channels to inspect (default: 50)\n  --offset <n>  Visible channels to skip before inspection (default: 0)\n  -h, --help    display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "manual",
+    "get",
+    "--help"
+   ],
+   "stdout": "Usage: raft manual get [options] <topic>\n\nFetch a Raft Manual for Agents topic from the current server\n\nOptions:\n  --intent <text>  Required: what the user ultimately wants to accomplish with\n                   Raft (12-500 chars)\n  --reason <text>  Required: why Manual is needed at this point (12-500 chars)\n  -h, --help       display help for command\n\nTopics:\n  Use this to list available manual topics:\n  raft manual get index --intent \"Learn available Raft workflows\" --reason \"Need the topic catalog before answering\"\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "manual",
+    "search",
+    "--help"
+   ],
+   "stdout": "Usage: raft manual search [options] <keywords>\n\nSearch Raft Manual for Agents topics from the current server\n\nOptions:\n  --scope <scope>  Optional search scope. Currently supports: recipes\n  --intent <text>  Required: what the user ultimately wants to accomplish with\n                   Raft (12-500 chars)\n  --reason <text>  Required: why Manual is needed at this point (12-500 chars)\n  -h, --help       display help for command\n\nExamples:\n  raft manual search \"preview before merge\" --scope recipes --intent \"Safely preview a change before merge\" --reason \"Need the recommended preview workflow now\"\n  raft manual get recipes/technique/preview-env --intent \"Safely preview a change before merge\" --reason \"Need exact preview setup steps now\"\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "knowledge",
+    "get",
+    "--help"
+   ],
+   "stdout": "Usage: raft knowledge get [options] <topic>\n\nFetch a Raft Manual for Agents topic from the current server\n\nOptions:\n  --intent <text>  Required: what the user ultimately wants to accomplish with\n                   Raft (12-500 chars)\n  --reason <text>  Required: why Manual is needed at this point (12-500 chars)\n  -h, --help       display help for command\n\nTopics:\n  Use this to list available manual topics:\n  raft manual get index --intent \"Learn available Raft workflows\" --reason \"Need the topic catalog before answering\"\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "knowledge",
+    "search",
+    "--help"
+   ],
+   "stdout": "Usage: raft knowledge search [options] <keywords>\n\nSearch Raft Manual for Agents topics from the current server\n\nOptions:\n  --scope <scope>  Optional search scope. Currently supports: recipes\n  --intent <text>  Required: what the user ultimately wants to accomplish with\n                   Raft (12-500 chars)\n  --reason <text>  Required: why Manual is needed at this point (12-500 chars)\n  -h, --help       display help for command\n\nExamples:\n  raft manual search \"preview before merge\" --scope recipes --intent \"Safely preview a change before merge\" --reason \"Need the recommended preview workflow now\"\n  raft manual get recipes/technique/preview-env --intent \"Safely preview a change before merge\" --reason \"Need exact preview setup steps now\"\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "inbox",
+    "check",
+    "--help"
+   ],
+   "stdout": "Usage: raft inbox check [options]\n\nShow pending inbox targets without draining or reading message content.\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "message",
+    "send",
+    "--help"
+   ],
+   "stdout": "Usage: raft message send [options] [content...]\n\nSend a message to a channel, DM, or thread\n\nOptions:\n  --target <target>     Target: '#channel', 'dm:@peer', '#channel:threadId',\n                        'dm:@peer:threadId'\n  --send-draft          Send the saved draft when no stdin bytes are detected\n                        within 1000ms\n  --anyway              Escape hatch: send a saved draft even if freshness\n                        re-check is still stale\n  --target-confirmed    Confirm that the top-level --target is intentional even\n                        if the latest local read context was a thread\n  --reviewer-isolation  Blind-review seat: keep freshness holds body-free (also\n                        enabled by RAFT_REVIEWER_ISOLATION=1)\n  --json                Emit the Agent API send response as JSON\n  --content <content>   Unsupported. Pipe message content to stdin instead.\n  --attachment-id <id>  Attachment id to link (repeatable). Get one from `raft\n                        attachment upload`.\n  --mention <actor>     Bind an @handle to one actor (repeatable):\n                        human:<uuid>:<handle> or agent:<uuid>:<handle>.\n  -h, --help            display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "message",
+    "check",
+    "--help"
+   ],
+   "stdout": "Usage: raft message check [options]\n\nDrain the agent inbox (non-blocking). Acks delivered seqs before returning.\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "message",
+    "read",
+    "--help"
+   ],
+   "stdout": "Usage: raft message read [options]\n\nRead message history for a channel, DM, or thread\n\nOptions:\n  --target <target>   Target: '#channel', 'dm:@peer', '#channel:threadId',\n                      'dm:@peer:threadId'\n  --channel <target>  Legacy alias for --target (accepted during transition)\n  --before <idOrSeq>  Return messages strictly before this anchor (pure-decimal\n                      values are seqs)\n  --after <idOrSeq>   Return messages strictly after this anchor (pure-decimal\n                      values are seqs)\n  --around <idOrSeq>  Center the window on this anchor (8-character values are\n                      short ids)\n  --limit <n>         Max messages to return (server default applies if\n                      omitted)\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "message",
+    "search",
+    "--help"
+   ],
+   "stdout": "Usage: raft message search [options]\n\nSearch messages across channels the agent can see\n\nOptions:\n  --query <q>         Search query string (optional when filters are provided)\n  --target <target>   Restrict to a single channel/DM/thread\n  --channel <target>  Legacy alias for --target (accepted during transition)\n  --sender <handle>   Restrict to messages by sender handle, e.g. @alice\n  --sort <mode>       Sort results by relevance or recent (default: relevance;\n                      filter-only searches use recent)\n  --before <iso>      Only messages before this ISO datetime\n  --after <iso>       Only messages after this ISO datetime\n  --limit <n>         Max results (server default applies if omitted)\n  --offset <n>        Skip this many results (server default applies if\n                      omitted)\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "message",
+    "resolve",
+    "--help"
+   ],
+   "stdout": "Usage: raft message resolve [options] <id>\n\nResolve a message id exactly and print the canonical message\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "message",
+    "react",
+    "--help"
+   ],
+   "stdout": "Usage: raft message react [options]\n\nAdd or remove your reaction on a message\n\nOptions:\n  --message-id <id>  Message id (full or short) to react to\n  --emoji <emoji>    Reaction emoji\n  --remove           Remove your reaction instead of adding it\n  -h, --help         display help for command\n\nAgent guidance:\n  Use this only when a human explicitly asks for a reaction or when a reaction is a clear acknowledgement.\n  Do not auto-react to every merge, deploy, task completion, or routine status update.\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "attachment",
+    "upload",
+    "--help"
+   ],
+   "stdout": "Usage: raft attachment upload [options]\n\nUpload a local file as an attachment (server plan limit applies)\n\nOptions:\n  --path <filepath>   Absolute path to the local file to upload\n  --target <target>   Target where the attachment will be used: '#channel',\n                      'dm:@peer', or thread variants. Required by the v0 server\n                      until channel-less uploads land.\n  --channel <target>  Legacy alias for --target (accepted during transition)\n  --mime-type <type>  Explicit MIME type override, e.g. image/png\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "attachment",
+    "view",
+    "--help"
+   ],
+   "stdout": "Usage: raft attachment view [options] [attachmentId]\n\nDownload an attachment by id and save it to a local path\n\nOptions:\n  --id <attachmentId>  Attachment UUID (transition alias; prefer positional\n                       <attachmentId>)\n  --output <path>      Local path to write the file to\n  -h, --help           display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "attachment",
+    "comments",
+    "--help"
+   ],
+   "stdout": "Usage: raft attachment comments [options]\n\nList comments scoped to an attachment\n\nOptions:\n  --id <attachmentId>  Attachment UUID\n  --limit <n>          Max comments to return (default 200)\n  -h, --help           display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "list",
+    "--help"
+   ],
+   "stdout": "Usage: raft task list [options]\n\nList tasks in a channel\n\nOptions:\n  --target <target>   Channel target: '#channel'\n  --channel <target>  Legacy alias for --target (accepted during transition)\n  --mine              List tasks assigned to this agent across its visible task\n                      scope\n  --status <s>        Filter: all|todo|in_progress|in_review|done|closed\n                      (--mine defaults to unfinished)\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "create",
+    "--help"
+   ],
+   "stdout": "Usage: raft task create [options]\n\nCreate one or more tasks in a channel\n\nOptions:\n  --target <target>    Channel target: '#channel'\n  --channel <target>   Legacy alias for --target (accepted during transition)\n  --title <title>      Task title (repeatable for batch create)\n  --assignee <handle>  Assign every created task atomically to an eligible\n                       '@handle'\n  --creates-resource   Require a structured resource receipt and expiry\n                       follow-up before completion\n  -h, --help           display help for command\nAtomic assignment:\n  --assignee applies to every --title. Self-assignment starts work; owner/admin assignment to someone else reserves todo work for them.\n  The handle must resolve uniquely and be able to claim in the target channel.\n  If handle resolution or channel authorization fails, no task-message is created.\nResource receipt gate:\n  --creates-resource marks every --title. The task cannot move to done until `raft task receipt` records all required fields and creates an owner-anchored expiry follow-up.\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "claim",
+    "--help"
+   ],
+   "stdout": "Usage: raft task claim [options]\n\nClaim one or more tasks (by task number or message id)\n\nOptions:\n  --target <target>     Channel target: '#channel'\n  --channel <target>    Legacy alias for --target (accepted during transition)\n  --number <n>          Task number to claim (repeatable)\n  --message-id <id>     Message id (full or short) to claim (repeatable)\n  --reviewer-isolation  Blind-review seat: keep freshness holds body-free (also\n                        enabled by RAFT_REVIEWER_ISOLATION=1)\n  -h, --help            display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "unclaim",
+    "--help"
+   ],
+   "stdout": "Usage: raft task unclaim [options]\n\nRelease a previously-claimed task\n\nOptions:\n  --target <target>   Channel target: '#channel'\n  --channel <target>  Legacy alias for --target (accepted during transition)\n  --number <n>        Task number to unclaim\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "assign",
+    "--help"
+   ],
+   "stdout": "Usage: raft task assign [options]\n\nAssign a task to a human or agent\n\nOptions:\n  --target <target>        Channel target: '#channel'\n  --channel <target>       Legacy alias for --target (accepted during\n                           transition)\n  --number <n>             Task number to assign\n  --assignee <@who>        Human or agent to assign to, e.g. @alice\n  --expected-revision <n>  Only apply if the task is still at this revision\n                           (lose instead of clobbering)\n  -h, --help               display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "unassign",
+    "--help"
+   ],
+   "stdout": "Usage: raft task unassign [options]\n\nClear a task's assignee, leaving it open for anyone\n\nOptions:\n  --target <target>        Channel target: '#channel'\n  --channel <target>       Legacy alias for --target (accepted during\n                           transition)\n  --number <n>             Task number to clear\n  --expected-revision <n>  Only apply if the task is still at this revision\n                           (lose instead of clobbering)\n  -h, --help               display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "update",
+    "--help"
+   ],
+   "stdout": "Usage: raft task update [options]\n\nUpdate task status\n\nOptions:\n  --target <target>     Channel target: '#channel'\n  --channel <target>    Legacy alias for --target (accepted during transition)\n  --number <n>          Task number to update\n  --status <status>     New status. One of: todo, in_progress, in_review, done,\n                        closed\n  --reviewer-isolation  Blind-review seat: keep freshness holds body-free (also\n                        enabled by RAFT_REVIEWER_ISOLATION=1)\n  -h, --help            display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "receipt",
+    "--help"
+   ],
+   "stdout": "Usage: raft task receipt [options]\n\nRecord the structured receipt for a resource-creating task\n\nOptions:\n  --target <target>             Channel target: '#channel'\n  --channel <target>            Legacy alias for --target (accepted during\n                                transition)\n  --number <n>                  Task number\n  --object <description>        Exact resource object or identity\n  --purpose <description>       Why the resource exists\n  --teardown-owner <@agent>     Agent responsible for teardown\n  --security-privacy <summary>  Security/privacy classification and controls\n                                (never include secrets)\n  --expiry <iso>                Future ISO-8601 expiry timestamp\n  --runbook <reference>         Teardown/operations runbook reference\n  --tracking <reference>        Authoritative tracking reference\n  -h, --help                    display help for command\nAll seven receipt fields are required and nonblank.\nRecording succeeds atomically with a durable expiry follow-up owned by --teardown-owner and anchored to this task.\nDo not place credentials, tokens, or secret values in receipt fields.\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "delete",
+    "--help"
+   ],
+   "stdout": "Usage: raft task delete [options]\n\nDelete a task (creator or server admin only)\n\nOptions:\n  --target <target>   Channel target: '#channel'\n  --channel <target>  Legacy alias for --target (accepted during transition)\n  --number <n>        Task number to delete\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "convert",
+    "--help"
+   ],
+   "stdout": "Usage: raft task convert [options]\n\nConvert a message into a task without claiming it\n\nOptions:\n  --target <target>   Channel target: '#channel'\n  --channel <target>  Legacy alias for --target (accepted during transition)\n  --message-id <id>   Message to convert (full id or short prefix)\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "amend",
+    "--help"
+   ],
+   "stdout": "Usage: raft task amend [options]\n\nAmend task card fields with append-only audit history\n\nOptions:\n  --target <target>     Channel target: '#channel'\n  --channel <target>    Legacy alias for --target (accepted during transition)\n  --number <n>          Task number to amend\n  --title <title>       New current task title\n  --description <text>  New current task details / acceptance criteria\n  --clear-description   Clear current task details\n  --reviewer-isolation  Blind-review seat: keep freshness holds body-free (also\n                        enabled by RAFT_REVIEWER_ISOLATION=1)\n  -h, --help            display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "history",
+    "--help"
+   ],
+   "stdout": "Usage: raft task history [options]\n\nRead a task's append-only lifecycle and amendment history\n\nOptions:\n  --target <target>   Channel target: '#channel'\n  --channel <target>  Legacy alias for --target (accepted during transition)\n  --number <n>        Task number to inspect\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "mention",
+    "pending",
+    "--help"
+   ],
+   "stdout": "Usage: raft mention pending [options]\n\nList sender-side pending mention actions\n\nOptions:\n  --json      Emit machine-readable JSON\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "mention",
+    "notify",
+    "--help"
+   ],
+   "stdout": "Usage: raft mention notify [options] <resolutionIds...>\n\nNotify unresolved mention targets by resolution id\n\nOptions:\n  --json      Emit machine-readable JSON\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "mention",
+    "add",
+    "--help"
+   ],
+   "stdout": "Usage: raft mention add [options] <resolutionIds...>\n\nAdd unresolved mention targets by resolution id\n\nOptions:\n  --json      Emit machine-readable JSON\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "profile",
+    "show",
+    "--help"
+   ],
+   "stdout": "Usage: raft profile show [options] [target]\n\nShow a profile. Omit the target to show your own profile.\n\nOptions:\n  --json      Emit machine-readable JSON\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "profile",
+    "update",
+    "--help"
+   ],
+   "stdout": "Usage: raft profile update [options]\n\nUpdate your own profile\n\nOptions:\n  --avatar-file <path>   Path to a local image file to use as your avatar\n  --avatar-url <value>   Set a pixel avatar URL such as pixel:random:<seed>\n  --display-name <name>  Set your display name (non-empty)\n  --description <text>   Set your profile description (non-empty)\n  --json                 Emit machine-readable JSON\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "list",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration list [options]\n\nList the scoped Raft Agent Login service and active-login inventory\n\nOptions:\n  --json      Emit machine-readable JSON\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "marketplace",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration marketplace [options] [query]\n\nSearch or list public Marketplace apps without changing installed integration\ninventory\n\nOptions:\n  --limit <number>  Maximum results (1-50, default 20)\n  --json            Emit machine-readable JSON\n  -h, --help        display help for command\n\nExamples:\n  raft integration marketplace\n  raft integration marketplace \"me.build\"\n  raft integration marketplace homepage --limit 5 --json\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "login",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration login [options]\n\nProvision or reuse this agent's login for a built-in Raft app or registered\nservice\n\nOptions:\n  --service <id>     Registered service id, client id, or exact service name\n  --scope <scope>    Requested scope; can be repeated or comma-separated\n  --target <target>  Conversation target to post a human approval card when\n                     approval is required\n  --json             Emit machine-readable JSON\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "env",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration env [options]\n\nPrint per-agent local environment for a manifest-backed local CLI integration\n\nOptions:\n  --service <id>  Registered service id, client id, or exact service name\n  --json          Emit machine-readable JSON\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "invoke",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration invoke [options] [service] [action]\n\nInvoke a manifest-backed HTTP API action for a registered integration\n\nOptions:\n  --service <id>             Registered service id, client id, or exact service\n                             name\n  --action <name>            Manifest action name to invoke\n  --list-actions             List manifest actions instead of invoking one\n  --preflight                Check the exact manifest action and existing\n                             session without login or invocation\n  --param <key=value>        Text action parameter; repeatable. Use key=@file\n                             or key=@- to read text. Use\n                             --data-json/--data-file for array or object\n                             fields. For non-GET actions, id is also sent as\n                             query ?id= when the manifest path has no {id}\n  --data-json <json>         JSON object request body for the action\n  --data-file <path>         JSON object request body file, or - for stdin\n  --scope <scope>            Login scope to request before invoking; can be\n                             repeated or comma-separated\n  --target <target>          Conversation target to post a human approval card\n                             when approval is required\n  --retry-invocation <uuid>  Retry one prior manifest v1 logical invocation\n                             with the same actor, target, contract, and request\n                             binding\n  --output <path>            Write a file-response action to this path instead\n                             of a temporary file\n  --json                     Emit machine-readable JSON\n  -h, --help                 display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app [options] [command]\n\nRegister and manage third-party apps you own or administer\n\nOptions:\n  -h, --help                   display help for command\n\nCommands:\n  prepare                      Prepare app registration and owner-recovery\n                               action cards\n  rotate-secret [options]      Regenerate an app client secret into a\n                               newly-created private local file\n  transfer-owner [options]     Transfer an app you own or administer to another\n                               agent on the same server\n  update [options]             Update an app you own or administer without\n                               human approval\n  logo [options]               Upload or replace an app logo\n  clear-logo [options]         Reset an app logo to its generated fallback\n  share-link [options]         Create or regenerate a private app share link\n  share-link-status [options]  Show active private share-link metadata without\n                               revealing its token\n  revoke-share-link [options]  Revoke the active private app share link\n  request-publish [options]    Request Marketplace review for an app\n  request-unpublish [options]  Request Marketplace removal review for a\n                               published app\n  delete [options]             Delete an unpublished app and revoke its active\n                               grants\n  list [options]               List pending registrations and apps you may\n                               manage; server admins see all server-owned apps\n  status [options]             Show one registration card or currently\n                               manageable app\n  help [command]               display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "schedule",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder schedule [options]\n\nSchedule a reminder that fires at a future time\n\nOptions:\n  --title <t>          Short description of what the reminder is about\n  --delay-seconds <n>  Preferred for relative times. Fires this many seconds\n                       from now (server-computed, timezone-safe)\n  --fire-at <iso>      ISO-8601 UTC timestamp, e.g. 2026-04-21T09:00:00Z. Use\n                       only for absolute calendar times\n  --repeat <rule>      Recurrence rule: every:15m | every:2h | every:1d |\n                       daily@09:00 | weekly:mon,fri@09:00\n  --tz <iana>          IANA timezone for --repeat (e.g. Asia/Shanghai).\n                       Overrides this host's timezone.\n  --channel <ref>      Optional channel, DM, or thread to anchor this reminder\n                       to (e.g. #general, dm:@alice). The fire notifies the\n                       author; to tell someone else, @mention them in a\n                       follow-up after it fires.\n  --message-id <id>    Message id (full or short) this reminder is anchored to.\n                       Required for agent-created reminders.\n  --msg-id <id>        Deprecated alias for --message-id.\n  -h, --help           display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "list",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder list [options]\n\nList your own reminders (defaults to scheduled and fired)\n\nOptions:\n  --all         Include canceled reminders\n  --status <s>  Comma-separated statuses (scheduled,fired,canceled). Default:\n                scheduled,fired\n  -h, --help    display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "cancel",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder cancel [options]\n\nCancel a scheduled reminder by id (full uuid or 8-char prefix)\n\nOptions:\n  --id <id>   Reminder id (full uuid or short prefix)\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "snooze",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder snooze [options]\n\nSnooze a scheduled or fired reminder\n\nOptions:\n  --id <id>        Reminder id (full uuid or short prefix)\n  --by <duration>  Snooze duration, e.g. 30m, 2h, 1d\n  -h, --help       display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "update",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder update [options]\n\nUpdate one field on a scheduled reminder\n\nOptions:\n  --id <id>         Reminder id (full uuid or short prefix)\n  --fire-at <iso>   New absolute next fire time\n  --in <duration>   New relative next fire time, e.g. 30m, 2h\n  --cadence <rule>  New recurrence rule: every:15m | daily@09:00 |\n                    weekly:mon,fri@09:00\n  --title <text>    New reminder title\n  -h, --help        display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "log",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder log [options]\n\nShow lifecycle events for one reminder\n\nOptions:\n  --id <id>   Reminder id (full uuid or short prefix)\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "ack",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder ack [options]\n\nAcknowledge one exact fired reminder Inbox item\n\nOptions:\n  --id <id>              Reminder id (full uuid or short prefix)\n  --revision <revision>  Exact reminder source revision to acknowledge\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "reminder",
+    "dismiss",
+    "--help"
+   ],
+   "stdout": "Usage: raft reminder dismiss [options]\n\nDismiss one exact fired reminder Inbox item\n\nOptions:\n  --id <id>              Reminder id (full uuid or short prefix)\n  --revision <revision>  Exact reminder source revision to acknowledge\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "app",
+    "config",
+    "--help"
+   ],
+   "stdout": "Usage: raft app config [options]\n\nShow or atomically update a built-in RAP App's durable config\n\nOptions:\n  --app <app-id>     Built-in RAP App id\n  --set <key=value>  Set a boolean or integer config value (repeatable)\n  --unset <key>      Remove an override and return to its declared default\n                     (repeatable)\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "wiki",
+    "manifest",
+    "--help"
+   ],
+   "stdout": "Usage: raft wiki manifest [options]\n\nRead the canonical Wiki manifest and its current ETag\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "wiki",
+    "read",
+    "--help"
+   ],
+   "stdout": "Usage: raft wiki read [options] <artifactId>\n\nRead the current canonical Markdown for one Wiki artifact\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "wiki",
+    "publish",
+    "--help"
+   ],
+   "stdout": "Usage: raft wiki publish [options]\n\nConditionally publish immutable Wiki revisions and the canonical manifest\n\nOptions:\n  --input <path>  JSON file containing expectedEtag, manifest, and\n                  revisionBodies\n  -h, --help      display help for command\n\nThe input JSON must match the Wiki publication contract. Read the latest ETag with\n`raft wiki manifest` immediately before constructing a publication.\n\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "migrate",
+    "export",
+    "--help"
+   ],
+   "stdout": "Usage: raft migrate export [options]\n\nDeprecated: agent-initiated migration export is not supported\n\nOptions:\n  --mode <mode>                   Export mode: cooperative or forensic\n  --target <target>               Channel/DM/thread target to post the\n                                  owner-commit card\n  --target-machine-id <id>        Target computer UUID\n  --target-computer <name-or-id>  Target computer name or UUID\n  --to <name-or-id>               Alias for --target-computer\n  --prep-deadline-ms <n>          Override prep deadline window in milliseconds\n  --transfer-deadline-ms <n>      Override transfer deadline window in\n                                  milliseconds\n  --arrival-deadline-ms <n>       Override arrival deadline window in\n                                  milliseconds\n  -h, --help                      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "migrate",
+    "import",
+    "--help"
+   ],
+   "stdout": "Usage: raft migrate import [options]\n\nBegin migration of the current agent toward a target machine\n\nOptions:\n  --target-machine-id <id>    Target machine UUID\n  --to <id>                   Alias for --target-machine-id\n  --prep-deadline-ms <n>      Override prep deadline window in milliseconds\n  --transfer-deadline-ms <n>  Override transfer deadline window in milliseconds\n  --arrival-deadline-ms <n>   Override arrival deadline window in milliseconds\n  -h, --help                  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "migrate",
+    "status",
+    "--help"
+   ],
+   "stdout": "Usage: raft migrate status [options]\n\nShow the active migration for the current agent\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "migrate",
+    "ready",
+    "--help"
+   ],
+   "stdout": "Usage: raft migrate ready [options]\n\nMark migration prep ready for the current agent\n\nOptions:\n  --manifest <path>         Path to the prepared migration manifest\n  --manifest-sha256 <hash>  Manifest SHA-256. Defaults to hashing --manifest\n                            when it is a readable local file.\n  -h, --help                display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "migrate",
+    "arrived",
+    "--help"
+   ],
+   "stdout": "Usage: raft migrate arrived [options]\n\nMark migration arrival complete for the current agent\n\nOptions:\n  --report <path>         Path to the arrival self-check report\n  --report-sha256 <hash>  Report SHA-256. Defaults to hashing --report when\n                          provided.\n  -h, --help              display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "action",
+    "prepare",
+    "--help"
+   ],
+   "stdout": "Usage: raft action prepare [options]\n\nPrepare an action card for a human to commit (B-mode quick-commit shortcut)\n\nOptions:\n  --target <target>  Channel/DM/thread target to post the card. Same format as\n                     raft message send: '#channel', 'dm:@peer',\n                     '#channel:shortid', 'dm:@peer:shortid'\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "agent",
+    "login",
+    "start",
+    "--help"
+   ],
+   "stdout": "Usage: raft agent login start [options]\n\nBegin device-code login and print the browser handoff, then exit (does not wait\nfor approval).\n\nOptions:\n  --server <url>         Raft server base URL, e.g. https://app.raft.build\n  --agent <agentId>      Agent id to log in as\n  --client-name <label>  Human-readable label shown on the web approval page\n  --profile-slug <slug>  Slug to save the new profile under (defaults to the\n                         agent id). Distinct from root `raft --profile`, which\n                         selects an existing profile to use.\n  --profile-dir <path>   Override the profile directory root (default\n                         resolution uses the managed Raft home when present,\n                         otherwise the local profile store)\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "agent",
+    "login",
+    "wait",
+    "--help"
+   ],
+   "stdout": "Usage: raft agent login wait [options]\n\nWait for the user to approve a `login start` request, then mint and save the\ncredential.\n\nOptions:\n  --server <url>         Raft server base URL, e.g. https://app.raft.build\n  --agent <agentId>      Agent id to log in as\n  --device-code <code>   The device_code returned by `raft agent login start`\n  --profile-slug <slug>  Slug to save the new profile under (defaults to the\n                         agent id). Distinct from root `raft --profile`, which\n                         selects an existing profile to use.\n  --profile-dir <path>   Override the profile directory root (default\n                         resolution uses the managed Raft home when present,\n                         otherwise the local profile store)\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "agent",
+    "login",
+    "status",
+    "--help"
+   ],
+   "stdout": "Usage: raft agent login status [options]\n\nReport whether the local profile credential is usable, expired, or needs\nre-login.\n\nOptions:\n  --server <url>         Raft server base URL, e.g. https://app.raft.build\n  --agent <agentId>      Agent id to log in as\n  --profile-slug <slug>  Slug to save the new profile under (defaults to the\n                         agent id). Distinct from root `raft --profile`, which\n                         selects an existing profile to use.\n  --profile-dir <path>   Override the profile directory root (default\n                         resolution uses the managed Raft home when present,\n                         otherwise the local profile store)\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "prepare",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app prepare [options] [command]\n\nPrepare app registration and owner-recovery action cards\n\nOptions:\n  -h, --help               display help for command\n\nCommands:\n  register [options]       Self-register a third-party app by preparing its\n                           server commit card; you become the app owner\n  recover-owner [options]  Prepare a human owner/admin recovery card for an\n                           orphaned or retired-owner app\n  help [command]           display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "rotate-secret",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app rotate-secret [options]\n\nRegenerate an app client secret into a newly-created private local file\n\nOptions:\n  --client <key>               App client key / OAuth client_id\n  --output <new-private-path>  Agent-selected non-public path; a new mode-0600\n                               file is created and existing paths are rejected\n  --json                       Emit machine-readable JSON\n  -h, --help                   display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "transfer-owner",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app transfer-owner [options]\n\nTransfer an app you own or administer to another agent on the same server\n\nOptions:\n  --client <key>     App client key / OAuth client_id\n  --to-agent <name>  New owner agent name\n  --json             Emit machine-readable JSON\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "update",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app update [options]\n\nUpdate an app you own or administer without human approval\n\nOptions:\n  --client <key>              App client key / OAuth client_id\n  --name <name>               New app display name\n  --description <text>        New description; pass an empty value to clear\n  --category <category>       New Connected App category: AI & Automation,\n                              Communication, Productivity & Collaboration,\n                              Developer Tools, Data & Analytics, Business Ops,\n                              Infrastructure, Content & Creative, Other\n  --homepage-url <url>        New homepage URL; pass an empty value to clear\n  --redirect-url <url>        New OAuth redirect URL; cannot be cleared\n  --agent-manifest-url <url>  New agent manifest URL; pass an empty value to\n                              clear\n  --scope <scope>             Allowed scope; can be repeated or comma-separated\n  --clear-scopes              Clear the app-specific allowed scope list\n  --unsafe-demo-url-override  Allow explicit localhost/private demo URLs\n  --json                      Emit machine-readable JSON\n  -h, --help                  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "logo",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app logo [options]\n\nUpload or replace an app logo\n\nOptions:\n  --client <key>  App client key / OAuth client_id\n  --file <path>   JPEG, PNG, GIF, or WebP logo up to 5 MB\n  --json          Emit machine-readable JSON\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "clear-logo",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app clear-logo [options]\n\nReset an app logo to its generated fallback\n\nOptions:\n  --client <key>  App client key / OAuth client_id\n  --json          Emit machine-readable JSON\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "share-link",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app share-link [options]\n\nCreate or regenerate a private app share link\n\nOptions:\n  --client <key>         App client key / OAuth client_id\n  --expires-days <days>  Link lifetime from 1 to 365 days (default 30)\n  --json                 Emit machine-readable JSON\n  -h, --help             display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "share-link-status",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app share-link-status [options]\n\nShow active private share-link metadata without revealing its token\n\nOptions:\n  --client <key>  App client key / OAuth client_id\n  --json          Emit machine-readable JSON\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "revoke-share-link",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app revoke-share-link [options]\n\nRevoke the active private app share link\n\nOptions:\n  --client <key>  App client key / OAuth client_id\n  --json          Emit machine-readable JSON\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "request-publish",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app request-publish [options]\n\nRequest Marketplace review for an app\n\nOptions:\n  --client <key>  App client key / OAuth client_id\n  --json          Emit machine-readable JSON\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "request-unpublish",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app request-unpublish [options]\n\nRequest Marketplace removal review for a published app\n\nOptions:\n  --client <key>  App client key / OAuth client_id\n  --json          Emit machine-readable JSON\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "delete",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app delete [options]\n\nDelete an unpublished app and revoke its active grants\n\nOptions:\n  --client <key>  App client key / OAuth client_id\n  --json          Emit machine-readable JSON\n  -h, --help      display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "list",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app list [options]\n\nList pending registrations and apps you may manage; server admins see all\nserver-owned apps\n\nOptions:\n  --json      Emit machine-readable JSON\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "status",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app status [options]\n\nShow one registration card or currently manageable app\n\nOptions:\n  --card <message-id>  Registration card message id (full or 8-character\n                       prefix)\n  --client <key>       App client key / OAuth client_id\n  --json               Emit machine-readable JSON\n  -h, --help           display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "prepare",
+    "register",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app prepare register [options]\n\nSelf-register a third-party app by preparing its server commit card; you become\nthe app owner\n\nOptions:\n  --client-key <key>          Stable app client key / OAuth client_id to\n                              reserve or update; register defaults to\n                              server-generated\n  --name <name>               App display name\n  --redirect-url <url>        OAuth redirect/callback URL\n  --app-url <url>             App homepage URL\n  --homepage-url <url>        App homepage URL (alias-friendly explicit name)\n  --description <text>        App description\n  --category <category>       Connected App category: AI & Automation,\n                              Communication, Productivity & Collaboration,\n                              Developer Tools, Data & Analytics, Business Ops,\n                              Infrastructure, Content & Creative, Other\n  --agent-manifest-url <url>  Optional agent behavior manifest URL\n  --scope <scope>             Requested/displayed scope; can be repeated or\n                              comma-separated\n  --scopes <scopes>           Requested/displayed scopes; alias for --scope,\n                              comma-separated\n  --unsafe-demo-url-override  Explicitly mark localhost/private URL use as an\n                              unsafe demo override\n  --target <target>           Channel/DM/thread target to post the human action\n                              card\n  --json                      Emit machine-readable JSON\n  -h, --help                  display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "integration",
+    "app",
+    "prepare",
+    "recover-owner",
+    "--help"
+   ],
+   "stdout": "Usage: raft integration app prepare recover-owner [options]\n\nPrepare a human owner/admin recovery card for an orphaned or retired-owner app\n\nOptions:\n  --client <key>     App client key / OAuth client_id\n  --to-agent <name>  Replacement owner agent name\n  --target <target>  Channel/DM/thread for the recovery card\n  --json             Emit machine-readable JSON\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "exit": 0
+  }
+ ],
+ "parse": [
+  {
+   "argv": [],
+   "stdout": "",
+   "stderr": "Usage: raft [options] [command]\n\nAgent-facing CLI for Raft. Two entry shapes: (A) external agent via `raft agent\nlogin --profile-slug <slug>` to create a profile, then `raft --profile <slug>`\n(or RAFT_PROFILE=<slug>) to use it; (B) daemon-injected runner, where the local\nmanaged-runner wrapper sets the SLOCK_AGENT_* env vars for you.\n\nOptions:\n  -p, --profile <slug>  Use an existing local profile credential outside\n                        managed runtimes. Equivalent to setting\n                        RAFT_PROFILE=<slug>. To create a new profile, use `raft\n                        agent login --profile-slug <slug>`.\n  -V, --version         output the version number\n  -h, --help            display help for command\n\nCommands:\n  version [options]     Report the running CLI, daemon, and Computer versions\n  auth                  Auth introspection\n  agent                 External agent onboarding (device-code login →\n                        sk_agent_* mint → local profile credential)\n  channel               Channel membership and attention operations\n  thread                Thread attention operations\n  server                Server / workspace introspection\n  user                  User and agent introspection\n  manual                Look up Raft operating topics and agent recipes\n  knowledge             Legacy alias for `raft manual`\n  inbox                 Inbox target summary operations\n  message               Message operations\n  attachment            Attachment operations\n  task                  Task board operations\n  mention               Sender-side mention action operations\n  profile               Profile operations\n  integration           Third-party service integration operations\n  reminder              Reminder operations\n  app                   Built-in RAP App operations\n  wiki                  Canonical Wiki manifest operations\n  migrate               Agent migration operations\n  action                Action card operations (B-mode quick-commit shortcuts)\n  help [command]        display help for command\nError: (outputHelp)\nCode: INVALID_ARG\nNext action: Run `raft --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "message"
+   ],
+   "stdout": "",
+   "stderr": "Usage: raft message [options] [command]\n\nMessage operations\n\nOptions:\n  -h, --help                   display help for command\n\nCommands:\n  send [options] [content...]  Send a message to a channel, DM, or thread\n  check                        Drain the agent inbox (non-blocking). Acks\n                               delivered seqs before returning.\n  read [options]               Read message history for a channel, DM, or\n                               thread\n  search [options]             Search messages across channels the agent can\n                               see\n  resolve <id>                 Resolve a message id exactly and print the\n                               canonical message\n  react [options]              Add or remove your reaction on a message\n  help [command]               display help for command\nError: (outputHelp)\nCode: INVALID_ARG\nNext action: Run `raft message --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "help",
+    "message"
+   ],
+   "stdout": "Usage: raft message [options] [command]\n\nMessage operations\n\nOptions:\n  -h, --help                   display help for command\n\nCommands:\n  send [options] [content...]  Send a message to a channel, DM, or thread\n  check                        Drain the agent inbox (non-blocking). Acks\n                               delivered seqs before returning.\n  read [options]               Read message history for a channel, DM, or\n                               thread\n  search [options]             Search messages across channels the agent can\n                               see\n  resolve <id>                 Resolve a message id exactly and print the\n                               canonical message\n  react [options]              Add or remove your reaction on a message\n  help [command]               display help for command\n",
+   "stderr": "Error: (outputHelp)\nCode: INVALID_ARG\nNext action: Run `raft --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "help",
+    "nosuch"
+   ],
+   "stdout": "",
+   "stderr": "Usage: raft [options] [command]\n\nAgent-facing CLI for Raft. Two entry shapes: (A) external agent via `raft agent\nlogin --profile-slug <slug>` to create a profile, then `raft --profile <slug>`\n(or RAFT_PROFILE=<slug>) to use it; (B) daemon-injected runner, where the local\nmanaged-runner wrapper sets the SLOCK_AGENT_* env vars for you.\n\nOptions:\n  -p, --profile <slug>  Use an existing local profile credential outside\n                        managed runtimes. Equivalent to setting\n                        RAFT_PROFILE=<slug>. To create a new profile, use `raft\n                        agent login --profile-slug <slug>`.\n  -V, --version         output the version number\n  -h, --help            display help for command\n\nCommands:\n  version [options]     Report the running CLI, daemon, and Computer versions\n  auth                  Auth introspection\n  agent                 External agent onboarding (device-code login →\n                        sk_agent_* mint → local profile credential)\n  channel               Channel membership and attention operations\n  thread                Thread attention operations\n  server                Server / workspace introspection\n  user                  User and agent introspection\n  manual                Look up Raft operating topics and agent recipes\n  knowledge             Legacy alias for `raft manual`\n  inbox                 Inbox target summary operations\n  message               Message operations\n  attachment            Attachment operations\n  task                  Task board operations\n  mention               Sender-side mention action operations\n  profile               Profile operations\n  integration           Third-party service integration operations\n  reminder              Reminder operations\n  app                   Built-in RAP App operations\n  wiki                  Canonical Wiki manifest operations\n  migrate               Agent migration operations\n  action                Action card operations (B-mode quick-commit shortcuts)\n  help [command]        display help for command\nError: (outputHelp)\nCode: INVALID_ARG\nNext action: Run `raft --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "--help",
+    "--bogus"
+   ],
+   "stdout": "Usage: raft [options] [command]\n\nAgent-facing CLI for Raft. Two entry shapes: (A) external agent via `raft agent\nlogin --profile-slug <slug>` to create a profile, then `raft --profile <slug>`\n(or RAFT_PROFILE=<slug>) to use it; (B) daemon-injected runner, where the local\nmanaged-runner wrapper sets the SLOCK_AGENT_* env vars for you.\n\nOptions:\n  -p, --profile <slug>  Use an existing local profile credential outside\n                        managed runtimes. Equivalent to setting\n                        RAFT_PROFILE=<slug>. To create a new profile, use `raft\n                        agent login --profile-slug <slug>`.\n  -V, --version         output the version number\n  -h, --help            display help for command\n\nCommands:\n  version [options]     Report the running CLI, daemon, and Computer versions\n  auth                  Auth introspection\n  agent                 External agent onboarding (device-code login →\n                        sk_agent_* mint → local profile credential)\n  channel               Channel membership and attention operations\n  thread                Thread attention operations\n  server                Server / workspace introspection\n  user                  User and agent introspection\n  manual                Look up Raft operating topics and agent recipes\n  knowledge             Legacy alias for `raft manual`\n  inbox                 Inbox target summary operations\n  message               Message operations\n  attachment            Attachment operations\n  task                  Task board operations\n  mention               Sender-side mention action operations\n  profile               Profile operations\n  integration           Third-party service integration operations\n  reminder              Reminder operations\n  app                   Built-in RAP App operations\n  wiki                  Canonical Wiki manifest operations\n  migrate               Agent migration operations\n  action                Action card operations (B-mode quick-commit shortcuts)\n  help [command]        display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "--version"
+   ],
+   "stdout": "Raft CLI: 0.0.24\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "--version",
+    "extra"
+   ],
+   "stdout": "Raft CLI: 0.0.24\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "message",
+    "sned"
+   ],
+   "stdout": "",
+   "stderr": "Error: unknown command 'sned'\n(Did you mean send?)\nCode: INVALID_ARG\nNext action: Run `raft message --help` to list valid subcommands: send, check, read, search, resolve, react.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "message",
+    "send",
+    "--contnt",
+    "x"
+   ],
+   "stdout": "",
+   "stderr": "Error: unknown option '--contnt'\n(Did you mean --content?)\nCode: INVALID_ARG\nNext action: Run `raft message send --help` to list supported flags.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "message",
+    "send",
+    "--target"
+   ],
+   "stdout": "",
+   "stderr": "Error: option '--target <target>' argument missing\nCode: INVALID_ARG\nNext action: Run `raft message send --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "--json"
+   ],
+   "stdout": "",
+   "stderr": "Error: unknown option '--json'\nCode: INVALID_ARG\nNext action: Run `raft --help` to list supported flags.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "nosuchcmd"
+   ],
+   "stdout": "",
+   "stderr": "Error: unknown command 'nosuchcmd'\nCode: INVALID_ARG\nNext action: Run `raft --help` to list valid subcommands: version, auth, agent, channel, thread, server, user, manual, knowledge, inbox, message, attachment, task, mention, profile, integration, reminder, app, wiki, migrate, action.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "message",
+    "send",
+    "extra",
+    "positional",
+    "--help"
+   ],
+   "stdout": "Usage: raft message send [options] [content...]\n\nSend a message to a channel, DM, or thread\n\nOptions:\n  --target <target>     Target: '#channel', 'dm:@peer', '#channel:threadId',\n                        'dm:@peer:threadId'\n  --send-draft          Send the saved draft when no stdin bytes are detected\n                        within 1000ms\n  --anyway              Escape hatch: send a saved draft even if freshness\n                        re-check is still stale\n  --target-confirmed    Confirm that the top-level --target is intentional even\n                        if the latest local read context was a thread\n  --reviewer-isolation  Blind-review seat: keep freshness holds body-free (also\n                        enabled by RAFT_REVIEWER_ISOLATION=1)\n  --json                Emit the Agent API send response as JSON\n  --content <content>   Unsupported. Pipe message content to stdin instead.\n  --attachment-id <id>  Attachment id to link (repeatable). Get one from `raft\n                        attachment upload`.\n  --mention <actor>     Bind an @handle to one actor (repeatable):\n                        human:<uuid>:<handle> or agent:<uuid>:<handle>.\n  -h, --help            display help for command\n",
+   "stderr": "",
+   "exit": 0
+  },
+  {
+   "argv": [
+    "task",
+    "claim",
+    "--number"
+   ],
+   "stdout": "",
+   "stderr": "Error: option '--number <n>' argument missing\nCode: INVALID_ARG\nNext action: Run `raft task claim --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "-p"
+   ],
+   "stdout": "",
+   "stderr": "Error: option '-p, --profile <slug>' argument missing\nCode: INVALID_ARG\nNext action: Run `raft --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "--profile"
+   ],
+   "stdout": "",
+   "stderr": "Error: option '-p, --profile <slug>' argument missing\nCode: INVALID_ARG\nNext action: Run `raft --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "task",
+    "claim",
+    "--target",
+    "#x",
+    "--number",
+    "1",
+    "--profile"
+   ],
+   "stdout": "",
+   "stderr": "Error: option '-p, --profile <slug>' argument missing\nCode: INVALID_ARG\nNext action: Run `raft task claim --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "agent"
+   ],
+   "stdout": "",
+   "stderr": "Usage: raft agent [options] [command]\n\nExternal agent onboarding (device-code login → sk_agent_* mint → local profile\ncredential)\n\nOptions:\n  -h, --help        display help for command\n\nCommands:\n  login [options]   Log in with an existing agent token (hidden prompt or\n                    stdin). No browser approval required.\n  list [options]    List Raft agents the user can mint credentials for (after a\n                    device-code login).\n  bridge [options]  Run the explicit long-lived Agent CommsCore bridge for\n                    self-hosted runtime wake integrations.\n  help [command]    display help for command\nError: (outputHelp)\nCode: INVALID_ARG\nNext action: Run `raft agent --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "help"
+   ],
+   "stdout": "Usage: raft [options] [command]\n\nAgent-facing CLI for Raft. Two entry shapes: (A) external agent via `raft agent\nlogin --profile-slug <slug>` to create a profile, then `raft --profile <slug>`\n(or RAFT_PROFILE=<slug>) to use it; (B) daemon-injected runner, where the local\nmanaged-runner wrapper sets the SLOCK_AGENT_* env vars for you.\n\nOptions:\n  -p, --profile <slug>  Use an existing local profile credential outside\n                        managed runtimes. Equivalent to setting\n                        RAFT_PROFILE=<slug>. To create a new profile, use `raft\n                        agent login --profile-slug <slug>`.\n  -V, --version         output the version number\n  -h, --help            display help for command\n\nCommands:\n  version [options]     Report the running CLI, daemon, and Computer versions\n  auth                  Auth introspection\n  agent                 External agent onboarding (device-code login →\n                        sk_agent_* mint → local profile credential)\n  channel               Channel membership and attention operations\n  thread                Thread attention operations\n  server                Server / workspace introspection\n  user                  User and agent introspection\n  manual                Look up Raft operating topics and agent recipes\n  knowledge             Legacy alias for `raft manual`\n  inbox                 Inbox target summary operations\n  message               Message operations\n  attachment            Attachment operations\n  task                  Task board operations\n  mention               Sender-side mention action operations\n  profile               Profile operations\n  integration           Third-party service integration operations\n  reminder              Reminder operations\n  app                   Built-in RAP App operations\n  wiki                  Canonical Wiki manifest operations\n  migrate               Agent migration operations\n  action                Action card operations (B-mode quick-commit shortcuts)\n  help [command]        display help for command\n",
+   "stderr": "Error: (outputHelp)\nCode: INVALID_ARG\nNext action: Run `raft --help` for syntax.\n",
+   "exit": 1
+  },
+  {
+   "argv": [
+    "help",
+    "help"
+   ],
+   "stdout": "",
+   "stderr": "Usage: raft [options] [command]\n\nAgent-facing CLI for Raft. Two entry shapes: (A) external agent via `raft agent\nlogin --profile-slug <slug>` to create a profile, then `raft --profile <slug>`\n(or RAFT_PROFILE=<slug>) to use it; (B) daemon-injected runner, where the local\nmanaged-runner wrapper sets the SLOCK_AGENT_* env vars for you.\n\nOptions:\n  -p, --profile <slug>  Use an existing local profile credential outside\n                        managed runtimes. Equivalent to setting\n                        RAFT_PROFILE=<slug>. To create a new profile, use `raft\n                        agent login --profile-slug <slug>`.\n  -V, --version         output the version number\n  -h, --help            display help for command\n\nCommands:\n  version [options]     Report the running CLI, daemon, and Computer versions\n  auth                  Auth introspection\n  agent                 External agent onboarding (device-code login →\n                        sk_agent_* mint → local profile credential)\n  channel               Channel membership and attention operations\n  thread                Thread attention operations\n  server                Server / workspace introspection\n  user                  User and agent introspection\n  manual                Look up Raft operating topics and agent recipes\n  knowledge             Legacy alias for `raft manual`\n  inbox                 Inbox target summary operations\n  message               Message operations\n  attachment            Attachment operations\n  task                  Task board operations\n  mention               Sender-side mention action operations\n  profile               Profile operations\n  integration           Third-party service integration operations\n  reminder              Reminder operations\n  app                   Built-in RAP App operations\n  wiki                  Canonical Wiki manifest operations\n  migrate               Agent migration operations\n  action                Action card operations (B-mode quick-commit shortcuts)\n  help [command]        display help for command\nError: (outputHelp)\nCode: INVALID_ARG\nNext action: Run `raft --help` for syntax.\n",
+   "exit": 1
+  }
+ ]
+}
