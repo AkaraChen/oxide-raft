@@ -1233,3 +1233,24 @@ The zone database is bundled on every OS, so macOS, Linux and Windows resolve
 the same zones and offsets whatever tzdata the host has installed. The ICU
 zone-id table (`js/tz_ids.rs`, 639 ids with their resolved names) is generated
 from Node 24.15.0 as its header describes.
+
+## D26. Terminal width for help, and the libc / windows-sys pins
+
+**Governs:** `crates/commander` (`terminal.rs`, the default output
+configuration), root `Cargo.toml`.
+
+**Facts.** D1 makes the help width the columns of the stream the help goes to
+when that stream is a TTY, else 80 (`command.js` reads `process.stdout.columns`
+/ `process.stderr.columns`, `help.js` uses `helpWidth || 80`). Neither CLI
+configures a width, so the default is observable in every interactive
+`--help`. The 116 help goldens are captured without a TTY and cannot show it.
+
+**Decision.** commander reads the width itself on every help render, as Node
+refreshes `columns`: unix `isatty` + `ioctl(TIOCGWINSZ)` (`ws_col`); Windows
+`GetConsoleMode` (libuv's TTY test) + `GetConsoleScreenBufferInfo` (window
+width `srWindow.Right - srWindow.Left + 1`). Not a terminal, a failed query, or
+0 columns → 80. `configure_output` still overrides it. Pinned per
+mapping-guide §13: `libc =0.2.189` (unix targets), `windows-sys =0.61.2` with
+features `Win32_Foundation` and `Win32_System_Console` (windows targets).
+Proof: pty tests at 120 and 60 columns with expected text captured from Node
+24.15.0 under a pty of the same size.
