@@ -1,0 +1,3049 @@
+{
+ "commander": "12.1.0",
+ "node": "v24.15.0",
+ "programs": {
+  "basic": {
+   "name": "tool",
+   "description": "A small tool for exercising commander.",
+   "version": [
+    "1.2.3"
+   ],
+   "options": [
+    {
+     "flags": "-p, --profile <slug>",
+     "description": "Profile slug to use."
+    },
+    {
+     "flags": "-v, --verbose",
+     "description": "Verbose output."
+    }
+   ],
+   "preAction": true,
+   "commands": [
+    {
+     "name": "send",
+     "description": "Send a message to a target.",
+     "arguments": [
+      "<target>",
+      [
+       "[rest...]",
+       "Extra words."
+      ]
+     ],
+     "options": [
+      {
+       "flags": "--content <text>",
+       "description": "Message content."
+      },
+      {
+       "flags": "-n, --count <n>",
+       "description": "How many.",
+       "parser": "int"
+      },
+      {
+       "flags": "--tag <tag>",
+       "description": "Repeatable tag.",
+       "parser": "collect"
+      },
+      {
+       "flags": "--trace <v>",
+       "description": "Parser previous trace.",
+       "parser": "trace"
+      },
+      {
+       "flags": "--limit <n>",
+       "description": "Validated number.",
+       "parser": "invalid"
+      },
+      {
+       "flags": "--dry-run",
+       "description": "Do not send."
+      },
+      {
+       "flags": "--mode [mode]",
+       "description": "Optional value.",
+       "default": "fast"
+      },
+      {
+       "flags": "--secret <s>",
+       "description": "Hidden option.",
+       "hidden": true
+      },
+      {
+       "flags": "-a",
+       "description": "Short flag a."
+      },
+      {
+       "flags": "-b",
+       "description": "Short flag b."
+      },
+      {
+       "flags": "-c <val>",
+       "description": "Short with value."
+      }
+     ],
+     "helpAfter": "\nExamples:\n  tool send #general --content hi\n"
+    },
+    {
+     "name": "task",
+     "description": "Task operations",
+     "commands": [
+      {
+       "name": "claim",
+       "description": "Claim a task by number.",
+       "options": [
+        {
+         "flags": "--target <target>",
+         "description": "Channel target."
+        },
+        {
+         "flags": "--number <n>",
+         "description": "Task number.",
+         "parser": "int"
+        }
+       ]
+      },
+      {
+       "name": "list",
+       "description": "List tasks."
+      },
+      {
+       "name": "secret-op",
+       "description": "Hidden subcommand.",
+       "hidden": true
+      }
+     ]
+    },
+    {
+     "name": "status",
+     "description": "Show status."
+    }
+   ]
+  },
+  "computer": {
+   "name": "comp",
+   "description": "Default exit path program (no exitOverride).",
+   "version": [
+    "9.9.9"
+   ],
+   "commands": [
+    {
+     "name": "setup",
+     "description": "Set up the thing with a rather long description that needs wrapping across multiple lines of help output.",
+     "arguments": [
+      [
+       "<serverSlug>",
+       "The server slug."
+      ]
+     ],
+     "options": [
+      {
+       "flags": "--no-start",
+       "description": "Do not start after setup."
+      },
+      {
+       "flags": "--server-url <url>",
+       "description": "Server URL."
+      }
+     ]
+    },
+    {
+     "name": "logs",
+     "description": "Show logs.",
+     "arguments": [
+      "[serverSlug]"
+     ],
+     "options": [
+      {
+       "flags": "--lines <n>",
+       "description": "Number of lines.",
+       "parser": "invalid"
+      },
+      {
+       "flags": "--follow",
+       "description": "Follow."
+      }
+     ]
+    },
+    {
+     "name": "__service",
+     "description": "Internal service entry.",
+     "hidden": true
+    },
+    {
+     "name": "status",
+     "description": "Status."
+    }
+   ]
+  },
+  "versionFlags": {
+   "name": "vf",
+   "version": [
+    "Tool: 2.0.0",
+    "-v, --vers",
+    "print it"
+   ],
+   "options": [
+    {
+     "flags": "--required <r>",
+     "description": "Mandatory option.",
+     "mandatory": true
+    }
+   ],
+   "commands": [
+    {
+     "name": "run",
+     "description": "Run it."
+    }
+   ]
+  },
+  "rootAction": {
+   "name": "ra",
+   "arguments": [
+    "[file]"
+   ],
+   "options": [
+    {
+     "flags": "--flag",
+     "description": "A flag."
+    }
+   ]
+  }
+ },
+ "cases": [
+  {
+   "program": "basic",
+   "argv": [
+    "--help"
+   ],
+   "stdout": "Usage: tool [options] [command]\n\nA small tool for exercising commander.\n\nOptions:\n  -V, --version                      output the version number\n  -p, --profile <slug>               Profile slug to use.\n  -v, --verbose                      Verbose output.\n  -h, --help                         display help for command\n\nCommands:\n  send [options] <target> [rest...]  Send a message to a target.\n  task                               Task operations\n  status                             Show status.\n  help [command]                     display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "--help"
+   ],
+   "stdout": "Usage: tool send [options] <target> [rest...]\n\nSend a message to a target.\n\nArguments:\n  target\n  rest              Extra words.\n\nOptions:\n  --content <text>  Message content.\n  -n, --count <n>   How many.\n  --tag <tag>       Repeatable tag.\n  --trace <v>       Parser previous trace.\n  --limit <n>       Validated number.\n  --dry-run         Do not send.\n  --mode [mode]     Optional value. (default: \"fast\")\n  -a                Short flag a.\n  -b                Short flag b.\n  -c <val>          Short with value.\n  -h, --help        display help for command\n\nExamples:\n  tool send #general --content hi\n\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "--help"
+   ],
+   "stdout": "Usage: tool task [options] [command]\n\nTask operations\n\nOptions:\n  -h, --help       display help for command\n\nCommands:\n  claim [options]  Claim a task by number.\n  list             List tasks.\n  help [command]   display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "claim",
+    "--help"
+   ],
+   "stdout": "Usage: tool task claim [options]\n\nClaim a task by number.\n\nOptions:\n  --target <target>  Channel target.\n  --number <n>       Task number.\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "status",
+    "--help"
+   ],
+   "stdout": "Usage: tool status [options]\n\nShow status.\n\nOptions:\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "help"
+   ],
+   "stdout": "Usage: tool [options] [command]\n\nA small tool for exercising commander.\n\nOptions:\n  -V, --version                      output the version number\n  -p, --profile <slug>               Profile slug to use.\n  -v, --verbose                      Verbose output.\n  -h, --help                         display help for command\n\nCommands:\n  send [options] <target> [rest...]  Send a message to a target.\n  task                               Task operations\n  status                             Show status.\n  help [command]                     display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "help",
+    "send"
+   ],
+   "stdout": "Usage: tool send [options] <target> [rest...]\n\nSend a message to a target.\n\nArguments:\n  target\n  rest              Extra words.\n\nOptions:\n  --content <text>  Message content.\n  -n, --count <n>   How many.\n  --tag <tag>       Repeatable tag.\n  --trace <v>       Parser previous trace.\n  --limit <n>       Validated number.\n  --dry-run         Do not send.\n  --mode [mode]     Optional value. (default: \"fast\")\n  -a                Short flag a.\n  -b                Short flag b.\n  -c <val>          Short with value.\n  -h, --help        display help for command\n\nExamples:\n  tool send #general --content hi\n\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "help",
+    "task",
+    "claim"
+   ],
+   "stdout": "Usage: tool task [options] [command]\n\nTask operations\n\nOptions:\n  -h, --help       display help for command\n\nCommands:\n  claim [options]  Claim a task by number.\n  list             List tasks.\n  help [command]   display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "help",
+    "nosuch"
+   ],
+   "stdout": "",
+   "stderr": "Usage: tool [options] [command]\n\nA small tool for exercising commander.\n\nOptions:\n  -V, --version                      output the version number\n  -p, --profile <slug>               Profile slug to use.\n  -v, --verbose                      Verbose output.\n  -h, --help                         display help for command\n\nCommands:\n  send [options] <target> [rest...]  Send a message to a target.\n  task                               Task operations\n  status                             Show status.\n  help [command]                     display help for command\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 1,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "help",
+    "claim"
+   ],
+   "stdout": "Usage: tool task claim [options]\n\nClaim a task by number.\n\nOptions:\n  --target <target>  Channel target.\n  --number <n>       Task number.\n  -h, --help         display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "-h"
+   ],
+   "stdout": "Usage: tool [options] [command]\n\nA small tool for exercising commander.\n\nOptions:\n  -V, --version                      output the version number\n  -p, --profile <slug>               Profile slug to use.\n  -v, --verbose                      Verbose output.\n  -h, --help                         display help for command\n\nCommands:\n  send [options] <target> [rest...]  Send a message to a target.\n  task                               Task operations\n  status                             Show status.\n  help [command]                     display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "-h",
+    "--bogus"
+   ],
+   "stdout": "Usage: tool send [options] <target> [rest...]\n\nSend a message to a target.\n\nArguments:\n  target\n  rest              Extra words.\n\nOptions:\n  --content <text>  Message content.\n  -n, --count <n>   How many.\n  --tag <tag>       Repeatable tag.\n  --trace <v>       Parser previous trace.\n  --limit <n>       Validated number.\n  --dry-run         Do not send.\n  --mode [mode]     Optional value. (default: \"fast\")\n  -a                Short flag a.\n  -b                Short flag b.\n  -c <val>          Short with value.\n  -h, --help        display help for command\n\nExamples:\n  tool send #general --content hi\n\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "--help"
+   ],
+   "widths": [
+    40,
+    40
+   ],
+   "stdout": "Usage: tool [options] [command]\n\nA small tool for exercising commander.\n\nOptions:\n  -V, --version                      output the version number\n  -p, --profile <slug>               Profile slug to use.\n  -v, --verbose                      Verbose output.\n  -h, --help                         display help for command\n\nCommands:\n  send [options] <target> [rest...]  Send a message to a target.\n  task                               Task operations\n  status                             Show status.\n  help [command]                     display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "--help"
+   ],
+   "widths": [
+    120,
+    60
+   ],
+   "stdout": "Usage: tool send [options] <target> [rest...]\n\nSend a message to a target.\n\nArguments:\n  target\n  rest              Extra words.\n\nOptions:\n  --content <text>  Message content.\n  -n, --count <n>   How many.\n  --tag <tag>       Repeatable tag.\n  --trace <v>       Parser previous trace.\n  --limit <n>       Validated number.\n  --dry-run         Do not send.\n  --mode [mode]     Optional value. (default: \"fast\")\n  -a                Short flag a.\n  -b                Short flag b.\n  -c <val>          Short with value.\n  -h, --help        display help for command\n\nExamples:\n  tool send #general --content hi\n\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task"
+   ],
+   "widths": [
+    100,
+    50
+   ],
+   "stdout": "",
+   "stderr": "Usage: tool task [options] [command]\n\nTask operations\n\nOptions:\n  -h, --help       display help for command\n\nCommands:\n  claim [options]  Claim a task by number.\n  list             List tasks.\n  help [command]   display help for command\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 1,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task"
+   ],
+   "stdout": "",
+   "stderr": "Usage: tool task [options] [command]\n\nTask operations\n\nOptions:\n  -h, --help       display help for command\n\nCommands:\n  claim [options]  Claim a task by number.\n  list             List tasks.\n  help [command]   display help for command\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 1,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "stdout": "",
+   "stderr": "Usage: tool [options] [command]\n\nA small tool for exercising commander.\n\nOptions:\n  -V, --version                      output the version number\n  -p, --profile <slug>               Profile slug to use.\n  -v, --verbose                      Verbose output.\n  -h, --help                         display help for command\n\nCommands:\n  send [options] <target> [rest...]  Send a message to a target.\n  task                               Task operations\n  status                             Show status.\n  help [command]                     display help for command\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 1,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "--help"
+   ],
+   "stdout": "Usage: comp [options] [command]\n\nDefault exit path program (no exitOverride).\n\nOptions:\n  -V, --version                 output the version number\n  -h, --help                    display help for command\n\nCommands:\n  setup [options] <serverSlug>  Set up the thing with a rather long description\n                                that needs wrapping across multiple lines of\n                                help output.\n  logs [options] [serverSlug]   Show logs.\n  status                        Status.\n  help [command]                display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "setup",
+    "--help"
+   ],
+   "stdout": "Usage: comp setup [options] <serverSlug>\n\nSet up the thing with a rather long description that needs wrapping across\nmultiple lines of help output.\n\nArguments:\n  serverSlug          The server slug.\n\nOptions:\n  --no-start          Do not start after setup.\n  --server-url <url>  Server URL.\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "setup",
+    "--help"
+   ],
+   "widths": [
+    30,
+    30
+   ],
+   "stdout": "Usage: comp setup [options] <serverSlug>\n\nSet up the thing with a rather long description that needs wrapping across multiple lines of help output.\n\nArguments:\n  serverSlug          The server slug.\n\nOptions:\n  --no-start          Do not start after setup.\n  --server-url <url>  Server URL.\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "logs",
+    "--help"
+   ],
+   "stdout": "Usage: comp logs [options] [serverSlug]\n\nShow logs.\n\nOptions:\n  --lines <n>  Number of lines.\n  --follow     Follow.\n  -h, --help   display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "help",
+    "logs"
+   ],
+   "stdout": "Usage: comp logs [options] [serverSlug]\n\nShow logs.\n\nOptions:\n  --lines <n>  Number of lines.\n  --follow     Follow.\n  -h, --help   display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.help",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "versionFlags",
+   "argv": [
+    "--help"
+   ],
+   "stdout": "Usage: vf [options] [command]\n\nOptions:\n  -v, --vers      print it\n  --required <r>  Mandatory option.\n  -h, --help      display help for command\n\nCommands:\n  run             Run it.\n  help [command]  display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "rootAction",
+   "argv": [
+    "--help"
+   ],
+   "stdout": "Usage: ra [options] [file]\n\nOptions:\n  --flag      A flag.\n  -h, --help  display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.helpDisplayed",
+    "exitCode": 0,
+    "message": "(outputHelp)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "--version"
+   ],
+   "stdout": "1.2.3\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.version",
+    "exitCode": 0,
+    "message": "1.2.3"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "-V"
+   ],
+   "stdout": "1.2.3\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.version",
+    "exitCode": 0,
+    "message": "1.2.3"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "--version",
+    "extra"
+   ],
+   "stdout": "1.2.3\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.version",
+    "exitCode": 0,
+    "message": "1.2.3"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "--version"
+   ],
+   "stdout": "9.9.9\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.version",
+    "exitCode": 0,
+    "message": "9.9.9"
+   }
+  },
+  {
+   "program": "versionFlags",
+   "argv": [
+    "--vers"
+   ],
+   "stdout": "Tool: 2.0.0\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.version",
+    "exitCode": 0,
+    "message": "Tool: 2.0.0"
+   }
+  },
+  {
+   "program": "versionFlags",
+   "argv": [
+    "-v"
+   ],
+   "stdout": "Tool: 2.0.0\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.version",
+    "exitCode": 0,
+    "message": "Tool: 2.0.0"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast"
+     },
+     "optsWithGlobals": {
+      "mode": "fast"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "a",
+    "b",
+    "c"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      [
+       "a",
+       "b",
+       "c"
+      ]
+     ],
+     "opts": {
+      "mode": "fast"
+     },
+     "optsWithGlobals": {
+      "mode": "fast"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--content",
+    "hi there"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "content": "hi there"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "content": "hi there"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--content=hi=there"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "content": "hi=there"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "content": "hi=there"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "--content",
+    "-x",
+    "#general"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "content": "-x"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "content": "-x"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "-n",
+    "12abc"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "count": 12
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "count": 12
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "-n12"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "count": 12
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "count": 12
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--count=0x10"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "count": 0
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "count": 0
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--tag",
+    "a",
+    "--tag",
+    "b",
+    "--tag=c"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "tag": [
+       "a",
+       "b",
+       "c"
+      ]
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "tag": [
+       "a",
+       "b",
+       "c"
+      ]
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--trace",
+    "x",
+    "--trace",
+    "y"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "trace": "undefined|x|y"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "trace": "undefined|x|y"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--limit",
+    "42"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "limit": 42
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "limit": 42
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--dry-run"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "dryRun": true
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "dryRun": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--mode"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": true
+     },
+     "optsWithGlobals": {
+      "mode": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--mode",
+    "slow"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "slow"
+     },
+     "optsWithGlobals": {
+      "mode": "slow"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--mode=slow"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "slow"
+     },
+     "optsWithGlobals": {
+      "mode": "slow"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--secret",
+    "s3"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "secret": "s3"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "secret": "s3"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "-ab"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "a": true,
+      "b": true
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "a": true,
+      "b": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "-abcval"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "a": true,
+      "b": true,
+      "c": "val"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "a": true,
+      "b": true,
+      "c": "val"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "-ac",
+    "val"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast",
+      "a": true,
+      "c": "val"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "a": true,
+      "c": "val"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--",
+    "--content",
+    "x"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      [
+       "--content",
+       "x"
+      ]
+     ],
+     "opts": {
+      "mode": "fast"
+     },
+     "optsWithGlobals": {
+      "mode": "fast"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "--",
+    "-weird"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "-weird",
+      []
+     ],
+     "opts": {
+      "mode": "fast"
+     },
+     "optsWithGlobals": {
+      "mode": "fast"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "-p",
+    "prof",
+    "send",
+    "#general"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {
+      "profile": "prof"
+     }
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "profile": "prof"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "-p",
+    "prof"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {
+      "profile": "prof"
+     }
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "profile": "prof"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--profile=prof",
+    "-v"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {
+      "profile": "prof",
+      "verbose": true
+     }
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "profile": "prof",
+      "verbose": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#general",
+    "--profile",
+    "a",
+    "--profile",
+    "b"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "send",
+     "opts": {
+      "profile": "b"
+     }
+    },
+    {
+     "kind": "action",
+     "path": [
+      "send"
+     ],
+     "args": [
+      "#general",
+      []
+     ],
+     "opts": {
+      "mode": "fast"
+     },
+     "optsWithGlobals": {
+      "mode": "fast",
+      "profile": "b"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "--verbose",
+    "task",
+    "claim",
+    "--target",
+    "#x",
+    "--number",
+    "7"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "claim",
+     "opts": {
+      "verbose": true
+     }
+    },
+    {
+     "kind": "action",
+     "path": [
+      "task",
+      "claim"
+     ],
+     "args": [],
+     "opts": {
+      "target": "#x",
+      "number": 7
+     },
+     "optsWithGlobals": {
+      "target": "#x",
+      "number": 7,
+      "verbose": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "claim",
+    "--target",
+    "#x",
+    "--number",
+    "1",
+    "--profile",
+    "p"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "claim",
+     "opts": {
+      "profile": "p"
+     }
+    },
+    {
+     "kind": "action",
+     "path": [
+      "task",
+      "claim"
+     ],
+     "args": [],
+     "opts": {
+      "target": "#x",
+      "number": 1
+     },
+     "optsWithGlobals": {
+      "target": "#x",
+      "number": 1,
+      "profile": "p"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "claim",
+    "extra",
+    "positional"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "claim",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "task",
+      "claim"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "secret-op"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "secret-op",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "task",
+      "secret-op"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "status",
+    "extra"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "preAction",
+     "hookedOn": "tool",
+     "actionCommand": "status",
+     "opts": {}
+    },
+    {
+     "kind": "action",
+     "path": [
+      "status"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "rootAction",
+   "argv": [],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      null
+     ],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "rootAction",
+   "argv": [
+    "f.txt",
+    "--flag"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      "f.txt"
+     ],
+     "opts": {
+      "flag": true
+     },
+     "optsWithGlobals": {
+      "flag": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "rootAction",
+   "argv": [
+    "f.txt",
+    "g.txt"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [],
+     "args": [
+      "f.txt"
+     ],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "setup",
+    "my-server",
+    "--no-start"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "setup"
+     ],
+     "args": [
+      "my-server"
+     ],
+     "opts": {
+      "start": false
+     },
+     "optsWithGlobals": {
+      "start": false
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "setup",
+    "my-server"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "setup"
+     ],
+     "args": [
+      "my-server"
+     ],
+     "opts": {
+      "start": true
+     },
+     "optsWithGlobals": {
+      "start": true
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "setup",
+    "my-server",
+    "--server-url",
+    "http://x"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "setup"
+     ],
+     "args": [
+      "my-server"
+     ],
+     "opts": {
+      "start": true,
+      "serverUrl": "http://x"
+     },
+     "optsWithGlobals": {
+      "start": true,
+      "serverUrl": "http://x"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "logs",
+    "--lines",
+    "5"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "logs"
+     ],
+     "args": [
+      null
+     ],
+     "opts": {
+      "lines": 5
+     },
+     "optsWithGlobals": {
+      "lines": 5
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "__service"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "__service"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {}
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "sned"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'sned'\n(Did you mean send?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'sned'\n(Did you mean send?)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "nosuchcmd"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'nosuchcmd'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'nosuchcmd'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "stat"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'stat'\n(Did you mean status?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'stat'\n(Did you mean status?)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "clam"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'clam'\n(Did you mean claim?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'clam'\n(Did you mean claim?)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "zzzzzzzz"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'zzzzzzzz'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'zzzzzzzz'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send"
+   ],
+   "stdout": "",
+   "stderr": "error: missing required argument 'target'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.missingArgument",
+    "exitCode": 1,
+    "message": "error: missing required argument 'target'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#g",
+    "--contnt",
+    "x"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--contnt'\n(Did you mean --content?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '--contnt'\n(Did you mean --content?)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#g",
+    "--content"
+   ],
+   "stdout": "",
+   "stderr": "error: option '--content <text>' argument missing\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.optionMissingArgument",
+    "exitCode": 1,
+    "message": "error: option '--content <text>' argument missing"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#g",
+    "-n"
+   ],
+   "stdout": "",
+   "stderr": "error: option '-n, --count <n>' argument missing\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.optionMissingArgument",
+    "exitCode": 1,
+    "message": "error: option '-n, --count <n>' argument missing"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#g",
+    "--limit",
+    "abc"
+   ],
+   "stdout": "",
+   "stderr": "error: option '--limit <n>' argument 'abc' is invalid. Not a number.\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.invalidArgument",
+    "exitCode": 1,
+    "message": "error: option '--limit <n>' argument 'abc' is invalid. Not a number."
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#g",
+    "--dry-run=yes"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--dry-run=yes'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '--dry-run=yes'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#g",
+    "-z"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '-z'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '-z'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#g",
+    "--DRY-RUN"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--DRY-RUN'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '--DRY-RUN'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "send",
+    "#g",
+    "--secre",
+    "x"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--secre'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '--secre'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "--bogus"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--bogus'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '--bogus'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "-p"
+   ],
+   "stdout": "",
+   "stderr": "error: option '-p, --profile <slug>' argument missing\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.optionMissingArgument",
+    "exitCode": 1,
+    "message": "error: option '-p, --profile <slug>' argument missing"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "--profile"
+   ],
+   "stdout": "",
+   "stderr": "error: option '-p, --profile <slug>' argument missing\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.optionMissingArgument",
+    "exitCode": 1,
+    "message": "error: option '-p, --profile <slug>' argument missing"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "claim",
+    "--number"
+   ],
+   "stdout": "",
+   "stderr": "error: option '--number <n>' argument missing\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.optionMissingArgument",
+    "exitCode": 1,
+    "message": "error: option '--number <n>' argument missing"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "claim",
+    "--target",
+    "#x",
+    "--number",
+    "1",
+    "--profile"
+   ],
+   "stdout": "",
+   "stderr": "error: option '-p, --profile <slug>' argument missing\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.optionMissingArgument",
+    "exitCode": 1,
+    "message": "error: option '-p, --profile <slug>' argument missing"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "claim",
+    "--tgt",
+    "#x"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--tgt'\n(Did you mean --target?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '--tgt'\n(Did you mean --target?)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "claim",
+    "--verbos"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown option '--verbos'\n(Did you mean --verbose?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownOption",
+    "exitCode": 1,
+    "message": "error: unknown option '--verbos'\n(Did you mean --verbose?)"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "secret-o"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'secret-o'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'secret-o'"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [
+    "task",
+    "secret-o"
+   ],
+   "stdout": "",
+   "stderr": "error: unknown command 'secret-o'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.unknownCommand",
+    "exitCode": 1,
+    "message": "error: unknown command 'secret-o'"
+   }
+  },
+  {
+   "program": "versionFlags",
+   "argv": [
+    "run"
+   ],
+   "stdout": "",
+   "stderr": "error: required option '--required <r>' not specified\n",
+   "calls": [],
+   "outcome": {
+    "kind": "commanderError",
+    "code": "commander.missingMandatoryOptionValue",
+    "exitCode": 1,
+    "message": "error: required option '--required <r>' not specified"
+   }
+  },
+  {
+   "program": "versionFlags",
+   "argv": [
+    "run",
+    "--required",
+    "x"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "run"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {
+      "required": "x"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "versionFlags",
+   "argv": [
+    "--required",
+    "x",
+    "run"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [
+    {
+     "kind": "action",
+     "path": [
+      "run"
+     ],
+     "args": [],
+     "opts": {},
+     "optsWithGlobals": {
+      "required": "x"
+     }
+    }
+   ],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "Usage: comp [options] [command]\n\nDefault exit path program (no exitOverride).\n\nOptions:\n  -V, --version                 output the version number\n  -h, --help                    display help for command\n\nCommands:\n  setup [options] <serverSlug>  Set up the thing with a rather long description\n                                that needs wrapping across multiple lines of\n                                help output.\n  logs [options] [serverSlug]   Show logs.\n  status                        Status.\n  help [command]                display help for command\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "--help"
+   ],
+   "exitOverride": false,
+   "stdout": "Usage: comp [options] [command]\n\nDefault exit path program (no exitOverride).\n\nOptions:\n  -V, --version                 output the version number\n  -h, --help                    display help for command\n\nCommands:\n  setup [options] <serverSlug>  Set up the thing with a rather long description\n                                that needs wrapping across multiple lines of\n                                help output.\n  logs [options] [serverSlug]   Show logs.\n  status                        Status.\n  help [command]                display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 0
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "--version"
+   ],
+   "exitOverride": false,
+   "stdout": "9.9.9\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 0
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "nosuchcmd"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: unknown command 'nosuchcmd'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "stauts"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: unknown command 'stauts'\n(Did you mean status?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "logs",
+    "--lines"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: option '--lines <n>' argument missing\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "logs",
+    "--lines",
+    "x"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: option '--lines <n>' argument 'x' is invalid. Not a number.\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "logs",
+    "--lines",
+    "5.9"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: option '--lines <n>' argument '5.9' is invalid. Not a number.\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "logs",
+    "--lines",
+    "1e25"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: option '--lines <n>' argument '1e25' is invalid. Not a number.\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "setup"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: missing required argument 'serverSlug'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "setup",
+    "--no-start",
+    "--help"
+   ],
+   "exitOverride": false,
+   "stdout": "Usage: comp setup [options] <serverSlug>\n\nSet up the thing with a rather long description that needs wrapping across\nmultiple lines of help output.\n\nArguments:\n  serverSlug          The server slug.\n\nOptions:\n  --no-start          Do not start after setup.\n  --server-url <url>  Server URL.\n  -h, --help          display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 0
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "start",
+    "--bogus"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: unknown command 'start'\n(Did you mean status?)\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "status",
+    "--bogus"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "error: unknown option '--bogus'\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "help"
+   ],
+   "exitOverride": false,
+   "stdout": "Usage: comp [options] [command]\n\nDefault exit path program (no exitOverride).\n\nOptions:\n  -V, --version                 output the version number\n  -h, --help                    display help for command\n\nCommands:\n  setup [options] <serverSlug>  Set up the thing with a rather long description\n                                that needs wrapping across multiple lines of\n                                help output.\n  logs [options] [serverSlug]   Show logs.\n  status                        Status.\n  help [command]                display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 0
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "help",
+    "nosuch"
+   ],
+   "exitOverride": false,
+   "stdout": "",
+   "stderr": "Usage: comp [options] [command]\n\nDefault exit path program (no exitOverride).\n\nOptions:\n  -V, --version                 output the version number\n  -h, --help                    display help for command\n\nCommands:\n  setup [options] <serverSlug>  Set up the thing with a rather long description\n                                that needs wrapping across multiple lines of\n                                help output.\n  logs [options] [serverSlug]   Show logs.\n  status                        Status.\n  help [command]                display help for command\n",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 1
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "help"
+   ],
+   "exitOverride": false,
+   "exitCode": 3,
+   "stdout": "Usage: comp [options] [command]\n\nDefault exit path program (no exitOverride).\n\nOptions:\n  -V, --version                 output the version number\n  -h, --help                    display help for command\n\nCommands:\n  setup [options] <serverSlug>  Set up the thing with a rather long description\n                                that needs wrapping across multiple lines of\n                                help output.\n  logs [options] [serverSlug]   Show logs.\n  status                        Status.\n  help [command]                display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 3
+   }
+  },
+  {
+   "program": "computer",
+   "argv": [
+    "--help"
+   ],
+   "exitOverride": false,
+   "exitCode": 4,
+   "stdout": "Usage: comp [options] [command]\n\nDefault exit path program (no exitOverride).\n\nOptions:\n  -V, --version                 output the version number\n  -h, --help                    display help for command\n\nCommands:\n  setup [options] <serverSlug>  Set up the thing with a rather long description\n                                that needs wrapping across multiple lines of\n                                help output.\n  logs [options] [serverSlug]   Show logs.\n  status                        Status.\n  help [command]                display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "exit",
+    "exitCode": 0
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "op": "helpInformation",
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": "Usage: tool [options] [command]\n\nA small tool for exercising commander.\n\nOptions:\n  -V, --version                      output the version number\n  -p, --profile <slug>               Profile slug to use.\n  -v, --verbose                      Verbose output.\n  -h, --help                         display help for command\n\nCommands:\n  send [options] <target> [rest...]  Send a message to a target.\n  task                               Task operations\n  status                             Show status.\n  help [command]                     display help for command\n"
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "op": "helpInformation",
+   "path": [
+    "send"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": "Usage: tool send [options] <target> [rest...]\n\nSend a message to a target.\n\nArguments:\n  target\n  rest              Extra words.\n\nOptions:\n  --content <text>  Message content.\n  -n, --count <n>   How many.\n  --tag <tag>       Repeatable tag.\n  --trace <v>       Parser previous trace.\n  --limit <n>       Validated number.\n  --dry-run         Do not send.\n  --mode [mode]     Optional value. (default: \"fast\")\n  -a                Short flag a.\n  -b                Short flag b.\n  -c <val>          Short with value.\n  -h, --help        display help for command\n"
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "op": "helpInformation",
+   "path": [
+    "task",
+    "claim"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": "Usage: tool task claim [options]\n\nClaim a task by number.\n\nOptions:\n  --target <target>  Channel target.\n  --number <n>       Task number.\n  -h, --help         display help for command\n"
+  },
+  {
+   "program": "computer",
+   "argv": [],
+   "op": "helpInformation",
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": "Usage: comp [options] [command]\n\nDefault exit path program (no exitOverride).\n\nOptions:\n  -V, --version                 output the version number\n  -h, --help                    display help for command\n\nCommands:\n  setup [options] <serverSlug>  Set up the thing with a rather long description\n                                that needs wrapping across multiple lines of\n                                help output.\n  logs [options] [serverSlug]   Show logs.\n  status                        Status.\n  help [command]                display help for command\n"
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "op": "outputHelp",
+   "path": [
+    "task"
+   ],
+   "stdout": "Usage: tool task [options] [command]\n\nTask operations\n\nOptions:\n  -h, --help       display help for command\n\nCommands:\n  claim [options]  Claim a task by number.\n  list             List tasks.\n  help [command]   display help for command\n",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "op": "outputHelp",
+   "path": [
+    "task"
+   ],
+   "error": true,
+   "stdout": "",
+   "stderr": "Usage: tool task [options] [command]\n\nTask operations\n\nOptions:\n  -h, --help       display help for command\n\nCommands:\n  claim [options]  Claim a task by number.\n  list             List tasks.\n  help [command]   display help for command\n",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   }
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "op": "visibleCommands",
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": [
+    "send",
+    "task",
+    "status",
+    "help"
+   ]
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "op": "visibleCommands",
+   "path": [
+    "task"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": [
+    "claim",
+    "list",
+    "help"
+   ]
+  },
+  {
+   "program": "computer",
+   "argv": [],
+   "op": "visibleCommands",
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": [
+    "setup",
+    "logs",
+    "status",
+    "help"
+   ]
+  },
+  {
+   "program": "basic",
+   "argv": [],
+   "op": "options",
+   "path": [
+    "send"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": [
+    {
+     "flags": "--content <text>",
+     "long": "--content",
+     "short": null,
+     "attributeName": "content"
+    },
+    {
+     "flags": "-n, --count <n>",
+     "long": "--count",
+     "short": "-n",
+     "attributeName": "count"
+    },
+    {
+     "flags": "--tag <tag>",
+     "long": "--tag",
+     "short": null,
+     "attributeName": "tag"
+    },
+    {
+     "flags": "--trace <v>",
+     "long": "--trace",
+     "short": null,
+     "attributeName": "trace"
+    },
+    {
+     "flags": "--limit <n>",
+     "long": "--limit",
+     "short": null,
+     "attributeName": "limit"
+    },
+    {
+     "flags": "--dry-run",
+     "long": "--dry-run",
+     "short": null,
+     "attributeName": "dryRun"
+    },
+    {
+     "flags": "--mode [mode]",
+     "long": "--mode",
+     "short": null,
+     "attributeName": "mode"
+    },
+    {
+     "flags": "--secret <s>",
+     "long": "--secret",
+     "short": null,
+     "attributeName": "secret"
+    },
+    {
+     "flags": "-a",
+     "long": null,
+     "short": "-a",
+     "attributeName": "a"
+    },
+    {
+     "flags": "-b",
+     "long": null,
+     "short": "-b",
+     "attributeName": "b"
+    },
+    {
+     "flags": "-c <val>",
+     "long": null,
+     "short": "-c",
+     "attributeName": "c"
+    }
+   ]
+  },
+  {
+   "program": "computer",
+   "argv": [],
+   "op": "options",
+   "path": [
+    "setup"
+   ],
+   "stdout": "",
+   "stderr": "",
+   "calls": [],
+   "outcome": {
+    "kind": "ok"
+   },
+   "result": [
+    {
+     "flags": "--no-start",
+     "long": "--no-start",
+     "short": null,
+     "attributeName": "start"
+    },
+    {
+     "flags": "--server-url <url>",
+     "long": "--server-url",
+     "short": null,
+     "attributeName": "serverUrl"
+    }
+   ]
+  }
+ ]
+}

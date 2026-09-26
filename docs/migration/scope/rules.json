@@ -426,6 +426,12 @@
     "comment": "Kind of every upstream skip in scope (decisions.md D9), read from the skip/skipIf expression, since vitest's JSON has no reason. platform: condition on process.platform → #[cfg_attr(<cfg>, ignore = \"upstream skip: …\")]. opt-in: gated on an env var → the Rust test reads the same var at runtime and returns early; no ignore. always: unconditional test.skip → #[ignore = \"upstream skip: …\"]. title \"*\" covers every case of the file.",
     "rules": [
       {
+        "file": "upstream/raft-source/packages/computer/src/shellEnvCapture.test.ts",
+        "title": "dispatchToKResident: real macOS mktemp alias stays on installer convergence",
+        "kind": "platform",
+        "source": "shellEnvCapture.test.ts:437-438 ({ skip: process.platform !== \"darwin\" })"
+      },
+      {
         "file": "upstream/raft-source/packages/daemon/src/drivers/cliTransport.test.ts",
         "title": "*",
         "kind": "platform",

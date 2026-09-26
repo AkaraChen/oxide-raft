@@ -13,6 +13,8 @@
 // Environment: vitest runs with CI=1, as the Gate 6 GitHub Actions jobs do.
 // It is deliberate: upstream configs switch snapshot `update` off under CI,
 // and any `skipIf(process.env.CI)` is then evaluated as on CI.
+// Every runner gets TZ=Asia/Shanghai: upstream tests assert +08:00 local time
+// output (decisions.md D23).
 //
 // Failure is loud. A package whose runner exits non-zero, whose report lists
 // a file that failed to load, or that has any failed case gets `{ error }`
@@ -83,7 +85,7 @@ function listNodeTest(name, pkg) {
     `--test-reporter=${join(root, "tools/test-list/node-test-reporter.mjs")}`,
     `--test-reporter-destination=${dest}`,
     ...files,
-  ], { cwd, stdio: ["ignore", "ignore", "inherit"], env: { ...process.env, NO_COLOR: "1" } });
+  ], { cwd, stdio: ["ignore", "ignore", "inherit"], env: { ...process.env, NO_COLOR: "1", TZ: "Asia/Shanghai" } });
   const cases = existsSync(dest) ? readFileSync(dest, "utf8").split("\n").filter(Boolean).map((line) => {
     const e = JSON.parse(line);
     if (e.error) return { file: rel(resolve(cwd, e.file)), error: e.error };
@@ -96,7 +98,7 @@ function listNodeTest(name, pkg) {
 
 function vitestReport(name, cwd, args) {
   const dest = join(workDir, `${name}.json`);
-  const result = run("npx", ["vitest", ...args, `--outputFile=${dest}`], { cwd, stdio: ["ignore", "ignore", "inherit"], env: { ...process.env, NO_COLOR: "1", CI: "1" } });
+  const result = run("npx", ["vitest", ...args, `--outputFile=${dest}`], { cwd, stdio: ["ignore", "ignore", "inherit"], env: { ...process.env, NO_COLOR: "1", CI: "1", TZ: "Asia/Shanghai" } });
   return { result, report: existsSync(dest) ? JSON.parse(readFileSync(dest, "utf8")) : null };
 }
 
@@ -125,7 +127,7 @@ function listVitest(name, pkg) {
   // Separate configs are listed, not run (vitest list --json).
   for (const config of pkg.listConfigs ?? []) {
     const dest = join(workDir, `${name}.${config}.json`);
-    const r = run("npx", ["vitest", "list", "--json", `--config=${config}`], { cwd, stdio: ["ignore", "pipe", "inherit"], env: { ...process.env, NO_COLOR: "1", CI: "1" } });
+    const r = run("npx", ["vitest", "list", "--json", `--config=${config}`], { cwd, stdio: ["ignore", "pipe", "inherit"], env: { ...process.env, NO_COLOR: "1", CI: "1", TZ: "Asia/Shanghai" } });
     writeFileSync(dest, r.stdout ?? "");
     let listed = null;
     try {
