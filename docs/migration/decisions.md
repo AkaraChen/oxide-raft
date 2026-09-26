@@ -1212,3 +1212,24 @@ captured with `LANG`, `LC_ALL` and `LC_MESSAGES` unset, that is `en-US` (the
 scripts refuse to run otherwise); Rust tests pass the same unset locale through
 `Env`, never the real process environment. Locales other than root are verified by targeted
 cases, not by the corpus.
+
+## D25. Pinned crates for dates, time zones and collation
+
+**Governs:** root `Cargo.toml` `[workspace.dependencies]`, `raft_shared::js`
+date, time-zone and collation helpers (D3, D23, D24).
+
+**Decision.** Pinned per mapping-guide §13:
+- `jiff =0.2.31` with `default-features = false`, features `std` and
+  `tzdb-bundle-always` (plus `tz-system` on Windows only, for the system zone
+  when `TZ` is unset). 0.2.31 is the newest jiff that accepts `jiff-tzdb
+  0.1.6`.
+- `jiff-tzdb =0.1.6`, pinned only to fix the tz data version: it bundles
+  tzdb 2026a, the tz data of Node 24.15.0's ICU 78.2. A newer jiff-tzdb
+  (0.1.8 bundles 2026c) changes offsets and is a new migration.
+- `icu_collator =2.3.1` and `icu_locale =2.3.1` with compiled data.
+- `chrono =0.4.45`, `default-features = false`, feature `std`.
+
+The zone database is bundled on every OS, so macOS, Linux and Windows resolve
+the same zones and offsets whatever tzdata the host has installed. The ICU
+zone-id table (`js/tz_ids.rs`, 639 ids with their resolved names) is generated
+from Node 24.15.0 as its header describes.
