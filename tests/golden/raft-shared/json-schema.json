@@ -1,0 +1,2421 @@
+{
+ "ajv": "8.20.0",
+ "safeRegex2": "5.1.1",
+ "node": "v24.15.0",
+ "compile": [
+  {
+   "name": "type.string",
+   "schema": {
+    "type": "string"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "type.integer",
+   "schema": {
+    "type": "integer"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "type.number",
+   "schema": {
+    "type": "number"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "type.boolean",
+   "schema": {
+    "type": "boolean"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "type.null",
+   "schema": {
+    "type": "null"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "type.array",
+   "schema": {
+    "type": "array"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "type.object",
+   "schema": {
+    "type": "object"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "enum",
+   "schema": {
+    "enum": [
+     "a",
+     1,
+     null,
+     {
+      "x": [
+       1
+      ]
+     },
+     [
+      2
+     ]
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "const",
+   "schema": {
+    "const": {
+     "a": [
+      1,
+      "b"
+     ]
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "const.number",
+   "schema": {
+    "const": 1
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "string.bounds",
+   "schema": {
+    "type": "string",
+    "minLength": 2,
+    "maxLength": 3
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "string.pattern",
+   "schema": {
+    "type": "string",
+    "pattern": "^[a-z]+$"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "string.pattern.unicode",
+   "schema": {
+    "type": "string",
+    "pattern": "^.$"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "string.pattern.unanchored",
+   "schema": {
+    "type": "string",
+    "pattern": "b"
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "number.bounds",
+   "schema": {
+    "type": "number",
+    "minimum": 1,
+    "maximum": 10
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "integer.bounds",
+   "schema": {
+    "type": "integer",
+    "minimum": 0,
+    "maximum": 100
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "array.items",
+   "schema": {
+    "type": "array",
+    "items": {
+     "type": "string"
+    },
+    "minItems": 1,
+    "maxItems": 2
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "object.required",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "a": {
+      "type": "string"
+     },
+     "b": {
+      "type": "integer"
+     }
+    },
+    "required": [
+     "a",
+     "b"
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "object.additional.false",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "a": {
+      "type": "string"
+     }
+    },
+    "additionalProperties": false
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "object.additional.schema",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "a": {
+      "type": "string"
+     }
+    },
+    "additionalProperties": {
+     "type": "number"
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "object.nested",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "user": {
+      "type": "object",
+      "properties": {
+       "name": {
+        "type": "string",
+        "minLength": 1
+       },
+       "tags": {
+        "type": "array",
+        "items": {
+         "enum": [
+          "x",
+          "y"
+         ]
+        }
+       }
+      },
+      "required": [
+       "name"
+      ]
+     }
+    },
+    "required": [
+     "user"
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "object.key.escaping",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "a/b": {
+      "type": "string"
+     },
+     "c~d": {
+      "type": "string"
+     },
+     "e f": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "a/b"
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "anyOf",
+   "schema": {
+    "anyOf": [
+     {
+      "type": "string"
+     },
+     {
+      "type": "integer",
+      "minimum": 5
+     }
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "oneOf",
+   "schema": {
+    "oneOf": [
+     {
+      "type": "integer"
+     },
+     {
+      "type": "number",
+      "minimum": 2
+     }
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "allOf",
+   "schema": {
+    "allOf": [
+     {
+      "type": "string"
+     },
+     {
+      "minLength": 2
+     }
+    ]
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "not",
+   "schema": {
+    "not": {
+     "type": "string"
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "defs.ref",
+   "schema": {
+    "type": "object",
+    "$defs": {
+     "name": {
+      "type": "string",
+      "pattern": "^[a-z]+$"
+     }
+    },
+    "properties": {
+     "first": {
+      "$ref": "#/$defs/name"
+     },
+     "list": {
+      "type": "array",
+      "items": {
+       "$ref": "#/$defs/name"
+      }
+     }
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "manifest.like",
+   "schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "channel",
+     "count"
+    ],
+    "properties": {
+     "channel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+     },
+     "count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50
+     },
+     "mode": {
+      "enum": [
+       "fast",
+       "slow"
+      ]
+     },
+     "filters": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+       "type": "object",
+       "required": [
+        "k"
+       ],
+       "properties": {
+        "k": {
+         "type": "string"
+        },
+        "v": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       }
+      }
+     }
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "empty",
+   "schema": {},
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "true.schema.items",
+   "schema": {
+    "type": "array",
+    "items": true
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "false.schema.prop",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "a": false
+    }
+   },
+   "ok": true,
+   "warnings": []
+  },
+  {
+   "name": "bad.type",
+   "schema": {
+    "type": "strin"
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/type must be equal to one of the allowed values, data/type must be array, data/type must match a schema in anyOf",
+   "warnings": []
+  },
+  {
+   "name": "bad.type.number",
+   "schema": {
+    "type": 5
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/type must be equal to one of the allowed values, data/type must be array, data/type must match a schema in anyOf",
+   "warnings": []
+  },
+  {
+   "name": "bad.minLength.negative",
+   "schema": {
+    "type": "string",
+    "minLength": -1
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/minLength must be >= 0",
+   "warnings": []
+  },
+  {
+   "name": "bad.minLength.float",
+   "schema": {
+    "type": "string",
+    "minLength": 1.5
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/minLength must be integer",
+   "warnings": []
+  },
+  {
+   "name": "bad.required.notArray",
+   "schema": {
+    "type": "object",
+    "required": "a"
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/required must be array",
+   "warnings": []
+  },
+  {
+   "name": "bad.required.dupes",
+   "schema": {
+    "type": "object",
+    "required": [
+     "a",
+     "a"
+    ]
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/required must NOT have duplicate items (items ## 1 and 0 are identical)",
+   "warnings": []
+  },
+  {
+   "name": "bad.properties.value",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "a": 5
+    }
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/properties/a must be object,boolean",
+   "warnings": []
+  },
+  {
+   "name": "bad.enum.empty",
+   "schema": {
+    "enum": []
+   },
+   "ok": false,
+   "error": "Error: enum must have non-empty array",
+   "warnings": []
+  },
+  {
+   "name": "bad.anyOf.empty",
+   "schema": {
+    "anyOf": []
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/anyOf must NOT have fewer than 1 items",
+   "warnings": []
+  },
+  {
+   "name": "bad.items.array",
+   "schema": {
+    "items": [
+     {
+      "type": "string"
+     }
+    ]
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/items must be object,boolean",
+   "warnings": []
+  },
+  {
+   "name": "bad.pattern",
+   "schema": {
+    "type": "string",
+    "pattern": "("
+   },
+   "ok": false,
+   "error": "SyntaxError: Invalid regular expression: /(/u: Unterminated group",
+   "warnings": []
+  },
+  {
+   "name": "bad.ref.missing",
+   "schema": {
+    "$ref": "#/$defs/nope"
+   },
+   "ok": false,
+   "error": "MissingRefError: can't resolve reference #/$defs/nope from id #",
+   "warnings": []
+  },
+  {
+   "name": "bad.additional",
+   "schema": {
+    "additionalProperties": "no"
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/additionalProperties must be object,boolean",
+   "warnings": []
+  },
+  {
+   "name": "bad.maximum.string",
+   "schema": {
+    "maximum": "5"
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/maximum must be number",
+   "warnings": []
+  },
+  {
+   "name": "bad.nested",
+   "schema": {
+    "type": "object",
+    "properties": {
+     "a": {
+      "type": "object",
+      "properties": {
+       "b": {
+        "minItems": "x"
+       }
+      }
+     }
+    }
+   },
+   "ok": false,
+   "error": "Error: schema is invalid: data/properties/a/properties/b/minItems must be integer",
+   "warnings": []
+  },
+  {
+   "name": "format.unknown",
+   "schema": {
+    "type": "string",
+    "format": "email"
+   },
+   "ok": true,
+   "warnings": [
+    "unknown format \"email\" ignored in schema at path \"#\"",
+    "unknown format \"email\" ignored in schema at path \"#\""
+   ]
+  }
+ ],
+ "validate": [
+  {
+   "name": "type.string",
+   "payload": "x",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.string",
+   "payload": 1,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "type.string",
+   "payload": null,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "type.string",
+   "payload": true,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "type.string",
+   "payload": [],
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "type.string",
+   "payload": {},
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "type.integer",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.integer",
+   "payload": 1.5,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "integer"
+     },
+     "message": "must be integer"
+    }
+   ]
+  },
+  {
+   "name": "type.integer",
+   "payload": "1",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "integer"
+     },
+     "message": "must be integer"
+    }
+   ]
+  },
+  {
+   "name": "type.integer",
+   "payload": 1e+21,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.integer",
+   "payload": 0,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.number",
+   "payload": 1.5,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.number",
+   "payload": "1.5",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "number"
+     },
+     "message": "must be number"
+    }
+   ]
+  },
+  {
+   "name": "type.number",
+   "payload": null,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "number"
+     },
+     "message": "must be number"
+    }
+   ]
+  },
+  {
+   "name": "type.boolean",
+   "payload": true,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.boolean",
+   "payload": 0,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "boolean"
+     },
+     "message": "must be boolean"
+    }
+   ]
+  },
+  {
+   "name": "type.null",
+   "payload": null,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.null",
+   "payload": 0,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "null"
+     },
+     "message": "must be null"
+    }
+   ]
+  },
+  {
+   "name": "type.null",
+   "payload": "",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "null"
+     },
+     "message": "must be null"
+    }
+   ]
+  },
+  {
+   "name": "type.array",
+   "payload": [],
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.array",
+   "payload": {},
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "array"
+     },
+     "message": "must be array"
+    }
+   ]
+  },
+  {
+   "name": "type.object",
+   "payload": {},
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "type.object",
+   "payload": [],
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "object"
+     },
+     "message": "must be object"
+    }
+   ]
+  },
+  {
+   "name": "type.object",
+   "payload": null,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "object"
+     },
+     "message": "must be object"
+    }
+   ]
+  },
+  {
+   "name": "enum",
+   "payload": "a",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "enum",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "enum",
+   "payload": null,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "enum",
+   "payload": {
+    "x": [
+     1
+    ]
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "enum",
+   "payload": [
+    2
+   ],
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "enum",
+   "payload": "b",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/enum",
+     "keyword": "enum",
+     "params": {
+      "allowedValues": [
+       "a",
+       1,
+       null,
+       {
+        "x": [
+         1
+        ]
+       },
+       [
+        2
+       ]
+      ]
+     },
+     "message": "must be equal to one of the allowed values"
+    }
+   ]
+  },
+  {
+   "name": "enum",
+   "payload": {
+    "x": [
+     2
+    ]
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/enum",
+     "keyword": "enum",
+     "params": {
+      "allowedValues": [
+       "a",
+       1,
+       null,
+       {
+        "x": [
+         1
+        ]
+       },
+       [
+        2
+       ]
+      ]
+     },
+     "message": "must be equal to one of the allowed values"
+    }
+   ]
+  },
+  {
+   "name": "enum",
+   "payload": [
+    2,
+    3
+   ],
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/enum",
+     "keyword": "enum",
+     "params": {
+      "allowedValues": [
+       "a",
+       1,
+       null,
+       {
+        "x": [
+         1
+        ]
+       },
+       [
+        2
+       ]
+      ]
+     },
+     "message": "must be equal to one of the allowed values"
+    }
+   ]
+  },
+  {
+   "name": "const",
+   "payload": {
+    "a": [
+     1,
+     "b"
+    ]
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "const",
+   "payload": {
+    "a": [
+     1
+    ]
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/const",
+     "keyword": "const",
+     "params": {
+      "allowedValue": {
+       "a": [
+        1,
+        "b"
+       ]
+      }
+     },
+     "message": "must be equal to constant"
+    }
+   ]
+  },
+  {
+   "name": "const",
+   "payload": "x",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/const",
+     "keyword": "const",
+     "params": {
+      "allowedValue": {
+       "a": [
+        1,
+        "b"
+       ]
+      }
+     },
+     "message": "must be equal to constant"
+    }
+   ]
+  },
+  {
+   "name": "const.number",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "const.number",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "const.number",
+   "payload": "1",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/const",
+     "keyword": "const",
+     "params": {
+      "allowedValue": 1
+     },
+     "message": "must be equal to constant"
+    }
+   ]
+  },
+  {
+   "name": "string.bounds",
+   "payload": "a",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/minLength",
+     "keyword": "minLength",
+     "params": {
+      "limit": 2
+     },
+     "message": "must NOT have fewer than 2 characters"
+    }
+   ]
+  },
+  {
+   "name": "string.bounds",
+   "payload": "ab",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "string.bounds",
+   "payload": "abcd",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/maxLength",
+     "keyword": "maxLength",
+     "params": {
+      "limit": 3
+     },
+     "message": "must NOT have more than 3 characters"
+    }
+   ]
+  },
+  {
+   "name": "string.bounds",
+   "payload": "😀",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/minLength",
+     "keyword": "minLength",
+     "params": {
+      "limit": 2
+     },
+     "message": "must NOT have fewer than 2 characters"
+    }
+   ]
+  },
+  {
+   "name": "string.bounds",
+   "payload": "😀😀",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "string.bounds",
+   "payload": "😀a",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "string.pattern",
+   "payload": "abc",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "string.pattern",
+   "payload": "aBc",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/pattern",
+     "keyword": "pattern",
+     "params": {
+      "pattern": "^[a-z]+$"
+     },
+     "message": "must match pattern \"^[a-z]+$\""
+    }
+   ]
+  },
+  {
+   "name": "string.pattern",
+   "payload": "",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/pattern",
+     "keyword": "pattern",
+     "params": {
+      "pattern": "^[a-z]+$"
+     },
+     "message": "must match pattern \"^[a-z]+$\""
+    }
+   ]
+  },
+  {
+   "name": "string.pattern.unicode",
+   "payload": "😀",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "string.pattern.unicode",
+   "payload": "a",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "string.pattern.unicode",
+   "payload": "ab",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/pattern",
+     "keyword": "pattern",
+     "params": {
+      "pattern": "^.$"
+     },
+     "message": "must match pattern \"^.$\""
+    }
+   ]
+  },
+  {
+   "name": "string.pattern.unanchored",
+   "payload": "abc",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "string.pattern.unanchored",
+   "payload": "xyz",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/pattern",
+     "keyword": "pattern",
+     "params": {
+      "pattern": "b"
+     },
+     "message": "must match pattern \"b\""
+    }
+   ]
+  },
+  {
+   "name": "number.bounds",
+   "payload": 0,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/minimum",
+     "keyword": "minimum",
+     "params": {
+      "comparison": ">=",
+      "limit": 1
+     },
+     "message": "must be >= 1"
+    }
+   ]
+  },
+  {
+   "name": "number.bounds",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "number.bounds",
+   "payload": 10,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "number.bounds",
+   "payload": 10.5,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/maximum",
+     "keyword": "maximum",
+     "params": {
+      "comparison": "<=",
+      "limit": 10
+     },
+     "message": "must be <= 10"
+    }
+   ]
+  },
+  {
+   "name": "integer.bounds",
+   "payload": -1,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/minimum",
+     "keyword": "minimum",
+     "params": {
+      "comparison": ">=",
+      "limit": 0
+     },
+     "message": "must be >= 0"
+    }
+   ]
+  },
+  {
+   "name": "integer.bounds",
+   "payload": 50,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "integer.bounds",
+   "payload": 101,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/maximum",
+     "keyword": "maximum",
+     "params": {
+      "comparison": "<=",
+      "limit": 100
+     },
+     "message": "must be <= 100"
+    }
+   ]
+  },
+  {
+   "name": "integer.bounds",
+   "payload": 50.5,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "integer"
+     },
+     "message": "must be integer"
+    }
+   ]
+  },
+  {
+   "name": "array.items",
+   "payload": [],
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/minItems",
+     "keyword": "minItems",
+     "params": {
+      "limit": 1
+     },
+     "message": "must NOT have fewer than 1 items"
+    }
+   ]
+  },
+  {
+   "name": "array.items",
+   "payload": [
+    "a"
+   ],
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "array.items",
+   "payload": [
+    "a",
+    1
+   ],
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/1",
+     "schemaPath": "#/items/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "array.items",
+   "payload": [
+    "a",
+    "b",
+    "c"
+   ],
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/maxItems",
+     "keyword": "maxItems",
+     "params": {
+      "limit": 2
+     },
+     "message": "must NOT have more than 2 items"
+    }
+   ]
+  },
+  {
+   "name": "array.items",
+   "payload": [
+    1,
+    2,
+    3
+   ],
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/maxItems",
+     "keyword": "maxItems",
+     "params": {
+      "limit": 2
+     },
+     "message": "must NOT have more than 2 items"
+    }
+   ]
+  },
+  {
+   "name": "object.required",
+   "payload": {
+    "a": "x",
+    "b": 1
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "object.required",
+   "payload": {
+    "a": "x"
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/required",
+     "keyword": "required",
+     "params": {
+      "missingProperty": "b"
+     },
+     "message": "must have required property 'b'"
+    }
+   ]
+  },
+  {
+   "name": "object.required",
+   "payload": {},
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/required",
+     "keyword": "required",
+     "params": {
+      "missingProperty": "a"
+     },
+     "message": "must have required property 'a'"
+    }
+   ]
+  },
+  {
+   "name": "object.required",
+   "payload": {
+    "b": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/required",
+     "keyword": "required",
+     "params": {
+      "missingProperty": "a"
+     },
+     "message": "must have required property 'a'"
+    }
+   ]
+  },
+  {
+   "name": "object.required",
+   "payload": {
+    "a": 1,
+    "b": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/a",
+     "schemaPath": "#/properties/a/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "object.required",
+   "payload": {
+    "a": "x",
+    "b": "y"
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/b",
+     "schemaPath": "#/properties/b/type",
+     "keyword": "type",
+     "params": {
+      "type": "integer"
+     },
+     "message": "must be integer"
+    }
+   ]
+  },
+  {
+   "name": "object.required",
+   "payload": [],
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/type",
+     "keyword": "type",
+     "params": {
+      "type": "object"
+     },
+     "message": "must be object"
+    }
+   ]
+  },
+  {
+   "name": "object.additional.false",
+   "payload": {
+    "a": "x"
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "object.additional.false",
+   "payload": {
+    "a": "x",
+    "z": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/additionalProperties",
+     "keyword": "additionalProperties",
+     "params": {
+      "additionalProperty": "z"
+     },
+     "message": "must NOT have additional properties"
+    }
+   ]
+  },
+  {
+   "name": "object.additional.false",
+   "payload": {
+    "z": 1,
+    "y": 2
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/additionalProperties",
+     "keyword": "additionalProperties",
+     "params": {
+      "additionalProperty": "z"
+     },
+     "message": "must NOT have additional properties"
+    }
+   ]
+  },
+  {
+   "name": "object.additional.schema",
+   "payload": {
+    "a": "x",
+    "n": 1
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "object.additional.schema",
+   "payload": {
+    "a": "x",
+    "n": "y"
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/n",
+     "schemaPath": "#/additionalProperties/type",
+     "keyword": "type",
+     "params": {
+      "type": "number"
+     },
+     "message": "must be number"
+    }
+   ]
+  },
+  {
+   "name": "object.nested",
+   "payload": {
+    "user": {
+     "name": "n",
+     "tags": [
+      "x"
+     ]
+    }
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "object.nested",
+   "payload": {
+    "user": {
+     "name": ""
+    }
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/user/name",
+     "schemaPath": "#/properties/user/properties/name/minLength",
+     "keyword": "minLength",
+     "params": {
+      "limit": 1
+     },
+     "message": "must NOT have fewer than 1 characters"
+    }
+   ]
+  },
+  {
+   "name": "object.nested",
+   "payload": {
+    "user": {
+     "tags": [
+      "z"
+     ]
+    }
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/user",
+     "schemaPath": "#/properties/user/required",
+     "keyword": "required",
+     "params": {
+      "missingProperty": "name"
+     },
+     "message": "must have required property 'name'"
+    }
+   ]
+  },
+  {
+   "name": "object.nested",
+   "payload": {
+    "user": {
+     "name": "n",
+     "tags": [
+      "x",
+      "q"
+     ]
+    }
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/user/tags/1",
+     "schemaPath": "#/properties/user/properties/tags/items/enum",
+     "keyword": "enum",
+     "params": {
+      "allowedValues": [
+       "x",
+       "y"
+      ]
+     },
+     "message": "must be equal to one of the allowed values"
+    }
+   ]
+  },
+  {
+   "name": "object.nested",
+   "payload": {
+    "user": []
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/user",
+     "schemaPath": "#/properties/user/type",
+     "keyword": "type",
+     "params": {
+      "type": "object"
+     },
+     "message": "must be object"
+    }
+   ]
+  },
+  {
+   "name": "object.key.escaping",
+   "payload": {
+    "a/b": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/a~1b",
+     "schemaPath": "#/properties/a~1b/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "object.key.escaping",
+   "payload": {
+    "a/b": "x",
+    "c~d": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/c~0d",
+     "schemaPath": "#/properties/c~0d/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "object.key.escaping",
+   "payload": {
+    "a/b": "x",
+    "e f": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/e f",
+     "schemaPath": "#/properties/e%20f/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "object.key.escaping",
+   "payload": {},
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/required",
+     "keyword": "required",
+     "params": {
+      "missingProperty": "a/b"
+     },
+     "message": "must have required property 'a/b'"
+    }
+   ]
+  },
+  {
+   "name": "anyOf",
+   "payload": "x",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "anyOf",
+   "payload": 7,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "anyOf",
+   "payload": 3,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/anyOf/0/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/anyOf/1/minimum",
+     "keyword": "minimum",
+     "params": {
+      "comparison": ">=",
+      "limit": 5
+     },
+     "message": "must be >= 5"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/anyOf",
+     "keyword": "anyOf",
+     "params": {},
+     "message": "must match a schema in anyOf"
+    }
+   ]
+  },
+  {
+   "name": "anyOf",
+   "payload": null,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/anyOf/0/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/anyOf/1/type",
+     "keyword": "type",
+     "params": {
+      "type": "integer"
+     },
+     "message": "must be integer"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/anyOf",
+     "keyword": "anyOf",
+     "params": {},
+     "message": "must match a schema in anyOf"
+    }
+   ]
+  },
+  {
+   "name": "oneOf",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "oneOf",
+   "payload": 3,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf",
+     "keyword": "oneOf",
+     "params": {
+      "passingSchemas": [
+       0,
+       1
+      ]
+     },
+     "message": "must match exactly one schema in oneOf"
+    }
+   ]
+  },
+  {
+   "name": "oneOf",
+   "payload": 2.5,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "oneOf",
+   "payload": 1.5,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf/0/type",
+     "keyword": "type",
+     "params": {
+      "type": "integer"
+     },
+     "message": "must be integer"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf/1/minimum",
+     "keyword": "minimum",
+     "params": {
+      "comparison": ">=",
+      "limit": 2
+     },
+     "message": "must be >= 2"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf",
+     "keyword": "oneOf",
+     "params": {
+      "passingSchemas": null
+     },
+     "message": "must match exactly one schema in oneOf"
+    }
+   ]
+  },
+  {
+   "name": "oneOf",
+   "payload": "x",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf/0/type",
+     "keyword": "type",
+     "params": {
+      "type": "integer"
+     },
+     "message": "must be integer"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf/1/type",
+     "keyword": "type",
+     "params": {
+      "type": "number"
+     },
+     "message": "must be number"
+    },
+    {
+     "instancePath": "",
+     "schemaPath": "#/oneOf",
+     "keyword": "oneOf",
+     "params": {
+      "passingSchemas": null
+     },
+     "message": "must match exactly one schema in oneOf"
+    }
+   ]
+  },
+  {
+   "name": "allOf",
+   "payload": "ab",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "allOf",
+   "payload": "a",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/allOf/1/minLength",
+     "keyword": "minLength",
+     "params": {
+      "limit": 2
+     },
+     "message": "must NOT have fewer than 2 characters"
+    }
+   ]
+  },
+  {
+   "name": "allOf",
+   "payload": 1,
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/allOf/0/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    }
+   ]
+  },
+  {
+   "name": "not",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "not",
+   "payload": "x",
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/not",
+     "keyword": "not",
+     "params": {},
+     "message": "must NOT be valid"
+    }
+   ]
+  },
+  {
+   "name": "defs.ref",
+   "payload": {
+    "first": "abc",
+    "list": [
+     "x"
+    ]
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "defs.ref",
+   "payload": {
+    "first": "ABC"
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/first",
+     "schemaPath": "#/$defs/name/pattern",
+     "keyword": "pattern",
+     "params": {
+      "pattern": "^[a-z]+$"
+     },
+     "message": "must match pattern \"^[a-z]+$\""
+    }
+   ]
+  },
+  {
+   "name": "defs.ref",
+   "payload": {
+    "list": [
+     "ok",
+     "NO"
+    ]
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/list/1",
+     "schemaPath": "#/$defs/name/pattern",
+     "keyword": "pattern",
+     "params": {
+      "pattern": "^[a-z]+$"
+     },
+     "message": "must match pattern \"^[a-z]+$\""
+    }
+   ]
+  },
+  {
+   "name": "manifest.like",
+   "payload": {
+    "channel": "c",
+    "count": 1
+   },
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "manifest.like",
+   "payload": {
+    "channel": "",
+    "count": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/channel",
+     "schemaPath": "#/properties/channel/minLength",
+     "keyword": "minLength",
+     "params": {
+      "limit": 1
+     },
+     "message": "must NOT have fewer than 1 characters"
+    }
+   ]
+  },
+  {
+   "name": "manifest.like",
+   "payload": {
+    "channel": "c",
+    "count": 0
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/count",
+     "schemaPath": "#/properties/count/minimum",
+     "keyword": "minimum",
+     "params": {
+      "comparison": ">=",
+      "limit": 1
+     },
+     "message": "must be >= 1"
+    }
+   ]
+  },
+  {
+   "name": "manifest.like",
+   "payload": {
+    "channel": "c",
+    "count": 1,
+    "extra": true
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/additionalProperties",
+     "keyword": "additionalProperties",
+     "params": {
+      "additionalProperty": "extra"
+     },
+     "message": "must NOT have additional properties"
+    }
+   ]
+  },
+  {
+   "name": "manifest.like",
+   "payload": {
+    "channel": "c",
+    "count": 1,
+    "mode": "medium"
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/mode",
+     "schemaPath": "#/properties/mode/enum",
+     "keyword": "enum",
+     "params": {
+      "allowedValues": [
+       "fast",
+       "slow"
+      ]
+     },
+     "message": "must be equal to one of the allowed values"
+    }
+   ]
+  },
+  {
+   "name": "manifest.like",
+   "payload": {
+    "channel": "c",
+    "count": 1,
+    "filters": [
+     {
+      "k": "a",
+      "v": 1
+     }
+    ]
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/filters/0/v",
+     "schemaPath": "#/properties/filters/items/properties/v/anyOf/0/type",
+     "keyword": "type",
+     "params": {
+      "type": "string"
+     },
+     "message": "must be string"
+    },
+    {
+     "instancePath": "/filters/0/v",
+     "schemaPath": "#/properties/filters/items/properties/v/anyOf/1/type",
+     "keyword": "type",
+     "params": {
+      "type": "null"
+     },
+     "message": "must be null"
+    },
+    {
+     "instancePath": "/filters/0/v",
+     "schemaPath": "#/properties/filters/items/properties/v/anyOf",
+     "keyword": "anyOf",
+     "params": {},
+     "message": "must match a schema in anyOf"
+    }
+   ]
+  },
+  {
+   "name": "manifest.like",
+   "payload": {
+    "channel": "c",
+    "count": 1,
+    "filters": [
+     {},
+     {},
+     {},
+     {}
+    ]
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/filters",
+     "schemaPath": "#/properties/filters/maxItems",
+     "keyword": "maxItems",
+     "params": {
+      "limit": 3
+     },
+     "message": "must NOT have more than 3 items"
+    }
+   ]
+  },
+  {
+   "name": "manifest.like",
+   "payload": {
+    "count": "1"
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "",
+     "schemaPath": "#/required",
+     "keyword": "required",
+     "params": {
+      "missingProperty": "channel"
+     },
+     "message": "must have required property 'channel'"
+    }
+   ]
+  },
+  {
+   "name": "empty",
+   "payload": 1,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "empty",
+   "payload": "x",
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "empty",
+   "payload": null,
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "empty",
+   "payload": {},
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "true.schema.items",
+   "payload": [
+    1,
+    "x"
+   ],
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "false.schema.prop",
+   "payload": {},
+   "valid": true,
+   "errors": null
+  },
+  {
+   "name": "false.schema.prop",
+   "payload": {
+    "a": 1
+   },
+   "valid": false,
+   "errors": [
+    {
+     "instancePath": "/a",
+     "schemaPath": "#/properties/a/false schema",
+     "keyword": "false schema",
+     "params": {},
+     "message": "boolean schema is false"
+    }
+   ]
+  }
+ ],
+ "safeRegex": [
+  {
+   "pattern": "^[a-z]+$",
+   "safe": true
+  },
+  {
+   "pattern": "(a+)+",
+   "safe": false
+  },
+  {
+   "pattern": "(a*)*b",
+   "safe": false
+  },
+  {
+   "pattern": "^(a|a)*$",
+   "safe": true
+  },
+  {
+   "pattern": "(x+x+)+y",
+   "safe": false
+  },
+  {
+   "pattern": "^\\d{3}-\\d{4}$",
+   "safe": true
+  },
+  {
+   "pattern": "(a|b|c)+",
+   "safe": true
+  },
+  {
+   "pattern": "((ab)*)+",
+   "safe": false
+  },
+  {
+   "pattern": "a{1,5}",
+   "safe": true
+  },
+  {
+   "pattern": "(a{1,30}){1,30}",
+   "safe": false
+  },
+  {
+   "pattern": "^([a-zA-Z0-9])(([\\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$",
+   "safe": false
+  },
+  {
+   "pattern": "(.*a){20}",
+   "safe": false
+  },
+  {
+   "pattern": "[",
+   "safe": false
+  },
+  {
+   "pattern": "\\",
+   "safe": false
+  },
+  {
+   "pattern": "(?<n>a+)+",
+   "safe": false
+  },
+  {
+   "pattern": "(?:a+)+",
+   "safe": false
+  },
+  {
+   "pattern": "^(?:[a-z0-9]+(?:-[a-z0-9]+)*)$",
+   "safe": false
+  },
+  {
+   "pattern": "(a|aa)+",
+   "safe": true
+  },
+  {
+   "pattern": "x*y*z*",
+   "safe": true
+  },
+  {
+   "pattern": "(\\w+\\s?)+$",
+   "safe": false
+  }
+ ]
+}
