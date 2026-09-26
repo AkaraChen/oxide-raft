@@ -20,6 +20,12 @@
 //                  addIssue({ code: z.ZodIssueCode.custom, message: "exactly one of channel or mine=true is required" })
 //   pathIssue      superRefine: if v.a === "bad" → addIssue({ code: "custom", path: ["a"], message: "a is bad" });
 //                  and if v.b === "bad" → addIssue({ code: "custom", path: ["b", 0], message: "b is bad" })
+//   noNull         refine(v => v !== null, { message: "no null" })
+//   never          refine(() => false, { message: "never" })
+//   issueNoCode    superRefine: addIssue({ message: "m", path: ["q"] })   (no code)
+//   issueNested    superRefine: addIssue({ code: "custom", message: "m" })
+// An input string starting with "$json:" is JSON.parse'd (so "__proto__" is an
+// own key, as in a parsed response body).
 // Inputs are JSON with markers: {"$undefined": true} → undefined,
 // {"$number": "NaN" | "Infinity" | "-Infinity" | "-0"} → that number.
 // Recorded per case: success, data (same markers for undefined/non-finite),
@@ -42,6 +48,14 @@ const refinements = {
     const selectors = Number(v.channel !== undefined) + Number(v.mine === "true");
     if (selectors !== 1) ctx.addIssue({ code: z.ZodIssueCode.custom, message: "exactly one of channel or mine=true is required" });
   }),
+  noNull: (s) => s.refine((v) => v !== null, { message: "no null" }),
+  never: (s) => s.refine(() => false, { message: "never" }),
+  issueNoCode: (s) => s.superRefine((_v, ctx) => {
+    ctx.addIssue({ message: "m", path: ["q"] });
+  }),
+  issueNested: (s) => s.superRefine((_v, ctx) => {
+    ctx.addIssue({ code: "custom", message: "m" });
+  }),
   pathIssue: (s) => s.superRefine((v, ctx) => {
     if (v.a === "bad") ctx.addIssue({ code: "custom", path: ["a"], message: "a is bad" });
     if (v.b === "bad") ctx.addIssue({ code: "custom", path: ["b", 0], message: "b is bad" });
@@ -54,7 +68,7 @@ function decode(v) {
     if (v.$undefined === true) return undefined;
     if (typeof v.$number === "string") return v.$number === "-0" ? -0 : Number(v.$number);
     const out = {};
-    for (const [k, x] of Object.entries(v)) out[k] = decode(x);
+    for (const [k, x] of Object.entries(v)) Object.defineProperty(out, k, { value: decode(x), enumerable: true, writable: true, configurable: true });
     return out;
   }
   return v;
@@ -66,7 +80,7 @@ function encode(v) {
   if (Array.isArray(v)) return v.map(encode);
   if (v && typeof v === "object") {
     const out = {};
-    for (const [k, x] of Object.entries(v)) out[k] = encode(x);
+    for (const [k, x] of Object.entries(v)) Object.defineProperty(out, k, { value: encode(x), enumerable: true, writable: true, configurable: true });
     return out;
   }
   return v;
@@ -273,15 +287,47 @@ const groups = [
     { t: "object", mode: "strict", shape: { s: str([["min", 3], ["regex", "^a"], ["max", 1]]), n: { t: "number", checks: [["int"], ["positive"], ["max", 0]] }, e: { t: "enum", values: ["x"] }, l: { t: "literal", value: "y" } } },
     [{ s: "bcd", n: 1.5, e: "q", l: "z", extra: 1, "0": 1 }, { s: "ab", n: -2 }],
   ],
+  // Behaviours outside the first corpus (schema implementer's round-1 list).
+  ["record.keyMin2", { t: "record", key: str([["min", 2]]), value: { t: "number" } }, ["$json:{\"ab\":1,\"c\":2,\"5\":3}"]],
+  ["record.keyTrim", { t: "record", key: str([["trim"]]), value: { t: "number" } }, [{ " a ": 1 }]],
+  ["string.toLowerCase.greek", str([["toLowerCase"]]), ["ΑΣ ΣΑΣ İ"]],
+  ["z.url.trim", { t: "url" }, ["  https://x.y/a  ", "http://xn--a-/", "https://例え.jp/x", "https://xn--r8jz45g.jp/", "http://[::1]:8080/", "http://256.1.1.1/", "https://a b.com/", "file:///tmp/x"]],
+  ["string.min3.types", str([["min", 3]]), [["a"], { length: 1 }, 5]],
+  ["passthrough.proto", { t: "object", mode: "passthrough", shape: { a: { t: "number" } } }, ["$json:{\"a\":1,\"__proto__\":{\"x\":1},\"b\":2}"]],
+  ["strict.proto", { t: "object", mode: "strict", shape: { a: { t: "number" } } }, ["$json:{\"a\":1,\"__proto__\":5}"]],
+  ["record.proto", { t: "record", key: { t: "string" }, value: { t: "unknown" } }, ["$json:{\"a\":1,\"__proto__\":5}"]],
+  ["enum.order", { t: "enum", values: ["b", "1", "a"] }, ["c"]],
+  [
+    "discriminatedUnion.optionalKey",
+    { t: "discriminatedUnion", key: "k", of: [{ t: "object", shape: { k: { t: "literal", value: "a", wrap: [["optional"]] }, x: { t: "number" } } }, { t: "object", shape: { k: { t: "literal", value: "b" } } }] },
+    [{ x: "q" }, { x: 1 }, { k: "b" }],
+  ],
+  ["default.notParsed", { t: "object", shape: { s: { t: "object", shape: { a: str(null, [["default", "d"]]) }, wrap: [["default", {}]] } } }, [{}, { s: {} }]],
+  ["optional.default", { t: "object", shape: { a: str(null, [["default", "x"], ["optional"]]) } }, [{}]],
+  ["union.noAbort", { t: "union", of: [str([["min", 5]]), str([["max", 1]])] }, ["abc"]],
+  ["refine.nullish", str(null, [["nullish"], ["refine", "noNull"]]), [null, U, "x"]],
+  ["refine.afterFailedTransform", str([["min", 2]], [["transformIdentity"], ["refine", "never"]]), ["a", "ab"]],
+  ["string.length", str([["length", 2]]), ["abc", "a", "ab"]],
+  ["array.length", { t: "array", of: { t: "number" }, checks: [["length", 2]] }, [[1], [1, 2, 3]]],
+  ["literal.null", { t: "literal", value: null }, [1, null]],
+  ["superRefine.noCode", { t: "object", shape: {}, wrap: [["superRefine", "issueNoCode"]] }, [{}]],
+  ["superRefine.nested", { t: "object", shape: { o: { t: "object", shape: {}, wrap: [["superRefine", "issueNested"]] } } }, [{ o: {} }]],
+  ["string.regex.global", str([["regex", "a", "g"]]), ["a", "a", "b"]],
+  ["isoDatetime.precision3", { t: "isoDatetime", opts: { precision: 3 } }, ["2026-01-01T00:00:00.12Z", "2026-01-01T00:00:00.123Z"]],
+  ["string.datetime.local", str([["datetime", { local: true }]]), ["2026-01-01T00:00", "2026-01-01T00:00:00", "2026-01-01T00:00Z"]],
 ];
 
 const out = process.argv[2];
 mkdirSync(dirname(out), { recursive: true });
 const cases = [];
 for (const [name, spec, inputs] of groups) {
-  const schema = build(spec);
-  for (const input of inputs) {
-    const r = schema.safeParse(decode(input));
+  // zod's normalizeParams rewrites params objects in place; build from a copy
+  // so the recorded spec keeps `{ message }` as written.
+  const schema = build(structuredClone(spec));
+  for (const raw of inputs) {
+    const value = typeof raw === "string" && raw.startsWith("$json:") ? JSON.parse(raw.slice(6)) : decode(raw);
+    const input = encode(value);
+    const r = schema.safeParse(value);
     cases.push(r.success
       ? { schema: name, input, success: true, data: encode(r.data) }
       : { schema: name, input, success: false, issues: JSON.parse(JSON.stringify(r.error.issues, (k, v) => (v === undefined ? { $undefined: true } : v))), message: r.error.message });

@@ -40,7 +40,7 @@
      "min",
      3,
      {
-      "error": "too short!"
+      "message": "too short!"
      }
     ]
    ]
@@ -939,6 +939,294 @@
      "value": "y"
     }
    }
+  },
+  "record.keyMin2": {
+   "t": "record",
+   "key": {
+    "t": "string",
+    "checks": [
+     [
+      "min",
+      2
+     ]
+    ]
+   },
+   "value": {
+    "t": "number"
+   }
+  },
+  "record.keyTrim": {
+   "t": "record",
+   "key": {
+    "t": "string",
+    "checks": [
+     [
+      "trim"
+     ]
+    ]
+   },
+   "value": {
+    "t": "number"
+   }
+  },
+  "string.toLowerCase.greek": {
+   "t": "string",
+   "checks": [
+    [
+     "toLowerCase"
+    ]
+   ]
+  },
+  "z.url.trim": {
+   "t": "url"
+  },
+  "string.min3.types": {
+   "t": "string",
+   "checks": [
+    [
+     "min",
+     3
+    ]
+   ]
+  },
+  "passthrough.proto": {
+   "t": "object",
+   "mode": "passthrough",
+   "shape": {
+    "a": {
+     "t": "number"
+    }
+   }
+  },
+  "strict.proto": {
+   "t": "object",
+   "mode": "strict",
+   "shape": {
+    "a": {
+     "t": "number"
+    }
+   }
+  },
+  "record.proto": {
+   "t": "record",
+   "key": {
+    "t": "string"
+   },
+   "value": {
+    "t": "unknown"
+   }
+  },
+  "enum.order": {
+   "t": "enum",
+   "values": [
+    "b",
+    "1",
+    "a"
+   ]
+  },
+  "discriminatedUnion.optionalKey": {
+   "t": "discriminatedUnion",
+   "key": "k",
+   "of": [
+    {
+     "t": "object",
+     "shape": {
+      "k": {
+       "t": "literal",
+       "value": "a",
+       "wrap": [
+        [
+         "optional"
+        ]
+       ]
+      },
+      "x": {
+       "t": "number"
+      }
+     }
+    },
+    {
+     "t": "object",
+     "shape": {
+      "k": {
+       "t": "literal",
+       "value": "b"
+      }
+     }
+    }
+   ]
+  },
+  "default.notParsed": {
+   "t": "object",
+   "shape": {
+    "s": {
+     "t": "object",
+     "shape": {
+      "a": {
+       "t": "string",
+       "wrap": [
+        [
+         "default",
+         "d"
+        ]
+       ]
+      }
+     },
+     "wrap": [
+      [
+       "default",
+       {}
+      ]
+     ]
+    }
+   }
+  },
+  "optional.default": {
+   "t": "object",
+   "shape": {
+    "a": {
+     "t": "string",
+     "wrap": [
+      [
+       "default",
+       "x"
+      ],
+      [
+       "optional"
+      ]
+     ]
+    }
+   }
+  },
+  "union.noAbort": {
+   "t": "union",
+   "of": [
+    {
+     "t": "string",
+     "checks": [
+      [
+       "min",
+       5
+      ]
+     ]
+    },
+    {
+     "t": "string",
+     "checks": [
+      [
+       "max",
+       1
+      ]
+     ]
+    }
+   ]
+  },
+  "refine.nullish": {
+   "t": "string",
+   "wrap": [
+    [
+     "nullish"
+    ],
+    [
+     "refine",
+     "noNull"
+    ]
+   ]
+  },
+  "refine.afterFailedTransform": {
+   "t": "string",
+   "checks": [
+    [
+     "min",
+     2
+    ]
+   ],
+   "wrap": [
+    [
+     "transformIdentity"
+    ],
+    [
+     "refine",
+     "never"
+    ]
+   ]
+  },
+  "string.length": {
+   "t": "string",
+   "checks": [
+    [
+     "length",
+     2
+    ]
+   ]
+  },
+  "array.length": {
+   "t": "array",
+   "of": {
+    "t": "number"
+   },
+   "checks": [
+    [
+     "length",
+     2
+    ]
+   ]
+  },
+  "literal.null": {
+   "t": "literal",
+   "value": null
+  },
+  "superRefine.noCode": {
+   "t": "object",
+   "shape": {},
+   "wrap": [
+    [
+     "superRefine",
+     "issueNoCode"
+    ]
+   ]
+  },
+  "superRefine.nested": {
+   "t": "object",
+   "shape": {
+    "o": {
+     "t": "object",
+     "shape": {},
+     "wrap": [
+      [
+       "superRefine",
+       "issueNested"
+      ]
+     ]
+    }
+   }
+  },
+  "string.regex.global": {
+   "t": "string",
+   "checks": [
+    [
+     "regex",
+     "a",
+     "g"
+    ]
+   ]
+  },
+  "isoDatetime.precision3": {
+   "t": "isoDatetime",
+   "opts": {
+    "precision": 3
+   }
+  },
+  "string.datetime.local": {
+   "t": "string",
+   "checks": [
+    [
+     "datetime",
+     {
+      "local": true
+     }
+    ]
+   ]
   }
  },
  "cases": [
@@ -1762,7 +2050,9 @@
   },
   {
    "schema": "number",
-   "input": 0,
+   "input": {
+    "$number": "-0"
+   },
    "success": true,
    "data": {
     "$number": "-0"
@@ -4687,6 +4977,628 @@
     }
    ],
    "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"too_small\",\n    \"minimum\": 3,\n    \"inclusive\": true,\n    \"path\": [\n      \"s\"\n    ],\n    \"message\": \"Too small: expected string to have >=3 characters\"\n  },\n  {\n    \"origin\": \"string\",\n    \"code\": \"too_big\",\n    \"maximum\": 1,\n    \"inclusive\": true,\n    \"path\": [\n      \"s\"\n    ],\n    \"message\": \"Too big: expected string to have <=1 characters\"\n  },\n  {\n    \"origin\": \"number\",\n    \"code\": \"too_small\",\n    \"minimum\": 0,\n    \"inclusive\": false,\n    \"path\": [\n      \"n\"\n    ],\n    \"message\": \"Too small: expected number to be >0\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"x\"\n    ],\n    \"path\": [\n      \"e\"\n    ],\n    \"message\": \"Invalid input: expected \\\"x\\\"\"\n  },\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"y\"\n    ],\n    \"path\": [\n      \"l\"\n    ],\n    \"message\": \"Invalid input: expected \\\"y\\\"\"\n  }\n]"
+  },
+  {
+   "schema": "record.keyMin2",
+   "input": {
+    "5": 3,
+    "ab": 1,
+    "c": 2
+   },
+   "success": false,
+   "issues": [
+    {
+     "code": "invalid_key",
+     "origin": "record",
+     "issues": [
+      {
+       "origin": "string",
+       "code": "too_small",
+       "minimum": 2,
+       "inclusive": true,
+       "path": [],
+       "message": "Too small: expected string to have >=2 characters"
+      }
+     ],
+     "path": [
+      "5"
+     ],
+     "message": "Invalid key in record"
+    },
+    {
+     "code": "invalid_key",
+     "origin": "record",
+     "issues": [
+      {
+       "origin": "string",
+       "code": "too_small",
+       "minimum": 2,
+       "inclusive": true,
+       "path": [],
+       "message": "Too small: expected string to have >=2 characters"
+      }
+     ],
+     "path": [
+      "c"
+     ],
+     "message": "Invalid key in record"
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"invalid_key\",\n    \"origin\": \"record\",\n    \"issues\": [\n      {\n        \"origin\": \"string\",\n        \"code\": \"too_small\",\n        \"minimum\": 2,\n        \"inclusive\": true,\n        \"path\": [],\n        \"message\": \"Too small: expected string to have >=2 characters\"\n      }\n    ],\n    \"path\": [\n      \"5\"\n    ],\n    \"message\": \"Invalid key in record\"\n  },\n  {\n    \"code\": \"invalid_key\",\n    \"origin\": \"record\",\n    \"issues\": [\n      {\n        \"origin\": \"string\",\n        \"code\": \"too_small\",\n        \"minimum\": 2,\n        \"inclusive\": true,\n        \"path\": [],\n        \"message\": \"Too small: expected string to have >=2 characters\"\n      }\n    ],\n    \"path\": [\n      \"c\"\n    ],\n    \"message\": \"Invalid key in record\"\n  }\n]"
+  },
+  {
+   "schema": "record.keyTrim",
+   "input": {
+    " a ": 1
+   },
+   "success": true,
+   "data": {
+    "a": 1
+   }
+  },
+  {
+   "schema": "string.toLowerCase.greek",
+   "input": "ΑΣ ΣΑΣ İ",
+   "success": true,
+   "data": "ας σας i̇"
+  },
+  {
+   "schema": "z.url.trim",
+   "input": "  https://x.y/a  ",
+   "success": true,
+   "data": "https://x.y/a"
+  },
+  {
+   "schema": "z.url.trim",
+   "input": "http://xn--a-/",
+   "success": false,
+   "issues": [
+    {
+     "code": "invalid_format",
+     "format": "url",
+     "path": [],
+     "message": "Invalid URL"
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"invalid_format\",\n    \"format\": \"url\",\n    \"path\": [],\n    \"message\": \"Invalid URL\"\n  }\n]"
+  },
+  {
+   "schema": "z.url.trim",
+   "input": "https://例え.jp/x",
+   "success": true,
+   "data": "https://例え.jp/x"
+  },
+  {
+   "schema": "z.url.trim",
+   "input": "https://xn--r8jz45g.jp/",
+   "success": true,
+   "data": "https://xn--r8jz45g.jp/"
+  },
+  {
+   "schema": "z.url.trim",
+   "input": "http://[::1]:8080/",
+   "success": true,
+   "data": "http://[::1]:8080/"
+  },
+  {
+   "schema": "z.url.trim",
+   "input": "http://256.1.1.1/",
+   "success": false,
+   "issues": [
+    {
+     "code": "invalid_format",
+     "format": "url",
+     "path": [],
+     "message": "Invalid URL"
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"invalid_format\",\n    \"format\": \"url\",\n    \"path\": [],\n    \"message\": \"Invalid URL\"\n  }\n]"
+  },
+  {
+   "schema": "z.url.trim",
+   "input": "https://a b.com/",
+   "success": false,
+   "issues": [
+    {
+     "code": "invalid_format",
+     "format": "url",
+     "path": [],
+     "message": "Invalid URL"
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"invalid_format\",\n    \"format\": \"url\",\n    \"path\": [],\n    \"message\": \"Invalid URL\"\n  }\n]"
+  },
+  {
+   "schema": "z.url.trim",
+   "input": "file:///tmp/x",
+   "success": true,
+   "data": "file:///tmp/x"
+  },
+  {
+   "schema": "string.min3.types",
+   "input": [
+    "a"
+   ],
+   "success": false,
+   "issues": [
+    {
+     "expected": "string",
+     "code": "invalid_type",
+     "path": [],
+     "message": "Invalid input: expected string, received array"
+    },
+    {
+     "origin": "array",
+     "code": "too_small",
+     "minimum": 3,
+     "inclusive": true,
+     "path": [],
+     "message": "Too small: expected array to have >=3 items"
+    }
+   ],
+   "message": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [],\n    \"message\": \"Invalid input: expected string, received array\"\n  },\n  {\n    \"origin\": \"array\",\n    \"code\": \"too_small\",\n    \"minimum\": 3,\n    \"inclusive\": true,\n    \"path\": [],\n    \"message\": \"Too small: expected array to have >=3 items\"\n  }\n]"
+  },
+  {
+   "schema": "string.min3.types",
+   "input": {
+    "length": 1
+   },
+   "success": false,
+   "issues": [
+    {
+     "expected": "string",
+     "code": "invalid_type",
+     "path": [],
+     "message": "Invalid input: expected string, received object"
+    },
+    {
+     "origin": "unknown",
+     "code": "too_small",
+     "minimum": 3,
+     "inclusive": true,
+     "path": [],
+     "message": "Too small: expected unknown to be >=3"
+    }
+   ],
+   "message": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [],\n    \"message\": \"Invalid input: expected string, received object\"\n  },\n  {\n    \"origin\": \"unknown\",\n    \"code\": \"too_small\",\n    \"minimum\": 3,\n    \"inclusive\": true,\n    \"path\": [],\n    \"message\": \"Too small: expected unknown to be >=3\"\n  }\n]"
+  },
+  {
+   "schema": "string.min3.types",
+   "input": 5,
+   "success": false,
+   "issues": [
+    {
+     "expected": "string",
+     "code": "invalid_type",
+     "path": [],
+     "message": "Invalid input: expected string, received number"
+    }
+   ],
+   "message": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [],\n    \"message\": \"Invalid input: expected string, received number\"\n  }\n]"
+  },
+  {
+   "schema": "passthrough.proto",
+   "input": {
+    "a": 1,
+    "__proto__": {
+     "x": 1
+    },
+    "b": 2
+   },
+   "success": true,
+   "data": {
+    "a": 1,
+    "b": 2
+   }
+  },
+  {
+   "schema": "strict.proto",
+   "input": {
+    "a": 1,
+    "__proto__": 5
+   },
+   "success": false,
+   "issues": [
+    {
+     "code": "unrecognized_keys",
+     "keys": [
+      "__proto__"
+     ],
+     "path": [],
+     "message": "Unrecognized key: \"__proto__\""
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"__proto__\"\n    ],\n    \"path\": [],\n    \"message\": \"Unrecognized key: \\\"__proto__\\\"\"\n  }\n]"
+  },
+  {
+   "schema": "record.proto",
+   "input": {
+    "a": 1,
+    "__proto__": 5
+   },
+   "success": true,
+   "data": {
+    "a": 1
+   }
+  },
+  {
+   "schema": "enum.order",
+   "input": "c",
+   "success": false,
+   "issues": [
+    {
+     "code": "invalid_value",
+     "values": [
+      "1",
+      "b",
+      "a"
+     ],
+     "path": [],
+     "message": "Invalid option: expected one of \"1\"|\"b\"|\"a\""
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      \"1\",\n      \"b\",\n      \"a\"\n    ],\n    \"path\": [],\n    \"message\": \"Invalid option: expected one of \\\"1\\\"|\\\"b\\\"|\\\"a\\\"\"\n  }\n]"
+  },
+  {
+   "schema": "discriminatedUnion.optionalKey",
+   "input": {
+    "x": "q"
+   },
+   "success": false,
+   "issues": [
+    {
+     "expected": "number",
+     "code": "invalid_type",
+     "path": [
+      "x"
+     ],
+     "message": "Invalid input: expected number, received string"
+    }
+   ],
+   "message": "[\n  {\n    \"expected\": \"number\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"x\"\n    ],\n    \"message\": \"Invalid input: expected number, received string\"\n  }\n]"
+  },
+  {
+   "schema": "discriminatedUnion.optionalKey",
+   "input": {
+    "x": 1
+   },
+   "success": true,
+   "data": {
+    "x": 1
+   }
+  },
+  {
+   "schema": "discriminatedUnion.optionalKey",
+   "input": {
+    "k": "b"
+   },
+   "success": true,
+   "data": {
+    "k": "b"
+   }
+  },
+  {
+   "schema": "default.notParsed",
+   "input": {},
+   "success": true,
+   "data": {
+    "s": {}
+   }
+  },
+  {
+   "schema": "default.notParsed",
+   "input": {
+    "s": {}
+   },
+   "success": true,
+   "data": {
+    "s": {
+     "a": "d"
+    }
+   }
+  },
+  {
+   "schema": "optional.default",
+   "input": {},
+   "success": true,
+   "data": {
+    "a": "x"
+   }
+  },
+  {
+   "schema": "union.noAbort",
+   "input": "abc",
+   "success": false,
+   "issues": [
+    {
+     "code": "invalid_union",
+     "errors": [
+      [
+       {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 5,
+        "inclusive": true,
+        "path": [],
+        "message": "Too small: expected string to have >=5 characters"
+       }
+      ],
+      [
+       {
+        "origin": "string",
+        "code": "too_big",
+        "maximum": 1,
+        "inclusive": true,
+        "path": [],
+        "message": "Too big: expected string to have <=1 characters"
+       }
+      ]
+     ],
+     "path": [],
+     "message": "Invalid input"
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"invalid_union\",\n    \"errors\": [\n      [\n        {\n          \"origin\": \"string\",\n          \"code\": \"too_small\",\n          \"minimum\": 5,\n          \"inclusive\": true,\n          \"path\": [],\n          \"message\": \"Too small: expected string to have >=5 characters\"\n        }\n      ],\n      [\n        {\n          \"origin\": \"string\",\n          \"code\": \"too_big\",\n          \"maximum\": 1,\n          \"inclusive\": true,\n          \"path\": [],\n          \"message\": \"Too big: expected string to have <=1 characters\"\n        }\n      ]\n    ],\n    \"path\": [],\n    \"message\": \"Invalid input\"\n  }\n]"
+  },
+  {
+   "schema": "refine.nullish",
+   "input": null,
+   "success": false,
+   "issues": [
+    {
+     "code": "custom",
+     "path": [],
+     "message": "no null"
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [],\n    \"message\": \"no null\"\n  }\n]"
+  },
+  {
+   "schema": "refine.nullish",
+   "input": {
+    "$undefined": true
+   },
+   "success": true,
+   "data": {
+    "$undefined": true
+   }
+  },
+  {
+   "schema": "refine.nullish",
+   "input": "x",
+   "success": true,
+   "data": "x"
+  },
+  {
+   "schema": "refine.afterFailedTransform",
+   "input": "a",
+   "success": false,
+   "issues": [
+    {
+     "origin": "string",
+     "code": "too_small",
+     "minimum": 2,
+     "inclusive": true,
+     "path": [],
+     "message": "Too small: expected string to have >=2 characters"
+    }
+   ],
+   "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"too_small\",\n    \"minimum\": 2,\n    \"inclusive\": true,\n    \"path\": [],\n    \"message\": \"Too small: expected string to have >=2 characters\"\n  }\n]"
+  },
+  {
+   "schema": "refine.afterFailedTransform",
+   "input": "ab",
+   "success": false,
+   "issues": [
+    {
+     "code": "custom",
+     "path": [],
+     "message": "never"
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [],\n    \"message\": \"never\"\n  }\n]"
+  },
+  {
+   "schema": "string.length",
+   "input": "abc",
+   "success": false,
+   "issues": [
+    {
+     "origin": "string",
+     "code": "too_big",
+     "maximum": 2,
+     "inclusive": true,
+     "exact": true,
+     "path": [],
+     "message": "Too big: expected string to have <=2 characters"
+    }
+   ],
+   "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"too_big\",\n    \"maximum\": 2,\n    \"inclusive\": true,\n    \"exact\": true,\n    \"path\": [],\n    \"message\": \"Too big: expected string to have <=2 characters\"\n  }\n]"
+  },
+  {
+   "schema": "string.length",
+   "input": "a",
+   "success": false,
+   "issues": [
+    {
+     "origin": "string",
+     "code": "too_small",
+     "minimum": 2,
+     "inclusive": true,
+     "exact": true,
+     "path": [],
+     "message": "Too small: expected string to have >=2 characters"
+    }
+   ],
+   "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"too_small\",\n    \"minimum\": 2,\n    \"inclusive\": true,\n    \"exact\": true,\n    \"path\": [],\n    \"message\": \"Too small: expected string to have >=2 characters\"\n  }\n]"
+  },
+  {
+   "schema": "string.length",
+   "input": "ab",
+   "success": true,
+   "data": "ab"
+  },
+  {
+   "schema": "array.length",
+   "input": [
+    1
+   ],
+   "success": false,
+   "issues": [
+    {
+     "origin": "array",
+     "code": "too_small",
+     "minimum": 2,
+     "inclusive": true,
+     "exact": true,
+     "path": [],
+     "message": "Too small: expected array to have >=2 items"
+    }
+   ],
+   "message": "[\n  {\n    \"origin\": \"array\",\n    \"code\": \"too_small\",\n    \"minimum\": 2,\n    \"inclusive\": true,\n    \"exact\": true,\n    \"path\": [],\n    \"message\": \"Too small: expected array to have >=2 items\"\n  }\n]"
+  },
+  {
+   "schema": "array.length",
+   "input": [
+    1,
+    2,
+    3
+   ],
+   "success": false,
+   "issues": [
+    {
+     "origin": "array",
+     "code": "too_big",
+     "maximum": 2,
+     "inclusive": true,
+     "exact": true,
+     "path": [],
+     "message": "Too big: expected array to have <=2 items"
+    }
+   ],
+   "message": "[\n  {\n    \"origin\": \"array\",\n    \"code\": \"too_big\",\n    \"maximum\": 2,\n    \"inclusive\": true,\n    \"exact\": true,\n    \"path\": [],\n    \"message\": \"Too big: expected array to have <=2 items\"\n  }\n]"
+  },
+  {
+   "schema": "literal.null",
+   "input": 1,
+   "success": false,
+   "issues": [
+    {
+     "code": "invalid_value",
+     "values": [
+      null
+     ],
+     "path": [],
+     "message": "Invalid input: expected null"
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"invalid_value\",\n    \"values\": [\n      null\n    ],\n    \"path\": [],\n    \"message\": \"Invalid input: expected null\"\n  }\n]"
+  },
+  {
+   "schema": "literal.null",
+   "input": null,
+   "success": true,
+   "data": null
+  },
+  {
+   "schema": "superRefine.noCode",
+   "input": {},
+   "success": false,
+   "issues": [
+    {
+     "message": "m",
+     "path": [
+      "q"
+     ],
+     "code": "custom"
+    }
+   ],
+   "message": "[\n  {\n    \"message\": \"m\",\n    \"path\": [\n      \"q\"\n    ],\n    \"code\": \"custom\"\n  }\n]"
+  },
+  {
+   "schema": "superRefine.nested",
+   "input": {
+    "o": {}
+   },
+   "success": false,
+   "issues": [
+    {
+     "code": "custom",
+     "message": "m",
+     "path": [
+      "o"
+     ]
+    }
+   ],
+   "message": "[\n  {\n    \"code\": \"custom\",\n    \"message\": \"m\",\n    \"path\": [\n      \"o\"\n    ]\n  }\n]"
+  },
+  {
+   "schema": "string.regex.global",
+   "input": "a",
+   "success": true,
+   "data": "a"
+  },
+  {
+   "schema": "string.regex.global",
+   "input": "a",
+   "success": true,
+   "data": "a"
+  },
+  {
+   "schema": "string.regex.global",
+   "input": "b",
+   "success": false,
+   "issues": [
+    {
+     "origin": "string",
+     "code": "invalid_format",
+     "format": "regex",
+     "pattern": "/a/g",
+     "path": [],
+     "message": "Invalid string: must match pattern /a/g"
+    }
+   ],
+   "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"invalid_format\",\n    \"format\": \"regex\",\n    \"pattern\": \"/a/g\",\n    \"path\": [],\n    \"message\": \"Invalid string: must match pattern /a/g\"\n  }\n]"
+  },
+  {
+   "schema": "isoDatetime.precision3",
+   "input": "2026-01-01T00:00:00.12Z",
+   "success": false,
+   "issues": [
+    {
+     "origin": "string",
+     "code": "invalid_format",
+     "format": "datetime",
+     "pattern": "/^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d\\.\\d{3}(?:Z))$/",
+     "path": [],
+     "message": "Invalid ISO datetime"
+    }
+   ],
+   "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"invalid_format\",\n    \"format\": \"datetime\",\n    \"pattern\": \"/^(?:(?:\\\\d\\\\d[2468][048]|\\\\d\\\\d[13579][26]|\\\\d\\\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\\\d|30)|(?:02)-(?:0[1-9]|1\\\\d|2[0-8])))T(?:(?:[01]\\\\d|2[0-3]):[0-5]\\\\d:[0-5]\\\\d\\\\.\\\\d{3}(?:Z))$/\",\n    \"path\": [],\n    \"message\": \"Invalid ISO datetime\"\n  }\n]"
+  },
+  {
+   "schema": "isoDatetime.precision3",
+   "input": "2026-01-01T00:00:00.123Z",
+   "success": true,
+   "data": "2026-01-01T00:00:00.123Z"
+  },
+  {
+   "schema": "string.datetime.local",
+   "input": "2026-01-01T00:00",
+   "success": true,
+   "data": "2026-01-01T00:00"
+  },
+  {
+   "schema": "string.datetime.local",
+   "input": "2026-01-01T00:00:00",
+   "success": true,
+   "data": "2026-01-01T00:00:00"
+  },
+  {
+   "schema": "string.datetime.local",
+   "input": "2026-01-01T00:00Z",
+   "success": true,
+   "data": "2026-01-01T00:00Z"
   }
  ]
 }
