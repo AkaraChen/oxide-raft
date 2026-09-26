@@ -14,3 +14,9 @@ edition = "2024"
 rust-version = "1.89"
 license-file = "LICENSE"
 repository = "https://github.com/AkaraChen/oxide-raft"
+
+# Pinned per docs/migration/mapping-guide.md §13. Adding a crate or feature
+# needs a note in docs/migration/decisions.md.
+[workspace.dependencies]
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = { version = "=1.0.151", features = ["float_roundtrip"] }
